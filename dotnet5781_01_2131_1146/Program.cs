@@ -35,6 +35,11 @@ namespace dotnet5781_01_2131_1146
                     case 2:
                         pickBus(buses);
                         break;
+                    case 3:
+                        break;
+                    case 4:
+                        printDetails(buses);
+                        break;
                     default:
                         Console.WriteLine("Wrong choice");
                         break;
@@ -42,7 +47,15 @@ namespace dotnet5781_01_2131_1146
             } while (option != 0 );
         }
 
-        private static void pickBus(List<Bus> buses)
+        private static void printDetails(List<Bus> buses)
+        {
+            foreach (Bus bus in buses)
+            {
+                Console.WriteLine("Bus: {0}, milege from last repair: {1}", bus.Reg, bus.MilgeToRepair);
+            }
+        }
+
+        static private void pickBus(List<Bus> buses)
         {
             int getReg;
             bool success;
@@ -54,14 +67,25 @@ namespace dotnet5781_01_2131_1146
                     throw new Exception("Please enter a valid number!");
                 if (getReg > 99999999 || getReg < 1000000)
                     throw new Exception("Registration number should be 7 or 8 digits");
-                
+
                 Bus bus = findBuses(buses, getReg);
                 if (bus == null)
                     throw new Exception("This bus was not founded");
-                //// Should add random correctly////
-                //Random r = new Random(DateTime.Now.Millisecond);
-                //int longDrive = r;
-                //Console.WriteLine(longDrive);
+                if (!bus.ISSafe)
+                    throw new Exception("This bus is not safe for driving");
+
+                Random rnd = new Random();
+                int km = rnd.Next(1201);
+                Console.WriteLine("Long drive is {0}", km);
+                if (bus.Gas < km)
+                    throw new Exception("There is not enough gas for driving");
+                // SHould check how to validate that the "lastRepair" is lass then a year
+                // Informs the user the drive was succesfuly and update the bus valuse
+                Console.WriteLine("You can drive, nice driving!");
+                bus.setDrivingValues(km);
+
+                return;
+                
 
 
             }
@@ -73,7 +97,7 @@ namespace dotnet5781_01_2131_1146
 
         }
 
-        private static Bus findBuses(List<Bus> buses, int reg)
+        static private Bus findBuses(List<Bus> buses, int reg)
         {
             Bus bus = null;
             foreach (Bus item in buses)
@@ -86,16 +110,16 @@ namespace dotnet5781_01_2131_1146
             return bus;
         }
 
-        public static void printAll(List<Bus> buses)
+        static public void printAll(List<Bus> buses)
         {
             foreach (Bus bus in buses)
             {
-                Console.WriteLine(bus);
+                Console.WriteLine("bus: {0}, gas: {1}, milege: {2}, repair: {3}",bus, bus.Gas, bus.Milege, bus.MilgeToRepair);
             }
         }
 
         // Function to add a new bus to the list
-        private static void addBus(List<Bus> buses)
+        static private void addBus(List<Bus> buses)
         {
             int getReg;
             DateTime beginDate;
