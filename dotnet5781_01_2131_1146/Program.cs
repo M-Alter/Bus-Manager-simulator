@@ -13,7 +13,7 @@ namespace dotnet5781_01_2131_1146
             List<Bus> buses = new List<Bus> {};
 
             for (int i = 0; i  < 5; i++)
-                buses.Add(new Bus(12345670 + i, new DateTime(2020,01,01)));
+                buses.Add(new Bus(12345670 + i, new DateTime(2020, 01, 01)));
             
             int option = -1;
             do
@@ -36,6 +36,7 @@ namespace dotnet5781_01_2131_1146
                         pickBus(buses);
                         break;
                     case 3:
+                        performService(buses);
                         break;
                     case 4:
                         printDetails(buses);
@@ -51,7 +52,7 @@ namespace dotnet5781_01_2131_1146
         {
             foreach (Bus bus in buses)
             {
-                Console.WriteLine("Bus: {0}, milege from last repair: {1}", bus.Reg, bus.MilgeToRepair);
+                Console.WriteLine("Bus: {0}, milege since last service: {1}", bus.Reg, bus.MileageSinceService);
             }
         }
 
@@ -61,7 +62,7 @@ namespace dotnet5781_01_2131_1146
             bool success;
             try
             {
-                Console.WriteLine("please enter the registration number:");
+                Console.WriteLine("Please enter the registration number:");
                 success = int.TryParse(Console.ReadLine(), out getReg);
                 if (!success)
                     throw new Exception("Please enter a valid number!");
@@ -70,18 +71,26 @@ namespace dotnet5781_01_2131_1146
 
                 Bus bus = findBuses(buses, getReg);
                 if (bus == null)
-                    throw new Exception("This bus was not founded");
-                if (!bus.ISSafe)
+                    throw new Exception("This bus was not found");
+                if (!bus.IsSafe)
                     throw new Exception("This bus is not safe for driving");
 
                 Random rnd = new Random();
-                int km = rnd.Next(1201);
-                Console.WriteLine("Long drive is {0}", km);
+                int km = rnd.Next(1,1201);
+                Console.WriteLine("Length of the journey is {0}", km);
                 if (bus.Gas < km)
-                    throw new Exception("There is not enough gas for driving");
+                    throw new Exception("There is not enough gas for driving, Please refuel");
+                if (bus.MileageSinceService + km > 20000)
+                {
+                    throw new Exception("This bus will out perform it's mileage if it does this journey, please repair or choose another bus");
+                }
+                if (!bus.IsSafe)
+                {
+                    throw new Exception("A year has passed since the last service was done to this bus and therefore is unsafe, please repair or choose another bus");
+                }
                 // SHould check how to validate that the "lastRepair" is lass then a year
                 // Informs the user the drive was succesfuly and update the bus valuse
-                Console.WriteLine("You can drive, nice driving!");
+                Console.WriteLine("You can drive, safe driving!");
                 bus.setDrivingValues(km);
 
                 return;
@@ -110,11 +119,43 @@ namespace dotnet5781_01_2131_1146
             return bus;
         }
 
+
+        static public void performService(List<Bus> buses)
+        {
+            string answer;
+            int reg;
+            bool success;
+            try
+            {
+                Console.WriteLine("Please enter the bus registration you would like to perfrom a service to:");
+                success = int.TryParse(Console.ReadLine(), out reg);
+                Bus bus = findBuses(buses, reg);
+                if (bus == null)
+                    throw new Exception("This bus was not found");
+
+                Console.WriteLine("Would you like to perfom a service or a refuel?");
+                answer = Console.ReadLine();
+                if (answer.Contains("refuel"))
+                {
+                    bus.Refuel();
+                }
+                else if (answer.Contains("sevice"))
+                {
+                    bus.Service();
+                }
+            }
+            catch (Exception problem)
+            {
+                Console.WriteLine(problem.Message);
+                return;
+            }
+        }
+
         static public void printAll(List<Bus> buses)
         {
             foreach (Bus bus in buses)
             {
-                Console.WriteLine("bus: {0}, gas: {1}, milege: {2}, repair: {3}",bus, bus.Gas, bus.Milege, bus.MilgeToRepair);
+                Console.WriteLine("bus: {0}, gas: {1}, milege: {2}, repair: {3}",bus, bus.Gas, bus.Mileage, bus.MileageSinceService);
             }
         }
 

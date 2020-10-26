@@ -11,11 +11,12 @@ namespace dotnet5781_01_2131_1146
     {
         private int reg;
         private DateTime beginDate;
-        private int milege = 0;
+        private int mileage = 0;
         private int gas = 1200;
 
-        private int milgeToRepair = 0;
-        private DateTime lastRepair;
+        private int mileageSinceService = 0;
+        private int mileageAtService = 0;
+        private DateTime lastServiceDate;
         private bool isSafe = true;
 
         public Bus(int reg, DateTime beginDate)
@@ -40,15 +41,15 @@ namespace dotnet5781_01_2131_1146
             }
         }
         
-        public int Milege
+        public int Mileage
         {
             get
             {
-                return milege;
+                return mileage;
             }
             private set
             {
-                milege = value;
+                mileage = value;
             }
         }
         public int Gas
@@ -63,24 +64,40 @@ namespace dotnet5781_01_2131_1146
             }
         }
 
-        public int MilgeToRepair
+        public int MileageSinceService
         {
             get
             {
-                return milgeToRepair;
+                return mileageSinceService;
             }
             private set
             {
-                milgeToRepair = value;
-                if (milgeToRepair > 20000)
-                    ISSafe = false;                    
+                mileageSinceService = value;      
             }
         }
-        public bool ISSafe
+
+
+        public int MileageAtService
         {
             get
             {
-                return isSafe;
+                return mileageAtService;
+            }
+            private set
+            {
+                mileageAtService = value;
+            }
+        }
+
+        public bool IsSafe
+        {
+            get
+            {
+                if ((DateTime.Now - lastServiceDate).TotalDays > 365 )
+                {
+                   this.isSafe = false;
+                }
+                return this.isSafe;
             }
             private set
             {
@@ -90,11 +107,25 @@ namespace dotnet5781_01_2131_1146
 
         public void setDrivingValues(int value)
         {
-            Milege += value;
+            Mileage += value;
             Gas -= value;
-            MilgeToRepair += value;          
+            MileageSinceService += value;          
 
 
+        }
+
+
+        public void Service()
+        {
+            lastServiceDate = DateTime.Today;
+            mileageSinceService = 0;
+            mileageAtService = mileage;
+            isSafe = true;
+        }
+
+        public void Refuel()
+        {
+            gas = 1200;
         }
         public override string ToString()
         {
