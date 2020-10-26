@@ -40,7 +40,7 @@ namespace dotnet5781_01_2131_1146
                 return reg;
             }
         }
-        
+
         public int Mileage
         {
             get
@@ -72,7 +72,7 @@ namespace dotnet5781_01_2131_1146
             }
             private set
             {
-                mileageSinceService = value;      
+                mileageSinceService = value;
             }
         }
 
@@ -93,9 +93,9 @@ namespace dotnet5781_01_2131_1146
         {
             get
             {
-                if ((DateTime.Now - lastServiceDate).TotalDays > 365 )
+                if ((DateTime.Now - lastServiceDate).TotalDays > 365)
                 {
-                   this.isSafe = false;
+                    this.isSafe = false;
                 }
                 return this.isSafe;
             }
@@ -109,7 +109,7 @@ namespace dotnet5781_01_2131_1146
         {
             Mileage += value;
             Gas -= value;
-            MileageSinceService += value;          
+            MileageSinceService += value;
 
 
         }
@@ -121,11 +121,13 @@ namespace dotnet5781_01_2131_1146
             mileageSinceService = 0;
             mileageAtService = mileage;
             isSafe = true;
+            Console.WriteLine("Yout vehicle has been serviced successfully");
         }
 
         public void Refuel()
         {
             gas = 1200;
+            Console.WriteLine("Yout vehicle has been refueled successfully");
         }
         public override string ToString()
         {

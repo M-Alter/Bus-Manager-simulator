@@ -10,11 +10,11 @@ namespace dotnet5781_01_2131_1146
     {
         static void Main(string[] args)
         {
-            List<Bus> buses = new List<Bus> {};
+            List<Bus> buses = new List<Bus> { };
 
-            for (int i = 0; i  < 5; i++)
+            for (int i = 0; i < 5; i++)
                 buses.Add(new Bus(12345670 + i, new DateTime(2020, 01, 01)));
-            
+
             int option = -1;
             do
             {
@@ -25,12 +25,12 @@ namespace dotnet5781_01_2131_1146
 4 = Print details;
 0 = EXIT;");
 
-                bool success = int.TryParse( Console.ReadLine(),out option);
+                bool success = int.TryParse(Console.ReadLine(), out option);
 
                 switch (option)
                 {
                     case 1:
-                        addBus(buses);                        
+                        addBus(buses);
                         break;
                     case 2:
                         pickBus(buses);
@@ -45,7 +45,7 @@ namespace dotnet5781_01_2131_1146
                         Console.WriteLine("Wrong choice");
                         break;
                 }
-            } while (option != 0 );
+            } while (option != 0);
         }
 
         private static void printDetails(List<Bus> buses)
@@ -76,7 +76,7 @@ namespace dotnet5781_01_2131_1146
                     throw new Exception("This bus is not safe for driving");
 
                 Random rnd = new Random();
-                int km = rnd.Next(1,1201);
+                int km = rnd.Next(1, 1201);
                 Console.WriteLine("Length of the journey is {0}", km);
                 if (bus.Gas < km)
                     throw new Exception("There is not enough gas for driving, Please refuel");
@@ -94,7 +94,7 @@ namespace dotnet5781_01_2131_1146
                 bus.setDrivingValues(km);
 
                 return;
-                
+
 
 
             }
@@ -155,7 +155,7 @@ namespace dotnet5781_01_2131_1146
         {
             foreach (Bus bus in buses)
             {
-                Console.WriteLine("bus: {0}, gas: {1}, milege: {2}, repair: {3}",bus, bus.Gas, bus.Mileage, bus.MileageSinceService);
+                Console.WriteLine("bus: {0}, gas: {1}, milege: {2}, repair: {3}", bus, bus.Gas, bus.Mileage, bus.MileageSinceService);
             }
         }
 
@@ -182,9 +182,9 @@ namespace dotnet5781_01_2131_1146
                 if (beginDate.Year >= 2018)
                     if (getReg > 99999999 || getReg < 10000000)
                         throw new Exception("Registration number since 2018 should be 8 digits");
-                else if (beginDate.Year < 2018)
-                    if (getReg > 9999999 || getReg < 1000000)
-                        throw new Exception("Registration number until 2017 should be 7 digits");
+                    else if (beginDate.Year < 2018)
+                        if (getReg > 9999999 || getReg < 1000000)
+                            throw new Exception("Registration number until 2017 should be 7 digits");
             }
             catch (Exception problem)
             {
@@ -195,6 +195,6 @@ namespace dotnet5781_01_2131_1146
             buses.Add(new Bus(getReg, beginDate));
             Console.WriteLine("The bus added succefully");
         }
-    
+
     }
 }
