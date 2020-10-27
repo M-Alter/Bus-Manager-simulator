@@ -18,13 +18,14 @@ namespace dotnet5781_01_2131_1146
         private int mileageAtService = 0;
         private DateTime lastServiceDate;
         private bool isSafe = true;
-
+        // Constractor of class
         public Bus(int reg, DateTime beginDate)
         {
             this.reg = reg;
             this.beginDate = beginDate;
+            this.lastServiceDate = beginDate;
         }
-
+        // Getter for beginDate
         public DateTime BeginDate
         {
             get
@@ -32,7 +33,7 @@ namespace dotnet5781_01_2131_1146
                 return beginDate;
             }
         }
-
+        // Getter for reg
         public int Reg
         {
             get
@@ -40,7 +41,7 @@ namespace dotnet5781_01_2131_1146
                 return reg;
             }
         }
-
+        // Getter and setter for mileage
         public int Mileage
         {
             get
@@ -52,6 +53,7 @@ namespace dotnet5781_01_2131_1146
                 mileage = value;
             }
         }
+        // Getter and setter for gas
         public int Gas
         {
             get
@@ -63,7 +65,7 @@ namespace dotnet5781_01_2131_1146
                 gas = value;
             }
         }
-
+        // Getter and setter for mileageSinceService
         public int MileageSinceService
         {
             get
@@ -75,8 +77,7 @@ namespace dotnet5781_01_2131_1146
                 mileageSinceService = value;
             }
         }
-
-
+        // Getter and setter for mileageAtService
         public int MileageAtService
         {
             get
@@ -88,7 +89,7 @@ namespace dotnet5781_01_2131_1146
                 mileageAtService = value;
             }
         }
-
+        // Getter and setter for isSafe
         public bool IsSafe
         {
             get
@@ -104,31 +105,29 @@ namespace dotnet5781_01_2131_1146
                 isSafe = value;
             }
         }
-
+        // Update the values after driving 
         public void setDrivingValues(int value)
         {
             Mileage += value;
             Gas -= value;
             MileageSinceService += value;
-
-
         }
-
-
+        // Update the values after a service
         public void Service()
         {
             lastServiceDate = DateTime.Today;
             mileageSinceService = 0;
             mileageAtService = mileage;
             isSafe = true;
-            Console.WriteLine("Yout vehicle has been serviced successfully");
+            Console.WriteLine("Your vehicle has been serviced successfully");
         }
-
+        // Update the values after Refuel
         public void Refuel()
         {
             gas = 1200;
-            Console.WriteLine("Yout vehicle has been refueled successfully");
+            Console.WriteLine("Your vehicle has been refueled successfully");
         }
+        // Print bus details in requiered format 
         public override string ToString()
         {
             int prefix, middle, suffix, temp = reg;
