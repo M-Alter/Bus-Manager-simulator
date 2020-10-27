@@ -30,7 +30,7 @@ namespace dotnet5781_01_2131_1146
 
                 switch (option)
                 {
-                    // Add bus to the list
+                    // Add a bus to the list
                     case 1:
                         addBus(buses);
                         break;
@@ -38,11 +38,11 @@ namespace dotnet5781_01_2131_1146
                     case 2:
                         pickBus(buses);
                         break;
-                    // Preform a service to handle the bus
+                    // Preform a service to handle a bus
                     case 3:
                         performService(buses);
                         break;
-                    // Print details of buses
+                    // Print service details of all the buses
                     case 4:
                         printDetails(buses);
                         break;
@@ -85,7 +85,7 @@ namespace dotnet5781_01_2131_1146
                 Random rnd = new Random();
                 int km = rnd.Next(1, 1201);
                 Console.WriteLine("Length of the journey is {0}", km);
-                // Validate that the bus can drive 
+                // Validate that the bus has enough fuel to drive 
                 if (bus.Gas < km)
                     throw new Exception("There is not enough gas for this journey, Please refuel");
                 if (bus.MileageSinceService + km > 20000)
@@ -121,7 +121,7 @@ namespace dotnet5781_01_2131_1146
             }
             return bus;
         }
-        // Function for treatment in bus
+        // Function for treatment to the bus
         static public void performService(List<Bus> buses)
         {
             string answer;
@@ -136,7 +136,8 @@ namespace dotnet5781_01_2131_1146
                 if (bus == null)
                     throw new Exception("This bus was not found");
                 // Suggest a service
-                Console.WriteLine("Would you like to perfom a service or a refuel?");
+                Console.WriteLine(@"Would you like to perfom a service or a refuel?
+enter ""refuel"" to refuel or ""service"" to perform a service");
                 answer = Console.ReadLine();
                 // Make the treatment by user choice
                 if (answer.Contains("refuel"))
