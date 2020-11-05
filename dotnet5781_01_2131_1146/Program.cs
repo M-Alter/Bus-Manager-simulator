@@ -206,6 +206,5 @@ enter ""refuel"" to refuel or ""service"" to perform a service");
             buses.Add(new Bus(getReg, beginDate));
             Console.WriteLine("The bus added succefully");
         }
-
     }
 }
