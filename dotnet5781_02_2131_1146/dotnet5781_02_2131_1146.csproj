@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas.cs" />
+    <Compile Include="BusLine.cs" />
+    <Compile Include="BusRoute.cs" />
     <Compile Include="BusStop.cs" />
     <Compile Include="BusStopRoute.cs" />
     <Compile Include="Program.cs" />
