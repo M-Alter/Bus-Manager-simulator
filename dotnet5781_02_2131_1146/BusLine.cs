@@ -16,6 +16,11 @@ namespace dotnet5781_02_2131_1146
         private BusStopRoute End;
         private Areas Area;
 
+        public void AddStop(int index, BusStopRoute stop)
+        {
+            //
+        }
+
         public BusLine(int line)
         {
             //if (lines.ContainsKey(line) && lines[line] == 2)
@@ -149,6 +154,14 @@ namespace dotnet5781_02_2131_1146
         public int CompareTo(BusLine obj)
         {
             return obj.TotalTravelTime().CompareTo(this.TotalTravelTime());
+        }
+
+        public override string ToString()
+        {
+            string result = string.Format("Line: {0}\nArea: {1}\n",lineNumber,Area);
+            foreach (BusStopRoute stop in Stops)
+                result.Concat(stop.GetNumber() + ", ");
+            return result;
         }
     }
 }
