@@ -7,7 +7,7 @@ using System.Xml.Schema;
 
 namespace dotnet5781_02_2131_1146
 {
-    class BusLine
+    class BusLine : IComparable<BusLine>
     {
         private static Dictionary<int, int> lines = new Dictionary<int, int>();
         private List<BusStopRoute> Stops;
@@ -16,7 +16,7 @@ namespace dotnet5781_02_2131_1146
         private BusStopRoute End;
         private Areas Area;
 
-        public BusLine(/*int line*/)
+        public BusLine(int line)
         {
             //if (lines.ContainsKey(line) && lines[line] == 2)
             //    throw new ArgumentException("This line already exists twice");
@@ -110,12 +110,18 @@ namespace dotnet5781_02_2131_1146
             }
             throw new ArgumentException("stops are not part of this line");
         }
-
+        private TimeSpan TotalTravelTime()
+        {
+            TimeSpan result = new TimeSpan();
+            foreach (BusStopRoute stop in Stops)
+                result += stop.TravelTime;
+            return result;
+        }
         //TO add a line number to the subline
         public BusLine SubLine(BusStopRoute begin, BusStopRoute end)
         {
             int beginIndex = 0, endIndex = 0;
-            BusLine result = new BusLine();
+            BusLine result = new BusLine(0);
             for (int i = 0; i < Stops.Count; i++)
             {
                 if (Stops[i] == begin)
@@ -138,6 +144,11 @@ namespace dotnet5781_02_2131_1146
                 return result;
             }
             throw new ArgumentException("stops are not part of this line");
+        }
+
+        public int CompareTo(BusLine obj)
+        {
+            return obj.TotalTravelTime().CompareTo(this.TotalTravelTime());
         }
     }
 }
