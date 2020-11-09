@@ -16,7 +16,7 @@ namespace dotnet5781_02_2131_1146
         private BusStopRoute End;
         private Areas Area;
 
-        public BusLine(int line)
+        public BusLine(/*int line*/)
         {
             //if (lines.ContainsKey(line) && lines[line] == 2)
             //    throw new ArgumentException("This line already exists twice");
@@ -111,6 +111,33 @@ namespace dotnet5781_02_2131_1146
             throw new ArgumentException("stops are not part of this line");
         }
 
-
+        //TO add a line number to the subline
+        public BusLine SubLine(BusStopRoute begin, BusStopRoute end)
+        {
+            int beginIndex = 0, endIndex = 0;
+            BusLine result = new BusLine();
+            for (int i = 0; i < Stops.Count; i++)
+            {
+                if (Stops[i] == begin)
+                {
+                    beginIndex = i;
+                    for (i = beginIndex; i < Stops.Count; i++)
+                    {
+                        if (Stops[i] == end)
+                            endIndex = i;
+                    }
+                    break;
+                }
+            }
+            if (beginIndex != 0 && endIndex != 0)
+            {
+                for (int i = beginIndex; i < endIndex; i++)
+                {
+                    result.Stops.Add(Stops[i]);
+                }
+                return result;
+            }
+            throw new ArgumentException("stops are not part of this line");
+        }
     }
 }

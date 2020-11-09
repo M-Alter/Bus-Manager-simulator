@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace dotnet5781_02_2131_1146
 {
-    class BusStopRoute : BusStop
+    class BusStopRoute
     {
-        public BusStopRoute(int number) : base(number) { }
+        public BusStopRoute(BusStop stop)
+        {
+            Stop = stop;
+
+        }
+        private BusStop Stop;
         public TimeSpan TravelTime { get; set; }
         public double TravelDistance { get; set; }
         
