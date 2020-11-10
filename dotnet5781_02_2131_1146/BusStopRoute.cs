@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace dotnet5781_02_2131_1146
 {
-    public class BusStopRoute : BusStop
+    class BusStopRoute 
     {
-        public BusStopRoute(int number, TimeSpan time, double distance) : base(number) 
+        public BusStopRoute(BusStop stop)
         {
-            TravelTime = time;
-            TravelDistance = distance;
+            Stop = stop;
+
         }
-        //public BusStopRoute(BusStop busstop) : base(busstop.stopNumber) { }
-             
+        private BusStop Stop;
         public TimeSpan TravelTime { get; set; }
         public double TravelDistance { get; set; }
-        
-       
 
+        public int GetNumber()
+        {
+            return Stop.stopNumber;
+        }
+        
     }
 }
