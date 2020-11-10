@@ -15,45 +15,171 @@ namespace dotnet5781_02_2131_1146
         private BusStopRoute Begin;
         private BusStopRoute End;
         private Areas Area;
-
-        public void AddStop(int index, BusStopRoute stop)
+        //private De
+        private bool IsValidArea(BusStop stop)
         {
-            //
+            return (stop.Area == Area);
         }
 
-        public BusLine(int line)
+        public BusLine(int line, Areas area)
         {
-            //if (lines.ContainsKey(line) && lines[line] == 2)
-            //    throw new ArgumentException("This line already exists twice");
-            //if (lines.ContainsKey(line))
-            //{
-            //    //check if the stations suit each other
-            //    lines[line]++;
-
-            //}
-            //else
-            //    lines.Add(line, 1);
-            //Stops = new List<BusStopRoute>();
-            //bool success;
-            //int i = 0, input;
-            ////foreach (BusStopRoute stop in Stops)
-            ////    Console.WriteLine(string.Format("{0}: {1}",i++,stop));
-            //Console.WriteLine("Choose your first stop");
-            //success = (int.TryParse(Console.ReadLine(), out input));
-            //if (success)
-            //{
-            //    Stops.Add();
-            //}
-            //Console.WriteLine("Choose your second stop");
-
-            ////print all busStops and add first and last stops to line
+            Area = area;
+            bool flagArea = (Area == Areas.General);
+            if (lines.ContainsKey(line) && lines[line] == 2)
+                throw new ArgumentException("This line already exists twice");
+            //check if the stations suit each other
+            if (lines.ContainsKey(line))
+                lines[line]=2;
+            else
+                lines.Add(line, 1);
+            Console.WriteLine("Here is all existed bus stops:");
+            BusStop.PrintAll();
+            bool success;
+            int input1 = -1,input2, i = -1;
+            // Add the first stop
+            while (i != 0)
+            {
+                Console.WriteLine("Choose your first stop");
+                success = (int.TryParse(Console.ReadLine(), out input1));
+                success = (input1 > 0 && input1 <= BusStop.BusStopsList.Count);
+                if (!success)
+                {
+                    Console.WriteLine("Wrong input");
+                    continue;
+                }
+                else if(!flagArea)
+                {
+                    if(!IsValidArea(BusStop.BusStopsList[input1]))
+                    {
+                        Console.WriteLine("This stop is not from your area");
+                        continue;
+                    }
+                }
+                Begin = new BusStopRoute (BusStop.BusStopsList[input1]);
+                i = 0;                
+            }
+            i = -1;
+            // Add the last stop
+            while (i != 0)
+            {
+                Console.WriteLine("Choose your last stop");
+                success = (int.TryParse(Console.ReadLine(), out input2));
+                success = (input2 > 0 && input2 <= BusStop.BusStopsList.Count);
+                if (!success)
+                {
+                    Console.WriteLine("Wrong input");
+                    continue;
+                }
+                else if (input2 == input1)
+                {
+                    Console.WriteLine("This is the beggining stop. Try different");
+                    continue;
+                }
+                else if (!flagArea)
+                {
+                    if (!IsValidArea(BusStop.BusStopsList[input2]))
+                    {
+                        Console.WriteLine("This stop is not from your area");
+                        continue;
+                    }
+                }
+                End = new BusStopRoute(BusStop.BusStopsList[input2]);
+                i = 0;                
+            }
+            Stops = new List<BusStopRoute>();
+            Stops.Add(Begin);
+            Stops.Add(End);
+            i = -1;
+            // Enable to add more stops
+            while (i != 0)
+            {
+                Console.WriteLine("Add more stops. To finish press 0");
+                success = (int.TryParse(Console.ReadLine(), out input2));
+                success = (input2 > 0 && input2 <= BusStop.BusStopsList.Count);
+                if (!success && input2 != 0)
+                {
+                    Console.WriteLine("Wrong input");
+                    continue;
+                }
+                else if (input2 == 0)
+                {
+                    i = 0;
+                    continue;
+                }
+                foreach(BusStopRoute stop in Stops)
+                {
+                    if(stop.GetNumber() == BusStop.BusStopsList[input2].stopNumber)
+                    {
+                        Console.WriteLine("This stop in the line already");
+                        continue;
+                    }
+                }
+                if (!flagArea)
+                {
+                    if (!IsValidArea(BusStop.BusStopsList[input2]))
+                    {
+                        Console.WriteLine("This stop is not from your area");
+                        continue;
+                    }
+                }
+                Stops.Insert(Stops.Count - 2, new BusStopRoute(BusStop.BusStopsList[input2]));                
+            }
+        }
+        public void AddStop()
+        {
+            int i = 1, index;
+            Console.WriteLine("This is the route of this line");
+            foreach (BusStopRoute stop in Stops)
+            {
+                Console.WriteLine(String.Format("{0}: {1}", i++, stop));
+            }
+            Console.WriteLine("Choose a position for the new stop");
+            bool success = (int.TryParse(Console.ReadLine(), out index));
+            success = (index > 0 && index <= BusStop.BusStopsList.Count);
+            if (!success)
+            {
+                throw new ArgumentException("Wrong input");
+            }
+            AddStop(index - 1);
         }
 
-        public BusStopRoute this[int i]
+        private void AddStop(int index)
+        {
+            Console.WriteLine("Here is all existed bus stops:");
+            BusStop.PrintAll();
+            int input;
+            bool success = (int.TryParse(Console.ReadLine(), out input));
+            success = (input > 0 && input <= BusStop.BusStopsList.Count);
+            if (!success)
+            {
+                throw new ArgumentException("Wrong input");               
+            }
+            foreach (BusStopRoute stop in Stops)
+            {
+                if (stop.GetNumber() == BusStop.BusStopsList[input].stopNumber)
+                {
+                    Console.WriteLine("This stop in the line already");
+                    continue;
+                }
+            }
+            if (Area != Areas.General)
+            {
+                if (!IsValidArea(BusStop.BusStopsList[input]))
+                {
+                    throw new ArgumentException("This stop is not from your area");                    
+                }
+            }
+            Stops.Insert(index, new BusStopRoute(BusStop.BusStopsList[input]));
+        }
+    
+
+        private BusStopRoute this[int i]
         {
             get { return Stops[i]; }
             set { Stops[i] = value; }
         }
+
+        
 
         public bool Exists(BusStopRoute stop)
         {
@@ -126,7 +252,7 @@ namespace dotnet5781_02_2131_1146
         public BusLine SubLine(BusStopRoute begin, BusStopRoute end)
         {
             int beginIndex = 0, endIndex = 0;
-            BusLine result = new BusLine(0);
+            //BusLine result = new BusLine(0);
             for (int i = 0; i < Stops.Count; i++)
             {
                 if (Stops[i] == begin)
@@ -140,14 +266,14 @@ namespace dotnet5781_02_2131_1146
                     break;
                 }
             }
-            if (beginIndex != 0 && endIndex != 0)
-            {
-                for (int i = beginIndex; i < endIndex; i++)
-                {
-                    result.Stops.Add(Stops[i]);
-                }
-                return result;
-            }
+            //if (beginIndex != 0 && endIndex != 0)
+            //{
+            //    for (int i = beginIndex; i < endIndex; i++)
+            //    {
+            //        result.Stops.Add(Stops[i]);
+            //    }
+            //    return result;
+            //}
             throw new ArgumentException("stops are not part of this line");
         }
 
