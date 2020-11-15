@@ -26,7 +26,7 @@ namespace dotnet5781_02_2131_1146
             Area = area;
             bool flagArea = (Area == Areas.General);
             if (lines.ContainsKey(line) && lines[line] == 2)
-                throw new ArgumentException("This line already exists twice");
+                throw new BusExcexption("This line already exists twice");
             //check if the stations suit each other
             if (lines.ContainsKey(line))
                 lines[line] = 2;
@@ -169,7 +169,7 @@ namespace dotnet5781_02_2131_1146
             success = (index > 0 && index <= BusStop.BusStopsList.Count);
             if (!success)
             {
-                throw new ArgumentException("Wrong input");
+                throw new BusExcexption("Wrong input");
             }
             AddStop(index - 1);
         }
@@ -183,7 +183,7 @@ namespace dotnet5781_02_2131_1146
             success = (input > 0 && input <= BusStop.BusStopsList.Count);
             if (!success)
             {
-                throw new ArgumentException("Wrong input");
+                throw new BusExcexption("Wrong input");
             }
             foreach (BusStopRoute stop in Stops)
             {
@@ -197,7 +197,7 @@ namespace dotnet5781_02_2131_1146
             {
                 if (!IsValidArea(BusStop.BusStopsList[input]))
                 {
-                    throw new ArgumentException("This stop is not from your area");
+                    throw new BusExcexption("This stop is not from your area");
                 }
             }
 
@@ -248,7 +248,7 @@ namespace dotnet5781_02_2131_1146
                 }
                 return result;
             }
-            throw new ArgumentException("stops are not part of this line");
+            throw new BusException("stops are not part of this line");
         }
 
         public TimeSpan TravelTime(BusStopRoute begin, BusStopRoute end)
@@ -276,7 +276,7 @@ namespace dotnet5781_02_2131_1146
                 }
                 return result;
             }
-            throw new ArgumentException("stops are not part of this line");
+            throw new BusException("stops are not part of this line");
         }
         private TimeSpan TotalTravelTime()
         {
@@ -311,7 +311,7 @@ namespace dotnet5781_02_2131_1146
             //    }
             //    return result;
             //}
-            throw new ArgumentException("stops are not part of this line");
+            throw new BusException("stops are not part of this line");
         }
 
         public int CompareTo(BusLine obj)
