@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dotnet5781_02_2131_1146
 {
-    class BusStopRoute
+    public class BusStopRoute
     {
         public BusStopRoute(BusStop stop, TimeSpan time, double distance)
         {
