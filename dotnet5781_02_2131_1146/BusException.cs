@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace dotnet5781_02_2131_1146
 {
-    class BusExcexption : Exception
+    class BusException : Exception
     {
-        public BusExcexption(string info) : base(info) { }
+        public BusException(string info) : base(info) { }
 
         public override string Message => base.Message;
     }

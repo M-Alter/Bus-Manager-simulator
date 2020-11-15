@@ -26,7 +26,7 @@ namespace dotnet5781_02_2131_1146
             Area = area;
             bool flagArea = (Area == Areas.General);
             if (lines.ContainsKey(line) && lines[line] == 2)
-                throw new BusExcexption("This line already exists twice");
+                throw new BusException("This line already exists twice");
             //check if the stations suit each other
             if (lines.ContainsKey(line))
                 lines[line] = 2;
@@ -169,7 +169,7 @@ namespace dotnet5781_02_2131_1146
             success = (index > 0 && index <= BusStop.BusStopsList.Count);
             if (!success)
             {
-                throw new BusExcexption("Wrong input");
+                throw new BusException("Wrong input");
             }
             AddStop(index - 1);
         }
@@ -183,7 +183,7 @@ namespace dotnet5781_02_2131_1146
             success = (input > 0 && input <= BusStop.BusStopsList.Count);
             if (!success)
             {
-                throw new BusExcexption("Wrong input");
+                throw new BusException("Wrong input");
             }
             foreach (BusStopRoute stop in Stops)
             {
@@ -197,7 +197,7 @@ namespace dotnet5781_02_2131_1146
             {
                 if (!IsValidArea(BusStop.BusStopsList[input]))
                 {
-                    throw new BusExcexption("This stop is not from your area");
+                    throw new BusException("This stop is not from your area");
                 }
             }
 
