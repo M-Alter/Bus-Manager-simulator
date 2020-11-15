@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dotnet5781_02_2131_1146
 {
-    class BusException : Exception
+    public class BusException : Exception
     {
         public BusException(string info) : base(info) { }
 

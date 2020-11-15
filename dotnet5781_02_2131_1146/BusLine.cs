@@ -7,9 +7,9 @@ using System.Xml.Schema;
 
 namespace dotnet5781_02_2131_1146
 {
-    class BusLine : IComparable<BusLine>
+    public class BusLine : IComparable<BusLine>
     {
-        private static Dictionary<int, int> lines = new Dictionary<int, int>();
+       // private static Dictionary<int, int> lines = new Dictionary<int, int>();
         private List<BusStopRoute> Stops;
         private int lineNumber;
         private BusStopRoute Begin;
@@ -25,13 +25,6 @@ namespace dotnet5781_02_2131_1146
         {
             Area = area;
             bool flagArea = (Area == Areas.General);
-            if (lines.ContainsKey(line) && lines[line] == 2)
-                throw new BusException("This line already exists twice");
-            //check if the stations suit each other
-            if (lines.ContainsKey(line))
-                lines[line] = 2;
-            else
-                lines.Add(line, 1);
             lineNumber = line;
             Console.WriteLine("Here is all existed bus stops:");
             BusStop.PrintAll();
@@ -138,6 +131,7 @@ namespace dotnet5781_02_2131_1146
             }
         }
 
+        public int LineNumber{get; }
         private double UserInput()
         {
             int i = -1;
@@ -311,7 +305,7 @@ namespace dotnet5781_02_2131_1146
         //TO add a line number to the subline
         public BusLine SubLine(BusStopRoute begin, BusStopRoute end)
         {
-            int beginIndex = 0, endIndex = 0, lineInput;
+            int beginIndex = 0, endIndex = 0;
 
             BusLine result = new BusLine(99, this.Area);
             for (int i = 0; i < Stops.Count; i++)
