@@ -17,7 +17,7 @@ namespace dotnet5781_02_2131_1146
         public TimeSpan TravelTime { get; set; }
         public double TravelDistance { get; set; }
 
-        public int GetNumber()
+        public int GetNumber() 
         {
             return Stop.stopNumber;
         }
