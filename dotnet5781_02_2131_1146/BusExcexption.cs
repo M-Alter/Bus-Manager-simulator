@@ -8,7 +8,7 @@ namespace dotnet5781_02_2131_1146
 {
     class BusExcexption : Exception
     {
-        public BusExcexption(string info) : base(info);
+        public BusExcexption(string info) : base(info) { };
 
         public override string Message => base.Message;
     }
