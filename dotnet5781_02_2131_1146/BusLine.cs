@@ -32,6 +32,7 @@ namespace dotnet5781_02_2131_1146
                 lines[line] = 2;
             else
                 lines.Add(line, 1);
+            lineNumber = line;
             Console.WriteLine("Here is all existed bus stops:");
             BusStop.PrintAll();
             bool success;
