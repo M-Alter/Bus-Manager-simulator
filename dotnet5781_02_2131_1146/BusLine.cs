@@ -211,6 +211,28 @@ namespace dotnet5781_02_2131_1146
             Stops.Insert(index, new BusStopRoute(BusStop.BusStopsList[input], TimeSpan.FromMinutes(usetTime), userDistance));
         }
 
+        public void RemoveStop()
+        {
+            Console.WriteLine("Here are all the bus stops in this route:");
+            ToString();
+            int input;
+            bool success = (int.TryParse(Console.ReadLine(), out input));
+            success = (input > 0 && input <= Stops.Count);
+            if (!success)
+            {
+                throw new BusException("Wrong input");
+            }
+            // after consulting with the teacher removing a benig or end stop is allowed without considering the with the reversed route
+            Stops.Remove(Stops[input-1]);
+            if (input == 1)
+            {
+                Begin = Stops[0];
+            }
+            if (input == Stops.Count)
+            {
+                End = Stops[input - 2];
+            }
+        }
 
         private BusStopRoute this[int i]
         {
@@ -224,7 +246,7 @@ namespace dotnet5781_02_2131_1146
             return Stops.Contains(stop);
         }
 
-        public double Distance(BusStopRoute begin, BusStopRoute end)
+        private double Distance(BusStopRoute begin, BusStopRoute end)
         {
             int beginIndex = 0, endIndex = 0;
             double result = 0;
@@ -289,8 +311,9 @@ namespace dotnet5781_02_2131_1146
         //TO add a line number to the subline
         public BusLine SubLine(BusStopRoute begin, BusStopRoute end)
         {
-            int beginIndex = 0, endIndex = 0;
-            //BusLine result = new BusLine(0);
+            int beginIndex = 0, endIndex = 0, lineInput;
+
+            BusLine result = new BusLine(99, this.Area);
             for (int i = 0; i < Stops.Count; i++)
             {
                 if (Stops[i] == begin)
@@ -299,20 +322,24 @@ namespace dotnet5781_02_2131_1146
                     for (i = beginIndex; i < Stops.Count; i++)
                     {
                         if (Stops[i] == end)
+                        {
                             endIndex = i;
+                            break;
+                        }
                     }
                     break;
                 }
             }
-            //if (beginIndex != 0 && endIndex != 0)
-            //{
-            //    for (int i = beginIndex; i < endIndex; i++)
-            //    {
-            //        result.Stops.Add(Stops[i]);
-            //    }
-            //    return result;
-            //}
-            throw new BusException("stops are not part of this line");
+
+            if (endIndex != 0)
+            {
+                for (int i = beginIndex; i < endIndex; i++)
+                {
+                    result.Stops.Add(Stops[i]);
+                }
+                return result;
+            }
+            throw new BusException("these two stops dont create a subline of this line");
         }
 
         public int CompareTo(BusLine obj)
