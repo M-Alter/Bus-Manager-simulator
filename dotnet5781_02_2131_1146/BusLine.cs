@@ -29,13 +29,13 @@ namespace dotnet5781_02_2131_1146
                 throw new ArgumentException("This line already exists twice");
             //check if the stations suit each other
             if (lines.ContainsKey(line))
-                lines[line]=2;
+                lines[line] = 2;
             else
                 lines.Add(line, 1);
             Console.WriteLine("Here is all existed bus stops:");
             BusStop.PrintAll();
             bool success;
-            int input1 = -1,input2, i = -1;
+            int input1 = -1, input2, i = -1;
             // Add the first stop
             while (i != 0)
             {
@@ -47,16 +47,16 @@ namespace dotnet5781_02_2131_1146
                     Console.WriteLine("Wrong input");
                     continue;
                 }
-                else if(!flagArea)
+                else if (!flagArea)
                 {
-                    if(!IsValidArea(BusStop.BusStopsList[input1]))
+                    if (!IsValidArea(BusStop.BusStopsList[input1]))
                     {
                         Console.WriteLine("This stop is not from your area");
                         continue;
                     }
                 }
-                Begin = new BusStopRoute (BusStop.BusStopsList[input1]);
-                i = 0;                
+                Begin = new BusStopRoute(BusStop.BusStopsList[input1], TimeSpan.Zero, 0);
+                i = 0;
             }
             i = -1;
             // Add the last stop
@@ -83,8 +83,13 @@ namespace dotnet5781_02_2131_1146
                         continue;
                     }
                 }
-                End = new BusStopRoute(BusStop.BusStopsList[input2]);
-                i = 0;                
+                // Get time
+                Console.WriteLine("Enter time drive from the last stop");
+                double usetTime = UserInput();
+                // Get distance
+                Console.WriteLine("Enter the distance from the last stop");
+                double userDistance = UserInput();
+                End = new BusStopRoute(BusStop.BusStopsList[input2], TimeSpan.FromMinutes(usetTime), userDistance);
             }
             Stops = new List<BusStopRoute>();
             Stops.Add(Begin);
@@ -106,9 +111,9 @@ namespace dotnet5781_02_2131_1146
                     i = 0;
                     continue;
                 }
-                foreach(BusStopRoute stop in Stops)
+                foreach (BusStopRoute stop in Stops)
                 {
-                    if(stop.GetNumber() == BusStop.BusStopsList[input2].stopNumber)
+                    if (stop.GetNumber() == BusStop.BusStopsList[input2].stopNumber)
                     {
                         Console.WriteLine("This stop in the line already");
                         continue;
@@ -122,8 +127,34 @@ namespace dotnet5781_02_2131_1146
                         continue;
                     }
                 }
-                Stops.Insert(Stops.Count - 2, new BusStopRoute(BusStop.BusStopsList[input2]));                
+                // Get time
+                Console.WriteLine("Enter time drive from the last stop");
+                double usetTime = UserInput();
+                // Get distance
+                Console.WriteLine("Enter the distance from the last stop");
+                double userDistance = UserInput();
+                Stops.Insert(Stops.Count - 2, new BusStopRoute(BusStop.BusStopsList[input2], TimeSpan.FromMinutes(usetTime), userDistance));
             }
+        }
+
+        private double UserInput()
+        {
+            int i = -1;
+            bool success;
+            double input = 0;
+            while (i != 0)
+            {
+                //Console.WriteLine("Enter distance from the last stop");
+                success = (double.TryParse(Console.ReadLine(), out input));
+                success = (input > 0);
+                if (!success)
+                {
+                    Console.WriteLine("Wrong input");
+                    continue;
+                }
+                i = 0;
+            }
+            return input;
         }
         public void AddStop()
         {
@@ -152,7 +183,7 @@ namespace dotnet5781_02_2131_1146
             success = (input > 0 && input <= BusStop.BusStopsList.Count);
             if (!success)
             {
-                throw new ArgumentException("Wrong input");               
+                throw new ArgumentException("Wrong input");
             }
             foreach (BusStopRoute stop in Stops)
             {
@@ -166,12 +197,19 @@ namespace dotnet5781_02_2131_1146
             {
                 if (!IsValidArea(BusStop.BusStopsList[input]))
                 {
-                    throw new ArgumentException("This stop is not from your area");                    
+                    throw new ArgumentException("This stop is not from your area");
                 }
             }
-            Stops.Insert(index, new BusStopRoute(BusStop.BusStopsList[input]));
+
+            // Get time
+            Console.WriteLine("Enter time drive from the last stop");
+            double usetTime = UserInput();
+            // Get distance
+            Console.WriteLine("Enter the distance from the last stop");
+            double userDistance = UserInput();
+            Stops.Insert(index, new BusStopRoute(BusStop.BusStopsList[input], TimeSpan.FromMinutes(usetTime), userDistance));
         }
-    
+
 
         private BusStopRoute this[int i]
         {
@@ -179,7 +217,6 @@ namespace dotnet5781_02_2131_1146
             set { Stops[i] = value; }
         }
 
-        
 
         public bool Exists(BusStopRoute stop)
         {
@@ -235,7 +272,7 @@ namespace dotnet5781_02_2131_1146
             {
                 for (int i = beginIndex; i < endIndex; i++)
                 {
-                    result.Add( Stops[i].TravelTime);
+                    result.Add(Stops[i].TravelTime);
                 }
                 return result;
             }
@@ -284,7 +321,7 @@ namespace dotnet5781_02_2131_1146
 
         public override string ToString()
         {
-            string result = string.Format("Line: {0}\nArea: {1}\n",lineNumber,Area);
+            string result = string.Format("Line: {0}\nArea: {1}\n", lineNumber, Area);
             foreach (BusStopRoute stop in Stops)
                 result.Concat(stop.GetNumber() + ", ");
             return result;
