@@ -31,7 +31,7 @@ namespace dotnet5781_02_2131_1146
             BusLines.Add(busLine);
         }
 
-        public void RemovLine()
+        public void RemoveLine()
         {
             int input, input2;
             bool success;
@@ -85,6 +85,19 @@ namespace dotnet5781_02_2131_1146
                 throw new BusException("This line doesn't exist in this company");
         }
 
+        public void BusStopLines(int stopNumber)
+        {
+            bool flag = false;
+            foreach (var item in BusLines)
+                if (item.Contains(stopNumber))
+                {
+                    flag = true;
+                    Console.WriteLine(item);
+                }
+            if (!flag)
+                throw new BusException("This stop has no lines");
+        }
+
         public BusLine this[int index]
         {
             get
@@ -104,7 +117,7 @@ namespace dotnet5781_02_2131_1146
             }
         }
 
-        public void PrintAreas()
+        public static void PrintAreas()
         {
             Console.WriteLine("1:General\n2: Jerusalem\n3: North\n4: South\n5: Center");
         }

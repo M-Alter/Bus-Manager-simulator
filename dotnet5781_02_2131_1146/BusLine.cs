@@ -341,6 +341,14 @@ namespace dotnet5781_02_2131_1146
             return obj.TotalTravelTime().CompareTo(this.TotalTravelTime());
         }
 
+        public bool Contains(int StopNumber)
+        {
+            foreach (var item in Stops)
+                if (item.GetNumber() == StopNumber)
+                    return true;
+            return false;
+        }
+
         public override string ToString()
         {
             string result = string.Format("Line: {0}\nArea: {1}\n", lineNumber, Area);
