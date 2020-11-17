@@ -50,7 +50,7 @@ namespace dotnet5781_02_2131_1146
             }
         }
 
-        private BusStop this[int i]
+        public BusStop this[int i]
         {
             get { return BusStopsList[i]; }
         }

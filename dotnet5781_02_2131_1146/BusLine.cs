@@ -131,9 +131,18 @@ namespace dotnet5781_02_2131_1146
             }
         }
 
-        public BusLine(BusStopRoute stop)
+        public BusLine(int line, BusStopRoute beginStop, BusStopRoute endStop)
         {
-            AddStop(stop);
+            if (beginStop.GetNumber() == endStop.GetNumber())
+                throw new BusException("First stop can't be last stop");
+            if (beginStop.GetArea != endStop.GetArea && beginStop.GetArea != Areas.General && endStop.GetArea != Areas.General)
+                throw new BusException("Areas dont match");
+            lineNumber = line;
+            Stops = new List<BusStopRoute>();
+            AddStop(beginStop,1);
+            Begin = beginStop;
+            AddStop(endStop, 2);
+            End = endStop;
         }
 
         public int LineNumber{get; }
@@ -210,12 +219,12 @@ namespace dotnet5781_02_2131_1146
             Stops.Insert(index, new BusStopRoute(BusStop.BusStopsList[input], TimeSpan.FromMinutes(usetTime), userDistance));
         }
 
-        private void AddStop(BusStopRoute stop)
+        private void AddStop(BusStopRoute stop, int index)
         {
-            if (Area == stop.GetArea)
-                Stops.Add(stop);
-            else
-                throw new BusException("Areas dont match");
+            if (index == 1)
+                Area = stop.GetArea;
+             Stops.Insert(index-1, stop);
+            
         }
 
         public void RemoveStop()
@@ -366,7 +375,7 @@ namespace dotnet5781_02_2131_1146
         {
             string result = string.Format("Line: {0}\nArea: {1}\n", lineNumber, Area);
             foreach (BusStopRoute stop in Stops)
-                result.Concat(stop.GetNumber() + ", ");
+                result += (stop.GetNumber() + ", ");
             return result;
         }
     }

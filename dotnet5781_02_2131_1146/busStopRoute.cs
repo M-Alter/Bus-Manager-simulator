@@ -25,5 +25,6 @@ namespace dotnet5781_02_2131_1146
             return Stop.stopNumber;
         }
 
+        public Areas GetArea { get { return Stop.Area; } }
     }
 }

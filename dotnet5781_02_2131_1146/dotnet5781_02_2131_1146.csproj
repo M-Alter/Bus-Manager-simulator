@@ -50,6 +50,7 @@
     <Compile Include="BusCollection.cs" />
     <Compile Include="BusStop.cs" />
     <Compile Include="BusStopRoute.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
