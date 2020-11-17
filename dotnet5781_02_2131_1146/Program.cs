@@ -78,6 +78,20 @@ namespace dotnet5781_02_2131_1146
                             }
                             break;
                         case Options.SEARCH:
+                            Console.WriteLine("1 - Find lines in a stop\n2 - Find route between 2 stops");
+                            if (!int.TryParse(Console.ReadLine(), out choice) || choice > 2 || choice < 1)
+                                throw new BusException("Wrong input");
+                            switch (choice)
+                            {
+                                case 1:
+                                    FindLines(ref Company);
+                                    break;
+                                case 2:
+                                    FindRoute(ref Company);
+                                    break;
+                                default:
+                                    break;
+                            }
                             break;
                         case Options.PRINT:
                             break;
@@ -94,6 +108,22 @@ namespace dotnet5781_02_2131_1146
                 }
             } while (option != Options.EXIT);
             Console.ReadKey();
+        }
+
+        private static void FindRoute(ref BusCollection company)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void FindLines(ref BusCollection Company)
+        {
+            int stopNumber;
+            bool success;
+            Console.WriteLine("Enter stop number");
+            success = int.TryParse(Console.ReadLine(), out stopNumber);
+            if (!success)
+                throw new BusException("Wrong input");
+            Company.BusStopLines(stopNumber);
         }
 
         private static void RemoveStop(ref BusCollection Company)
