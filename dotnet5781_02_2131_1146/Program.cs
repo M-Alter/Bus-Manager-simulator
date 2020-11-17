@@ -46,13 +46,13 @@ namespace dotnet5781_02_2131_1146
                     {
 
                         case Options.ADD:
-                            Console.WriteLine("1 - To add a new bus\n2 - To add a new bus stop to the existed line");
+                            Console.WriteLine("1 - To add a new bus\n2 - To add a new bus stop to the existing line");
                             if (!int.TryParse(Console.ReadLine(), out choice) || choice > 2 || choice < 1)
                                 throw new BusException("Wrong input");
                             switch (choice)
                             {
                                 case 1:
-                                    AddBus(ref Company);
+                                    AddLine(ref Company);
                                     break;
                                 case 2:
                                     AddStop(ref Company);
@@ -62,6 +62,20 @@ namespace dotnet5781_02_2131_1146
                             }
                             break;
                         case Options.REMOVE:
+                            Console.WriteLine("1 - To remove a bus\n2 - To remove a stop from an existing line");
+                            if (!int.TryParse(Console.ReadLine(), out choice) || choice > 2 || choice < 1)
+                                throw new BusException("Wrong input");
+                            switch (choice)
+                            {
+                                case 1:
+                                    RemoveLine(ref Company);
+                                    break;
+                                case 2:
+                                    RemoveStop(ref Company);
+                                    break;
+                                default:
+                                    break;
+                            }
                             break;
                         case Options.SEARCH:
                             break;
@@ -82,6 +96,29 @@ namespace dotnet5781_02_2131_1146
             Console.ReadKey();
         }
 
+        private static void RemoveStop(ref BusCollection Company)
+        {
+            int line;
+            bool success;
+            Console.WriteLine("Enter line number");
+            success = int.TryParse(Console.ReadLine(), out line);
+            if (!success)
+                throw new BusException("Wrong input");
+            Company.RemoveStop(line);
+        }
+
+
+        private static void RemoveLine(ref BusCollection Company)
+        {
+            //int line;
+            //bool success;
+            //Console.WriteLine("Enter line number");
+            //success = int.TryParse(Console.ReadLine(), out line);
+            //if (!success)
+            //    throw new BusException("Wrong input");
+            Company.RemoveLine();
+        }
+
         private static void AddStop(ref BusCollection Company)
         {
             int line;
@@ -93,7 +130,7 @@ namespace dotnet5781_02_2131_1146
             Company.AddStop(line);
         }
 
-        private static void AddBus(ref BusCollection Company)
+        private static void AddLine(ref BusCollection Company)
         {
             int line;
             bool success;

@@ -98,6 +98,20 @@ namespace dotnet5781_02_2131_1146
                 throw new BusException("This line doesn't exist in this company");
         }
 
+        public void RemoveStop(int line)
+        {
+            foreach (var item in BusLines)
+            {
+                if (item.LineNumber == line)
+                {
+                    item.RemoveStop();
+                    return;
+                }
+            }
+            throw new BusException("This line doesn't exist");
+        }
+    
+
         public void BusStopLines(int stopNumber)
         {
             bool flag = false;
