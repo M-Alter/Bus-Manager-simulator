@@ -31,6 +31,19 @@ namespace dotnet5781_02_2131_1146
             BusLines.Add(busLine);
         }
 
+        public void AddStop(int line)
+        {
+            foreach (var item in BusLines)
+            {
+                if (item.LineNumber == line)
+                {
+                    item.AddStop();
+                    return;
+                }
+            }
+            throw new BusException("This line doesn't exist");
+        }
+
         public void RemoveLine()
         {
             int input, input2;

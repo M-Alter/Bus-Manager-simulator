@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace dotnet5781_02_2131_1146
 {
@@ -58,7 +55,8 @@ namespace dotnet5781_02_2131_1146
                                     AddBus(ref Company);
                                     break;
                                 case 2:
-
+                                    AddStop(ref Company);
+                                    break;
                                 default:
                                     break;
                             }
@@ -82,6 +80,17 @@ namespace dotnet5781_02_2131_1146
                 }
             } while (option != Options.EXIT);
             Console.ReadKey();
+        }
+
+        private static void AddStop(ref BusCollection Company)
+        {
+            int line;
+            bool success;
+            Console.WriteLine("Enter line number");
+            success = int.TryParse(Console.ReadLine(), out line);
+            if (!success)
+                throw new BusException("Wrong input");
+            Company.AddStop(line);
         }
 
         private static void AddBus(ref BusCollection Company)
