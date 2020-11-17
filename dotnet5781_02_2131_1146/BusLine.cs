@@ -131,6 +131,11 @@ namespace dotnet5781_02_2131_1146
             }
         }
 
+        public BusLine(BusStopRoute stop)
+        {
+            AddStop(stop);
+        }
+
         public int LineNumber{get; }
         private double UserInput()
         {
@@ -203,6 +208,14 @@ namespace dotnet5781_02_2131_1146
             Console.WriteLine("Enter the distance from the last stop");
             double userDistance = UserInput();
             Stops.Insert(index, new BusStopRoute(BusStop.BusStopsList[input], TimeSpan.FromMinutes(usetTime), userDistance));
+        }
+
+        private void AddStop(BusStopRoute stop)
+        {
+            if (Area == stop.GetArea)
+                Stops.Add(stop);
+            else
+                throw new BusException("Areas dont match");
         }
 
         public void RemoveStop()
