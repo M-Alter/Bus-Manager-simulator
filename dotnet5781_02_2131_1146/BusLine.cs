@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
 
 namespace dotnet5781_02_2131_1146
 {
     public class BusLine : IComparable<BusLine>
     {
-       // private static Dictionary<int, int> lines = new Dictionary<int, int>();
+        // private static Dictionary<int, int> lines = new Dictionary<int, int>();
         private List<BusStopRoute> Stops;
         private int lineNumber;
         private BusStopRoute Begin;
@@ -49,7 +45,7 @@ namespace dotnet5781_02_2131_1146
                         continue;
                     }
                 }
-                Begin = new BusStopRoute(BusStop.BusStopsList[input1-1], TimeSpan.Zero, 0);
+                Begin = new BusStopRoute(BusStop.BusStopsList[input1 - 1], TimeSpan.Zero, 0);
                 i = 0;
             }
             i = -1;
@@ -84,6 +80,7 @@ namespace dotnet5781_02_2131_1146
                 Console.WriteLine("Enter the distance from the last stop");
                 double userDistance = UserInput();
                 End = new BusStopRoute(BusStop.BusStopsList[input2], TimeSpan.FromMinutes(usetTime), userDistance);
+                i = 0;
             }
             Stops = new List<BusStopRoute>();
             Stops.Add(Begin);
@@ -139,13 +136,13 @@ namespace dotnet5781_02_2131_1146
                 throw new BusException("Areas dont match");
             lineNumber = line;
             Stops = new List<BusStopRoute>();
-            AddStop(beginStop,1);
+            AddStop(beginStop, 1);
             Begin = beginStop;
             AddStop(endStop, 2);
             End = endStop;
         }
 
-        public int LineNumber{ get { return lineNumber; } }
+        public int LineNumber { get { return lineNumber; } }
         private double UserInput()
         {
             int i = -1;
@@ -223,8 +220,8 @@ namespace dotnet5781_02_2131_1146
         {
             if (index == 1)
                 Area = stop.GetArea;
-             Stops.Insert(index-1, stop);
-            
+            Stops.Insert(index - 1, stop);
+
         }
 
         public void RemoveStop()
@@ -239,7 +236,7 @@ namespace dotnet5781_02_2131_1146
                 throw new BusException("Wrong input");
             }
             // after consulting with the teacher removing a benig or end stop is allowed without considering the with the reversed route
-            Stops.Remove(Stops[input-1]);
+            Stops.Remove(Stops[input - 1]);
             if (input == 1)
             {
                 Begin = Stops[0];

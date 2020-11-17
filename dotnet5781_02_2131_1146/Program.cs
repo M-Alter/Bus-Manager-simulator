@@ -25,17 +25,17 @@ namespace dotnet5781_02_2131_1146
                     Console.WriteLine(e.Message);
                 }
             BusStop.PrintAll();
-            BusCollection lines = new BusCollection();
+            BusCollection Company = new BusCollection();
             for (int i = 0; i < 10; i++)
                 try
                 {
-                    lines.Add(new BusLine(i + 100, new BusStopRoute(stops[i + (2 * 5)], TimeSpan.FromMinutes((2 * i) + 5 % 3), 2 * i / 3), new BusStopRoute(stops[i + (3 * 5)], TimeSpan.FromMinutes((2 * i) + 6 % 5), 2 * i / 5)));
+                    Company.Add(new BusLine(i + 100, new BusStopRoute(stops[i + (2 * 5)], TimeSpan.FromMinutes((2 * i) + 5 % 3), 2 * i / 3), new BusStopRoute(stops[i + (3 * 5)], TimeSpan.FromMinutes((2 * i) + 6 % 5), 2 * i / 5)));
                 }
                 catch (BusException e)
                 {
                     Console.WriteLine(e.Message);
                 }
-            foreach (var item in lines)
+            foreach (var item in Company)
                 Console.WriteLine(item);
             Options option;
             do
@@ -55,15 +55,10 @@ namespace dotnet5781_02_2131_1146
                             switch (choice)
                             {
                                 case 1:
-                                    Console.WriteLine("Enter line number");
-                                    success = int.TryParse(Console.ReadLine(), out line);
-                                    if (!success || line > 999 || line < 1)
-                                        throw new BusException("Wrong input");
-                                    Console.WriteLine("Choose an Area: General, Jerusalem, North, South, Center");
-                                    if (!Enum.TryParse(Console.ReadLine(), out area))
-                                        throw new BusException("Wrong input");
-                                    lines.Add(new BusLine(line, area));
+                                    AddBus(ref Company);
                                     break;
+                                case 2:
+
                                 default:
                                     break;
                             }
@@ -87,6 +82,21 @@ namespace dotnet5781_02_2131_1146
                 }
             } while (option != Options.EXIT);
             Console.ReadKey();
+        }
+
+        private static void AddBus(ref BusCollection Company)
+        {
+            int line;
+            bool success;
+            Areas area;
+            Console.WriteLine("Enter line number");
+            success = int.TryParse(Console.ReadLine(), out line);
+            if (!success || line > 999 || line < 1)
+                throw new BusException("Wrong input");
+            Console.WriteLine("Choose an Area: General, Jerusalem, North, South, Center");
+            if (!Enum.TryParse(Console.ReadLine(), out area))
+                throw new BusException("Wrong input");
+            Company.Add(new BusLine(line, area));
         }
     }
 }
