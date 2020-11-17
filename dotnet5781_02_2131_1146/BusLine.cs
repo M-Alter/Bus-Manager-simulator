@@ -295,7 +295,7 @@ namespace dotnet5781_02_2131_1146
             }
             throw new BusException("stops are not part of this line");
         }
-        private TimeSpan TotalTravelTime()
+        public TimeSpan TotalTravelTime()
         {
             TimeSpan result = new TimeSpan();
             foreach (BusStopRoute stop in Stops)

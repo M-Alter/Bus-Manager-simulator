@@ -126,6 +126,14 @@ namespace dotnet5781_02_2131_1146
         {
             return new BusEnumerator(BusLines, BusLines.Count);
         }
+
+
+        public void PrintSorted()
+        {
+            BusLines.Sort();
+            foreach (var item in BusLines)
+                Console.WriteLine(item.LineNumber + " Total Travel Time: " + item.TotalTravelTime());
+        }
     }
 
 
