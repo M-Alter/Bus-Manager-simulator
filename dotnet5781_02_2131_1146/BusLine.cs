@@ -49,7 +49,7 @@ namespace dotnet5781_02_2131_1146
                         continue;
                     }
                 }
-                Begin = new BusStopRoute(BusStop.BusStopsList[input1], TimeSpan.Zero, 0);
+                Begin = new BusStopRoute(BusStop.BusStopsList[input1-1], TimeSpan.Zero, 0);
                 i = 0;
             }
             i = -1;
@@ -145,7 +145,7 @@ namespace dotnet5781_02_2131_1146
             End = endStop;
         }
 
-        public int LineNumber{get; }
+        public int LineNumber{ get { return lineNumber; } }
         private double UserInput()
         {
             int i = -1;
@@ -373,9 +373,10 @@ namespace dotnet5781_02_2131_1146
 
         public override string ToString()
         {
-            string result = string.Format("Line: {0}\nArea: {1}\n", lineNumber, Area);
+            string result = string.Format("Line: {0,-4} Area: {1,-10}  ", lineNumber, Area);
             foreach (BusStopRoute stop in Stops)
-                result += (stop.GetNumber() + ", ");
+                result += (string.Format("{0,-7} ",
+            stop.GetNumber()));
             return result;
         }
     }

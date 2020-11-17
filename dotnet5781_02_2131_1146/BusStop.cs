@@ -19,6 +19,9 @@ namespace dotnet5781_02_2131_1146
         public readonly double Longitude;
         private static List<int> AllStopsNumbers = new List<int>();
         public static List<BusStop> BusStopsList = new List<BusStop>();
+        private static Random r = new Random(DateTime.Now.Millisecond);
+
+
         public Areas Area { get; set; }
         public BusStop(int number, Areas area)
         {
@@ -33,9 +36,10 @@ namespace dotnet5781_02_2131_1146
             stopNumber = number;
             Area = area;
             AllStopsNumbers.Add(number);
-            Random r = new Random(DateTime.Now.Millisecond);
-            Latitude = r.NextDouble() * (33.3 - 31) + 31;
+            Latitude = (r.NextDouble() * (33.3 - 31)) + 31;
             Longitude = r.NextDouble() * (35.5 - 34.3) + 34.3;
+            Latitude = Math.Round(Latitude, 6);
+            Longitude = Math.Round(Longitude, 6);
             BusStopsList.Add(this);
         }
 
@@ -46,7 +50,7 @@ namespace dotnet5781_02_2131_1146
             int i = 1;
             foreach (BusStop stop in BusStopsList)
             {
-                Console.WriteLine(String.Format("{0}: {1}", i++, stop));
+                Console.WriteLine(String.Format("{0,3}: {1}", i++, stop));
             }
         }
 
@@ -56,7 +60,7 @@ namespace dotnet5781_02_2131_1146
         }
         public override string ToString()
         {
-            return String.Format("Bus Station Code: {0}, {1}°N {2}°E, His area: {3}", stopNumber, Latitude, Longitude, Area);
+            return String.Format("Bus Station Code: {0,-7}  {1,11}°N {2,11}°E, His area: {3}", stopNumber, Latitude, Longitude, Area);
         }
     }
 }

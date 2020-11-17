@@ -18,7 +18,7 @@ namespace dotnet5781_02_2131_1146
         {
             BusLines = new List<BusLine>();
         }
-        public void addLine(BusLine busLine)
+        public void Add(BusLine busLine)
         {
             if (lines.ContainsKey(busLine.LineNumber) && lines[busLine.LineNumber] == 2)
             {

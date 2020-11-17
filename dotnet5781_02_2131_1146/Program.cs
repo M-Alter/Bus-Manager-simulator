@@ -10,6 +10,9 @@ namespace dotnet5781_02_2131_1146
     {
         static void Main(string[] args)
         {
+            int choice, line;
+            bool success;
+            Areas area;
             List<BusStop> stops = new List<BusStop>();
             Random r = new Random(DateTime.Today.Millisecond);
             for (int i = 0; i < 40; i++)
@@ -22,11 +25,11 @@ namespace dotnet5781_02_2131_1146
                     Console.WriteLine(e.Message);
                 }
             BusStop.PrintAll();
-            List<BusLine> lines = new List<BusLine>();
+            BusCollection lines = new BusCollection();
             for (int i = 0; i < 10; i++)
                 try
                 {
-                    lines.Add(new BusLine(i + 1, new BusStopRoute(stops[i + (2 * 5)], TimeSpan.FromMinutes((2 * i) + 5 % 3), 2 * i / 3), new BusStopRoute(stops[i + (3 * 5)], TimeSpan.FromMinutes((2 * i) + 6 % 5), 2 * i / 5)));
+                    lines.Add(new BusLine(i + 100, new BusStopRoute(stops[i + (2 * 5)], TimeSpan.FromMinutes((2 * i) + 5 % 3), 2 * i / 3), new BusStopRoute(stops[i + (3 * 5)], TimeSpan.FromMinutes((2 * i) + 6 % 5), 2 * i / 5)));
                 }
                 catch (BusException e)
                 {
@@ -39,21 +42,48 @@ namespace dotnet5781_02_2131_1146
             {
                 Console.WriteLine("Please choose from one of the following options");
                 Console.WriteLine("1: ADD \n2: REMOVE \n3: SEARCH \n4: PRINT \n5: EXIT");
-                Enum.TryParse(Console.ReadLine().ToUpper(),out option);
-                switch (option)
+                Enum.TryParse(Console.ReadLine().ToUpper(), out option);
+                try
                 {
-                    case Options.ADD:
-                        break;
-                    case Options.REMOVE:
-                        break;
-                    case Options.SEARCH:
-                        break;
-                    case Options.PRINT:
-                        break;
-                    case Options.EXIT:
-                        break;
-                    default:
-                        break;
+                    switch (option)
+                    {
+
+                        case Options.ADD:
+                            Console.WriteLine("1 - To add a new bus\n2 - To add a new bus stop to the existed line");
+                            if (!int.TryParse(Console.ReadLine(), out choice) || choice > 2 || choice < 1)
+                                throw new BusException("Wrong input");
+                            switch (choice)
+                            {
+                                case 1:
+                                    Console.WriteLine("Enter line number");
+                                    success = int.TryParse(Console.ReadLine(), out line);
+                                    if (!success || line > 999 || line < 1)
+                                        throw new BusException("Wrong input");
+                                    Console.WriteLine("Choose an Area: General, Jerusalem, North, South, Center");
+                                    if (!Enum.TryParse(Console.ReadLine(), out area))
+                                        throw new BusException("Wrong input");
+                                    lines.Add(new BusLine(line, area));
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case Options.REMOVE:
+                            break;
+                        case Options.SEARCH:
+                            break;
+                        case Options.PRINT:
+                            break;
+                        case Options.EXIT:
+                            break;
+                        default:
+                            break;
+
+                    }
+                }
+                catch (BusException e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             } while (option != Options.EXIT);
             Console.ReadKey();
