@@ -17,6 +17,9 @@ namespace dotnet5781_02_2131_1146
 
         }
         private BusStop Stop;
+
+        public BusStop GetBusStop { get { return Stop; } }
+
         public TimeSpan TravelTime { get; set; }
         public double TravelDistance { get; set; }
 

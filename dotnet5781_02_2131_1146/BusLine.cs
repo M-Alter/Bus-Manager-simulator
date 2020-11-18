@@ -346,7 +346,6 @@ namespace dotnet5781_02_2131_1146
         {
             int beginIndex = 0, endIndex = 0;
 
-            BusLine result = new BusLine(lineNumber, this.Area);
             for (int i = 0; i < Stops.Count; i++)
                 if (Stops[i].GetNumber() == begin.stopNumber)
                 {
@@ -359,11 +358,13 @@ namespace dotnet5781_02_2131_1146
                         }
                     break;
                 }
+            BusLine result = new BusLine(lineNumber, Stops[beginIndex], Stops[endIndex]);
+
             if (endIndex != 0)
             {
-                for (int i = beginIndex; i < endIndex; i++)
+                for (int i = beginIndex + 1; i < endIndex - 1; i++)
                 {
-                    result.Stops.Add(Stops[i]);
+                    result.Stops.Insert(i - beginIndex ,Stops[i]);
                 }
                 return result;
             }
@@ -385,10 +386,9 @@ namespace dotnet5781_02_2131_1146
 
         public override string ToString()
         {
-            string result = string.Format("Line: {0,-4} Area: {1,-10}  ", lineNumber, Area);
+            string result = string.Format("Line: {0,-4} Area: {1,-10}  \n", lineNumber, Area);
             foreach (BusStopRoute stop in Stops)
-                result += (string.Format("{0,-7} ",
-            stop.GetNumber()));
+                result += (string.Format("{0,-77} {1}\n",stop.GetBusStop,stop.TravelTime));
             return result;
         }
     }

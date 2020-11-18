@@ -27,7 +27,7 @@ namespace dotnet5781_02_2131_1146
             for (int i = 0; i < 18; i++)
                 try
                 {
-                    Company.Add(new BusLine(i + 100, new BusStopRoute(stops[((i + 1) * 2)], TimeSpan.FromMinutes((2 * i) + 5 % 3), 2 * i / 3), new BusStopRoute(stops[((i + 1) * 2) + 1], TimeSpan.FromMinutes((2 * i) + 6 % 5), 2 * i / 5)));
+                    Company.Add(new BusLine(i + 100, new BusStopRoute(stops[((i + 1) * 2)], TimeSpan.Zero, 0), new BusStopRoute(stops[((i + 1) * 2) + 1], TimeSpan.FromMinutes((2 * i) + 6 % 5), 2 * i / 5)));
                 }
                 catch (BusException e)
                 {
@@ -131,9 +131,11 @@ namespace dotnet5781_02_2131_1146
             BusStop.PrintAll();
             int inputBegin, inputEnd;
             BusStop Begin, End;
+            Console.WriteLine("Please choose the first stop");
             bool success = int.TryParse(Console.ReadLine(), out inputBegin);
             if (!success || inputBegin > BusStop.BusStopsList.Count || inputBegin < 1)
                 throw new BusException("This station doesn't exist");
+            Console.WriteLine("Please choose the last stop");
             success = int.TryParse(Console.ReadLine(), out inputEnd);
             if (!success || inputEnd > BusStop.BusStopsList.Count || inputEnd < 1)
                 throw new BusException("This station doesn't exist");

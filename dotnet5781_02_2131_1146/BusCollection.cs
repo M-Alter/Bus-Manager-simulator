@@ -164,7 +164,9 @@ namespace dotnet5781_02_2131_1146
 
         public void GetRoutes(BusStop begin, BusStop end)
         {
-            List<BusLine> result = null;
+            List<BusLine> result;
+            result = new List<BusLine>();
+            int i = 0;
             foreach (BusLine item in BusLines)
             
                 try
@@ -176,6 +178,7 @@ namespace dotnet5781_02_2131_1146
 
                 }
             result.Sort();
+            result.Reverse();
             foreach (BusLine item in result)
             {
                 Console.WriteLine("{0}: {1}" ,item.LineNumber,item.TotalTravelTime());
