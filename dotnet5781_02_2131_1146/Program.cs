@@ -185,7 +185,14 @@ namespace dotnet5781_02_2131_1146
             success = int.TryParse(Console.ReadLine(), out stopNumber);
             if (!success)
                 throw new BusException("Wrong input");
-            Company.BusStopLines(stopNumber);
+            try
+            {
+                Company.BusStopLines(stopNumber);
+            }
+            catch (BusException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         private static void RemoveStop(ref BusCollection Company)
