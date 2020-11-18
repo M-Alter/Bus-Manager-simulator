@@ -7,9 +7,7 @@ namespace dotnet5781_02_2131_1146
     {
         static void Main(string[] args)
         {
-            int choice, line;
-            bool success;
-            Areas area;
+            int choice;
             List<BusStop> stops = new List<BusStop>();
             Random r = new Random(DateTime.Today.Millisecond);
             for (int i = 0; i < 40; i++)
@@ -36,12 +34,15 @@ namespace dotnet5781_02_2131_1146
             try
             {
                 Company.Add(new BusLine(150, new BusStopRoute(stops[0], TimeSpan.Zero, 00), new BusStopRoute(stops[39], TimeSpan.FromMinutes(4), 3.3)));
-                for (int i = 2; i < 41; i++)
+                for (int i = 2; i < 40; i++)
                     try
                     {
                         Company[150].AddStops(new BusStopRoute(stops[i - 1], TimeSpan.FromMinutes((i % 10) + 1), i * 1.333), i);
                     }
-                    catch { }
+                    catch (BusException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
             }
             catch (BusException e)
             {
@@ -109,6 +110,20 @@ namespace dotnet5781_02_2131_1146
                             }
                             break;
                         case Options.PRINT:
+                            Console.WriteLine("1 - Print all lines\n2 - Print all stops");
+                            if (!int.TryParse(Console.ReadLine(), out choice) || choice > 2 || choice < 1)
+                                throw new BusException("Wrong input");
+                            switch (choice)
+                            {
+                                case 1:
+                                    Company.Print();
+                                    break;
+                                case 2:
+                                    PrintStops(ref Company, stops);
+                                    break;
+                                default:
+                                    break;
+                            }
                             break;
                         case Options.EXIT:
                             break;
@@ -123,6 +138,16 @@ namespace dotnet5781_02_2131_1146
                 }
             } while (option != Options.EXIT);
             Console.ReadKey();
+        }
+
+        private static void PrintStops(ref BusCollection company, List<BusStop> stops)
+        {
+            foreach (BusStop item in stops)
+            {
+                Console.WriteLine(item);
+                company.BusStopLines(item.stopNumber);
+                Console.WriteLine('\n');
+            }
         }
 
         private static void FindRoute(ref BusCollection Company)

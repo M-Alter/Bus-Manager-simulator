@@ -106,7 +106,7 @@ namespace dotnet5781_02_2131_1146
                 }
                 foreach (BusStopRoute stop in Stops)
                 {
-                    if (stop.GetNumber() == BusStop.BusStopsList[input2].stopNumber)
+                    if (stop.GetNumber == BusStop.BusStopsList[input2].stopNumber)
                     {
                         Console.WriteLine("This stop in the line already");
                         continue;
@@ -132,7 +132,7 @@ namespace dotnet5781_02_2131_1146
 
         public BusLine(int line, BusStopRoute beginStop, BusStopRoute endStop)
         {
-            if (beginStop.GetNumber() == endStop.GetNumber())
+            if (beginStop.GetNumber == endStop.GetNumber)
                 throw new BusException("First stop can't be last stop");
             if (beginStop.GetArea != endStop.GetArea && beginStop.GetArea != Areas.General && endStop.GetArea != Areas.General)
                 throw new BusException("Areas dont match");
@@ -195,7 +195,7 @@ namespace dotnet5781_02_2131_1146
             }
             foreach (BusStopRoute stop in Stops)
             {
-                if (stop.GetNumber() == BusStop.BusStopsList[input].stopNumber)
+                if (stop.GetNumber == BusStop.BusStopsList[input].stopNumber)
                 {
                     Console.WriteLine("This stop in the line already");
                     continue;
@@ -224,7 +224,7 @@ namespace dotnet5781_02_2131_1146
             {
                 if (index > 0 && index < BusStop.BusStopsList.Count)
                 {
-                    if (!Contains(stop.GetNumber()))
+                    if (!Contains(stop.GetNumber))
                     {
                         AddStop(stop, index);
                         return;
@@ -234,14 +234,6 @@ namespace dotnet5781_02_2131_1146
                 throw new BusException("index out of range");
             }
             throw new BusException("Areas don't match");
-        }
-
-        private void AddStop(BusStopRoute stop, int index)
-        {
-            if (index == 1)
-                Area = stop.GetArea;
-            Stops.Insert(index - 1, stop);
-
         }
 
         public void RemoveStop()
@@ -267,45 +259,12 @@ namespace dotnet5781_02_2131_1146
             }
         }
 
-        private BusStopRoute this[int i]
-        {
-            get { return Stops[i]; }
-            set { Stops[i] = value; }
-        }
+        //private BusStopRoute this[int i]
+        //{
+        //    get { return Stops[i]; }
+        //    set { Stops[i] = value; }
+        //}
 
-
-        public bool Exists(BusStopRoute stop)
-        {
-            return Stops.Contains(stop);
-        }
-
-        private double Distance(BusStopRoute begin, BusStopRoute end)
-        {
-            int beginIndex = 0, endIndex = 0;
-            double result = 0;
-            for (int i = 0; i < Stops.Count; i++)
-            {
-                if (Stops[i] == begin)
-                {
-                    beginIndex = i;
-                    for (i = beginIndex; i < Stops.Count; i++)
-                    {
-                        if (Stops[i] == end)
-                            endIndex = i;
-                    }
-                    break;
-                }
-            }
-            if (beginIndex != 0 && endIndex != 0)
-            {
-                for (int i = beginIndex; i < endIndex; i++)
-                {
-                    result += Stops[i].TravelDistance;
-                }
-                return result;
-            }
-            throw new BusException("stops are not part of this line");
-        }
 
         public TimeSpan TravelTime(BusStopRoute begin, BusStopRoute end)
         {
@@ -334,24 +293,18 @@ namespace dotnet5781_02_2131_1146
             }
             throw new BusException("stops are not part of this line");
         }
-        public TimeSpan TotalTravelTime()
-        {
-            TimeSpan result = new TimeSpan();
-            foreach (BusStopRoute stop in Stops)
-                result += stop.TravelTime;
-            return result;
-        }
-        //TO add a line number to the subline
+
+
         public BusLine SubLine(BusStop begin, BusStop end)
         {
             int beginIndex = 0, endIndex = 0;
 
             for (int i = 0; i < Stops.Count; i++)
-                if (Stops[i].GetNumber() == begin.stopNumber)
+                if (Stops[i].GetNumber == begin.stopNumber)
                 {
                     beginIndex = i;
                     for (i = beginIndex; i < Stops.Count; i++)
-                        if (Stops[i].GetNumber() == end.stopNumber)
+                        if (Stops[i].GetNumber == end.stopNumber)
                         {
                             endIndex = i;
                             break;
@@ -364,32 +317,122 @@ namespace dotnet5781_02_2131_1146
             {
                 for (int i = beginIndex + 1; i < endIndex - 1; i++)
                 {
-                    result.Stops.Insert(i - beginIndex ,Stops[i]);
+                    result.Stops.Insert(i - beginIndex, Stops[i]);
                 }
                 return result;
             }
             throw new BusException("these two stops don't create a subline of this line");
         }
 
+        #region IComparable
+        /// <summary>
+        /// returns 0 if travel times are equal, 1 if this is greater and -1 if this is not greater
+        /// </summary>
+        /// <param name="obj">another BusLine to compare to</param>
+        /// <returns>0,1,-1 see summary</returns>
         public int CompareTo(BusLine obj)
         {
             return obj.TotalTravelTime().CompareTo(this.TotalTravelTime());
         }
+        #endregion
 
+        #region Methods
+
+
+        /// <summary>
+        /// to add a stop after stop has been checked for compatability
+        /// </summary>
+        /// <param name="stop">Bustop to add</param>
+        /// <param name="index">on what part of the route to add it</param>
+        private void AddStop(BusStopRoute stop, int index)
+        {
+            if (index == 1)
+                Area = stop.GetArea;
+            Stops.Insert(index - 1, stop);
+        }
+
+        /// <summary>
+        /// mmethod to get the distance between two stops 
+        /// </summary>
+        /// <param name="begin">from what stop</param>
+        /// <param name="end">until what stop</param>
+        /// <returns>double distance</returns>
+        private double Distance(BusStopRoute begin, BusStopRoute end)
+        {
+            int beginIndex = 0, endIndex = 0;
+            double result = 0;
+            for (int i = 0; i < Stops.Count; i++)
+            {
+                if (Stops[i] == begin)
+                {
+                    beginIndex = i;
+                    for (i = beginIndex; i < Stops.Count; i++)
+                    {
+                        if (Stops[i] == end)
+                            endIndex = i;
+                    }
+                    break;
+                }
+            }
+            if (beginIndex != 0 && endIndex != 0)
+            {
+                for (int i = beginIndex; i < endIndex; i++)
+                {
+                    result += Stops[i].TravelDistance;
+                }
+                return result;
+            }
+            throw new BusException("stops are not part of this line");
+        }
+
+        /// <summary>
+        /// as requested to create a methos that receives a stop 
+        /// </summary>
+        /// <param name="stop"></param>
+        /// <returns>returns true if the stop is in this route</returns>
+        public bool Exists(BusStopRoute stop)
+        {
+            return Stops.Contains(stop);
+        }
+
+        /// <summary>
+        /// method that sums up thte total travel time of a route
+        /// </summary>
+        /// <returns>TimeSpan of the full route</returns>
+        public TimeSpan TotalTravelTime()
+        {
+            TimeSpan result = new TimeSpan();
+            foreach (BusStopRoute stop in Stops)
+                result += stop.TravelTime;
+            return result;
+        }
+
+        /// <summary>
+        /// method to see if the BusLine contains a stop with the given stop number
+        /// </summary>
+        /// <param name="StopNumber">number to search for</param>
+        /// <returns>true if it exists of false if not</returns>
         public bool Contains(int StopNumber)
         {
             foreach (var item in Stops)
-                if (item.GetNumber() == StopNumber)
+                if (item.GetNumber == StopNumber)
                     return true;
             return false;
         }
 
+        /// <summary>
+        /// ovverrides ToString() and prints the line number, operational area, and all the stops with their travel time
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             string result = string.Format("Line: {0,-4} Area: {1,-10}  \n", lineNumber, Area);
             foreach (BusStopRoute stop in Stops)
-                result += (string.Format("{0,-77} {1}\n",stop.GetBusStop,stop.TravelTime));
+                result += (string.Format("{0,-77} {1}\n", stop.GetBusStop, stop.TravelTime));
             return result;
         }
+
+        #endregion
+
     }
 }

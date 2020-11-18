@@ -119,7 +119,7 @@ namespace dotnet5781_02_2131_1146
                 if (item.Contains(stopNumber))
                 {
                     flag = true;
-                    Console.WriteLine(item);
+                    Console.WriteLine(item.LineNumber + " ");
                 }
             if (!flag)
                 throw new BusException("This stop has no lines");
@@ -166,7 +166,6 @@ namespace dotnet5781_02_2131_1146
         {
             List<BusLine> result;
             result = new List<BusLine>();
-            int i = 0;
             foreach (BusLine item in BusLines)
             
                 try
