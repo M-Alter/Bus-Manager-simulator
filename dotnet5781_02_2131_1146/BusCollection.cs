@@ -50,7 +50,7 @@ namespace dotnet5781_02_2131_1146
             bool success;
             Console.WriteLine("This is all the line in this compeny:");
             foreach (var item in BusLines)
-                 Console.WriteLine(item.LineNumber);
+                Console.WriteLine(item.LineNumber);
             Console.WriteLine("\nWhich line do you want to remove?");
             success = int.TryParse(Console.ReadLine(), out input);
             if (!success)
@@ -91,7 +91,7 @@ namespace dotnet5781_02_2131_1146
             }
             else if (lines.ContainsKey(input) && lines[input] == 1)
             {
-                BusLines.Remove(BusLines[input]);
+                BusLines.Remove(this[input]);
                 lines.Remove(input);
             }
             else
@@ -110,7 +110,7 @@ namespace dotnet5781_02_2131_1146
             }
             throw new BusException("This line doesn't exist");
         }
-    
+
 
         public void BusStopLines(int stopNumber)
         {
@@ -136,7 +136,7 @@ namespace dotnet5781_02_2131_1146
             }
         }
 
-        public void Print() 
+        public void Print()
         {
             foreach (var item in BusLines)
             {
@@ -161,8 +161,29 @@ namespace dotnet5781_02_2131_1146
             foreach (var item in BusLines)
                 Console.WriteLine(item.LineNumber + " Total Travel Time: " + item.TotalTravelTime());
         }
+
+        public void GetRoutes(BusStop begin, BusStop end)
+        {
+            List<BusLine> result = null;
+            foreach (BusLine item in BusLines)
+            
+                try
+                {
+                    result.Add(item.SubLine(begin, end));
+                }
+                catch (Exception)
+                {
+
+                }
+            result.Sort();
+            foreach (BusLine item in result)
+            {
+                Console.WriteLine("{0}: {1}" ,item.LineNumber,item.TotalTravelTime());
+            }
+
+        }
     }
 
 
-    
+
 }

@@ -15,6 +15,9 @@ namespace dotnet5781_02_2131_1146
         private const int MAX_LON = 180;
 
         public readonly int stopNumber;
+
+       
+
         public readonly double Latitude;
         public readonly double Longitude;
         private static List<int> AllStopsNumbers = new List<int>();
@@ -43,6 +46,8 @@ namespace dotnet5781_02_2131_1146
             BusStopsList.Add(this);
         }
 
+       
+
         public string Address   { get; set; }
 
         public static void PrintAll()
@@ -58,6 +63,7 @@ namespace dotnet5781_02_2131_1146
         {
             get { return BusStopsList[i]; }
         }
+
         public override string ToString()
         {
             return String.Format("Bus Station Code: {0,-7}  {1,11}°N {2,11}°E, His area: {3}", stopNumber, Latitude, Longitude, Area);

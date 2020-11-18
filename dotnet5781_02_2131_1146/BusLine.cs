@@ -14,6 +14,8 @@ namespace dotnet5781_02_2131_1146
         //private De
         private bool IsValidArea(BusStop stop)
         {
+            if (Area == Areas.General || stop.Area == Areas.General)
+                return true;
             return (stop.Area == Area);
         }
 
@@ -216,6 +218,24 @@ namespace dotnet5781_02_2131_1146
             Stops.Insert(index, new BusStopRoute(BusStop.BusStopsList[input], TimeSpan.FromMinutes(usetTime), userDistance));
         }
 
+        public void AddStops(BusStopRoute stop, int index)
+        {
+            if (IsValidArea(stop.GetBusStop))
+            {
+                if (index > 0 && index < BusStop.BusStopsList.Count)
+                {
+                    if (!Contains(stop.GetNumber()))
+                    {
+                        AddStop(stop, index);
+                        return;
+                    }
+                    throw new BusException("stop exists already");
+                }
+                throw new BusException("index out of range");
+            }
+            throw new BusException("Areas don't match");
+        }
+
         private void AddStop(BusStopRoute stop, int index)
         {
             if (index == 1)
@@ -322,28 +342,23 @@ namespace dotnet5781_02_2131_1146
             return result;
         }
         //TO add a line number to the subline
-        public BusLine SubLine(BusStopRoute begin, BusStopRoute end)
+        public BusLine SubLine(BusStop begin, BusStop end)
         {
             int beginIndex = 0, endIndex = 0;
 
-            BusLine result = new BusLine(99, this.Area);
+            BusLine result = new BusLine(lineNumber, this.Area);
             for (int i = 0; i < Stops.Count; i++)
-            {
-                if (Stops[i] == begin)
+                if (Stops[i].GetNumber() == begin.stopNumber)
                 {
                     beginIndex = i;
                     for (i = beginIndex; i < Stops.Count; i++)
-                    {
-                        if (Stops[i] == end)
+                        if (Stops[i].GetNumber() == end.stopNumber)
                         {
                             endIndex = i;
                             break;
                         }
-                    }
                     break;
                 }
-            }
-
             if (endIndex != 0)
             {
                 for (int i = beginIndex; i < endIndex; i++)
@@ -352,7 +367,7 @@ namespace dotnet5781_02_2131_1146
                 }
                 return result;
             }
-            throw new BusException("these two stops dont create a subline of this line");
+            throw new BusException("these two stops don't create a subline of this line");
         }
 
         public int CompareTo(BusLine obj)

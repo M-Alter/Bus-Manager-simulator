@@ -15,7 +15,8 @@ namespace dotnet5781_02_2131_1146
             for (int i = 0; i < 40; i++)
                 try
                 {
-                    stops.Add(new BusStop(r.Next(1, 1000000), (Areas)(i % 5) + 1));
+
+                    stops.Add(new BusStop(i + 10000, (Areas)(i / 8) + 1));
                 }
                 catch (BusException e)
                 {
@@ -23,15 +24,29 @@ namespace dotnet5781_02_2131_1146
                 }
             BusStop.PrintAll();
             BusCollection Company = new BusCollection();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 18; i++)
                 try
                 {
-                    Company.Add(new BusLine(i + 100, new BusStopRoute(stops[i + (2 * 5)], TimeSpan.FromMinutes((2 * i) + 5 % 3), 2 * i / 3), new BusStopRoute(stops[i + (3 * 5)], TimeSpan.FromMinutes((2 * i) + 6 % 5), 2 * i / 5)));
+                    Company.Add(new BusLine(i + 100, new BusStopRoute(stops[((i + 1) * 2)], TimeSpan.FromMinutes((2 * i) + 5 % 3), 2 * i / 3), new BusStopRoute(stops[((i + 1) * 2) + 1], TimeSpan.FromMinutes((2 * i) + 6 % 5), 2 * i / 5)));
                 }
                 catch (BusException e)
                 {
                     Console.WriteLine(e.Message);
                 }
+            try
+            {
+                Company.Add(new BusLine(150, new BusStopRoute(stops[0], TimeSpan.Zero, 00), new BusStopRoute(stops[39], TimeSpan.FromMinutes(4), 3.3)));
+                for (int i = 2; i < 41; i++)
+                    try
+                    {
+                        Company[150].AddStops(new BusStopRoute(stops[i - 1], TimeSpan.FromMinutes((i % 10) + 1), i * 1.333), i);
+                    }
+                    catch { }
+            }
+            catch (BusException e)
+            {
+                Console.WriteLine(e.Message);
+            }
             foreach (var item in Company)
                 Console.WriteLine(item);
             Options option;
@@ -110,10 +125,30 @@ namespace dotnet5781_02_2131_1146
             Console.ReadKey();
         }
 
-        private static void FindRoute(ref BusCollection company)
+        private static void FindRoute(ref BusCollection Company)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Here is all the stops:");
+            BusStop.PrintAll();
+            int inputBegin, inputEnd;
+            BusStop Begin, End;
+            bool success = int.TryParse(Console.ReadLine(), out inputBegin);
+            if (!success || inputBegin > BusStop.BusStopsList.Count || inputBegin < 1)
+                throw new BusException("This station doesn't exist");
+            success = int.TryParse(Console.ReadLine(), out inputEnd);
+            if (!success || inputEnd > BusStop.BusStopsList.Count || inputEnd < 1)
+                throw new BusException("This station doesn't exist");
+            Begin = BusStop.BusStopsList[inputBegin - 1];
+            End = BusStop.BusStopsList[inputEnd - 1];
+            Company.GetRoutes(Begin, End);
         }
+
+        //private static void FindRoute(BusStopRoute begin, BusStopRoute end)
+        //{
+        //    foreach (var item in collection)
+        //    {
+
+        //    }
+        //}
 
         private static void FindLines(ref BusCollection Company)
         {
@@ -140,12 +175,6 @@ namespace dotnet5781_02_2131_1146
 
         private static void RemoveLine(ref BusCollection Company)
         {
-            //int line;
-            //bool success;
-            //Console.WriteLine("Enter line number");
-            //success = int.TryParse(Console.ReadLine(), out line);
-            //if (!success)
-            //    throw new BusException("Wrong input");
             Company.RemoveLine();
         }
 
