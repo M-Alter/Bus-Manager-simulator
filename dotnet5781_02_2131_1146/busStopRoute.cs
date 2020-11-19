@@ -32,12 +32,12 @@ namespace dotnet5781_02_2131_1146
         /// <summary>
         /// travel time since the previous stop
         /// </summary>
-        public TimeSpan TravelTime { get; private set; }
+        public TimeSpan TravelTime { get; set; }
 
         /// <summary>
         /// travel distance since the previous stop
         /// </summary>
-        public double TravelDistance { get; private set; }
+        public double TravelDistance { get; set; }
 
         /// <summary>
         /// get the BusStop number 

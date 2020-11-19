@@ -82,7 +82,7 @@ namespace dotnet5781_02_2131_1146
         /// <returns>print info</returns>
         public override string ToString()
         {
-            return String.Format("Bus Station Code: {0,-7}  {1,11}°N {2,11}°E, Operating area: {3}", stopNumber, Latitude, Longitude, Area);
+            return String.Format("Bus Station Code: {0,-7}  {1,11}°N {2,11}°E, Operating area: {3,-10}", stopNumber, Latitude, Longitude, Area);
         }
 
         #endregion

@@ -14,7 +14,7 @@ namespace dotnet5781_02_2131_1146
         private Areas Area;
         #endregion
 
-        #region C'tor
+        #region C'tors
         /// <summary>
         /// C'tor that requests the stops from the user
         /// </summary>
@@ -199,7 +199,7 @@ namespace dotnet5781_02_2131_1146
             Console.WriteLine("This is the route of this line");
             foreach (BusStopRoute stop in Stops)
             {
-                Console.WriteLine(String.Format("{0}: {1}", i++, stop));
+                Console.WriteLine(String.Format("{0}: {1}", i++, stop.GetBusStop));
             }
             Console.WriteLine("Choose a position for the new stop");
             bool success = (int.TryParse(Console.ReadLine(), out index));
@@ -217,7 +217,9 @@ namespace dotnet5781_02_2131_1146
         /// <param name="index">position in the route</param>
         private void AddStop(int index)
         {
-            Console.WriteLine("Here is all existed bus stops:");
+            if (index > Stops.Count)
+                throw new IndexOutOfRangeException();
+            Console.WriteLine("Here are all the bus stops:");
             BusStop.PrintAll();
             int input;
             bool success = (int.TryParse(Console.ReadLine(), out input));
@@ -248,7 +250,7 @@ namespace dotnet5781_02_2131_1146
             // Get distance
             Console.WriteLine("Enter the distance from the last stop");
             double userDistance = UserInput();
-            Stops.Insert(index, new BusStopRoute(BusStop.BusStopsList[input], TimeSpan.FromMinutes(usetTime), userDistance));
+            Stops.Insert(index, new BusStopRoute(BusStop.BusStopsList[input-1], TimeSpan.FromMinutes(usetTime), userDistance));
         }
 
         /// <summary>
@@ -415,7 +417,7 @@ namespace dotnet5781_02_2131_1146
 
             if (endIndex != 0)
             {
-                for (int i = beginIndex + 1; i < endIndex - 1; i++)
+                for (int i = beginIndex + 1; i < endIndex; i++)
                 {
                     result.Stops.Insert(i - beginIndex, Stops[i]);
                 }

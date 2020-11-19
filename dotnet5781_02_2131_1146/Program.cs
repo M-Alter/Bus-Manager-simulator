@@ -169,13 +169,7 @@ namespace dotnet5781_02_2131_1146
             Company.GetRoutes(Begin, End);
         }
 
-        //private static void FindRoute(BusStopRoute begin, BusStopRoute end)
-        //{
-        //    foreach (var item in collection)
-        //    {
-
-        //    }
-        //}
+       
 
         private static void FindLines(ref BusCollection Company)
         {
@@ -220,7 +214,13 @@ namespace dotnet5781_02_2131_1146
             success = int.TryParse(Console.ReadLine(), out line);
             if (!success)
                 throw new BusException("Wrong input");
-            Company.AddStop(line);
+            try
+            {
+                Company.AddStop(line);
+            }catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         private static void AddLine(ref BusCollection Company)

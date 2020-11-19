@@ -167,15 +167,11 @@ namespace dotnet5781_02_2131_1146
             List<BusLine> result;
             result = new List<BusLine>();
             foreach (BusLine item in BusLines)
-            
                 try
                 {
                     result.Add(item.SubLine(begin, end));
                 }
-                catch (Exception)
-                {
-
-                }
+                catch (BusException) {  }
             result.Sort();
             result.Reverse();
             foreach (BusLine item in result)
