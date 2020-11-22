@@ -23,78 +23,44 @@ namespace dotnet5781_02_2131_1146
         public BusLine(int line, Areas area)
         {
             Area = area;
-            bool flagArea = (Area == Areas.General);
+            bool flagArea = (Area == Areas.GENERAL);
             lineNumber = line;
             Console.WriteLine("Here is all the bus stops:");
             BusStop.PrintAll();
             bool success;
-            int indexBegin = -1, indexEnd, i = -1;
+            int indexBegin = -1, indexEnd;
             // Add the first stop
-            while (i != 0)
-            {
-                Console.WriteLine("Choose your first stop");
-                success = (int.TryParse(Console.ReadLine(), out indexBegin));
-                if (!success)
-                {
-                    Console.WriteLine("Wrong input");
-                    continue;
-                }
-                success = (indexBegin > 0 && indexBegin <= BusStop.BusStopsList.Count);
-                if (!success)
-                {
-                    Console.WriteLine("Wrong input");
-                    continue;
-                }
-                else if (!flagArea)
-                {
-                    if (!IsValidArea(BusStop.BusStopsList[indexBegin]))
-                    {
-                        Console.WriteLine("This stop is not from your area");
-                        continue;
-                    }
-                }
-                Begin = new BusStopRoute(BusStop.BusStopsList[indexBegin - 1], TimeSpan.Zero, 0);
-                i = 0;
-            }
-            i = -1;
+            Console.WriteLine("Choose your first stop");
+            success = (int.TryParse(Console.ReadLine(), out indexBegin));
+            if (!success)
+                throw new BusException("please enter a line number");
+            success = (indexBegin > 0 && indexBegin <= BusStop.BusStopsList.Count);
+            if (!success)
+                throw new BusException("index out of range");
+            else if (!flagArea)
+                if (!IsValidArea(BusStop.BusStopsList[indexBegin - 1]))
+                    throw new BusException("Wrong input");
+            Begin = new BusStopRoute(BusStop.BusStopsList[indexBegin - 1], TimeSpan.Zero, 0);
             // Add the last stop
-            while (i != 0)
-            {
-                Console.WriteLine("Choose your last stop");
-                success = (int.TryParse(Console.ReadLine(), out indexEnd));
-                if (!success)
-                {
-                    Console.WriteLine("Wrong input");
-                    continue;
-                }
-                success = (indexEnd > 0 && indexEnd <= BusStop.BusStopsList.Count);
-                if (!success)
-                {
-                    Console.WriteLine("Wrong input");
-                    continue;
-                }
-                else if (indexEnd == indexBegin)
-                {
-                    Console.WriteLine("This is the beggining stop. Try different");
-                    continue;
-                }
-                else if (!flagArea)
-                {
-                    if (!IsValidArea(BusStop.BusStopsList[indexEnd]))
-                    {
-                        Console.WriteLine("This stop is not from your area");
-                        continue;
-                    }
-                }
-                // Get time
-                Console.WriteLine("Enter time drive from the last stop");
-                double usetTime = UserInput();
-                // Get distance
-                Console.WriteLine("Enter the distance from the last stop");
-                double userDistance = UserInput();
-                End = new BusStopRoute(BusStop.BusStopsList[indexEnd], TimeSpan.FromMinutes(usetTime), userDistance);
-                i = 0;
-            }
+            Console.WriteLine("Choose your last stop");
+            success = (int.TryParse(Console.ReadLine(), out indexEnd));
+            if (!success)
+                throw new BusException("please enter a number");
+            success = (indexEnd > 0 && indexEnd <= BusStop.BusStopsList.Count);
+            if (!success)
+                throw new BusException("index out of range");
+            else if (indexEnd == indexBegin)
+                throw new BusException("This is the beggining stop. Try different");
+            else if (!flagArea)
+                if (!IsValidArea(BusStop.BusStopsList[indexEnd]))
+                    throw new BusException("This stop is not from your area");
+            // Get time
+            Console.WriteLine("Enter time drive from the last stop");
+            double usetTime = UserInput();
+            // Get distance
+            Console.WriteLine("Enter the distance from the last stop");
+            double userDistance = UserInput();
+            End = new BusStopRoute(BusStop.BusStopsList[indexEnd], TimeSpan.FromMinutes(usetTime), userDistance);
             Stops = new List<BusStopRoute>();
             Stops.Add(Begin);
             Stops.Add(End);
@@ -110,7 +76,7 @@ namespace dotnet5781_02_2131_1146
         {
             if (beginStop.GetNumber == endStop.GetNumber)
                 throw new BusException("First stop can't be last stop");
-            if (beginStop.GetArea != endStop.GetArea && beginStop.GetArea != Areas.General && endStop.GetArea != Areas.General)
+            if (beginStop.GetArea != endStop.GetArea && beginStop.GetArea != Areas.GENERAL && endStop.GetArea != Areas.GENERAL)
                 throw new BusException("Areas dont match");
             lineNumber = line;
             Stops = new List<BusStopRoute>();
@@ -124,7 +90,7 @@ namespace dotnet5781_02_2131_1146
         #region Properties
         public int LineNumber { get { return lineNumber; } }
         #endregion
-       
+
         #region IComparable
         /// <summary>
         /// returns 0 if travel times are equal, 1 if this is greater and -1 if this is not greater
@@ -146,7 +112,7 @@ namespace dotnet5781_02_2131_1146
         /// <returns>bool</returns>
         private bool IsValidArea(BusStop stop)
         {
-            if (Area == Areas.General || stop.Area == Areas.General)
+            if (Area == Areas.GENERAL || stop.Area == Areas.GENERAL)
                 return true;
             return (stop.Area == Area);
         }
@@ -236,7 +202,7 @@ namespace dotnet5781_02_2131_1146
                     continue;
                 }
             }
-            if (Area != Areas.General)
+            if (Area != Areas.GENERAL)
             {
                 if (!IsValidArea(BusStop.BusStopsList[input]))
                 {
@@ -250,7 +216,7 @@ namespace dotnet5781_02_2131_1146
             // Get distance
             Console.WriteLine("Enter the distance from the last stop");
             double userDistance = UserInput();
-            Stops.Insert(index, new BusStopRoute(BusStop.BusStopsList[input-1], TimeSpan.FromMinutes(usetTime), userDistance));
+            Stops.Insert(index, new BusStopRoute(BusStop.BusStopsList[input - 1], TimeSpan.FromMinutes(usetTime), userDistance));
         }
 
         /// <summary>

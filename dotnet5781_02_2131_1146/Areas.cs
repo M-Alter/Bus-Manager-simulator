@@ -8,7 +8,7 @@ namespace dotnet5781_02_2131_1146
 {
     public enum Areas
     {
-        General = 1, Jerusalem, North, South, Center 
+        GENERAL = 1, JERUSALEM, NORTH, SOUTH, CENTER 
     }
     
 

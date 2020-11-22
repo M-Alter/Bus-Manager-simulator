@@ -62,7 +62,7 @@ namespace dotnet5781_02_2131_1146
                     {
 
                         case Options.ADD:
-                            Console.WriteLine("1 - To add a new bus\n2 - To add a new bus stop to the existing line");
+                            Console.WriteLine("1 - To add a new bus line\n2 - To add a new bus stop to the existing line");
                             if (!int.TryParse(Console.ReadLine(), out choice) || choice > 2 || choice < 1)
                                 throw new BusException("Wrong input");
                             switch (choice)
@@ -232,9 +232,9 @@ namespace dotnet5781_02_2131_1146
             success = int.TryParse(Console.ReadLine(), out line);
             if (!success || line > 999 || line < 1)
                 throw new BusException("Wrong input");
-            Console.WriteLine("Choose an Area: General, Jerusalem, North, South, Center");
-            if (!Enum.TryParse(Console.ReadLine(), out area))
-                throw new BusException("Wrong input");
+            Console.WriteLine("Choose an Area: GENERAL, JERUSALEM, NORTH, SOUTH, CENTER");
+            if (!Enum.TryParse(Console.ReadLine().ToUpper(), out area) || !Enum.IsDefined(typeof(Areas), area))
+                throw new BusException("That's not a valid area");
             Company.Add(new BusLine(line, area));
         }
     }

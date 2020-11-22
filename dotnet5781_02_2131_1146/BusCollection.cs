@@ -146,7 +146,7 @@ namespace dotnet5781_02_2131_1146
 
         public static void PrintAreas()
         {
-            Console.WriteLine("1:General\n2: Jerusalem\n3: North\n4: South\n5: Center");
+            Console.WriteLine("1:GENERAL\n2: JERUSALEM\n3: NORTH\n4: SOUTH\n5: CENTER");
         }
 
         public IEnumerator GetEnumerator()
