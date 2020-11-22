@@ -9,8 +9,6 @@ namespace dotnet5781_02_2131_1146
 
         private List<BusStopRoute> Stops;
         private readonly int lineNumber;
-        private BusStopRoute Begin;
-        private BusStopRoute End;
         private Areas Area;
         #endregion
 
@@ -39,7 +37,7 @@ namespace dotnet5781_02_2131_1146
                 throw new BusException("index out of range");
             else if (!flagArea)
                 if (!IsValidArea(BusStop.BusStopsList[indexBegin - 1]))
-                    throw new BusException("Wrong input");
+                    throw new BusException("this stop does not belong to your area");
             Begin = new BusStopRoute(BusStop.BusStopsList[indexBegin - 1], TimeSpan.Zero, 0);
             // Add the last stop
             Console.WriteLine("Choose your last stop");
@@ -90,6 +88,8 @@ namespace dotnet5781_02_2131_1146
 
         #region Properties
         public int LineNumber { get { return lineNumber; } }
+        public BusStopRoute Begin { get; private set; }
+        public BusStopRoute End { get; private set; }
         #endregion
 
         #region IComparable

@@ -226,15 +226,13 @@ namespace dotnet5781_02_2131_1146
 
         private static void AddLine(ref BusCollection Company)
         {
-            int line;
             bool success;
-            Areas area;
             Console.WriteLine("Enter line number");
-            success = int.TryParse(Console.ReadLine(), out line);
+            success = int.TryParse(Console.ReadLine(), out int line);
             if (!success || line > 999 || line < 1)
                 throw new BusException("Wrong input");
             Console.WriteLine("Choose an Area: GENERAL, JERUSALEM, NORTH, SOUTH, CENTER");
-            if (!Enum.TryParse(Console.ReadLine().ToUpper(), out area) || !Enum.IsDefined(typeof(Areas), area))
+            if (!Enum.TryParse(Console.ReadLine().ToUpper(), out Areas area) || !Enum.IsDefined(typeof(Areas), area))
                 throw new BusException("That's not a valid area");
             Company.Add(new BusLine(line, area));
         }

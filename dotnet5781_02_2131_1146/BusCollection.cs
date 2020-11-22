@@ -25,10 +25,16 @@ namespace dotnet5781_02_2131_1146
                 throw new BusException("This line already exists twice");
             }
             if (lines.ContainsKey(busLine.LineNumber))
-                lines[busLine.LineNumber] = 2;
-            else
-                lines.Add(busLine.LineNumber, 1);
+                if (lines[busLine.LineNumber] == 2)
+                    throw new BusException("this line exists alreaady twice");
+                else if (lines[busLine.LineNumber] == 1)
+                    if (!(busLine.Begin.GetNumber == this[busLine.LineNumber].End.GetNumber) || !(busLine.End.GetNumber == this[busLine.LineNumber].Begin.GetNumber))
+                        throw new BusException(string.Format("This is a return route, route must begin with {0} and end with {1}", this[busLine.LineNumber].End.GetNumber, this[busLine.LineNumber].Begin.GetNumber));
+                    else
+                        lines[busLine.LineNumber] = 2;
             BusLines.Add(busLine);
+            if (!lines.ContainsKey(busLine.LineNumber))
+                lines.Add(busLine.LineNumber, 1);
         }
 
         public void AddStop(int line)
@@ -171,12 +177,12 @@ namespace dotnet5781_02_2131_1146
                 {
                     result.Add(item.SubLine(begin, end));
                 }
-                catch (BusException) {  }
+                catch (BusException) { }
             result.Sort();
             result.Reverse();
             foreach (BusLine item in result)
             {
-                Console.WriteLine("{0}: {1}" ,item.LineNumber,item.TotalTravelTime());
+                Console.WriteLine("{0}: {1}", item.LineNumber, item.TotalTravelTime());
             }
 
         }
