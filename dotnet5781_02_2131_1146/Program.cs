@@ -140,30 +140,6 @@ namespace dotnet5781_02_2131_1146
             Console.ReadKey();
         }
 
-
-        public static IEnumerable<int> GetArea()
-        {
-            yield return (int)Areas.GENERAL;
-            yield return (int)Areas.GENERAL;
-            yield return (int)Areas.GENERAL;
-            yield return (int)Areas.GENERAL;
-            yield return (int)Areas.JERUSALEM;
-            yield return (int)Areas.JERUSALEM;
-            yield return (int)Areas.JERUSALEM;
-            yield return (int)Areas.JERUSALEM;
-            yield return (int)Areas.NORTH;
-            yield return (int)Areas.NORTH;
-            yield return (int)Areas.NORTH;
-            yield return (int)Areas.NORTH;
-            yield return (int)Areas.SOUTH;
-            yield return (int)Areas.SOUTH;
-            yield return (int)Areas.SOUTH;
-            yield return (int)Areas.SOUTH;
-            yield return (int)Areas.CENTER;
-            yield return (int)Areas.CENTER;
-            yield return (int)Areas.CENTER;
-            yield return (int)Areas.CENTER;
-        }
         private static void PrintStops(ref BusCollection company, List<BusStop> stops)
         {
             foreach (BusStop item in stops)
