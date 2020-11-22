@@ -7,7 +7,7 @@ namespace dotnet5781_02_2131_1146
     {
         #region Fields
 
-        private List<BusStopRoute> Stops;
+        //private List<BusStopRoute> Stations;
         private readonly int lineNumber;
         #endregion
 
@@ -58,9 +58,9 @@ namespace dotnet5781_02_2131_1146
             Console.WriteLine("Enter the distance from the last stop");
             double userDistance = UserInput();
             End = new BusStopRoute(BusStop.BusStopsList[indexEnd], TimeSpan.FromMinutes(usetTime), userDistance);
-            Stops = new List<BusStopRoute>();
-            Stops.Add(Begin);
-            Stops.Add(End);
+            Stations = new List<BusStopRoute>();
+            Stations.Add(Begin);
+            Stations.Add(End);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace dotnet5781_02_2131_1146
                 throw new BusException("Areas dont match");
             lineNumber = line;
             this.Area = Area;
-            Stops = new List<BusStopRoute>();
+            Stations = new List<BusStopRoute>();
             AddStop(beginStop, 1);
             Begin = beginStop;
             AddStop(endStop, 2);
@@ -89,7 +89,8 @@ namespace dotnet5781_02_2131_1146
         public int LineNumber { get { return lineNumber; } }
         public BusStopRoute Begin { get; private set; }
         public BusStopRoute End { get; private set; }
-        public Areas Area { get; private set; }
+        public Areas Area { get;  set; }
+        public List<BusStopRoute> Stations { get; private set; }
         #endregion
 
         #region IComparable
@@ -131,7 +132,7 @@ namespace dotnet5781_02_2131_1146
                 stop.TravelDistance = 0;
                 stop.TravelTime = TimeSpan.Zero;
             }
-            Stops.Insert(index - 1, stop);
+            Stations.Insert(index - 1, stop);
         }
         /// <summary>
         /// method to get a doubble from the user
@@ -164,7 +165,7 @@ namespace dotnet5781_02_2131_1146
         {
             int i = 1, index;
             Console.WriteLine("This is the route of this line");
-            foreach (BusStopRoute stop in Stops)
+            foreach (BusStopRoute stop in Stations)
             {
                 Console.WriteLine(String.Format("{0}: {1}", i++, stop.GetBusStop));
             }
@@ -184,7 +185,7 @@ namespace dotnet5781_02_2131_1146
         /// <param name="index">position in the route</param>
         private void AddStop(int index)
         {
-            if (index > Stops.Count)
+            if (index > Stations.Count)
                 throw new IndexOutOfRangeException();
             Console.WriteLine("Here are all the bus stops:");
             BusStop.PrintAll();
@@ -195,7 +196,7 @@ namespace dotnet5781_02_2131_1146
             {
                 throw new BusException("Wrong input");
             }
-            foreach (BusStopRoute stop in Stops)
+            foreach (BusStopRoute stop in Stations)
             {
                 if (stop.GetNumber == BusStop.BusStopsList[input].stopNumber)
                 {
@@ -217,7 +218,7 @@ namespace dotnet5781_02_2131_1146
             // Get distance
             Console.WriteLine("Enter the distance from the last stop");
             double userDistance = UserInput();
-            Stops.Insert(index, new BusStopRoute(BusStop.BusStopsList[input - 1], TimeSpan.FromMinutes(usetTime), userDistance));
+            Stations.Insert(index, new BusStopRoute(BusStop.BusStopsList[input - 1], TimeSpan.FromMinutes(usetTime), userDistance));
         }
 
         /// <summary>
@@ -230,14 +231,14 @@ namespace dotnet5781_02_2131_1146
         {
             int beginIndex = 0, endIndex = 0;
             double result = 0;
-            for (int i = 0; i < Stops.Count; i++)
+            for (int i = 0; i < Stations.Count; i++)
             {
-                if (Stops[i] == begin)
+                if (Stations[i] == begin)
                 {
                     beginIndex = i;
-                    for (i = beginIndex; i < Stops.Count; i++)
+                    for (i = beginIndex; i < Stations.Count; i++)
                     {
-                        if (Stops[i] == end)
+                        if (Stations[i] == end)
                             endIndex = i;
                     }
                     break;
@@ -247,7 +248,7 @@ namespace dotnet5781_02_2131_1146
             {
                 for (int i = beginIndex; i < endIndex; i++)
                 {
-                    result += Stops[i].TravelDistance;
+                    result += Stations[i].TravelDistance;
                 }
                 return result;
             }
@@ -264,14 +265,14 @@ namespace dotnet5781_02_2131_1146
         {
             int beginIndex = 0, endIndex = 0;
             TimeSpan result = new TimeSpan();
-            for (int i = 0; i < Stops.Count; i++)
+            for (int i = 0; i < Stations.Count; i++)
             {
-                if (Stops[i] == begin)
+                if (Stations[i] == begin)
                 {
                     beginIndex = i;
-                    for (i = beginIndex; i < Stops.Count; i++)
+                    for (i = beginIndex; i < Stations.Count; i++)
                     {
-                        if (Stops[i] == end)
+                        if (Stations[i] == end)
                             endIndex = i;
                     }
                     break;
@@ -281,7 +282,7 @@ namespace dotnet5781_02_2131_1146
             {
                 for (int i = beginIndex; i < endIndex; i++)
                 {
-                    result.Add(Stops[i].TravelTime);
+                    result.Add(Stations[i].TravelTime);
                 }
                 return result;
             }
@@ -295,7 +296,7 @@ namespace dotnet5781_02_2131_1146
         /// <returns>returns true if the stop is in this route</returns>
         public bool Exists(BusStopRoute stop)
         {
-            return Stops.Contains(stop);
+            return Stations.Contains(stop);
         }
 
         /// <summary>
@@ -328,7 +329,7 @@ namespace dotnet5781_02_2131_1146
         public TimeSpan TotalTravelTime()
         {
             TimeSpan result = new TimeSpan();
-            foreach (BusStopRoute stop in Stops)
+            foreach (BusStopRoute stop in Stations)
                 result += stop.TravelTime;
             return result;
         }
@@ -342,20 +343,20 @@ namespace dotnet5781_02_2131_1146
             ToString();
             int input;
             bool success = (int.TryParse(Console.ReadLine(), out input));
-            success = (input > 0 && input <= Stops.Count);
+            success = (input > 0 && input <= Stations.Count);
             if (!success)
             {
                 throw new BusException("Wrong input");
             }
             // after consulting with the teacher removing a benig or end stop is allowed without considering the with the reversed route
-            Stops.Remove(Stops[input - 1]);
+            Stations.Remove(Stations[input - 1]);
             if (input == 1)
             {
-                Begin = Stops[0];
+                Begin = Stations[0];
             }
-            if (input == Stops.Count)
+            if (input == Stations.Count)
             {
-                End = Stops[input - 2];
+                End = Stations[input - 2];
             }
         }
         /// <summary>
@@ -368,12 +369,12 @@ namespace dotnet5781_02_2131_1146
         {
             int beginIndex = 0, endIndex = 0;
 
-            for (int i = 0; i < Stops.Count; i++)
-                if (Stops[i].GetNumber == begin.stopNumber)
+            for (int i = 0; i < Stations.Count; i++)
+                if (Stations[i].GetNumber == begin.stopNumber)
                 {
                     beginIndex = i;
-                    for (i = beginIndex; i < Stops.Count; i++)
-                        if (Stops[i].GetNumber == end.stopNumber)
+                    for (i = beginIndex; i < Stations.Count; i++)
+                        if (Stations[i].GetNumber == end.stopNumber)
                         {
                             endIndex = i;
                             break;
@@ -384,19 +385,19 @@ namespace dotnet5781_02_2131_1146
             if (endIndex != 0)
             {
                 BusLine result;
-                result = new BusLine(lineNumber, Stops[beginIndex], Stops[endIndex], Areas.GENERAL);
+                result = new BusLine(lineNumber, Stations[beginIndex], Stations[endIndex], Areas.GENERAL);
                 //try 
                 //{
                 //}
                 //catch 
                 //{
                 //    result.Area = Areas.GENERAL;
-                //    result.Begin = Stops[beginIndex];
-                //    result.End = Stops[endIndex];
+                //    result.Begin = Stations[beginIndex];
+                //    result.End = Stations[endIndex];
                 //}
                 for (int i = beginIndex; i < endIndex; i++)
                 {
-                    result.Stops.Insert(i - beginIndex, Stops[i]);
+                    result.Stations.Insert(i - beginIndex, Stations[i]);
                 }
                 return result;
             }
@@ -410,7 +411,7 @@ namespace dotnet5781_02_2131_1146
         /// <returns>true if it exists of false if not</returns>
         public bool Contains(int StopNumber)
         {
-            foreach (var item in Stops)
+            foreach (var item in Stations)
                 if (item.GetNumber == StopNumber)
                     return true;
             return false;
@@ -423,7 +424,7 @@ namespace dotnet5781_02_2131_1146
         public override string ToString()
         {
             string result = string.Format("Line: {0,-4} Area: {1,-10}  \n", lineNumber, Area);
-            foreach (BusStopRoute stop in Stops)
+            foreach (BusStopRoute stop in Stations)
                 result += (string.Format("{0,-77} {1}\n", stop.GetBusStop, stop.TravelTime));
             return result;
         }
