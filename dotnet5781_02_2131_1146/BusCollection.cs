@@ -13,11 +13,18 @@ namespace dotnet5781_02_2131_1146
         private List<BusLine> BusLines;
         private static Dictionary<int, int> lines = new Dictionary<int, int>();
 
-
+        /// <summary>
+        /// c"tor
+        /// </summary>
         public BusCollection()
         {
             BusLines = new List<BusLine>();
         }
+
+        /// <summary>
+        /// adds a busLine to the collection
+        /// </summary>
+        /// <param name="busLine">busLine to add</param>
         public void Add(BusLine busLine)
         {
             if (lines.ContainsKey(busLine.LineNumber) && lines[busLine.LineNumber] == 2)
@@ -37,6 +44,10 @@ namespace dotnet5781_02_2131_1146
                 lines.Add(busLine.LineNumber, 1);
         }
 
+        /// <summary>
+        /// adds a stop to an existing busLine
+        /// </summary>
+        /// <param name="line">Line to add the stop to</param>
         public void AddStop(int line)
         {
             foreach (var item in BusLines)
@@ -50,6 +61,9 @@ namespace dotnet5781_02_2131_1146
             throw new BusException("This line doesn't exist");
         }
 
+        /// <summary>
+        /// removes a line from the bus company
+        /// </summary>
         public void RemoveLine()
         {
             int indexBegin, indexEnd;
@@ -104,6 +118,10 @@ namespace dotnet5781_02_2131_1146
                 throw new BusException("This line doesn't exist in this company");
         }
 
+        /// <summary>
+        /// removes a stop from the exisitng Busline
+        /// </summary>
+        /// <param name="line">BusLine to remove the stop from</param>
         public void RemoveStop(int line)
         {
             foreach (var item in BusLines)
@@ -117,7 +135,10 @@ namespace dotnet5781_02_2131_1146
             throw new BusException("This line doesn't exist");
         }
 
-
+        /// <summary>
+        /// prints all the Buslines that pass this stop
+        /// </summary>
+        /// <param name="stopNumber">stop to print</param>
         public void BusStopLines(int stopNumber)
         {
             bool flag = false;
@@ -125,7 +146,7 @@ namespace dotnet5781_02_2131_1146
                 if (item.Contains(stopNumber))
                 {
                     flag = true;
-                    Console.WriteLine(item.LineNumber + " ");
+                    Console.WriteLine(item.LineNumber + " " + item.Area);
                 }
             if (!flag)
                 throw new BusException("This stop has no lines");

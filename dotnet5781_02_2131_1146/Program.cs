@@ -7,7 +7,7 @@ namespace dotnet5781_02_2131_1146
     {
         static void Main(string[] args)
         {
-            int choice;
+            int choice, areaIndex = 0;
             List<BusStop> stops = new List<BusStop>();
             Random r = new Random(DateTime.Today.Millisecond);
             for (int i = 0; i < 40; i++)
@@ -22,10 +22,10 @@ namespace dotnet5781_02_2131_1146
                 }
             BusStop.PrintAll();
             BusCollection Company = new BusCollection();
-            for (int i = 0; i < 18; i++)
+            for (int i = 1; i < 21; i++)
                 try
                 {
-                    Company.Add(new BusLine(i + 100, new BusStopRoute(stops[((i + 1) * 2)], TimeSpan.Zero, 0), new BusStopRoute(stops[((i + 1) * 2) + 1], TimeSpan.FromMinutes((2 * i) + 6 % 5), 2 * i / 5), (Areas)(i / 5) + 1));
+                    Company.Add(new BusLine(i + 100, new BusStopRoute(stops[(i * 2) - 2], TimeSpan.Zero, 0), new BusStopRoute(stops[(i * 2) - 1], TimeSpan.FromMinutes((2 * i) + 6 % 5), 2 * i / 5), (Areas)(areaIndex++/4)+1 ));
                 }
                 catch (BusException e)
                 {
@@ -140,6 +140,30 @@ namespace dotnet5781_02_2131_1146
             Console.ReadKey();
         }
 
+
+        public static IEnumerable<int> GetArea()
+        {
+            yield return (int)Areas.GENERAL;
+            yield return (int)Areas.GENERAL;
+            yield return (int)Areas.GENERAL;
+            yield return (int)Areas.GENERAL;
+            yield return (int)Areas.JERUSALEM;
+            yield return (int)Areas.JERUSALEM;
+            yield return (int)Areas.JERUSALEM;
+            yield return (int)Areas.JERUSALEM;
+            yield return (int)Areas.NORTH;
+            yield return (int)Areas.NORTH;
+            yield return (int)Areas.NORTH;
+            yield return (int)Areas.NORTH;
+            yield return (int)Areas.SOUTH;
+            yield return (int)Areas.SOUTH;
+            yield return (int)Areas.SOUTH;
+            yield return (int)Areas.SOUTH;
+            yield return (int)Areas.CENTER;
+            yield return (int)Areas.CENTER;
+            yield return (int)Areas.CENTER;
+            yield return (int)Areas.CENTER;
+        }
         private static void PrintStops(ref BusCollection company, List<BusStop> stops)
         {
             foreach (BusStop item in stops)

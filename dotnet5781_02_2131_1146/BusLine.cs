@@ -9,7 +9,6 @@ namespace dotnet5781_02_2131_1146
 
         private List<BusStopRoute> Stops;
         private readonly int lineNumber;
-        private Areas Area;
         #endregion
 
         #region C'tors
@@ -90,6 +89,7 @@ namespace dotnet5781_02_2131_1146
         public int LineNumber { get { return lineNumber; } }
         public BusStopRoute Begin { get; private set; }
         public BusStopRoute End { get; private set; }
+        public Areas Area { get; private set; }
         #endregion
 
         #region IComparable
