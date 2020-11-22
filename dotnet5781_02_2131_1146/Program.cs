@@ -25,7 +25,7 @@ namespace dotnet5781_02_2131_1146
             for (int i = 0; i < 18; i++)
                 try
                 {
-                    Company.Add(new BusLine(i + 100, new BusStopRoute(stops[((i + 1) * 2)], TimeSpan.Zero, 0), new BusStopRoute(stops[((i + 1) * 2) + 1], TimeSpan.FromMinutes((2 * i) + 6 % 5), 2 * i / 5)));
+                    Company.Add(new BusLine(i + 100, new BusStopRoute(stops[((i + 1) * 2)], TimeSpan.Zero, 0), new BusStopRoute(stops[((i + 1) * 2) + 1], TimeSpan.FromMinutes((2 * i) + 6 % 5), 2 * i / 5), (Areas)(i / 5) + 1));
                 }
                 catch (BusException e)
                 {
@@ -169,7 +169,7 @@ namespace dotnet5781_02_2131_1146
             Company.GetRoutes(Begin, End);
         }
 
-       
+
 
         private static void FindLines(ref BusCollection Company)
         {
@@ -179,14 +179,14 @@ namespace dotnet5781_02_2131_1146
             success = int.TryParse(Console.ReadLine(), out stopNumber);
             if (!success)
                 throw new BusException("Wrong input");
-            try
-            {
-                Company.BusStopLines(stopNumber);
-            }
-            catch (BusException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            //try
+            //{
+            Company.BusStopLines(stopNumber);
+            //}
+            //catch (BusException e)
+            //{
+            //    Console.WriteLine(e.Message);
+            //}
         }
 
         private static void RemoveStop(ref BusCollection Company)
@@ -217,7 +217,8 @@ namespace dotnet5781_02_2131_1146
             try
             {
                 Company.AddStop(line);
-            }catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }

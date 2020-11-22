@@ -72,13 +72,14 @@ namespace dotnet5781_02_2131_1146
         /// <param name="line">line number</param>
         /// <param name="beginStop">Begin</param>
         /// <param name="endStop">End</param>
-        public BusLine(int line, BusStopRoute beginStop, BusStopRoute endStop)
+        public BusLine(int line, BusStopRoute beginStop, BusStopRoute endStop, Areas Area = Areas.GENERAL)
         {
             if (beginStop.GetNumber == endStop.GetNumber)
                 throw new BusException("First stop can't be last stop");
-            if (beginStop.GetArea != endStop.GetArea && beginStop.GetArea != Areas.GENERAL && endStop.GetArea != Areas.GENERAL)
+            if (beginStop.GetArea != endStop.GetArea && beginStop.GetArea != Areas.GENERAL && endStop.GetArea != Areas.GENERAL && Area != Areas.GENERAL)
                 throw new BusException("Areas dont match");
             lineNumber = line;
+            this.Area = Area;
             Stops = new List<BusStopRoute>();
             AddStop(beginStop, 1);
             Begin = beginStop;
@@ -126,7 +127,7 @@ namespace dotnet5781_02_2131_1146
         {
             if (index == 1)
             {
-                Area = stop.GetArea;
+                //Area = stop.GetArea;
                 stop.TravelDistance = 0;
                 stop.TravelTime = TimeSpan.Zero;
             }
@@ -379,11 +380,21 @@ namespace dotnet5781_02_2131_1146
                         }
                     break;
                 }
-            BusLine result = new BusLine(lineNumber, Stops[beginIndex], Stops[endIndex]);
 
             if (endIndex != 0)
             {
-                for (int i = beginIndex + 1; i < endIndex; i++)
+                BusLine result;
+                result = new BusLine(lineNumber, Stops[beginIndex], Stops[endIndex], Areas.GENERAL);
+                //try 
+                //{
+                //}
+                //catch 
+                //{
+                //    result.Area = Areas.GENERAL;
+                //    result.Begin = Stops[beginIndex];
+                //    result.End = Stops[endIndex];
+                //}
+                for (int i = beginIndex; i < endIndex; i++)
                 {
                     result.Stops.Insert(i - beginIndex, Stops[i]);
                 }
