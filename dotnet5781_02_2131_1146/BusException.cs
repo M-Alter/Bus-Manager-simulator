@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace dotnet5781_02_2131_1146
 {
     /// <summary>
-    /// Bus Exception ELIEZER
+    /// Bus Exception
     /// </summary>
     public class BusException : Exception
     {
@@ -15,7 +15,6 @@ namespace dotnet5781_02_2131_1146
 
         public override string Message => base.Message;
     }
-    // CHECK IF IT WORKING --
 
     
 }
