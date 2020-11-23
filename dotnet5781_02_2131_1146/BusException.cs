@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace dotnet5781_02_2131_1146
 {
     /// <summary>
-    /// Bus Exception 
+    /// Bus Exception ELIEZER
     /// </summary>
     public class BusException : Exception
     {
