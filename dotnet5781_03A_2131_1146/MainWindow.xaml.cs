@@ -68,5 +68,6 @@ namespace dotnet5781_03A_2131_1146
             UpGrid.DataContext = currentDisplayBusLine;
             lbBusLineStations.DataContext = currentDisplayBusLine.Stations;
         }
+
     }
 }
