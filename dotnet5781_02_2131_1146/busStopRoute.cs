@@ -50,5 +50,10 @@ namespace dotnet5781_02_2131_1146
         public Areas GetArea { get { return Stop.Area; } }
 
         #endregion
+
+        public override string ToString()
+        {
+            return String.Format("Bus Station Code: {0,-7}\t{1,13}°N\t{2,13}°E\tOperating area: {3,-15}\t{4,8}", Stop.stopNumber, Stop.Latitude, Stop.Longitude, Stop.Area, TravelTime);
+        }
     }
 }
