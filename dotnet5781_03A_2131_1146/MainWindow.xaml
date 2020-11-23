@@ -24,6 +24,6 @@
             <Label Content="Area :" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" FontSize="20"/>
             <TextBox Name="tbArea" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.Column="3" Text="{Binding Path=Area}" FontSize="20" Height="30" Width="110"/>
         </Grid>
-        <ListBox Name="lbBusLineStations" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding}"  Width="750" Height="500" FontSize="15"/>
+        <ListBox Name="lbBusLineStations" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding}" FontSize="15" Margin="10"/>
     </Grid>
 </Window>
