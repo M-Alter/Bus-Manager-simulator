@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotnet5781_03B_2131_1146"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="BusWindow" Height="450" Width="800">
     <Grid>
-        
+       
+        <ListView x:Name="lvBuses" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding}" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="20" >
+                        <Button>
+                        </Button>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Reg-Number" Width="85" DisplayMemberBinding="{Binding RegString}"/>
+                    <GridViewColumn Header="Start-Date" Width="100" DisplayMemberBinding="{Binding BeginDate}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

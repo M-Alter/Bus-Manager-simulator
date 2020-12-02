@@ -7,7 +7,7 @@ namespace dotnet5781_03B_2131_1146
     {
         #region Fields
         private const int MAX_GAS = 1200;
-        private static List<int> regNumbers;
+        private static List<int> regNumbers = new List<int>();
 
         private readonly int reg;
         private readonly DateTime beginDate;
@@ -21,13 +21,16 @@ namespace dotnet5781_03B_2131_1146
 
         #region C'tor
         // Constractor of class
-        public Bus(int reg, DateTime beginDate, int mileage = 0, int gas = 1200)
+        public Bus(int reg, DateTime beginDate, int mileage = 0, int gas = 1200, DateTime dateTime = default(DateTime))
         {
             if (!regNumbers.Contains(reg))
             {
                 this.reg = reg;
                 this.beginDate = beginDate;
-                this.serviceDetails.lastServiceDate = beginDate;
+                if (dateTime == default(DateTime))
+                    this.serviceDetails.lastServiceDate = DateTime.Now;
+                else
+                    this.serviceDetails.lastServiceDate = dateTime;
                 regNumbers.Add(reg);
                 this.Mileage = mileage;
                 Gas = gas;
@@ -39,15 +42,27 @@ namespace dotnet5781_03B_2131_1146
 
         #region Properties
         // Getter for beginDate
-        public DateTime BeginDate
+        public string BeginDate
         {
-            get => beginDate;
+            get => beginDate.ToShortDateString();
         }
 
-        // Getter for reg
+        //Getter for reg
         public int Reg
         {
             get => reg;
+        }
+
+        public string RegString
+        {
+            get
+            {
+                if (beginDate.Year < 2018)
+                {
+                    return reg.ToString("00-000-00");
+                }
+                return reg.ToString("000-00-000");
+            }
         }
 
         // Getter and setter for mileage
@@ -118,6 +133,7 @@ namespace dotnet5781_03B_2131_1146
         {
             serviceDetails.lastServiceDate = DateTime.Today;
             serviceDetails.mileageSinceService = 0;
+            Refuel();
             IsSafe = true;
             Console.WriteLine("Your vehicle has been serviced successfully");
         }
@@ -131,9 +147,9 @@ namespace dotnet5781_03B_2131_1146
         public override string ToString()
         {
             if (beginDate.Year < 2018)
-                return reg.ToString("00-000-00");
+                return String.Format("[{0}, {1}]", reg.ToString("00-000-00"), beginDate.ToShortDateString());
             else
-                return reg.ToString("000-00-000");
+                return String.Format("[{0}, {1}]", reg.ToString("000-00-000"), beginDate.ToShortDateString());
         }
 
         #endregion
