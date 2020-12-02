@@ -133,19 +133,21 @@ namespace dotnet5781_01_2131_1146
             int prefix, middle, suffix, temp = reg;
             if (beginDate.Year < 2018)
             {
-                prefix = temp % 100; temp /= 100;
-                middle = temp % 1000; temp /= 1000;
-                suffix = temp;
+                //prefix = temp % 100; temp /= 100;
+                //middle = temp % 1000; temp /= 1000;
+                //suffix = temp;
+                return reg.ToString("00-000-00");
             }
             else
             {
-                prefix = temp % 1000; temp /= 1000;
-                middle = temp % 100; temp /= 100;
-                suffix = temp;
+                //prefix = temp % 1000; temp /= 1000;
+                //middle = temp % 100; temp /= 100;
+                //suffix = temp;
+                return reg.ToString("000-00-000");
             }
-            string registration = String.Format("{0}-{1}-{2}", suffix, middle, prefix);
+            //string registration = String.Format("{0}-{1}-{2}", suffix, middle, prefix);
 
-            return String.Format("[{0}, {1}]", registration, beginDate.ToShortDateString());
+            //return String.Format("[{0}, {1}]", registration, beginDate.ToShortDateString());
         }
 
     }
