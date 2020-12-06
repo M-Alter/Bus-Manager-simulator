@@ -101,6 +101,15 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
+        public DateTime ServiceDate 
+        {
+            get => serviceDetails.lastServiceDate;
+            private set
+            {
+                serviceDetails.lastServiceDate = value;
+            }
+        }
+
         // Getter and setter for isSafe
         public bool IsSafe
         {
