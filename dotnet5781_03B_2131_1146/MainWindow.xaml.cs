@@ -79,5 +79,10 @@ namespace dotnet5781_03B_2131_1146
             Popup info = new Popup(currrentBus);
             info.Show();
         }
+
+        private void AddBusbtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

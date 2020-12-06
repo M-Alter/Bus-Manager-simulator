@@ -1,0 +1,35 @@
+﻿<Window x:Class="dotnet5781_03B_2131_1146.AddBus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dotnet5781_03B_2131_1146"
+        mc:Ignorable="d"
+        Title="Add a new Bus" Height="300" Width="400">
+    <Grid Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Registration number" FontSize="15" VerticalAlignment="Center" Grid.Row="0"/>
+        <TextBlock Text="Begin Date" FontSize="15" VerticalAlignment="Center" Grid.Row="1"/>
+        <TextBlock Text="Milege (Optional)" FontSize="15" VerticalAlignment="Center" Grid.Row="2"/>
+        <TextBlock Text="Gas (Optional)" FontSize="15" VerticalAlignment="Center" Grid.Row="3"/>
+        <TextBlock Text="Service Date (Optional)" FontSize="15" VerticalAlignment="Center" Grid.Row="4"/>
+        <TextBox FontSize="15" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+        <TextBox FontSize="15" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+        <TextBox FontSize="15" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"/>
+        <TextBox FontSize="15" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
+        <TextBox FontSize="15" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1"/>
+        <TextBox FontSize="15" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1"/>
+    </Grid>
+</Window>

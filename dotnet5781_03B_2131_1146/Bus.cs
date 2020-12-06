@@ -16,6 +16,8 @@ namespace dotnet5781_03B_2131_1146
         private int mileage;
         private int gas;
 
+        private State busState = State.READY;
+
         private bool isSafe = true;
         #endregion
 
@@ -101,6 +103,7 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
+        // Getter and setter for the last service date
         public DateTime ServiceDate 
         {
             get => serviceDetails.lastServiceDate;
@@ -108,6 +111,13 @@ namespace dotnet5781_03B_2131_1146
             {
                 serviceDetails.lastServiceDate = value;
             }
+        }
+
+        //bus stete
+        public State BusState
+        {
+            get { return busState; }
+            set { busState = value; }
         }
 
         // Getter and setter for isSafe
@@ -137,6 +147,8 @@ namespace dotnet5781_03B_2131_1146
             Gas -= value;
             MileageSinceService += value;
         }
+
+
         // Update the values after a service
         public void Service()
         {
