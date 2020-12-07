@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace dotnet5781_03B_2131_1146
 {
@@ -11,7 +12,9 @@ namespace dotnet5781_03B_2131_1146
     public partial class MainWindow : Window
     {
         private static Random r = new Random();
-        List<Bus> buses;
+        public static ObservableCollection<Bus> buses;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -20,21 +23,21 @@ namespace dotnet5781_03B_2131_1146
         }
         private void initBuses()
         {
-            buses = new List<Bus>();
+            buses = new ObservableCollection<Bus>();
             DateTime newDate;
             bool flag = false;
-            
+
             Func<DateTime> getRandomDate = () => new DateTime(r.Next(2000, 2020), r.Next(1, 12), r.Next(1, 28));
             Func<DateTime, int> getReg = (date) => date.Year >= 2018 ? r.Next(10000000, 99999999) : r.Next(1000000, 9999999);
             #region AddBusses
             for (int i = 0; i < 10; i++)
             {
-                    try
-                    {
+                try
+                {
                     newDate = getRandomDate();
                     buses.Add(new Bus(getReg(newDate), newDate));
-                    }
-                    catch (Exception) { i--; }
+                }
+                catch (Exception) { i--; }
             }
             while (flag == false)
             {
@@ -74,15 +77,26 @@ namespace dotnet5781_03B_2131_1146
         private void lvBuses_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var currrentBus = (Bus)lvBuses.SelectedItem as Bus;
-            //var context = item.DataContext as Bus;
-            //MessageBox.Show(String.Format("{0}, {1}",currrentBus.MileageSinceService, currrentBus.Gas));            
             Popup info = new Popup(currrentBus);
             info.Show();
         }
 
         private void AddBusbtn_Click(object sender, RoutedEventArgs e)
         {
+            AddBus addbus = new AddBus();
+            addbus.Show();
+        }
 
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            lvBuses.Items.Refresh();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PickBus pick = new PickBus();
+            pick.Show();
+            Bus bus = sender as Bus;
         }
     }
 }

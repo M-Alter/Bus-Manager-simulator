@@ -71,6 +71,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bus.cs" />
+    <Compile Include="PickBus.xaml.cs">
+      <DependentUpon>PickBus.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Popup.xaml.cs">
       <DependentUpon>Popup.xaml</DependentUpon>
     </Compile>
@@ -80,6 +83,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PickBus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Popup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

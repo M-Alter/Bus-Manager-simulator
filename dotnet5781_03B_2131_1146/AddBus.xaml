@@ -18,18 +18,18 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Text="Registration number" FontSize="15" VerticalAlignment="Center" Grid.Row="0"/>
-        <TextBlock Text="Begin Date" FontSize="15" VerticalAlignment="Center" Grid.Row="1"/>
+        <TextBlock Text="Begin Date " FontSize="15" VerticalAlignment="Center" Grid.Row="1"/>
         <TextBlock Text="Milege (Optional)" FontSize="15" VerticalAlignment="Center" Grid.Row="2"/>
         <TextBlock Text="Gas (Optional)" FontSize="15" VerticalAlignment="Center" Grid.Row="3"/>
         <TextBlock Text="Service Date (Optional)" FontSize="15" VerticalAlignment="Center" Grid.Row="4"/>
-        <TextBox FontSize="15" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-        <TextBox FontSize="15" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
-        <TextBox FontSize="15" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"/>
-        <TextBox FontSize="15" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
-        <TextBox FontSize="15" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1"/>
-        <TextBox FontSize="15" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1"/>
+        <TextBox x:Name="Reg" FontSize="15" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+        <TextBox x:Name="BeginDate"  FontSize="15" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+        <TextBox x:Name="Milege" FontSize="15" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"/>
+        <TextBox x:Name="Gas" FontSize="15" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
+        <TextBox x:Name="ServiceDate" FontSize="15" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1"/>
+        <Button x:Name="addSave" Content="Save" FontSize="15" Grid.Row="5" Margin="10,5" Click="addSave_Click"/>
+        <Button x:Name="addCancel" Grid.Row="5" Content="Cancel" FontSize="15" Grid.Column="1" Margin="10,5"/>
     </Grid>
 </Window>

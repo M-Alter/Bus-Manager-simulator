@@ -29,6 +29,15 @@ namespace dotnet5781_03B_2131_1146
             ServiceDate.Text = myBus.ServiceDate.ToShortDateString();
             ServiceMileage.Text = myBus.MileageSinceService.ToString();
             FuelBar.Value = myBus.Gas;
+            if (myBus.Gas < 120)
+            {
+                FuelBar.Foreground = Brushes.Red;
+            }
+            else
+            {
+                FuelBar.Foreground = Brushes.LightGreen;
+            }
+            PBarValue.Text = String.Format("{0}km",myBus.Gas.ToString());
             switch (myBus.BusState)
             {
                 case State.READY:

@@ -23,5 +23,33 @@ namespace dotnet5781_03B_2131_1146
         {
             InitializeComponent();
         }
+
+        private void addSave_Click(object sender, RoutedEventArgs e)
+        {
+            int reg;
+            DateTime beginDate;
+            if(!int.TryParse(Reg.Text, out reg))
+            {
+                this.Close();
+                MessageBox.Show("");
+                
+            }
+            if (!DateTime.TryParse(BeginDate.Text, out beginDate))
+            {
+                this.Close();
+                MessageBox.Show("");
+            }
+            try
+            {
+                MainWindow.buses.Add(new Bus(reg, beginDate));
+            }
+            catch (Exception  ex)            
+            {
+                MessageBox.Show(ex.Message);
+            }
+            this.Close();           
+        }
+
+       
     }
 }

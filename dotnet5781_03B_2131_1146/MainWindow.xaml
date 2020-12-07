@@ -12,7 +12,8 @@
             <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
             <Button x:Name="AddBusbtn" Height="25" Width=" 75" Margin=" 20,0" HorizontalAlignment="Left" Click="AddBusbtn_Click">Add Bus</Button>
-            <Button x:Name="RemoveBubtns" Height="25" Width=" 75" Content="Remove Bus" HorizontalAlignment="Left" Margin="150,0"/>
+        <Button x:Name="RemoveBubtns" Height="25" Width=" 75" Content="Remove Bus" HorizontalAlignment="Left" Margin="150,0"/>
+        <Button x:Name="Refresh" Height="25" Width=" 75" Content="Refresh" HorizontalAlignment="Left" Margin="250,0" Click="Refresh_Click"/>
         <ListView x:Name="lvBuses" Grid.Row="1"  Margin="10,10,10,10" ItemsSource="{Binding}" MouseDoubleClick="lvBuses_MouseDoubleClick" >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -22,7 +23,7 @@
                             <Image Source="https://png.pngtree.com/png-vector/20190302/ourlarge/pngtree-vector-fuel-station-icon-png-image_745318.jpg" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Button>
                         <Button Visibility="Hidden" Width="20"/>
-                        <Button Content="Pick" Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button Content="Pick" Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click">
                         </Button>
                     </WrapPanel>
                 </DataTemplate>

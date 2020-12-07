@@ -1,0 +1,21 @@
+﻿<Window x:Class="dotnet5781_03B_2131_1146.PickBus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dotnet5781_03B_2131_1146"
+        mc:Ignorable="d"
+        Title="PickBus" Height="100" Width="200" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel>
+        <TextBlock HorizontalAlignment="Center" Text="Please enter the journey distance"/>
+            <Button Height="10" Visibility="Hidden"/>
+            <WrapPanel HorizontalAlignment="Center">
+                <TextBox x:Name="Distance" HorizontalAlignment="Center" Width="40" PreviewKeyDown="Distance_PreviewKeyDown"/>
+                <TextBlock HorizontalAlignment="Center" Text="km"/>
+            </WrapPanel>
+            <Button Height="10" Visibility="Hidden"/>
+            <TextBlock Text="Press Enter to continue..." HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Window>

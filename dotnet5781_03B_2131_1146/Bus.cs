@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace dotnet5781_03B_2131_1146
 {
-    public class Bus
+    public class Bus 
     {
         #region Fields
         private const int MAX_GAS = 1200;
+
+        private const int MINUTE = 100;
+        private const int HOUR = 60 * MINUTE;
+        private const int DAY = 24 * HOUR;
+
         private static List<int> regNumbers = new List<int>();
 
         private readonly int reg;
@@ -35,6 +41,7 @@ namespace dotnet5781_03B_2131_1146
                     this.serviceDetails.lastServiceDate = dateTime;
                 regNumbers.Add(reg);
                 this.Mileage = mileage;
+                this.serviceDetails.mileageSinceService = mileage;
                 Gas = gas;
             }
             else

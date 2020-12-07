@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:dotnet5781_03B_2131_1146"
         mc:Ignorable="d"
         Title="Popup" Height="250" Width="500">
-    <Grid Margin="35" ShowGridLines="True">
+    <Grid Margin="35" ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*" />
@@ -33,8 +33,9 @@
             <TextBlock Text="Mileage:" Width="50"/>
             <TextBlock x:Name="ServiceMileage" Text="{Binding MileageSinceService}" Width="80"/>
         </WrapPanel>
-        <ProgressBar x:Name="FuelBar" Grid.Row="4" Margin="75,0,0,0" Grid.ColumnSpan="2" Minimum="0" Maximum="1200"/>
-        <TextBlock Text="Empty" Grid.Row="4" Margin="80,0,0,0" VerticalAlignment="Center"/>
+        <ProgressBar x:Name="FuelBar" Grid.Row="4"  Grid.Column="1" Minimum="0" Maximum="1200" BorderBrush="Black" BorderThickness="1"/>
+        <TextBlock x:Name="PBarValue" Text="{Binding}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="Empty" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center"/>
         <TextBlock Text="Full" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="0,0,5,0"/>
         <TextBlock Text="Fuel State" Grid.Row="4" VerticalAlignment="Center"/>
         <TextBlock Text="Bus State" Grid.Row="5" VerticalAlignment="Center"/>
