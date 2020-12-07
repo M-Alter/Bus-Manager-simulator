@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Threading;
 
 namespace dotnet5781_03B_2131_1146
 {
@@ -159,25 +159,30 @@ namespace dotnet5781_03B_2131_1146
         // Update the values after a service
         public void Service()
         {
+            this.BusState = State.SERVICING;
             serviceDetails.lastServiceDate = DateTime.Today;
             serviceDetails.mileageSinceService = 0;
-            Refuel();
+            Gas = MAX_GAS;
             IsSafe = true;
+            Thread.Sleep(DAY);
             Console.WriteLine("Your vehicle has been serviced successfully");
+            this.BusState = State.READY;
         }
         // Update the values after Refuel
         public void Refuel()
         {
-            Gas = MAX_GAS;
+            this.BusState = State.REFUELING;
+            Thread.Sleep(2 * HOUR);
+            this.BusState = State.READY;
             Console.WriteLine("Your vehicle has been refueled successfully");
         }
         // Print bus details in requiered format 
         public override string ToString()
         {
             if (beginDate.Year < 2018)
-                return String.Format("[{0}, {1}]", reg.ToString("00-000-00"), beginDate.ToShortDateString());
+                return String.Format("{0}, {1}", reg.ToString("00-000-00"), beginDate.ToShortDateString());
             else
-                return String.Format("[{0}, {1}]", reg.ToString("000-00-000"), beginDate.ToShortDateString());
+                return String.Format("{0}, {1}", reg.ToString("000-00-000"), beginDate.ToShortDateString());
         }
 
         #endregion

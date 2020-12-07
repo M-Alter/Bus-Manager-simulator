@@ -57,5 +57,19 @@ namespace dotnet5781_03B_2131_1146
             }
             
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PickBus pick = new PickBus();
+            pick.Show();
+            Bus bus = sender as Bus;
+        }
+
+        private void Refuel_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Bus currrentBus = button.DataContext as Bus;
+            currrentBus.Refuel();
+        }
     }
 }

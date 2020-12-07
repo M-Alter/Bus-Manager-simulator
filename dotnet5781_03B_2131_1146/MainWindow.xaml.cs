@@ -98,5 +98,17 @@ namespace dotnet5781_03B_2131_1146
             pick.Show();
             Bus bus = sender as Bus;
         }
+
+
+        private void Pick_Click(object sender, RoutedEventArgs e)
+        {
+            Bus currrentBus = (Bus)lvBuses.SelectedItem;
+            currrentBus.Refuel();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

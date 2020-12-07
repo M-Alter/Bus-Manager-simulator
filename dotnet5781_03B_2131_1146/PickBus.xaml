@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotnet5781_03B_2131_1146"
         mc:Ignorable="d"
-        Title="PickBus" Height="100" Width="200" ResizeMode="NoResize">
+        Title="PickBus" Height="120" Width="200" ResizeMode="NoResize">
     <Grid>
         <StackPanel>
         <TextBlock HorizontalAlignment="Center" Text="Please enter the journey distance"/>
