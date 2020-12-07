@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotnet5781_03A_2131_1146"
         mc:Ignorable="d"
-        Title="BusCompany" Height="640" Width="800" Icon="https://cdn3.iconfinder.com/data/icons/vehicles-flat-colorful/2048/5637_-_Double_Bus-512.png" >
+        Title="BusCompany" Height="640" Width="800" Icon="Bus.ico" >
     <Grid Background="Silver">
         
         <Grid.RowDefinitions>
@@ -20,10 +20,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Bus Line Number :" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" FontSize="20"/>
-            <ComboBox Name="cbBuslines" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Column="1" FontSize="20" Height="35" Width="60" SelectionChanged="cbBuslines_SelectionChanged" />
+            <ComboBox Name="cbBuslines" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Column="1" FontSize="20" Background="Silver" Height="35" Width="60" SelectionChanged="cbBuslines_SelectionChanged" />
             <Label Content="Area :" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" FontSize="20"/>
-            <TextBox Name="tbArea" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.Column="3" Text="{Binding Path=Area}" FontSize="20" Height="30" Width="110"/>
+            <TextBox Name="tbArea" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Stretch" Grid.Column="3" Text="{Binding Path=Area}" FontSize="20" Height="25" Width="auto"/>
         </Grid>
-        <ListBox Name="lbBusLineStations" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding}"  Width="750" Height="500" FontSize="15"/>
+        <ListBox Name="lbBusLineStations" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" ItemsSource="{Binding}" FontSize="15" Margin="10"/>
     </Grid>
 </Window>

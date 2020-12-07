@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{577035FE-B0B3-4119-8001-4144E1B1F5C4}</ProjectGuid>
+    <ProjectGuid>{E18CF8C4-FAF2-4FA1-BBD5-BE9D81489EFD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>dotnet5781_03A_2131_1146</RootNamespace>
-    <AssemblyName>dotnet5781_03A_2131_1146</AssemblyName>
+    <RootNamespace>dotnet5781_03B_2131_1146</RootNamespace>
+    <AssemblyName>dotnet5781_03B_2131_1146</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -55,18 +55,42 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AddBus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AddBus.xaml.cs">
+      <DependentUpon>AddBus.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Bus.cs" />
+    <Compile Include="PickBus.xaml.cs">
+      <DependentUpon>PickBus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Popup.xaml.cs">
+      <DependentUpon>Popup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceDetails.cs" />
+    <Compile Include="State.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PickBus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Popup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -93,15 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\dotnet5781_02_2131_1146\dotnet5781_02_2131_1146.csproj">
-      <Project>{6f3fde24-3b8a-45a0-b0c3-44efcb64d4b7}</Project>
-      <Name>dotnet5781_02_2131_1146</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Bus.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
