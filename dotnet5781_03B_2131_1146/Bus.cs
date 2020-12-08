@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Windows;
 
 namespace dotnet5781_03B_2131_1146
 {
-    public class Bus 
+    public class Bus
     {
         #region Fields
         private const int MAX_GAS = 1200;
@@ -25,6 +26,7 @@ namespace dotnet5781_03B_2131_1146
         private State busState = State.READY;
 
         private bool isSafe = true;
+        static Random r = new Random(DateTime.Now.Millisecond);
         #endregion
 
         #region C'tor
@@ -91,7 +93,7 @@ namespace dotnet5781_03B_2131_1146
         public int Gas
         {
             get => gas;
-            private set
+            set
             {
                 if (value <= 1200 || value > 0)
                     gas = value;
@@ -111,12 +113,12 @@ namespace dotnet5781_03B_2131_1146
         }
 
         // Getter and setter for the last service date
-        public DateTime ServiceDate 
+        public String ServiceDate
         {
-            get => serviceDetails.lastServiceDate;
+            get => serviceDetails.lastServiceDate.ToShortDateString();
             private set
             {
-                serviceDetails.lastServiceDate = value;
+                DateTime.TryParse(value, out serviceDetails.lastServiceDate);
             }
         }
 
@@ -156,6 +158,26 @@ namespace dotnet5781_03B_2131_1146
         }
 
 
+        public void Pick(int km)
+        {
+            if (serviceDetails.mileageSinceService + km < 20000)
+            {
+                if (Gas + km < 1200)
+                {
+                    if ((DateTime.Today - serviceDetails.lastServiceDate).TotalDays < 365)
+                    {
+                        busState = State.BUSY;
+                        setDrivingValues(km);
+                        Thread.Sleep(km / r.Next(20, 50) * HOUR);
+                        busState = State.READY;
+                    }
+                    throw new InvalidOperationException("This bus must undergo a service");
+                }
+                throw new InvalidOperationException("there isnt enough gas to cmoplete this journey");
+            }
+            throw new InvalidOperationException("this bus will exceed its mileage allowance in this journey");
+        }
+
         // Update the values after a service
         public void Service()
         {
@@ -174,7 +196,7 @@ namespace dotnet5781_03B_2131_1146
             this.BusState = State.REFUELING;
             Thread.Sleep(2 * HOUR);
             this.BusState = State.READY;
-            Console.WriteLine("Your vehicle has been refueled successfully");
+            MessageBox.Show("Your vehicle has been refueled successfully");
         }
         // Print bus details in requiered format 
         public override string ToString()

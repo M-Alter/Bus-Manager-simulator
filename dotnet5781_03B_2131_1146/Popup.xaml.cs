@@ -19,16 +19,12 @@ namespace dotnet5781_03B_2131_1146
     /// </summary>
     public partial class Popup : Window
     {
+        private Bus mybus;
         public Popup(Bus myBus)
         {
+            this.mybus = myBus;
             InitializeComponent();
             Title = String.Format("Bus no: {0} info",myBus.RegString);
-            RegString.Text = myBus.RegString;
-            BeginDate.Text = myBus.BeginDate;
-            Mileage.Text = myBus.Mileage.ToString();
-            ServiceDate.Text = myBus.ServiceDate.ToShortDateString();
-            ServiceMileage.Text = myBus.MileageSinceService.ToString();
-            FuelBar.Value = myBus.Gas;
             if (myBus.Gas < 120)
             {
                 FuelBar.Foreground = Brushes.Red;
@@ -60,16 +56,15 @@ namespace dotnet5781_03B_2131_1146
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            PickBus pick = new PickBus();
-            pick.Show();
-            Bus bus = sender as Bus;
+            
         }
 
         private void Refuel_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            Bus currrentBus = button.DataContext as Bus;
-            currrentBus.Refuel();
+            
+            mybus.Refuel();
         }
+
+       
     }
 }
