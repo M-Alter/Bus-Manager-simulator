@@ -10,11 +10,11 @@ namespace dotnet5781_03B_2131_1146
     /// </summary>
     public partial class Popup : Window
     {
-        private Bus mybus;
-        public Popup(Bus myBus)
+        private Bus myBus;
+        public Popup(Bus MyBus)
         {
-            this.mybus = myBus;
             InitializeComponent();
+            this.myBus = MyBus;
             Title = String.Format("Bus no: {0} info", myBus.RegString);
             if (myBus.Gas < 120)
             {
@@ -51,17 +51,18 @@ namespace dotnet5781_03B_2131_1146
         {
             new Thread(() =>
             {
-                mybus.Refuel();
+                myBus.Refuel();
             }).Start();
 
-            FuelBar.Value = mybus.Gas;
+            FuelBar.Value = myBus.Gas;
             FuelBar.Foreground = Brushes.LightGreen;
 
         }
 
         private void Pick_Click(object sender, RoutedEventArgs e)
         {
-
+            PickBus pick = new PickBus(myBus);
+            pick.Show();
         }
     }
 }

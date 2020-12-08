@@ -162,7 +162,7 @@ namespace dotnet5781_03B_2131_1146
         {
             if (serviceDetails.mileageSinceService + km < 20000)
             {
-                if (Gas + km < 1200)
+                if (Gas - km > 0)
                 {
                     if ((DateTime.Today - serviceDetails.lastServiceDate).TotalDays < 365)
                     {
@@ -170,10 +170,11 @@ namespace dotnet5781_03B_2131_1146
                         setDrivingValues(km);
                         Thread.Sleep(km / r.Next(20, 50) * HOUR);
                         busState = State.READY;
+                        return;
                     }
                     throw new InvalidOperationException("This bus must undergo a service");
                 }
-                throw new InvalidOperationException("there isnt enough gas to cmoplete this journey");
+                throw new InvalidOperationException("there isnt enough gas to complete this journey");
             }
             throw new InvalidOperationException("this bus will exceed its mileage allowance in this journey");
         }

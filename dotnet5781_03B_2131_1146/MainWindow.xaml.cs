@@ -73,7 +73,7 @@ namespace dotnet5781_03B_2131_1146
             }
             #endregion
         }
-
+        
         private void lvBuses_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var currrentBus = (Bus)lvBuses.SelectedItem as Bus;
@@ -96,7 +96,8 @@ namespace dotnet5781_03B_2131_1146
 
         private void Pick_Click(object sender, RoutedEventArgs e)
         {
-            Bus currrentBus = (Bus)lvBuses.SelectedItem;
+            PickBus pick = new PickBus((Bus)lvBuses.SelectedItem);
+            pick.Show();
 
         }
 

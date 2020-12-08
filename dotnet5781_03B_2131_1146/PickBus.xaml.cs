@@ -19,9 +19,11 @@ namespace dotnet5781_03B_2131_1146
     /// </summary>
     public partial class PickBus : Window
     {
-        public PickBus()
+        private Bus MyBus;
+        public PickBus(Bus myBus)
         {
             InitializeComponent();
+            MyBus = myBus;
         }
 
         private void Distance_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -34,7 +36,15 @@ namespace dotnet5781_03B_2131_1146
             {
                 if (text.Text.Length > 0)
                 {
-
+                    this.Close();
+                    try
+                    {
+                        MyBus.Pick(int.Parse(text.Text));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
                 e.Handled = true;
                 return;
