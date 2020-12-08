@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace dotnet5781_03B_2131_1146
 {
@@ -24,7 +15,7 @@ namespace dotnet5781_03B_2131_1146
         {
             this.mybus = myBus;
             InitializeComponent();
-            Title = String.Format("Bus no: {0} info",myBus.RegString);
+            Title = String.Format("Bus no: {0} info", myBus.RegString);
             if (myBus.Gas < 120)
             {
                 FuelBar.Foreground = Brushes.Red;
@@ -33,7 +24,7 @@ namespace dotnet5781_03B_2131_1146
             {
                 FuelBar.Foreground = Brushes.LightGreen;
             }
-            PBarValue.Text = String.Format("{0}km",myBus.Gas.ToString());
+            PBarValue.Text = String.Format("{0}km", myBus.Gas.ToString());
             switch (myBus.BusState)
             {
                 case State.READY:
@@ -51,20 +42,26 @@ namespace dotnet5781_03B_2131_1146
                 default:
                     break;
             }
-            
+
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
+
 
         private void Refuel_Click(object sender, RoutedEventArgs e)
         {
-            
-            mybus.Refuel();
+            new Thread(() =>
+            {
+                mybus.Refuel();
+            }).Start();
+
+            FuelBar.Value = mybus.Gas;
+            FuelBar.Foreground = Brushes.LightGreen;
+
         }
 
-       
+        private void Pick_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

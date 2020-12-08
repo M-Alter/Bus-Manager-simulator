@@ -194,10 +194,11 @@ namespace dotnet5781_03B_2131_1146
         public void Refuel()
         {
             this.BusState = State.REFUELING;
+            Gas = MAX_GAS;
             Thread.Sleep(2 * HOUR);
             this.BusState = State.READY;
-            MessageBox.Show("Your vehicle has been refueled successfully");
         }
+
         // Print bus details in requiered format 
         public override string ToString()
         {
