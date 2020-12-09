@@ -28,16 +28,17 @@ namespace dotnet5781_03B_2131_1146
         {
             int reg = 0;
             DateTime beginDate = default(DateTime);
-            if(!int.TryParse(Reg.Text, out reg) && reg != 0)
+            if( reg != 0 || !int.TryParse(Reg.Text, out reg))
             {
                 this.Close();
-                MessageBox.Show("");
-                
+                MessageBox.Show("please enter a valid number");
+                return;
             }
-            if (!DateTime.TryParse(BeginDate.Text, out beginDate) && beginDate != default(DateTime))
+            if (beginDate != default(DateTime) || !DateTime.TryParse(BeginDate.Text, out beginDate))
             {
                 this.Close();
-                MessageBox.Show("");
+                MessageBox.Show("please enter a date in format DD-MM-YYYY");
+                return;
             }
             try
             {
