@@ -33,6 +33,8 @@ namespace dotnet5781_03B_2131_1146
         // Constractor of class
         public Bus(int reg, DateTime beginDate, int mileage = 0, int gas = 1200, DateTime dateTime = default(DateTime))
         {
+            if (reg < 1000000 || reg > 99999999)
+                throw new Exception("Invalid number");
             if (!regNumbers.Contains(reg))
             {
                 this.reg = reg;

@@ -30,6 +30,6 @@
         <TextBox x:Name="Gas" FontSize="15" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
         <TextBox x:Name="ServiceDate" FontSize="15" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1"/>
         <Button x:Name="addSave" Content="Save" FontSize="15" Grid.Row="5" Margin="10,5" Click="addSave_Click"/>
-        <Button x:Name="addCancel" Grid.Row="5" Content="Cancel" FontSize="15" Grid.Column="1" Margin="10,5"/>
+        <Button x:Name="addCancel" Grid.Row="5" Content="Cancel" FontSize="15" Grid.Column="1" Margin="10,5" Click="addCancel_Click"/>
     </Grid>
 </Window>

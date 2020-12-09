@@ -26,31 +26,47 @@ namespace dotnet5781_03B_2131_1146
 
         private void addSave_Click(object sender, RoutedEventArgs e)
         {
-            int reg = 0;
-            DateTime beginDate = default(DateTime);
-            if( reg != 0 || !int.TryParse(Reg.Text, out reg))
+            bool fleg = true;
+            while (fleg)
             {
-                this.Close();
-                MessageBox.Show("please enter a valid number");
-                return;
+                int reg;
+                DateTime beginDate = default(DateTime);
+                if (!int.TryParse(Reg.Text, out reg) || reg == 0)
+                {
+                    //this.Close();
+                    Reg.BorderBrush = Brushes.Red;
+                    Reg.Text = string.Empty;
+                    MessageBox.Show("Invalid bus number");
+                    fleg = false; continue;
+                }
+                if (!DateTime.TryParse(BeginDate.Text, out beginDate) && beginDate != default(DateTime))
+                {
+                    //this.Close();
+                    BeginDate.BorderBrush = Brushes.Red;
+                    BeginDate.Text = string.Empty;
+                    MessageBox.Show("invalid date");
+                    fleg = false; continue;
+                }
+                fleg = true;
+                try
+                {
+                    MainWindow.buses.Add(new Bus(reg, beginDate));
+                    MessageBox.Show("The bus added succesfuly");
+                    break;
+                    this.Close();
+                }
+                catch (Exception  ex)            
+                {
+                    MessageBox.Show(ex.Message);
+                    fleg = false; continue;
+                }
             }
-            if (beginDate != default(DateTime) || !DateTime.TryParse(BeginDate.Text, out beginDate))
-            {
-                this.Close();
-                MessageBox.Show("please enter a date in format DD-MM-YYYY");
-                return;
-            }
-            try
-            {
-                MainWindow.buses.Add(new Bus(reg, beginDate));
-            }
-            catch (Exception  ex)            
-            {
-                MessageBox.Show(ex.Message);
-            }
-            this.Close();           
+                      
         }
 
-       
+        private void addCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
