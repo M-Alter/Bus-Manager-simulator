@@ -31,7 +31,7 @@ namespace dotnet5781_03B_2131_1146
             {
                 int reg;
                 DateTime beginDate = default(DateTime);
-                if (!int.TryParse(Reg.Text, out reg) || reg == 0)
+                if (!int.TryParse(Reg.Text, out reg) || reg == 0 || reg < 1000000 || reg > 99999999)
                 {
                     //this.Close();
                     Reg.BorderBrush = Brushes.Red;
@@ -39,7 +39,7 @@ namespace dotnet5781_03B_2131_1146
                     MessageBox.Show("Invalid bus number");
                     fleg = false; continue;
                 }
-                if (!DateTime.TryParse(BeginDate.Text, out beginDate) && beginDate != default(DateTime))
+                if (!DateTime.TryParse(BeginDate.Text, out beginDate) || beginDate == default(DateTime))
                 {
                     //this.Close();
                     BeginDate.BorderBrush = Brushes.Red;
@@ -52,8 +52,8 @@ namespace dotnet5781_03B_2131_1146
                 {
                     MainWindow.buses.Add(new Bus(reg, beginDate));
                     MessageBox.Show("The bus added succesfuly");
-                    break;
                     this.Close();
+                    break;
                 }
                 catch (Exception  ex)            
                 {
