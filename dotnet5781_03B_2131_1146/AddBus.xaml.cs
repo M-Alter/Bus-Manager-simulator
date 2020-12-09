@@ -26,15 +26,15 @@ namespace dotnet5781_03B_2131_1146
 
         private void addSave_Click(object sender, RoutedEventArgs e)
         {
-            int reg;
-            DateTime beginDate;
-            if(!int.TryParse(Reg.Text, out reg))
+            int reg = 0;
+            DateTime beginDate = default(DateTime);
+            if(!int.TryParse(Reg.Text, out reg) && reg != 0)
             {
                 this.Close();
                 MessageBox.Show("");
                 
             }
-            if (!DateTime.TryParse(BeginDate.Text, out beginDate))
+            if (!DateTime.TryParse(BeginDate.Text, out beginDate) && beginDate != default(DateTime))
             {
                 this.Close();
                 MessageBox.Show("");
