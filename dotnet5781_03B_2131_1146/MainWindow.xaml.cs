@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Windows;
@@ -73,7 +72,7 @@ namespace dotnet5781_03B_2131_1146
             }
             #endregion
         }
-        
+
         private void lvBuses_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var currrentBus = (Bus)lvBuses.SelectedItem as Bus;
@@ -103,9 +102,13 @@ namespace dotnet5781_03B_2131_1146
 
         private void Refuel_Click(object sender, RoutedEventArgs e)
         {
-           
-            Bus currrentBus = (Bus)lvBuses.SelectedItem;
-            currrentBus.BusState = State.REFUELING;
+            Bus currentBus = (Bus)lvBuses.SelectedItem;
+            if(currentBus.Gas == 1200)
+            {
+                MessageBox.Show("This bus already refueled");
+                return;
+            }
+            currentBus.BusState = State.REFUELING;
             Thread thread = null;
             thread = new Thread(() =>
             {
@@ -114,13 +117,15 @@ namespace dotnet5781_03B_2131_1146
                     Thread.Sleep(1000);
                     this.Dispatcher.Invoke(() =>
                     {
-                        currrentBus.BusStateString = String.Format("Reday in {0}", i.ToString());
+                        currentBus.BusStateString = String.Format("Reday in {0}", i.ToString());
                         //String s = i.ToString();
                     });
                 }
             });
             thread.Start();
-                //currrentBus.Refuel();
+            currentBus.BusStateString = "Ready";
+            currentBus.Gas = 1200;
+            currentBus.BusState = State.READY;
         }
     }
 }
