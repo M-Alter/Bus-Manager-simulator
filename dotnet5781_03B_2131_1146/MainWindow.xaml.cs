@@ -103,8 +103,24 @@ namespace dotnet5781_03B_2131_1146
 
         private void Refuel_Click(object sender, RoutedEventArgs e)
         {
-            var currrentBus = (Bus)lvBuses.SelectedItem;
-            currrentBus.Refuel();
+           
+            Bus currrentBus = (Bus)lvBuses.SelectedItem;
+            currrentBus.BusState = State.REFUELING;
+            Thread thread = null;
+            thread = new Thread(() =>
+            {
+                for (int i = 12; i > 0; i--)
+                {
+                    Thread.Sleep(1000);
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        currrentBus.BusStateString = String.Format("Reday in {0}", i.ToString());
+                        //String s = i.ToString();
+                    });
+                }
+            });
+            thread.Start();
+                //currrentBus.Refuel();
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace dotnet5781_03B_2131_1146
 {
@@ -24,7 +26,8 @@ namespace dotnet5781_03B_2131_1146
         private int gas;
 
         private State busState = State.READY;
-
+        private String busStateColor = "Green";
+        private String busStateString = "Ready";
         private bool isSafe = true;
         static Random r = new Random(DateTime.Now.Millisecond);
         #endregion
@@ -131,6 +134,18 @@ namespace dotnet5781_03B_2131_1146
             set { busState = value; }
         }
 
+        public String BusStateColor
+        {
+            get { return busStateColor; }
+            set { busStateColor = value; }
+        }
+
+        public String BusStateString
+        {
+            get { return busStateString; }
+            set { busStateString = value; }
+        }
+
         // Getter and setter for isSafe
         public bool IsSafe
         {
@@ -159,7 +174,28 @@ namespace dotnet5781_03B_2131_1146
             MileageSinceService += value;
         }
 
+        public void setBusStateColor()
+        {
+            switch (BusState)
+            {
+                case State.READY:
+                    BusStateColor = "LawnGreen";
+                    break;
+                case State.BUSY:
+                    BusStateColor = "Red";
+                    break;
+                case State.REFUELING:
+                    BusStateColor = "Orange";
+                    break;
+                case State.SERVICING:
+                    BusStateColor = "Gray";
+                    break;
+                default:
+                    break;
+            }
+        }
 
+        
         public void Pick(int km)
         {
             if (serviceDetails.mileageSinceService + km < 20000)
@@ -197,8 +233,11 @@ namespace dotnet5781_03B_2131_1146
         public void Refuel()
         {
             this.BusState = State.REFUELING;
+            
             Gas = MAX_GAS;
-            Thread.Sleep(2 * HOUR);
+            
+
+                
             this.BusState = State.READY;
         }
 

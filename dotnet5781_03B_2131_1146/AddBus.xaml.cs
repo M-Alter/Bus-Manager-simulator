@@ -33,7 +33,6 @@ namespace dotnet5781_03B_2131_1146
                 DateTime beginDate = default(DateTime);
                 if (!int.TryParse(Reg.Text, out reg) || reg == 0 || reg < 1000000 || reg > 99999999)
                 {
-                    //this.Close();
                     Reg.BorderBrush = Brushes.Red;
                     Reg.Text = string.Empty;
                     MessageBox.Show("Invalid bus number");
@@ -41,7 +40,6 @@ namespace dotnet5781_03B_2131_1146
                 }
                 if (!DateTime.TryParse(BeginDate.Text, out beginDate) || beginDate == default(DateTime))
                 {
-                    //this.Close();
                     BeginDate.BorderBrush = Brushes.Red;
                     BeginDate.Text = string.Empty;
                     MessageBox.Show("invalid date");
