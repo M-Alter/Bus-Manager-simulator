@@ -50,6 +50,7 @@ namespace dotnet5781_03B_2131_1146
                 this.Mileage = mileage;
                 this.serviceDetails.mileageSinceService = mileage;
                 Gas = gas;
+                this.setBusState();
             }
             else
                 throw new Exception("this reg number exists already");
@@ -174,21 +175,36 @@ namespace dotnet5781_03B_2131_1146
             MileageSinceService += value;
         }
 
+        public void setBusState()
+        {
+            if(this.Gas <=100)
+            {
+                this.busState = State.NOTREADY;
+                setBusStateColor();
+            }
+        }
+
         public void setBusStateColor()
         {
             switch (BusState)
             {
                 case State.READY:
                     BusStateColor = "LawnGreen";
+                    BusStateString = "Ready";
                     break;
                 case State.BUSY:
                     BusStateColor = "Red";
+                    BusStateString = "Busy";
                     break;
                 case State.REFUELING:
                     BusStateColor = "Orange";
                     break;
                 case State.SERVICING:
                     BusStateColor = "Gray";
+                    break;
+                case State.NOTREADY:
+                    BusStateColor = "Red";
+                    BusStateString = "Not ready";
                     break;
                 default:
                     break;

@@ -40,7 +40,7 @@
         <TextBlock Text="Fuel State" Grid.Row="4" VerticalAlignment="Center"/>
         <TextBlock Text="Bus State" Grid.Row="5" VerticalAlignment="Center"/>
         <WrapPanel Grid.Row="5" Grid.Column="1">
-            <Ellipse x:Name="BusState"  Height="20" Width="20" HorizontalAlignment="Left"/>
+            <Ellipse x:Name="BusState"  Height="15" Width="15" HorizontalAlignment="Left" Fill="{Binding BusStateColor}"/>
             <TextBlock x:Name="isReady" Width="100" Text="{Binding BusStateString}"/>
         </WrapPanel>
         <WrapPanel Grid.Row="6" Margin="3" HorizontalAlignment="Center">

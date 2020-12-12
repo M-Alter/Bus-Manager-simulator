@@ -2,6 +2,6 @@
 {
     public enum State
     {
-        READY = 1, BUSY, REFUELING, SERVICING
+        READY = 1, BUSY, REFUELING, SERVICING, NOTREADY
     }
 }
