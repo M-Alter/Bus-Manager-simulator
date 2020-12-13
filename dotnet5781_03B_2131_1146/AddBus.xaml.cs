@@ -26,8 +26,8 @@ namespace dotnet5781_03B_2131_1146
 
         private void addSave_Click(object sender, RoutedEventArgs e)
         {
-            bool fleg = true;
-            while (fleg)
+            bool flag = true;
+            while (flag)
             {
                 int reg;
                 DateTime beginDate = default(DateTime);
@@ -36,16 +36,16 @@ namespace dotnet5781_03B_2131_1146
                     Reg.BorderBrush = Brushes.Red;
                     Reg.Text = string.Empty;
                     MessageBox.Show("Invalid bus number");
-                    fleg = false; continue;
+                    flag = false; continue;
                 }
                 if (!DateTime.TryParse(BeginDate.Text, out beginDate) || beginDate == default(DateTime))
                 {
                     BeginDate.BorderBrush = Brushes.Red;
                     BeginDate.Text = string.Empty;
                     MessageBox.Show("invalid date");
-                    fleg = false; continue;
+                    flag = false; continue;
                 }
-                fleg = true;
+                flag = true;
                 try
                 {
                     MainWindow.buses.Add(new Bus(reg, beginDate));
@@ -56,7 +56,7 @@ namespace dotnet5781_03B_2131_1146
                 catch (Exception  ex)            
                 {
                     MessageBox.Show(ex.Message);
-                    fleg = false; continue;
+                    flag = false; continue;
                 }
             }
                       
