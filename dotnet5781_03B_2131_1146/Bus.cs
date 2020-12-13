@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Threading;
 
 namespace dotnet5781_03B_2131_1146
 {
@@ -106,7 +103,10 @@ namespace dotnet5781_03B_2131_1146
             set
             {
                 if (value <= 1200 || value > 0)
+                {
                     gas = value;
+                    NotifyPropertyChanged();
+                }
                 else
                     Console.WriteLine("you have enter an invalid gas amount");
             }
@@ -136,7 +136,7 @@ namespace dotnet5781_03B_2131_1146
         public State BusState
         {
             get { return busState; }
-            set 
+            set
             {
                 busState = value;
                 NotifyPropertyChanged();
@@ -146,8 +146,8 @@ namespace dotnet5781_03B_2131_1146
         public String BusStateColor
         {
             get { return busStateColor; }
-            set 
-            { 
+            set
+            {
                 busStateColor = value;
                 NotifyPropertyChanged();
             }
@@ -156,8 +156,8 @@ namespace dotnet5781_03B_2131_1146
         public String BusStateString
         {
             get { return busStateString; }
-            set 
-            { 
+            set
+            {
                 busStateString = value;
                 NotifyPropertyChanged();
             }
@@ -193,7 +193,7 @@ namespace dotnet5781_03B_2131_1146
 
         public void setBusState()
         {
-            if(this.Gas <=100)
+            if (this.Gas <= 100)
             {
                 this.busState = State.NOTREADY;
                 setBusStateColor();
@@ -227,7 +227,7 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
-        
+
         public void Pick(int km)
         {
             if (serviceDetails.mileageSinceService + km < 20000)
@@ -265,11 +265,11 @@ namespace dotnet5781_03B_2131_1146
         public void Refuel()
         {
             this.BusState = State.REFUELING;
-            
-            Gas = MAX_GAS;
-            
 
-                
+            Gas = MAX_GAS;
+
+
+
             this.BusState = State.READY;
         }
 
