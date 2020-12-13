@@ -51,13 +51,13 @@ namespace dotnet5781_03B_2131_1146
                 {
                     BeginDate.BorderBrush = Brushes.Red;
                     MessageBox.Show("Since 2018 register number should be 8 digits");
-                    fleg = false; continue;
+                    flag = false; continue;
                 }
                 else if (beginDate.Year < 2018 && reg >= 10000000)
                 {
                     BeginDate.BorderBrush = Brushes.Red;
                     MessageBox.Show("Until 2018 register number should be 7 digits");
-                    fleg = false; continue;
+                    flag = false; continue;
                 }
                 // Validate milege input
                 if (! (Milege.Text.Length == 0||int.TryParse(Milege.Text, out milege)) || milege < 0)
@@ -66,7 +66,7 @@ namespace dotnet5781_03B_2131_1146
                     Milege.Text = string.Empty;
                     MessageBox.Show("Invalid milege");
                     milege = 0;                    
-                    fleg = false; continue;
+                    flag = false; continue;
                 }
                 // Validate gas input
                 if (!(Gas.Text.Length == 0||int.TryParse(Gas.Text, out gas)) || gas < 0 || gas > 1200)
@@ -75,7 +75,7 @@ namespace dotnet5781_03B_2131_1146
                     Gas.Text = string.Empty;
                     MessageBox.Show("Invalid gas");
                     gas = 1200;
-                    fleg = false; continue;
+                    flag = false; continue;
                 }
                 // Validate ServiceDate input
                 serviceDate = beginDate;
@@ -84,9 +84,9 @@ namespace dotnet5781_03B_2131_1146
                     ServiceDate.BorderBrush = Brushes.Red;
                     ServiceDate.Text = string.Empty;
                     MessageBox.Show("invalid service date");
-                    fleg = false; continue;
+                    flag = false; continue;
                 }
-                fleg = true;
+                flag = true;
                 try
                 {
                     if (serviceDate == default(DateTime))
