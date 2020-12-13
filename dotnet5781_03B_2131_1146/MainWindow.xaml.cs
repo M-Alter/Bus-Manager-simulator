@@ -12,8 +12,7 @@ namespace dotnet5781_03B_2131_1146
     {
         private static Random r = new Random();
         public static ObservableCollection<Bus> buses;
-
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -109,6 +108,7 @@ namespace dotnet5781_03B_2131_1146
                 return;
             }
             currentBus.BusState = State.REFUELING;
+            currentBus.setBusStateColor();
             Thread thread = null;
             thread = new Thread(() =>
             {
@@ -117,15 +117,14 @@ namespace dotnet5781_03B_2131_1146
                     Thread.Sleep(1000);
                     this.Dispatcher.Invoke(() =>
                     {
-                        currentBus.BusStateString = String.Format("Reday in {0}", i.ToString());
-                        //String s = i.ToString();
+                        currentBus.BusStateString = String.Format("Reday in {0}", i.ToString());                        
                     });
                 }
+                currentBus.BusState = State.READY;
+                currentBus.setBusStateColor();
             });
             thread.Start();
-            currentBus.BusStateString = "Ready";
             currentBus.Gas = 1200;
-            currentBus.BusState = State.READY;
         }
     }
 }
