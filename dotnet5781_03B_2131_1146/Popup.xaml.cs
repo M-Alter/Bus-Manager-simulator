@@ -25,7 +25,8 @@ namespace dotnet5781_03B_2131_1146
             {
                 FuelBar.Foreground = Brushes.LightGreen;
             }
-            PBarValue.Text = String.Format("{0}km", myBus.Gas.ToString());
+            //PBarValue.DataContext = myBus.Gas;
+            //PBarValue.Text = myBus.Gas;
             switch (myBus.BusState)
             {
                 case State.READY:
@@ -74,7 +75,7 @@ namespace dotnet5781_03B_2131_1146
             this.IsEnabled = false;
             thread = new Thread(() =>
             {
-                currentBus.Gas = 120;
+                currentBus.Gas = 100;
                 this.Dispatcher.Invoke(() =>
                 {
                     FuelBar.Foreground = Brushes.LightGreen;

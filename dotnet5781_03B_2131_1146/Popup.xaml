@@ -34,7 +34,7 @@
             <TextBlock Text="{Binding MileageSinceService}" Width="80"/>
         </WrapPanel>
         <ProgressBar x:Name="FuelBar" Value="{Binding Gas}"  Grid.Row="4"  Grid.Column="1" Minimum="0" Maximum="1200" BorderBrush="Black" BorderThickness="1"/>
-        <TextBlock x:Name="PBarValue" Text="{Binding}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="PBarValue" Text="{Binding ElementName=FuelBar, Path=Value, StringFormat={}{0}km}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock Text="Empty" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center"/>
         <TextBlock Text="Full" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="0,0,5,0"/>
         <TextBlock Text="Fuel State" Grid.Row="4" VerticalAlignment="Center"/>

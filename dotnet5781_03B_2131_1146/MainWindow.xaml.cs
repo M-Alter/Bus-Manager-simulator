@@ -118,7 +118,7 @@ namespace dotnet5781_03B_2131_1146
             thread = new Thread(() =>
             {
                 currentBus.Gas = 0;
-                for (int i = 12; i > 0; i--)
+                for (int i = 13; i > 0; i--)
                 {
                     Thread.Sleep(1000);
                     currentBus.Gas += 100;
@@ -131,7 +131,7 @@ namespace dotnet5781_03B_2131_1146
                 currentBus.setBusStateColor();
             });
             thread.Start();
-            
+
         }
 
         private void Service_Click(object sender, RoutedEventArgs e)
@@ -146,7 +146,6 @@ namespace dotnet5781_03B_2131_1146
             //}
             currentBus.BusState = State.SERVICING;
             currentBus.setBusStateColor();
-
             Thread thread = null;
             this.IsEnabled = false;
             thread = new Thread(() =>
@@ -154,11 +153,11 @@ namespace dotnet5781_03B_2131_1146
                 for (int i = 288; i > 0; i--)
                 {
                     Thread.Sleep(1000);
-
                     this.Dispatcher.Invoke(() =>
                     {
-                        currentBus.BusStateString = String.Format("Reday in {0}", i.ToString());
+                        currentBus.BusStateString = String.Format("Ready in {0}", i);
                     });
+
                 }
                 currentBus.BusState = State.READY;
                 currentBus.setBusStateColor();
