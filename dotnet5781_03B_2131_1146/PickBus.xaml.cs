@@ -59,10 +59,11 @@ namespace dotnet5781_03B_2131_1146
                                 MyBus.Gas += 100;
                                 this.Dispatcher.Invoke(() =>
                                 {
-                                    MyBus.BusStateString = String.Format("Reday in {0}", i.ToString());
+                                    MyBus.BusStateString = String.Format("Ready in {0}", i.ToString());
                                 });
                             }
                             MyBus.BusState = State.READY;
+                            MyBus.setDrivingValues(km);
                             MyBus.setBusStateColor();
                         });
                         thread.Start();

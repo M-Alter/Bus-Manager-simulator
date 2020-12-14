@@ -90,7 +90,10 @@ namespace dotnet5781_03B_2131_1146
             private set
             {
                 if (value > 0)
+                {
                     mileage = value;
+                    NotifyPropertyChanged();
+                }
                 else
                     Console.WriteLine("mileage cant be negative");
             }
@@ -111,7 +114,7 @@ namespace dotnet5781_03B_2131_1146
                     Console.WriteLine("you have enter an invalid gas amount");
             }
         }
-                
+
         // Getter and setter for mileageSinceService
         public int MileageSinceService
         {
@@ -119,6 +122,7 @@ namespace dotnet5781_03B_2131_1146
             private set
             {
                 serviceDetails.mileageSinceService = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -129,6 +133,7 @@ namespace dotnet5781_03B_2131_1146
             private set
             {
                 DateTime.TryParse(value, out serviceDetails.lastServiceDate);
+                NotifyPropertyChanged();
             }
         }
 
@@ -193,7 +198,7 @@ namespace dotnet5781_03B_2131_1146
 
         public void setBusState()
         {
-            if (this.Gas <= 100)
+            if ((DateTime.Today - serviceDetails.lastServiceDate).TotalDays > 365)
             {
                 this.busState = State.NOTREADY;
                 setBusStateColor();
@@ -204,12 +209,12 @@ namespace dotnet5781_03B_2131_1146
         {
             if (serviceDetails.mileageSinceService + km > 20000)
                 throw new InvalidOperationException("this bus will exceed its mileage allowance in this journey");
-            if(Gas - km < 0)
+            if (Gas - km < 0)
                 throw new InvalidOperationException("there isnt enough gas to complete this journey");
-            if((DateTime.Today - serviceDetails.lastServiceDate).TotalDays > 365)                    
+            if ((DateTime.Today - serviceDetails.lastServiceDate).TotalDays > 365)
                 throw new InvalidOperationException("The last service was more then a  year ago");
-            
-        }       
+
+        }
 
         public void setBusStateColor()
         {
@@ -238,28 +243,6 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
-
-        public void Pick(int km)
-        {
-            if (serviceDetails.mileageSinceService + km < 20000)
-            {
-                if (Gas - km > 0)
-                {
-                    if ((DateTime.Today - serviceDetails.lastServiceDate).TotalDays < 365)
-                    {
-                        busState = State.BUSY;
-                        setDrivingValues(km);
-                        Thread.Sleep(km / r.Next(20, 50) * HOUR);
-                        busState = State.READY;
-                        return;
-                    }
-                    throw new InvalidOperationException("This bus must undergo a service");
-                }
-                throw new InvalidOperationException("there isnt enough gas to complete this journey");
-            }
-            throw new InvalidOperationException("this bus will exceed its mileage allowance in this journey");
-        }
-
         // Update the values after a service
         public void Service()
         {
@@ -270,17 +253,6 @@ namespace dotnet5781_03B_2131_1146
             IsSafe = true;
             Thread.Sleep(DAY);
             Console.WriteLine("Your vehicle has been serviced successfully");
-            this.BusState = State.READY;
-        }
-        // Update the values after Refuel
-        public void Refuel()
-        {
-            this.BusState = State.REFUELING;
-
-            Gas = MAX_GAS;
-
-
-
             this.BusState = State.READY;
         }
 

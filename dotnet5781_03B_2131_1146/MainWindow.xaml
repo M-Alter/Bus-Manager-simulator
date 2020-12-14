@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotnet5781_03B_2131_1146"
         mc:Ignorable="d"
-        Title="BusWindow" Height="450" Width="800" MinWidth="500" MinHeight="300">
+        Title="BusWindow" Height="450" Width="800" MinWidth="500" MinHeight="300" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

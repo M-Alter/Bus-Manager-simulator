@@ -98,6 +98,13 @@ namespace dotnet5781_03B_2131_1146
         {
             Button button = (Button)sender;
             PickBus pick = new PickBus((Bus)button.DataContext);
+            Bus bus = (Bus)button.DataContext;
+            if (bus.BusState != State.READY)
+            {
+                MessageBox.Show("This bus can't be availeble");
+                return;
+            }
+
             pick.Show();
 
         }
@@ -106,6 +113,12 @@ namespace dotnet5781_03B_2131_1146
         {
             Button button = (Button)sender;
             Bus currentBus = (Bus)button.DataContext;
+            if (currentBus.BusState != State.READY)
+            {
+                MessageBox.Show("This bus can't be availeble");
+                return;
+            }
+
             if (currentBus.Gas == 1200)
             {
                 MessageBox.Show("This bus already refueled");
@@ -124,7 +137,7 @@ namespace dotnet5781_03B_2131_1146
                     currentBus.Gas += 100;
                     this.Dispatcher.Invoke(() =>
                     {
-                        currentBus.BusStateString = String.Format("Reday in {0}", i);
+                        currentBus.BusStateString = String.Format("Ready in {0}", i);
                     });
                 }
                 currentBus.BusState = State.READY;
@@ -138,16 +151,14 @@ namespace dotnet5781_03B_2131_1146
         {
             Button button = (Button)sender;
             Bus currentBus = (Bus)button.DataContext;
-            //
-            //if ()
-            //{
-            //    MessageBox.Show("");
-            //    return;
-            //}
+            if (currentBus.BusState != State.READY && currentBus.BusState != State.NOTREADY)
+            {
+                MessageBox.Show("This bus can't be availeble");
+                return;
+            }            
             currentBus.BusState = State.SERVICING;
             currentBus.setBusStateColor();
             Thread thread = null;
-            this.IsEnabled = false;
             thread = new Thread(() =>
             {
                 for (int i = 288; i > 0; i--)
@@ -163,9 +174,15 @@ namespace dotnet5781_03B_2131_1146
                 currentBus.setBusStateColor();
             });
             thread.Start();
-            this.IsEnabled = true;
             currentBus.Gas = 1200;
 
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }
+
+
