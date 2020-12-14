@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,7 @@ namespace dotnet5781_03B_2131_1146
     public partial class PickBus : Window
     {
         private Bus MyBus;
+        private static Random r = new Random();
         public PickBus(Bus myBus)
         {
             InitializeComponent();
@@ -39,7 +41,32 @@ namespace dotnet5781_03B_2131_1146
                     this.Close();
                     try
                     {
-                        MyBus.Pick(int.Parse(text.Text));
+                        //MyBus.Pick(int.Parse(text.Text));
+                        int km = int.Parse(text.Text);
+                        MyBus.IsReadyToPick(km);
+
+
+                        MyBus.BusState = State.BUSY;
+                        MyBus.setBusStateColor();
+
+                        Thread thread = null;
+                        thread = new Thread(() =>
+                        {
+                            MyBus.Gas = 0;
+                            for (int i = (km / r.Next(20, 50) * 6); i > 0; i--)
+                            {
+                                Thread.Sleep(1000);
+                                MyBus.Gas += 100;
+                                this.Dispatcher.Invoke(() =>
+                                {
+                                    MyBus.BusStateString = String.Format("Reday in {0}", i.ToString());
+                                });
+                            }
+                            MyBus.BusState = State.READY;
+                            MyBus.setBusStateColor();
+                        });
+                        thread.Start();
+
                     }
                     catch (Exception ex)
                     {

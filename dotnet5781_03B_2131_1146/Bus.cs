@@ -111,7 +111,7 @@ namespace dotnet5781_03B_2131_1146
                     Console.WriteLine("you have enter an invalid gas amount");
             }
         }
-
+                
         // Getter and setter for mileageSinceService
         public int MileageSinceService
         {
@@ -200,12 +200,23 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
+        public void IsReadyToPick(int km)
+        {
+            if (serviceDetails.mileageSinceService + km > 20000)
+                throw new InvalidOperationException("this bus will exceed its mileage allowance in this journey");
+            if(Gas - km < 0)
+                throw new InvalidOperationException("there isnt enough gas to complete this journey");
+            if((DateTime.Today - serviceDetails.lastServiceDate).TotalDays > 365)                    
+                throw new InvalidOperationException("The last service was more then a  year ago");
+            
+        }       
+
         public void setBusStateColor()
         {
             switch (BusState)
             {
                 case State.READY:
-                    BusStateColor = "Green";
+                    BusStateColor = "LawnGreen";
                     BusStateString = "Ready";
                     break;
                 case State.BUSY:

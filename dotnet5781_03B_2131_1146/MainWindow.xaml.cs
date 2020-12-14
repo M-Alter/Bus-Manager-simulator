@@ -96,7 +96,8 @@ namespace dotnet5781_03B_2131_1146
 
         private void Pick_Click(object sender, RoutedEventArgs e)
         {
-            PickBus pick = new PickBus((Bus)lvBuses.SelectedItem);
+            Button button = (Button)sender;
+            PickBus pick = new PickBus((Bus)button.DataContext);
             pick.Show();
 
         }
@@ -112,7 +113,7 @@ namespace dotnet5781_03B_2131_1146
             }
             currentBus.BusState = State.REFUELING;
             currentBus.setBusStateColor();
-
+            
             Thread thread = null;
             thread = new Thread(() =>
             {
@@ -123,7 +124,7 @@ namespace dotnet5781_03B_2131_1146
                     currentBus.Gas += 100;
                     this.Dispatcher.Invoke(() =>
                     {
-                        currentBus.BusStateString = String.Format("Reday in {0}", i.ToString());
+                        currentBus.BusStateString = String.Format("Reday in {0}", i);
                     });
                 }
                 currentBus.BusState = State.READY;
