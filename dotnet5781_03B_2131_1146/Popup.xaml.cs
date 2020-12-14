@@ -94,7 +94,7 @@ namespace dotnet5781_03B_2131_1146
             Thread thread = null;
             thread = new Thread(() =>
             {
-                for (int i = 288; i > 0; i--)
+                for (int i = 144; i > 0; i--)
                 {
                     Thread.Sleep(1000);
                     this.Dispatcher.Invoke(() =>
