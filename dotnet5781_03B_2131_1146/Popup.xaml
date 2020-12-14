@@ -43,12 +43,14 @@
             <Ellipse x:Name="BusState"  Height="15" Width="15" HorizontalAlignment="Left" Fill="{Binding BusStateColor}"/>
             <TextBlock x:Name="isReady" Width="100" Text="{Binding BusStateString}"/>
         </WrapPanel>
-        <WrapPanel Grid.Row="6" Margin="3" HorizontalAlignment="Center">
-        <Button x:Name="Pick" Content="Pick" Grid.Row="7" Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Pick_Click" >
-        </Button>
-        <Button x:Name="Refuel" Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Refuel_Click" >
-                <Image Source="https://png.pngtree.com/png-vector/20190302/ourlarge/pngtree-vector-fuel-station-icon-png-image_745318.jpg" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <WrapPanel Grid.Row="6" Grid.Column="1" Margin="3" HorizontalAlignment="Center">
+            <Button x:Name="Refuel" Content="Refuel" Height="30" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Refuel_Click" >
             </Button>
+            <Button Visibility="Hidden" Width="20"/>
+            <Button x:Name="Service" Content="Service" Height="30" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Service_Click" />
+            <Button Visibility="Hidden" Width="20"/>
+            <Button x:Name="Pick" Content="Pick" Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Pick_Click"/>
+
         </WrapPanel>
     </Grid>
 </Window>

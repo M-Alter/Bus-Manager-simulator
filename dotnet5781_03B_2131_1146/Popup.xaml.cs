@@ -25,45 +25,21 @@ namespace dotnet5781_03B_2131_1146
             {
                 FuelBar.Foreground = Brushes.LightGreen;
             }
-            //PBarValue.DataContext = myBus.Gas;
-            //PBarValue.Text = myBus.Gas;
+
             myBus.setBusStateColor();
-            //switch (myBus.BusState)
-            //{
-            //    case State.READY:
-            //        BusState.Fill = Brushes.LawnGreen;
-            //        break;
-            //    case State.BUSY:
-            //        BusState.Fill = Brushes.Red;
-            //        break;
-            //    case State.REFUELING:
-            //        BusState.Fill = Brushes.Orange;
-            //        break;
-            //    case State.SERVICING:
-            //        BusState.Fill = Brushes.Gray;
-            //        break;
-            //    default:
-            //        break;
-            //}
 
         }
-
-
 
         private void Refuel_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             Bus currentBus = (Bus)button.DataContext;
-            if (currentBus.BusState == State.BUSY)
+            if (currentBus.BusState != State.READY)
             {
-                MessageBox.Show("Bus can't be refueled while driving");
+                MessageBox.Show("This bus can't be availeble");
                 return;
             }
-            if (currentBus.BusState == State.REFUELING || currentBus.BusState == State.SERVICING)
-            {
-                MessageBox.Show("Bus can't be refueled now");
-                return;
-            }
+
             if (currentBus.Gas == 1200)
             {
                 MessageBox.Show("This bus already refueled");
@@ -73,36 +49,65 @@ namespace dotnet5781_03B_2131_1146
             currentBus.setBusStateColor();
 
             Thread thread = null;
-            this.IsEnabled = false;
             thread = new Thread(() =>
             {
-                currentBus.Gas = 100;
-                this.Dispatcher.Invoke(() =>
-                {
-                    FuelBar.Foreground = Brushes.LightGreen;
-                });
-                for (int i = 11; i > 0; i--)
+                currentBus.Gas = 0;
+                for (int i = 13; i > 0; i--)
                 {
                     Thread.Sleep(1000);
                     currentBus.Gas += 100;
                     this.Dispatcher.Invoke(() =>
                     {
-                        currentBus.BusStateString = String.Format("Reday in {0}", i.ToString());
+                        currentBus.BusStateString = String.Format("Ready in {0}", i);
                     });
                 }
                 currentBus.BusState = State.READY;
                 currentBus.setBusStateColor();
             });
             thread.Start();
-            this.IsEnabled = true;
-
-
         }
 
         private void Pick_Click(object sender, RoutedEventArgs e)
         {
-            PickBus pick = new PickBus(myBus);
+            Button button = (Button)sender;
+            PickBus pick = new PickBus((Bus)button.DataContext);
+            Bus bus = (Bus)button.DataContext;
+            if (bus.BusState != State.READY)
+            {
+                MessageBox.Show("This bus can't be availeble");
+                return;
+            }
             pick.Show();
+        }
+
+        private void Service_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            Bus currentBus = (Bus)button.DataContext;
+            if (currentBus.BusState != State.READY && currentBus.BusState != State.NOTREADY)
+            {
+                MessageBox.Show("This bus can't be availeble");
+                return;
+            }
+            currentBus.BusState = State.SERVICING;
+            currentBus.setBusStateColor();
+            Thread thread = null;
+            thread = new Thread(() =>
+            {
+                for (int i = 288; i > 0; i--)
+                {
+                    Thread.Sleep(1000);
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        currentBus.BusStateString = String.Format("Ready in {0}", i);
+                    });
+
+                }
+                currentBus.BusState = State.READY;
+                currentBus.setBusStateColor();
+            });
+            thread.Start();
+            currentBus.Gas = 1200;
         }
     }
 }

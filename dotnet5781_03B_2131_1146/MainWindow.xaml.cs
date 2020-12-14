@@ -88,12 +88,6 @@ namespace dotnet5781_03B_2131_1146
             addbus.Show();
         }
 
-        private void Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            lvBuses.Items.Refresh();
-        }
-
-
         private void Pick_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -104,9 +98,7 @@ namespace dotnet5781_03B_2131_1146
                 MessageBox.Show("This bus can't be availeble");
                 return;
             }
-
             pick.Show();
-
         }
 
         private void Refuel_Click(object sender, RoutedEventArgs e)
@@ -144,7 +136,6 @@ namespace dotnet5781_03B_2131_1146
                 currentBus.setBusStateColor();
             });
             thread.Start();
-
         }
 
         private void Service_Click(object sender, RoutedEventArgs e)
@@ -155,7 +146,7 @@ namespace dotnet5781_03B_2131_1146
             {
                 MessageBox.Show("This bus can't be availeble");
                 return;
-            }            
+            }
             currentBus.BusState = State.SERVICING;
             currentBus.setBusStateColor();
             Thread thread = null;
@@ -175,7 +166,6 @@ namespace dotnet5781_03B_2131_1146
             });
             thread.Start();
             currentBus.Gas = 1200;
-
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
