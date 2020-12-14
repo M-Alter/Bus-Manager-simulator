@@ -52,11 +52,9 @@ namespace dotnet5781_03B_2131_1146
                         Thread thread = null;
                         thread = new Thread(() =>
                         {
-                            MyBus.Gas = 0;
                             for (int i = (km / r.Next(20, 50) * 6); i > 0; i--)
                             {
                                 Thread.Sleep(1000);
-                                MyBus.Gas += 100;
                                 this.Dispatcher.Invoke(() =>
                                 {
                                     MyBus.BusStateString = String.Format("Ready in {0}", i.ToString());

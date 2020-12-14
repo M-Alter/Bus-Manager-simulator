@@ -27,23 +27,24 @@ namespace dotnet5781_03B_2131_1146
             }
             //PBarValue.DataContext = myBus.Gas;
             //PBarValue.Text = myBus.Gas;
-            switch (myBus.BusState)
-            {
-                case State.READY:
-                    BusState.Fill = Brushes.LawnGreen;
-                    break;
-                case State.BUSY:
-                    BusState.Fill = Brushes.Red;
-                    break;
-                case State.REFUELING:
-                    BusState.Fill = Brushes.Orange;
-                    break;
-                case State.SERVICING:
-                    BusState.Fill = Brushes.Gray;
-                    break;
-                default:
-                    break;
-            }
+            myBus.setBusStateColor();
+            //switch (myBus.BusState)
+            //{
+            //    case State.READY:
+            //        BusState.Fill = Brushes.LawnGreen;
+            //        break;
+            //    case State.BUSY:
+            //        BusState.Fill = Brushes.Red;
+            //        break;
+            //    case State.REFUELING:
+            //        BusState.Fill = Brushes.Orange;
+            //        break;
+            //    case State.SERVICING:
+            //        BusState.Fill = Brushes.Gray;
+            //        break;
+            //    default:
+            //        break;
+            //}
 
         }
 

@@ -5,15 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotnet5781_03B_2131_1146"
         mc:Ignorable="d"
-        Title="BusWindow" Height="450" Width="800" MinWidth="500" MinHeight="300" Closing="Window_Closing">
+        Title="Bus Window" Icon="Bus.ico" Height="450" Width="800" MinWidth="500" MinHeight="300" Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
             <Button x:Name="AddBusbtn" Height="25" Width=" 75" Margin=" 20,0" HorizontalAlignment="Left" Click="AddBusbtn_Click">Add Bus</Button>
-        <Button x:Name="RemoveBubtns" Height="25" Width=" 75" Content="Remove Bus" HorizontalAlignment="Left" Margin="150,0"/>
-        <Button x:Name="Refresh" Height="25" Width=" 75" Content="Refresh" HorizontalAlignment="Left" Margin="250,0" Click="Refresh_Click"/>
         <ListView x:Name="lvBuses" Grid.Row="1"  Margin="10,10,10,10" ItemsSource="{Binding}" MouseDoubleClick="lvBuses_MouseDoubleClick" >
             <ListView.ItemTemplate>
                 <DataTemplate>
