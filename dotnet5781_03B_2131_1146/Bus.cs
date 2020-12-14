@@ -26,7 +26,7 @@ namespace dotnet5781_03B_2131_1146
         private int gas;
 
         private State busState = State.READY;
-        private String busStateColor = "Green";
+        private String busStateColor = "LawnGreen";
         private String busStateString = "Ready";
         private bool isSafe = true;
         static Random r = new Random(DateTime.Now.Millisecond);
