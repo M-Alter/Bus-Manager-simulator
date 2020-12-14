@@ -117,13 +117,13 @@ namespace dotnet5781_03B_2131_1146
             thread = new Thread(() =>
             {
                 currentBus.Gas = 0;
-                for (int i = 12; i > 0; i--)
+                for (int i = 13; i > 0; i--)
                 {
                     Thread.Sleep(1000);
                     currentBus.Gas += 100;
                     this.Dispatcher.Invoke(() =>
                     {
-                        currentBus.BusStateString = String.Format("Reday in {0}", i.ToString());
+                        currentBus.BusStateString = String.Format("Reday in {0}", (i-1).ToString());
                     });
                 }
                 currentBus.BusState = State.READY;

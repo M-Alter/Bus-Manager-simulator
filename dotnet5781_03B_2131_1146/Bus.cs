@@ -205,7 +205,7 @@ namespace dotnet5781_03B_2131_1146
             switch (BusState)
             {
                 case State.READY:
-                    BusStateColor = "Green";
+                    BusStateColor = "LawnGreen";
                     BusStateString = "Ready";
                     break;
                 case State.BUSY:
