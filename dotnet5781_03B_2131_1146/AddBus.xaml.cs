@@ -91,7 +91,7 @@ namespace dotnet5781_03B_2131_1146
                 {
                     if (serviceDate == default(DateTime))
                     {
-                        MainWindow.buses.Add(new Bus(reg, beginDate, milege, gas, beginDate));
+                        MainWindow.buses.Add(new Bus(reg, beginDate, milege, gas, DateTime.Today));
                     }
                     else
                     {

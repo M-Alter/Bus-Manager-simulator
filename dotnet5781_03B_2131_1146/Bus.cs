@@ -195,14 +195,21 @@ namespace dotnet5781_03B_2131_1146
             Gas -= value;
             MileageSinceService += value;
         }
+        // Update the values after servicing
+        public void setServicingValue()
+        {
+            Gas = 1200;
+            MileageSinceService = 0;
+            ServiceDate = DateTime.Today.ToShortDateString();
+        }
 
         public void setBusState()
         {
-            if ((DateTime.Today - serviceDetails.lastServiceDate).TotalDays > 365)
-            {
-                this.busState = State.NOTREADY;
-                setBusStateColor();
-            }
+            if ((DateTime.Today - serviceDetails.lastServiceDate).TotalDays > 365 || Gas == 0)
+                this.busState = State.NOTREADY;             
+            else
+                this.busState = State.READY;
+            setBusStateColor();
         }
 
         public void IsReadyToPick(int km)

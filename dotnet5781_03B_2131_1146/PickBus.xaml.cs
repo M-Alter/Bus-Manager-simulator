@@ -60,9 +60,8 @@ namespace dotnet5781_03B_2131_1146
                                     MyBus.BusStateString = String.Format("Ready in {0}", i.ToString());
                                 });
                             }
-                            MyBus.BusState = State.READY;
                             MyBus.setDrivingValues(km);
-                            MyBus.setBusStateColor();
+                            MyBus.setBusState();
                         });
                         thread.Start();
 

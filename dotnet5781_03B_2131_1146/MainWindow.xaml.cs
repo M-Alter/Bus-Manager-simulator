@@ -132,8 +132,7 @@ namespace dotnet5781_03B_2131_1146
                         currentBus.BusStateString = String.Format("Ready in {0}", i);
                     });
                 }
-                currentBus.BusState = State.READY;
-                currentBus.setBusStateColor();
+                currentBus.setBusState();
             });
             thread.Start();
         }
@@ -161,11 +160,11 @@ namespace dotnet5781_03B_2131_1146
                     });
 
                 }
-                currentBus.BusState = State.READY;
-                currentBus.setBusStateColor();
+                currentBus.setServicingValue();
+                currentBus.setBusState();
             });
             thread.Start();
-            currentBus.Gas = 1200;
+
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
