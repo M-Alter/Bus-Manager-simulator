@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace dotnet5781_03B_2131_1146
@@ -49,13 +50,50 @@ namespace dotnet5781_03B_2131_1146
 
         private void Refuel_Click(object sender, RoutedEventArgs e)
         {
-            new Thread(() =>
+            Button button = (Button)sender;
+            Bus currentBus = (Bus)button.DataContext;
+            if (currentBus.BusState == State.BUSY)
             {
-                myBus.Refuel();
-            }).Start();
+                MessageBox.Show("Bus can't be refueled while driving");
+                return;
+            }
+            if (currentBus.BusState == State.REFUELING || currentBus.BusState == State.SERVICING)
+            {
+                MessageBox.Show("Bus can't be refueled now");
+                return;
+            }
+            if (currentBus.Gas == 1200)
+            {
+                MessageBox.Show("This bus already refueled");
+                return;
+            }
+            currentBus.BusState = State.REFUELING;
+            currentBus.setBusStateColor();
 
-            FuelBar.Value = myBus.Gas;
-            FuelBar.Foreground = Brushes.LightGreen;
+            Thread thread = null;
+            this.IsEnabled = false;
+            thread = new Thread(() =>
+            {
+                currentBus.Gas = 120;
+                this.Dispatcher.Invoke(() =>
+                {
+                    FuelBar.Foreground = Brushes.LightGreen;
+                });
+                for (int i = 11; i > 0; i--)
+                {
+                    Thread.Sleep(1000);
+                    currentBus.Gas += 100;
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        currentBus.BusStateString = String.Format("Reday in {0}", i.ToString());
+                    });
+                }
+                currentBus.BusState = State.READY;
+                currentBus.setBusStateColor();
+            });
+            thread.Start();
+            this.IsEnabled = true;
+
 
         }
 

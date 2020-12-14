@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace dotnet5781_03B_2131_1146
 {
@@ -12,7 +14,7 @@ namespace dotnet5781_03B_2131_1146
     {
         private static Random r = new Random();
         public static ObservableCollection<Bus> buses;
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -101,30 +103,69 @@ namespace dotnet5781_03B_2131_1146
 
         private void Refuel_Click(object sender, RoutedEventArgs e)
         {
-            Bus currentBus = (Bus)lvBuses.SelectedItem;
-            if(currentBus.Gas == 1200)
+            Button button = (Button)sender;
+            Bus currentBus = (Bus)button.DataContext;
+            if (currentBus.Gas == 1200)
             {
                 MessageBox.Show("This bus already refueled");
                 return;
             }
             currentBus.BusState = State.REFUELING;
             currentBus.setBusStateColor();
+
             Thread thread = null;
             thread = new Thread(() =>
             {
+                currentBus.Gas = 0;
                 for (int i = 12; i > 0; i--)
                 {
                     Thread.Sleep(1000);
+                    currentBus.Gas += 100;
                     this.Dispatcher.Invoke(() =>
                     {
-                        currentBus.BusStateString = String.Format("Reday in {0}", i.ToString());                        
+                        currentBus.BusStateString = String.Format("Reday in {0}", i.ToString());
                     });
                 }
                 currentBus.BusState = State.READY;
                 currentBus.setBusStateColor();
             });
             thread.Start();
+            
+        }
+
+        private void Service_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            Bus currentBus = (Bus)button.DataContext;
+            //
+            //if ()
+            //{
+            //    MessageBox.Show("");
+            //    return;
+            //}
+            currentBus.BusState = State.SERVICING;
+            currentBus.setBusStateColor();
+
+            Thread thread = null;
+            this.IsEnabled = false;
+            thread = new Thread(() =>
+            {
+                for (int i = 288; i > 0; i--)
+                {
+                    Thread.Sleep(1000);
+
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        currentBus.BusStateString = String.Format("Reday in {0}", i.ToString());
+                    });
+                }
+                currentBus.BusState = State.READY;
+                currentBus.setBusStateColor();
+            });
+            thread.Start();
+            this.IsEnabled = true;
             currentBus.Gas = 1200;
+
         }
     }
 }
