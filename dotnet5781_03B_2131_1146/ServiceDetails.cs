@@ -9,6 +9,6 @@ namespace dotnet5781_03B_2131_1146
     struct ServiceDetails
     {
         public DateTime lastServiceDate;
-        public int mileageSinceService;
+        public float mileageSinceService;
     }
 }

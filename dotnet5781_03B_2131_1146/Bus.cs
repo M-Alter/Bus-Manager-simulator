@@ -21,8 +21,8 @@ namespace dotnet5781_03B_2131_1146
         private readonly DateTime beginDate;
         private ServiceDetails serviceDetails;
 
-        private int mileage;
-        private int gas;
+        private float mileage;
+        private float gas;
 
         private State busState = State.READY;
         private String busStateColor = "LawnGreen";
@@ -59,18 +59,26 @@ namespace dotnet5781_03B_2131_1146
         #endregion
 
         #region Properties
-        // Getter for beginDate
+        
+        /// <summary>
+        /// get the Begin date of the bus
+        /// </summary>
         public string BeginDate
         {
             get => beginDate.ToShortDateString();
         }
 
-        //Getter for reg
+        /// <summary>
+        /// getter for the reg
+        /// </summary>
         public int Reg
         {
             get => reg;
         }
 
+        /// <summary>
+        /// returns the reg as a string type
+        /// </summary>
         public string RegString
         {
             get
@@ -83,8 +91,11 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
-        // Getter and setter for mileage
-        public int Mileage
+
+        /// <summary>
+        /// Getter and setter for mileage
+        /// </summary>
+        public float Mileage
         {
             get => mileage;
             private set
@@ -98,9 +109,11 @@ namespace dotnet5781_03B_2131_1146
                     Console.WriteLine("mileage cant be negative");
             }
         }
-
-        // Getter and setter for gas
-        public int Gas
+        
+        /// <summary>
+        /// Getter and setter for gas
+        /// </summary>
+        public float Gas
         {
             get => gas;
             set
@@ -115,8 +128,10 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
-        // Getter and setter for mileageSinceService
-        public int MileageSinceService
+        /// <summary>
+        /// Getter and setter for mileageSinceService
+        /// </summary>
+        public float MileageSinceService
         {
             get => serviceDetails.mileageSinceService;
             private set
@@ -126,7 +141,9 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
-        // Getter and setter for the last service date
+        /// <summary>
+        /// Getter and setter for the last service date
+        /// </summary>
         public String ServiceDate
         {
             get => serviceDetails.lastServiceDate.ToShortDateString();
@@ -137,10 +154,12 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
-        //bus stete
+        /// <summary>
+        /// get and set the current State of the bus
+        /// </summary>
         public State BusState
         {
-            get { return busState; }
+            get => busState; 
             set
             {
                 busState = value;
@@ -148,9 +167,12 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
+        /// <summary>
+        /// set ang get the colour of the current state of the bus
+        /// </summary>
         public String BusStateColor
         {
-            get { return busStateColor; }
+            get => busStateColor;
             set
             {
                 busStateColor = value;
@@ -158,9 +180,12 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
+        /// <summary>
+        /// current state of the bus in words
+        /// </summary>
         public String BusStateString
         {
-            get { return busStateString; }
+            get => busStateString;
             set
             {
                 busStateString = value;
@@ -168,34 +193,24 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
-        // Getter and setter for isSafe
-        public bool IsSafe
-        {
-            get
-            {
-                if ((DateTime.Now - serviceDetails.lastServiceDate).TotalDays > 365)
-                {
-                    this.isSafe = false;
-                }
-                return this.isSafe;
-            }
-            private set
-            {
-                isSafe = value;
-            }
-        }
-
         #endregion
 
         #region Methods
-        // Update the values after driving 
+        
+        /// <summary>
+        /// updates the respected fields after a ride 
+        /// </summary>
+        /// <param name="value"></param>
         public void setDrivingValues(int value)
         {
             Mileage += value;
             Gas -= value;
             MileageSinceService += value;
         }
-        // Update the values after servicing
+        
+        /// <summary>
+        /// after a service updates the values respective to the service
+        /// </summary>
         public void setServicingValue()
         {
             Gas = 1200;
@@ -203,6 +218,9 @@ namespace dotnet5781_03B_2131_1146
             ServiceDate = DateTime.Today.ToShortDateString();
         }
 
+        /// <summary>
+        /// checks the bus and provides it with it state
+        /// </summary>
         public void setBusState()
         {
             if ((DateTime.Today - serviceDetails.lastServiceDate).TotalDays > 365 || Gas == 0)
@@ -212,6 +230,10 @@ namespace dotnet5781_03B_2131_1146
             setBusStateColor();
         }
 
+        /// <summary>
+        /// throws an exception if the bus can't make the journey
+        /// </summary>
+        /// <param name="km"></param>
         public void IsReadyToPick(int km)
         {
             if (serviceDetails.mileageSinceService + km > 20000)
@@ -223,6 +245,9 @@ namespace dotnet5781_03B_2131_1146
 
         }
 
+        /// <summary>
+        /// returns a colour respective to the state
+        /// </summary>
         public void setBusStateColor()
         {
             switch (BusState)
@@ -250,20 +275,10 @@ namespace dotnet5781_03B_2131_1146
             }
         }
 
-        // Update the values after a service
-        public void Service()
-        {
-            this.BusState = State.SERVICING;
-            serviceDetails.lastServiceDate = DateTime.Today;
-            serviceDetails.mileageSinceService = 0;
-            Gas = MAX_GAS;
-            IsSafe = true;
-            Thread.Sleep(DAY);
-            Console.WriteLine("Your vehicle has been serviced successfully");
-            this.BusState = State.READY;
-        }
-
-        // Print bus details in requiered format 
+        /// <summary>
+        /// Print bus details in requiered format 
+        /// </summary>
+        /// <returns>a string in the required format</returns>
         public override string ToString()
         {
             if (beginDate.Year < 2018)
@@ -272,6 +287,10 @@ namespace dotnet5781_03B_2131_1146
                 return String.Format("{0}, {1}", reg.ToString("000-00-000"), beginDate.ToShortDateString());
         }
 
+        /// <summary>
+        /// gets the name of the property automatically and updates the UI if changed
+        /// </summary>
+        /// <param name="propertyName"></param>
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             if (PropertyChanged != null)

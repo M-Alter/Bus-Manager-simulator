@@ -24,6 +24,11 @@ namespace dotnet5781_03B_2131_1146
             InitializeComponent();
         }
 
+        /// <summary>
+        /// event handler if the save button is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addSave_Click(object sender, RoutedEventArgs e)
         {
             bool flag = true;
@@ -97,8 +102,8 @@ namespace dotnet5781_03B_2131_1146
                     {
                         MainWindow.buses.Add(new Bus(reg, beginDate, milege, gas, serviceDate));
                     }    
-                    MessageBox.Show("The bus added succesfuly");
                     this.Close();
+                    MessageBox.Show("The bus added succesfuly");
                     break;
                 }
                 catch (Exception  ex)            
@@ -106,10 +111,14 @@ namespace dotnet5781_03B_2131_1146
                     MessageBox.Show(ex.Message);
                     flag = false; continue;
                 }
-            }
-                      
+            }            
         }
 
+        /// <summary>
+        /// event handler if the cancel button is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

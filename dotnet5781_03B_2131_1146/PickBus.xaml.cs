@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace dotnet5781_03B_2131_1146
 {
@@ -28,12 +19,17 @@ namespace dotnet5781_03B_2131_1146
             MyBus = myBus;
         }
 
+        /// <summary>
+        /// event hanlder when a key is pressed down, it checks a if the key pressed is a number
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Distance_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             TextBox text = sender as TextBox;
             if (text == null) return;
             if (e == null) return;
-
+            //if the key pressed is enter
             if (e.Key == Key.Enter || e.Key == Key.Return)
             {
                 if (text.Text.Length > 0)
@@ -41,14 +37,12 @@ namespace dotnet5781_03B_2131_1146
                     this.Close();
                     try
                     {
-                        //MyBus.Pick(int.Parse(text.Text));
                         int km = int.Parse(text.Text);
+                        //make sure 
                         MyBus.IsReadyToPick(km);
-
-
                         MyBus.BusState = State.BUSY;
                         MyBus.setBusStateColor();
-
+                        //thread that puts the bus to sleep whilst the ride is going
                         Thread thread = null;
                         thread = new Thread(() =>
                         {
@@ -64,7 +58,6 @@ namespace dotnet5781_03B_2131_1146
                             MyBus.setBusState();
                         });
                         thread.Start();
-
                     }
                     catch (Exception ex)
                     {
@@ -74,6 +67,7 @@ namespace dotnet5781_03B_2131_1146
                 e.Handled = true;
                 return;
             }
+            //if the pressed key is a function key then ignore the event
             if (e.Key == Key.Escape || e.Key == Key.Tab || e.Key == Key.Back
                 || e.Key == Key.Delete || e.Key == Key.CapsLock ||
                 e.Key == Key.LeftShift || e.Key == Key.RightShift ||
