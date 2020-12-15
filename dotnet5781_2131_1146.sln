@@ -13,6 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet5781_03A_2131_1146", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet5781_03B_2131_1146", "dotnet5781_03B_2131_1146\dotnet5781_03B_2131_1146.csproj", "{E18CF8C4-FAF2-4FA1-BBD5-BE9D81489EFD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3342B27A-FA4E-4554-9EC7-4C0D708366C1}"
+	ProjectSection(SolutionItems) = preProject
+		dotnet5781_03B_2131_1146\שימוש בThread  בתרגיל 3B.docx = dotnet5781_03B_2131_1146\שימוש בThread  בתרגיל 3B.docx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
