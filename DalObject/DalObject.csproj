@@ -39,6 +39,7 @@
     <Compile Include="Bus.cs" />
     <Compile Include="BusOnTrip.cs" />
     <Compile Include="BusStatus.cs" />
+    <Compile Include="Station.cs" />
     <Compile Include="Trip.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
