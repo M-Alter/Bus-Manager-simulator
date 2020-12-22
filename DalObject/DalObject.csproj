@@ -36,6 +36,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bus.cs" />
+    <Compile Include="BusStatus.cs" />
     <Compile Include="Trip.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
