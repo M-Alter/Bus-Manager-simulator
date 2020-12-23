@@ -39,5 +39,8 @@
     <Folder Include="BlApi\" />
     <Folder Include="BO\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IBL.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

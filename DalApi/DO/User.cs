@@ -8,16 +8,19 @@ namespace DO
 {
     class User
     {
+
+
+        #region Fields
         private string userName;
         private string password;
+        #endregion
 
-
+        #region Properties
         public string UserName
         {
             get { return userName; }
             set { userName = value; }
         }
-
 
         public string Password
         {
@@ -26,6 +29,7 @@ namespace DO
         }
 
         public bool Admin { get; set; }
+        #endregion
 
     }
 }

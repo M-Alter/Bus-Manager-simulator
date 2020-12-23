@@ -35,10 +35,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="DalApi\" />
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="DalApi\IDL.cs" />
     <Compile Include="DO\Bus.cs" />
     <Compile Include="DO\BusOnTrip.cs" />
     <Compile Include="DO\BusStatus.cs" />

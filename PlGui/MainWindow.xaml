@@ -12,6 +12,6 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button x:Name="UserBtn" Content="User" Height="30" Width="90"/>
-        <Button x:Name="AdminBtn" Content="Admin" Height="30" Width="90" Grid.Column="1"/>
+        <Button x:Name="AdminBtn" Content="Admin" Height="30" Width="90" Grid.Column="1" Click="AdminBtn_Click"/>
     </Grid>
 </Window>

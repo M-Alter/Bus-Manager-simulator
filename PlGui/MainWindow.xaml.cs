@@ -24,5 +24,10 @@ namespace PlGui
         {
             InitializeComponent();
         }
+
+        private void AdminBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
