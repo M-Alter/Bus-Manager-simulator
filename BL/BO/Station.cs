@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DO
+namespace BL.BO
 {
-    public class Station
+    class Station
     {
         #region Fields
         private int code;
@@ -40,6 +40,5 @@ namespace DO
             set { lattitude = value; }
         }
         #endregion
-
     }
 }

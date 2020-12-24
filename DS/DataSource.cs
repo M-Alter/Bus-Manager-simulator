@@ -12,6 +12,7 @@ namespace DS
     {
         public static List<Bus> BusList;
         public static List<Station> StationList;
+        public static List<Trip> TripList;
 
         /// <summary>
         /// C'tor that runs before an instance is created
@@ -25,6 +26,7 @@ namespace DS
         {
             BusList = new List<Bus>();
             StationList = new List<Station>();
+            TripList = new List<Trip>();
         }
     }
 }

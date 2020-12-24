@@ -37,9 +37,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BlApi\" />
-    <Folder Include="BO\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BO\Bus.cs" />
+    <Compile Include="BO\Enums.cs" />
+    <Compile Include="BO\Station.cs" />
     <Compile Include="IBL.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
