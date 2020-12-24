@@ -14,7 +14,7 @@ namespace BO
         private int longitude;
         private int lattitude;
         #endregion
-
+        
         #region Properties
         public int Code
         {
@@ -40,6 +40,7 @@ namespace BO
             set { lattitude = value; }
         }
 
+        //public IEnumerable<Line> LinesAtStation { get; set; }
 
         #endregion
     }
