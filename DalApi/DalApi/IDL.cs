@@ -13,6 +13,7 @@ namespace DalApi
         IEnumerable<Bus> GetAllBuses();
         IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate);
         Bus GetBus(int licenseNum);
+        void AddBus(Bus bus);
         void DeleteBus(int licenseNum);
         void UpdateBus();
         #endregion
@@ -20,6 +21,7 @@ namespace DalApi
         #region Station
         IEnumerable<Station> GetAllStations();
         IEnumerable<Station> GetAllStationsThat(Predicate<Station> predicate);
+        void AddStation(Station station);
         Station GetStation(int code);
         void DeleteStation(int code);
         #endregion

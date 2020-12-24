@@ -31,6 +31,19 @@ namespace DL
             return buses.AsEnumerable();
         }
 
+        public void AddBus(Bus bus)
+        {
+            foreach (var busItem in DataSource.BusList)
+            {
+                if (busItem.LicenseNum == bus.LicenseNum)
+                {
+                    //throw
+                }
+            }
+
+            DataSource.BusList.Add(bus);
+        }
+
         public Bus GetBus(int licenseNum)
         {
             Bus bus = DataSource.BusList.Find(b => b.LicenseNum == licenseNum);
@@ -71,16 +84,41 @@ namespace DL
         {
             throw new NotImplementedException();
         }
+        public void AddStation(Station station)
+        {
+            foreach (var stationItem in DataSource.StationList)
+            {
+                if (stationItem.Code == station.Code)
+                {
+                    //throw
+                }
+            }
+
+            DataSource.StationList.Add(station);
+        }
 
         public Station GetStation(int code)
         {
-            throw new NotImplementedException();
+            Station result = DataSource.StationList.Find(s => s.Code == code);
+
+          //  if (result != null)
+            {
+                return result;
+            }
+           // throw
         }
 
         public void DeleteStation(int code)
         {
-            throw new NotImplementedException();
+            Station result = DataSource.StationList.Find(s => s.Code == code);
+
+              if (result != null)
+            {
+                DataSource.StationList.Remove(result);
+            }
+            // throw
         }
+
         #endregion
     }
 }
