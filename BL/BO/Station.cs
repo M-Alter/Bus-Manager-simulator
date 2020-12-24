@@ -39,6 +39,8 @@ namespace BO
             get { return lattitude; }
             set { lattitude = value; }
         }
+
+
         #endregion
     }
 }
