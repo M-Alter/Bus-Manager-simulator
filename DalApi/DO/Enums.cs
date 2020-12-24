@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    public enum BusStatus
+    public class Enums
     {
-        READY, NOTREADY
+        public enum BusStatus { READY, NOTREADY }
+
+        public enum Areas { }
     }
 }

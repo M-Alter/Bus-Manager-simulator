@@ -4,49 +4,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DalApi.DO
+namespace DO
 {
     public class Line
     {
         #region Fields
-        private int lineID;
-        private int station;
-        private int lineStationIndex;
-        private int prevStation;
-        private int nextStation;
+        private int id;
+        private int code;
+        private Enums.Areas areas;
+        private int firstStation;
+        private int lastStation;
         #endregion
 
         #region Properties
-        public int LineId
+        public int Id
         {
-            get { return lineID; }
-            set { lineID = value; }
+            get { return id; }
+            set { id = value; }
+        }
+        public int Code
+        {
+            get { return code; }
+            set { code = value; }
         }
 
-        public int Station
+        public Enums.Areas Area
         {
-            get { return station; }
-            set { station = value; }
+            get { return areas; }
+            set { areas = value; }
         }
 
-        public int LineStationIndex
+        public int FirstStation
         {
-            get { return lineStationIndex; }
-            set { lineStationIndex = value; }
+            get { return firstStation; }
+            set { firstStation = value; }
         }
 
-        public int PrevStation
+        public int LastStation
         {
-            get { return prevStation; }
-            set { prevStation = value; }
-        }
-
-        public int NextStation
-        {
-            get { return nextStation; }
-            set { nextStation = value; }
+            get { return lastStation; }
+            set { lastStation = value; }
         }
         #endregion
-
     }
 }

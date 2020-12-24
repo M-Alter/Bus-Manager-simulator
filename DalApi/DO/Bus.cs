@@ -13,7 +13,7 @@ namespace DO
         private DateTime fromDate;
         private double totalTrip;
         private double fuelRemain;
-        private BusStatus status;
+        private Enums.BusStatus status;
         #endregion
 
         #region Properties
@@ -41,7 +41,7 @@ namespace DO
             set { fuelRemain = value; }
         }
 
-        public BusStatus Status
+        public Enums.BusStatus Status
         {
             get { return status; }
             set { status = value; }
