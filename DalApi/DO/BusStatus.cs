@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    enum BusStatus
+    public enum BusStatus
     {
         READY, NOTREADY
     }

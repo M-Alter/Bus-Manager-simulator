@@ -7,7 +7,7 @@ using DO;
 
 namespace DalApi
 {
-    interface IDL
+    public interface IDL
     {
         #region Bus
         IEnumerable<Bus> GetAllBuses();

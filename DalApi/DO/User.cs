@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    class User
+    public class User
     {
-
-
         #region Fields
         private string userName;
         private string password;

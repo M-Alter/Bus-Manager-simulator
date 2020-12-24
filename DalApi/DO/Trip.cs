@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    class Trip
+    public class Trip
     {
         #region Fields
         private int id;
