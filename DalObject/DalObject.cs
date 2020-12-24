@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace DL
 {
-    class DalObject : IDL
+    sealed class DalObject : IDL
     {
         #region singelton
         static readonly DalObject instance = new DalObject();
@@ -15,7 +15,6 @@ namespace DL
         DalObject() { } // default => private
         public static DalObject Instance { get => instance; }// The public Instance property to use
         #endregion
-
 
         #region Bus
 
