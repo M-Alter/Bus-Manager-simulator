@@ -10,29 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PlGui
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Admin.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Admin : Window
     {
-        public MainWindow()
+        public Admin()
         {
             InitializeComponent();
-        }
-
-        private void AdminBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Credentials credentials = new Credentials();
-            credentials.Show();
-
-            Admin admin = new Admin();
-            admin.Show();
-            Close();
         }
     }
 }
