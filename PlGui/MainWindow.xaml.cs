@@ -27,12 +27,13 @@ namespace PlGui
 
         private void AdminBtn_Click(object sender, RoutedEventArgs e)
         {
-            Credentials credentials = new Credentials();
-            credentials.Show();
-
-            Admin admin = new Admin();
-            admin.Show();
-            Close();
+            credentialsGrid.Visibility = Visibility.Visible;
+            
+            //Admin admin = new Admin();
+            //admin.Show();
+            //Close();
         }
+
+        
     }
 }
