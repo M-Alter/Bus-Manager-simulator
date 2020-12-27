@@ -9,9 +9,15 @@
     <Grid>
         <TabControl>
             <TabItem Header="Buses" Width="100">
-                <ListView x:Name="buseslview" Margin="20,70,20,20">
-                    
-                    
+                <ListView x:Name="buseslview" Margin="20,70,20,20" ItemsSource="{Binding}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel Visibility="Visible">
+                                <TextBlock Text="{Binding LicenseNum}"/>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
                 </ListView>
             </TabItem>
             <TabItem Header="Lines" Width="100">
