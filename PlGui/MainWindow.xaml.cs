@@ -34,6 +34,12 @@ namespace PlGui
             //Close();
         }
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Admin admin = new Admin();
+            admin.Show();
+            
+            Close();
+        }
     }
 }

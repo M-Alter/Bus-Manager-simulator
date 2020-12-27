@@ -10,6 +10,13 @@
         <TabControl>
             <TabItem Header="Buses" Width="100">
                 <DataGrid Margin="20,70,20,20">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Reg" Width="*"/>
+                        <DataGridTextColumn Header="Fuel" Width="*"/>
+                        <DataGridTextColumn Width="*"/>
+                        <DataGridTextColumn Width="*"/>
+                        
+                    </DataGrid.Columns>
                     
                 </DataGrid>
             </TabItem>
