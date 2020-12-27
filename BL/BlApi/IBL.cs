@@ -9,6 +9,7 @@ namespace BLAPI
 {
     public interface IBL
     {
+        Bus GetBus(int license);
         IEnumerable<Bus> GetAllBuses();
         IEnumerable<Station> GetAllStations();
         IEnumerable<Line> GetAllLines();

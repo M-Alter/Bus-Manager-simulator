@@ -15,7 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet5781_03B_2131_1146", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3342B27A-FA4E-4554-9EC7-4C0D708366C1}"
 	ProjectSection(SolutionItems) = preProject
-		config.xml = config.xml
 		dotnet5781_03B_2131_1146\שימוש בThread  בתרגיל 3B.docx = dotnet5781_03B_2131_1146\שימוש בThread  בתרגיל 3B.docx
 	EndProjectSection
 EndProject
