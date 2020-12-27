@@ -8,7 +8,7 @@ using DO;
 
 namespace DS
 {
-    public class DataSource
+    public static class DataSource
     {
         public static List<Bus> BusList;
         public static List<Station> StationList;
@@ -23,13 +23,14 @@ namespace DS
             InitAllLists();
         }
 
-        private static void InitAllLists()
+        
+         static void InitAllLists()
         {
             BusList = new List<Bus>
             {
-                new Bus
+                new Bus()
                 {
-                    FromDate = DateTime.Today, FuelRemain = 1200, LicenseNum = 123, Status = Enums.BusStatus.READY, TotalTrip = 0
+                    FromDate = DateTime.Today, FuelRemain = 1200, LicenseNum = 12345678, Status = Enums.BusStatus.READY, TotalTrip = 0
                 }
             };
             StationList = new List<Station>();
