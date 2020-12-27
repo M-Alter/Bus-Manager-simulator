@@ -12,6 +12,7 @@ namespace DS
     {
         public static List<Bus> BusList;
         public static List<Station> StationList;
+        public static List<Line> LineList;
         public static List<Trip> TripList;
 
         /// <summary>
@@ -27,6 +28,7 @@ namespace DS
             BusList = new List<Bus>();
             StationList = new List<Station>();
             TripList = new List<Trip>();
+            LineList = new List<Line>();
         }
     }
 }
