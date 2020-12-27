@@ -42,12 +42,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLAPI\BLFactory.cs" />
+    <Compile Include="BLImp.cs" />
     <Compile Include="BO\Bus.cs" />
     <Compile Include="BO\Enums.cs" />
     <Compile Include="BLAPI\IBL.cs" />
     <Compile Include="BO\Line.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BO\Station.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DalApi\DalApi.csproj">
+      <Project>{e54331f8-38fe-43c7-b04b-0d18a159c329}</Project>
+      <Name>DalApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
