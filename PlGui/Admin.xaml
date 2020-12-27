@@ -9,16 +9,10 @@
     <Grid>
         <TabControl>
             <TabItem Header="Buses" Width="100">
-                <DataGrid Margin="20,70,20,20">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Reg" Width="*"/>
-                        <DataGridTextColumn Header="Fuel" Width="*"/>
-                        <DataGridTextColumn Width="*"/>
-                        <DataGridTextColumn Width="*"/>
-                        
-                    </DataGrid.Columns>
+                <ListView x:Name="buseslview" Margin="20,70,20,20">
                     
-                </DataGrid>
+                    
+                </ListView>
             </TabItem>
             <TabItem Header="Lines" Width="100">
                 <DataGrid Margin="20,70,20,20">

@@ -15,7 +15,9 @@ namespace BL
 
         public IEnumerable<Bus> GetAllBuses()
         {
-            throw new NotImplementedException();
+            return from item in dl.GetAllBuses()
+                   let bus = GetBus(item.LicenseNum)
+                   select bus;
         }
 
         public IEnumerable<Line> GetAllLines()
@@ -26,6 +28,14 @@ namespace BL
         public IEnumerable<Station> GetAllStations()
         {
             throw new NotImplementedException();
+        }
+
+        public Bus GetBus(int license)
+        {
+            Bus bus = new Bus();
+            var tempBus = dl.GetBus(license);
+            tempBus.CopyPropertiesTo(bus);
+            return bus;
         }
     }
 }

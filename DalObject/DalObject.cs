@@ -54,10 +54,10 @@ namespace DL
         {
             Bus bus = DataSource.BusList.Find(b => b.LicenseNum == licenseNum);
 
-            // if (bus != null)
-            return bus;
+            //if (bus != null)
+                return bus;
             //else
-            //    throw;
+            //    throw new Exception("exception");
 
         }
 
