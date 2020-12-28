@@ -23,6 +23,7 @@ namespace PlGui
     public partial class Admin : Window
     {
         ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
+        ObservableCollection<Station> stations = new ObservableCollection<Station>();
         IBL bl = BLFactory.GetIBL(); 
         public Admin()
         {
@@ -33,6 +34,10 @@ namespace PlGui
                 buses.Add(item);
             }
             buseslview.DataContext = buses;
+
+            foreach (var item in bl.GetAllStations())
+                stations.Add(item);
+            stationslview.DataContext = stations;
         }
     }
 }

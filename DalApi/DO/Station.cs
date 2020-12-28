@@ -11,8 +11,8 @@ namespace DO
         #region Fields
         private int code;
         private string name;
-        private int longitude;
-        private int lattitude;
+        private double longitude;
+        private double lattitude;
         #endregion
 
         #region Properties
@@ -28,13 +28,13 @@ namespace DO
             set { name = value; }
         }
 
-        public int Longitude
+        public double Longitude
         {
             get { return longitude; }
             set { longitude = value; }
         }
 
-        public int Lattitude
+        public double Lattitude
         {
             get { return lattitude; }
             set { lattitude = value; }

@@ -45,7 +45,10 @@ namespace DS
                     TotalTrip = 0
                 });
             }
-            StationList = new List<Station>();
+            StationList = new List<Station>
+            {
+                new Station{Code = 38831, Lattitude = 32.183921, Longitude = 34.917806, Name = "Bar Lev" }
+            };
             TripList = new List<Trip>();
             LineList = new List<Line>();
         }
