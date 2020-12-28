@@ -22,7 +22,7 @@ namespace DL
         {
             List<Bus> buses = new List<Bus>();
             foreach (var bus in DataSource.BusList)
-                buses.Add(bus);
+                buses.Add(bus.Clone());
             return buses.AsEnumerable();
         }
 
@@ -32,7 +32,7 @@ namespace DL
             foreach (var bus in DataSource.BusList)
             {
                 if (predicate(bus))
-                    buses.Add(bus);
+                    buses.Add(bus.Clone());
             }
             return buses.AsEnumerable();
         }
@@ -47,7 +47,7 @@ namespace DL
                 }
             }
 
-            DataSource.BusList.Add(bus);
+            DataSource.BusList.Add(bus.Clone());
         }
 
         public Bus GetBus(int licenseNum)
@@ -55,7 +55,7 @@ namespace DL
             Bus bus = DataSource.BusList.Find(b => b.LicenseNum == licenseNum);
 
             //if (bus != null)
-                return bus;
+                return bus.Clone();
             //else
             //    throw new Exception("exception");
 
@@ -83,7 +83,8 @@ namespace DL
         #region Station
         public IEnumerable<Station> GetAllStations()
         {
-            throw new NotImplementedException();
+            return from station in DataSource.StationList
+                   select station.Clone();
         }
 
         public IEnumerable<Station> GetAllStationsThat(Predicate<Station> predicate)

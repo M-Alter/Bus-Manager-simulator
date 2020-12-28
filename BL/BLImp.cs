@@ -43,5 +43,12 @@ namespace BL
             throw new NotImplementedException();
         }
 
+        public Station GetStation(int id)
+        {
+            Station station = new Station();
+            var tempStation = dl.GetStation(id);
+            tempStation.CopyPropertiesTo(station);
+            return station;
+        }
     }
 }
