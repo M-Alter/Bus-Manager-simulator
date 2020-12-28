@@ -13,7 +13,8 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel Visibility="Visible">
-                                <TextBlock Text="{Binding LicenseNum}"/>
+                                <TextBlock Width="120" FontSize="20" Text="{Binding LicenseNum}"/>
+                                <TextBlock Width="Auto" FontSize="20" Text="{Binding FromDate}"/>
                             </WrapPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>

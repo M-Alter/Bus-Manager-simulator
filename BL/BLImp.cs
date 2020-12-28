@@ -20,6 +20,19 @@ namespace BL
                    select bus;
         }
 
+        public Bus GetBus(int license)
+        {
+            Bus bus = new Bus();
+            var tempBus = dl.GetBus(license);
+            tempBus.CopyPropertiesTo(bus);
+            return bus;
+        }
+        
+        public IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Line> GetAllLines()
         {
             throw new NotImplementedException();
@@ -30,12 +43,5 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public Bus GetBus(int license)
-        {
-            Bus bus = new Bus();
-            var tempBus = dl.GetBus(license);
-            tempBus.CopyPropertiesTo(bus);
-            return bus;
-        }
     }
 }

@@ -28,11 +28,23 @@ namespace DS
         {
             BusList = new List<Bus>
             {
+
                 new Bus()
                 {
                     FromDate = DateTime.Today, FuelRemain = 1200, LicenseNum = 12345678, Status = Enums.BusStatus.READY, TotalTrip = 0
                 }
             };
+            for (int i = 0; i < 10; i++)
+            {
+                BusList.Add(new Bus()
+                {
+                    FromDate = DateTime.Today,
+                    FuelRemain = 1200,
+                    LicenseNum = 12345670+i,
+                    Status = Enums.BusStatus.READY,
+                    TotalTrip = 0
+                });
+            }
             StationList = new List<Station>();
             TripList = new List<Trip>();
             LineList = new List<Line>();

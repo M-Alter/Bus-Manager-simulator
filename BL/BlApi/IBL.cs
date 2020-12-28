@@ -11,6 +11,7 @@ namespace BLAPI
     {
         Bus GetBus(int license);
         IEnumerable<Bus> GetAllBuses();
+        IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate);
         IEnumerable<Station> GetAllStations();
         IEnumerable<Line> GetAllLines();
     }
