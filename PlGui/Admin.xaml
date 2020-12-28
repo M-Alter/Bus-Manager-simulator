@@ -27,12 +27,14 @@
             </TabItem>
             <TabItem Header="Stations" Width="100">
                 <ListView x:Name="stationslview" ItemsSource="{Binding}" Margin="20,70,20,20">
-                    <DataTemplate>
-                        <WrapPanel>
-                            <TextBlock Text="{Binding Code}" Width="Auto" FontSize="20"/>
-                            <TextBlock Text="{Binding Name}" Width="Auto" FontSize="20"/>
-                        </WrapPanel>
-                    </DataTemplate>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding Code}" Width="Auto" FontSize="20"/>
+                                <TextBlock Text="{Binding Name}" Width="Auto" FontSize="20"/>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </TabItem>
         </TabControl>
