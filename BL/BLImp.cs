@@ -40,7 +40,9 @@ namespace BL
 
         public IEnumerable<Station> GetAllStations()
         {
-            throw new NotImplementedException();
+            return from item in dl.GetAllStations()
+                   let station = GetStation(item.Code)
+                   select station;
         }
 
         public Station GetStation(int id)
