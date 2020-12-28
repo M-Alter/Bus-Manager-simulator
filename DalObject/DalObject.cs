@@ -91,6 +91,7 @@ namespace DL
         {
             throw new NotImplementedException();
         }
+
         public void AddStation(Station station)
         {
             foreach (var stationItem in DataSource.StationList)
@@ -125,7 +126,28 @@ namespace DL
             }
             // throw
         }
-
         #endregion
+
+        #region Lines
+
+        public Line GetLine(int id)
+        {
+            Line result = DataSource.LineList.Find(s => s.Id == id);
+
+            //  if (result != null)
+            {
+                return result;
+            }
+            // throw
+        }
+
+        public IEnumerable<Line> GetAllLines()
+        {
+            return from lines in DataSource.LineList
+                   select lines.Clone();
+        }
+        #endregion
+
+        
     }
 }

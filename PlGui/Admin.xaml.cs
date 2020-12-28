@@ -24,6 +24,7 @@ namespace PlGui
     {
         ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
         ObservableCollection<Station> stations = new ObservableCollection<Station>();
+        //ObservableCollection<Line> lines = new ObservableCollection<Line>();
         IBL bl = BLFactory.GetIBL(); 
         public Admin()
         {
@@ -38,6 +39,11 @@ namespace PlGui
             foreach (var item in bl.GetAllStations())
                 stations.Add(item);
             stationslview.DataContext = stations;
+
+            foreach (var item in bl.GetAllLines())
+            {
+
+            }
         }
     }
 }

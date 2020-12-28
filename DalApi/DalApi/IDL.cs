@@ -26,5 +26,10 @@ namespace DalApi
         void DeleteStation(int code);
         #endregion
 
+        #region Lines
+        Line GetLine(int id);
+        IEnumerable<Line> GetAllLines();
+        #endregion
+
     }
 }

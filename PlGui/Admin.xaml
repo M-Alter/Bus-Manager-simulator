@@ -21,16 +21,23 @@
                 </ListView>
             </TabItem>
             <TabItem Header="Lines" Width="100">
-                <DataGrid Margin="20,70,20,20">
-
-                </DataGrid>
+                <ListView x:Name="lineslview" ItemsSource="{Binding}" Margin="20,70,20,20">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding Id}" Width="120" FontSize="20"/>
+                                <TextBlock Text="{Binding Code}" Width="Auto" FontSize="20"/>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </TabItem>
             <TabItem Header="Stations" Width="100">
                 <ListView x:Name="stationslview" ItemsSource="{Binding}" Margin="20,70,20,20">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
-                                <TextBlock Text="{Binding Code}" Width="Auto" FontSize="20"/>
+                                <TextBlock Text="{Binding Code}" Width="120" FontSize="20"/>
                                 <TextBlock Text="{Binding Name}" Width="Auto" FontSize="20"/>
                             </WrapPanel>
                         </DataTemplate>

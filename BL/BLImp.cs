@@ -35,7 +35,9 @@ namespace BL
 
         public IEnumerable<Line> GetAllLines()
         {
-            throw new NotImplementedException();
+            return from item in dl.GetAllLines()
+                   let line = GetLine(item.Id)
+                   select line;
         }
 
         public IEnumerable<Station> GetAllStations()
@@ -51,6 +53,14 @@ namespace BL
             var tempStation = dl.GetStation(id);
             tempStation.CopyPropertiesTo(station);
             return station;
+        }
+
+        public Line GetLine(int id)
+        {
+            Line line = new     Line();
+            var tempLine = dl.GetLine(id);
+            tempLine.CopyPropertiesTo(line);
+            return line;
         }
     }
 }
