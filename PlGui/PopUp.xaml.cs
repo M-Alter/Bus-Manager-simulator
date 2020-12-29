@@ -36,5 +36,11 @@ namespace PlGui
             InitializeComponent();
             Title = string.Format("License Number: " + bus.LicenseNum + " | info");
         }
+
+        public PopUp(Station station)
+        {
+            InitializeComponent();
+            Title = string.Format("Station Number: " + station.Code + " | info");
+        }
     }
 }

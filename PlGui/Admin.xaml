@@ -33,7 +33,7 @@
                 </ListView>
             </TabItem>
             <TabItem Header="Stations" Width="100">
-                <ListView x:Name="stationslview" ItemsSource="{Binding}" Margin="20,70,20,20">
+                <ListView x:Name="stationslview" ItemsSource="{Binding}" Margin="20,70,20,20" MouseDoubleClick="stationslview_MouseDoubleClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
