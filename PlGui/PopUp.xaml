@@ -10,7 +10,7 @@
         <Grid x:Name="busGrid" Margin="15">
             
         </Grid>
-        <Grid x:Name="lineGrid" Margin="15">
+        <Grid x:Name="lineGrid" Margin="15" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -26,8 +26,9 @@
             <Label Content="{Binding FirstStation}" Margin="100,0,0,0" Grid.Column="0" Grid.Row="1"/>
             <Label Margin="3,0,0,0" Content="Last Station:" Grid.Column="1" Grid.Row="1"/>
             <Label Content="{Binding LastStation}" Margin="100,0,0,0" Grid.Column="1" Grid.Row="1"/>
-            <DataGrid Grid.Row="2" Grid.ColumnSpan="2" Margin="3,0,100,0" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding Stations}">
+            <DataGrid IsReadOnly="True" Grid.Row="2" Grid.ColumnSpan="2" Margin="3,0,100,0" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding Stations}">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="Index" Binding="{Binding Index}"/>
                     <DataGridTextColumn Header="Station number" Binding="{Binding Station}"/>
                     <DataGridTextColumn Header="Station Name" Binding="{Binding StationName}"/>
                 </DataGrid.Columns>

@@ -62,9 +62,10 @@ namespace BL
             tempLine.CopyPropertiesTo(line);
             var stationIDs = from numbers in dl.GetLineStations(id)
                              select numbers;
+            int index = 1;
             line.Stations = from numbers in stationIDs
                             let name = dl.GetStation(numbers).Name
-                            select new LineStation() { Station = numbers, StationName = name };
+                            select new LineStation() { Station = numbers, StationName = name, Index = index++};
 
 
                             ;

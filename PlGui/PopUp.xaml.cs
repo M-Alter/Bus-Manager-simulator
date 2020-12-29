@@ -29,6 +29,7 @@ namespace PlGui
         {
             InitializeComponent();
             Title = string.Format("Line: " + line.Code  + " in " + line.Area.ToString().ToLower() + " area | info");
+            lineGrid.Visibility = Visibility.Visible;
         }
 
         public PopUp(Bus bus)
