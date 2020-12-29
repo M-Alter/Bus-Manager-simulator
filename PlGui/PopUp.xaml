@@ -5,13 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
         mc:Ignorable="d"
-        Title="PopUp" Height="250" Width="500">
+        Title="PopUp" Height="250" Width="500" ResizeMode="NoResize">
     <Grid>
         <Grid x:Name="busGrid" Margin="15">
             
         </Grid>
         <Grid x:Name="lineGrid" Margin="15">
-            <DataGrid Margin="3,50,100,0" ItemsSource="{Binding Stations}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Margin="3,0,0,0" Content="Line ID:" Grid.Row="0" />
+            <Label Content="{Binding Code}" Margin="100,0,0,0" Grid.Column="0" Grid.Row="0"/>
+            <Label Margin="3,0,0,0" Content="First Station:" Grid.Row="1"/>
+            <Label Content="{Binding FirstStation}" Margin="100,0,0,0" Grid.Column="0" Grid.Row="1"/>
+            <Label Margin="3,0,0,0" Content="Last Station:" Grid.Column="1" Grid.Row="1"/>
+            <Label Content="{Binding LastStation}" Margin="100,0,0,0" Grid.Column="1" Grid.Row="1"/>
+            <DataGrid Grid.Row="2" Grid.ColumnSpan="2" Margin="3,0,100,0" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding Stations}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Station number" Binding="{Binding Station}"/>
                     <DataGridTextColumn Header="Station Name" Binding="{Binding StationName}"/>
