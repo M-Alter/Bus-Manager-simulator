@@ -149,7 +149,7 @@ namespace DL
         #endregion
 
 
-        public IEnumerable<object> GetLineStations(int lineId)
+        public IEnumerable<int> GetLineStations(int lineId)
         {
             var stations = from station in DataSource.LineStationsList
                            where station.LineId == lineId
@@ -157,7 +157,8 @@ namespace DL
             return from item in stations
                    from station in DataSource.StationList
                    where item.Station == station.Code
-                   select new { code = station.Code, name = station.Name};
+                   orderby item.LineStationIndex
+                   select station.Code;
         }
 
 

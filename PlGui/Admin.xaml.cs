@@ -46,5 +46,21 @@ namespace PlGui
             }
             lineslview.DataContext = lines;
         }
+
+        private void lineslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var currrentLine = (BO.Line)lineslview.SelectedItem as BO.Line;
+            PopUp info = new PopUp(currrentLine);
+            info.DataContext = currrentLine;
+            info.Show();
+        }
+
+        private void buseslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var currentBus = buseslview.SelectedItem as Bus;
+            PopUp info = new PopUp(currentBus);
+            info.DataContext = currentBus;
+            info.Show();
+        }
     }
 }

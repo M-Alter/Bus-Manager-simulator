@@ -57,9 +57,17 @@ namespace BL
 
         public Line GetLine(int id)
         {
-            Line line = new     Line();
+            Line line = new Line();
             var tempLine = dl.GetLine(id);
             tempLine.CopyPropertiesTo(line);
+            var stationIDs = from numbers in dl.GetLineStations(id)
+                             select numbers;
+            line.Stations = from numbers in stationIDs
+                            let name = dl.GetStation(numbers).Name
+                            select new LineStation() { Station = numbers, StationName = name };
+
+
+                            ;
             return line;
         }
     }

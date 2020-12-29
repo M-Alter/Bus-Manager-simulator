@@ -33,7 +33,7 @@ namespace DalApi
 
         #region LineStation
 
-        IEnumerable<object> GetLineStations(int lineId);
+        IEnumerable<int> GetLineStations(int lineId);
 
         #endregion
     }
