@@ -148,6 +148,19 @@ namespace DL
         }
         #endregion
 
-        
+
+        public IEnumerable<object> GetLineStations(int lineId)
+        {
+            var stations = from station in DataSource.LineStationsList
+                           where station.LineId == lineId
+                           select station.Clone();
+            return from item in stations
+                   from station in DataSource.StationList
+                   where item.Station == station.Code
+                   select new { code = station.Code, name = station.Name};
+        }
+
+
+
     }
 }
