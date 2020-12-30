@@ -16,6 +16,7 @@ namespace DS
         public static List<Trip> TripList;
         public static List<LineStation> LineStationsList;
         public static List<User> UserList;
+        public static List<AdjacentStations> AdjacentStationsList;
 
         /// <summary>
         /// C'tor that runs before an instance is created
@@ -59,7 +60,7 @@ namespace DS
             LineStationsList = new List<LineStation>
             {
                 new LineStation     {   StationCode = 38831, LineId = 1, LineStationIndex = 1, NextStation = 38832, PrevStation = 0     },
-                new LineStation     {   StationCode = 38832, LineId = 1, LineStationIndex = 1, NextStation = 0, PrevStation = 38831     }
+                new LineStation     {   StationCode = 38832, LineId = 1, LineStationIndex = 2, NextStation = 0, PrevStation = 38831     }
             };
             UserList = new List<User>
             {
@@ -68,6 +69,10 @@ namespace DS
             };
 
             TripList = new List<Trip>();
+            AdjacentStationsList = new List<AdjacentStations>
+            {
+                new AdjacentStations{Station1 = 38831, Station2 = 38832, Distance = 1.5, Time = new TimeSpan(0,3,0) }
+            };
         }
     }
 }
