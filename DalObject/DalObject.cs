@@ -168,5 +168,38 @@ namespace DL
                    orderby station.LineId
                    select station.LineId;
         }
+
+        bool IDL.AddBus(Bus bus)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IDL.AddStation(Station station)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddLine(Line line)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddLineStation(LineStation lineStation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AdjacentStations GetAdjacentStations(int first, int second)
+        {
+            return (from item in DataSource.AdjacentStationsList
+                    where item.Station1 == first && item.Station2 == second
+                    select item).FirstOrDefault();
+        }
+
+        public bool AddAdjacentStations(AdjacentStations adjacentStations)
+        {
+            DataSource.AdjacentStationsList.Add(adjacentStations.Clone());
+            return true;
+        }
     }
 }

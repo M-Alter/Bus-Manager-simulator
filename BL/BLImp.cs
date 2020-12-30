@@ -4,8 +4,6 @@ using DalApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL
 {
@@ -27,7 +25,7 @@ namespace BL
             tempBus.CopyPropertiesTo(bus);
             return bus;
         }
-        
+
         public IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate)
         {
             throw new NotImplementedException();
@@ -68,11 +66,68 @@ namespace BL
             int index = 1;
             line.Stations = from numbers in stationIDs
                             let name = dl.GetStation(numbers).Name
-                            select new LineStation() { Station = numbers, StationName = name, Index = index++};
+                            select new LineStation() { Station = numbers, StationName = name, Index = index++ };
 
 
-                            ;
+            ;
             return line;
+        }
+
+        public bool AddBus(Bus bus)
+        {
+            var busBO = dl.GetBus(bus.LicenseNum);
+            if (busBO != null)
+            {
+                throw new Exception("This bus number already exist");
+            }
+            DO.Bus busDO = new DO.Bus();
+            bus.CopyPropertiesTo(busDO);
+            dl.AddBus(busDO);
+            return true;
+        }
+
+        public bool AddStation(Station station)
+        {
+            var stationBO = dl.GetStation(station.Code);
+            if (stationBO != null)
+            {
+                throw new Exception("This station already exist");
+            }
+            DO.Station stationDO = new DO.Station();
+            station.CopyPropertiesTo(stationDO);
+            dl.AddStation(stationDO);
+            return true;
+        }
+
+        public bool AddLine(Line line)
+        {
+            var lineBO = dl.GetLine(line.Code);
+            if (lineBO != null)
+            {
+                throw new Exception("This line already exist");
+            }
+            DO.Line lineDO = new DO.Line();
+            line.CopyPropertiesTo(lineDO);
+            dl.AddLine(lineDO);
+            int index = 0;
+            int[] stationArray = new int[line.Stations.Count()];
+
+            foreach (var item in line.Stations)
+            {
+                stationArray[index++] = item.Station;
+            };
+            for (int i = 0; i < stationArray.Length; i++)
+            {
+                if (i == 0)
+                    dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = 1, StationCode = stationArray[0], NextStation = stationArray[1], PrevStation = 0 });
+                else if (i == stationArray.Length - 1)
+                    dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = 0, PrevStation = stationArray[i - 1] });
+                else
+                    dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
+
+            }
+
+            return true;
         }
     }
 }
