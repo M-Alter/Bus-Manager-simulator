@@ -50,7 +50,7 @@ namespace PlGui
         private void lineslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var currrentLine = lineslview.SelectedItem as BO.Line;
-            PopUp info = new PopUp(currrentLine);
+            LinePopUp info = new LinePopUp(currrentLine);
             info.DataContext = currrentLine;
             info.Show();
         }
@@ -58,7 +58,7 @@ namespace PlGui
         private void buseslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var currentBus = buseslview.SelectedItem as Bus;
-            PopUp info = new PopUp(currentBus);
+            BusPopUp info = new BusPopUp(currentBus);
             info.DataContext = currentBus;
             info.Show();
         }
@@ -66,7 +66,7 @@ namespace PlGui
         private void stationslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var currentStation = stationslview.SelectedItem as Station;
-            PopUp info = new PopUp(currentStation);
+            StationPopUp info = new StationPopUp(currentStation);
             info.DataContext = currentStation;
             info.Show();
         }

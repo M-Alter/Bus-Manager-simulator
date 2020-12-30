@@ -63,11 +63,11 @@ namespace DS
             {
                 new LineStation
                 {
-                    Station = 38831, LineId = 1, LineStationIndex = 1, NextStation = 38832, PrevStation = 0
+                    StationCode = 38831, LineId = 1, LineStationIndex = 1, NextStation = 38832, PrevStation = 0
                 },
                 new LineStation
                 {
-                    Station = 38832, LineId = 1, LineStationIndex = 1, NextStation = 0, PrevStation = 38831
+                    StationCode = 38832, LineId = 1, LineStationIndex = 1, NextStation = 0, PrevStation = 38831
                 }
             };
         }

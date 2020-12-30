@@ -16,29 +16,16 @@ using BO;
 namespace PlGui
 {
     /// <summary>
-    /// Interaction logic for PopUp.xaml
+    /// Interaction logic for StationPopUp.xaml
     /// </summary>
-    public partial class PopUp : Window
+    public partial class StationPopUp : Window
     {
-        public PopUp()
+        public StationPopUp()
         {
             InitializeComponent();
         }
 
-        public PopUp(BO.Line line)
-        {
-            InitializeComponent();
-            Title = string.Format("Line: " + line.Code  + " in " + line.Area.ToString().ToLower() + " area | info");
-            lineGrid.Visibility = Visibility.Visible;
-        }
-
-        public PopUp(Bus bus)
-        {
-            InitializeComponent();
-            Title = string.Format("License Number: " + bus.LicenseNum + " | info");
-        }
-
-        public PopUp(Station station)
+        public StationPopUp(Station station)
         {
             InitializeComponent();
             Title = string.Format("Station Number: " + station.Code + " | info");
