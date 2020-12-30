@@ -38,5 +38,10 @@ namespace DalApi
         IEnumerable<int> GetStationLines(int code);
 
         #endregion
+
+        #region Users
+        IEnumerable<User> GetAllUsers();
+
+        #endregion
     }
 }

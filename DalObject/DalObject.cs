@@ -10,7 +10,7 @@ namespace DL
     sealed class DalObject : IDL
     {
         #region singelton
-        static readonly DalObject instance = new DalObject();
+        private static readonly DalObject instance = new DalObject();
         static DalObject() { }// static ctor to ensure instance init is done just before first usage
         DalObject() { } // default => private
         public static DalObject Instance { get => instance; }// The public Instance property to use
@@ -167,6 +167,15 @@ namespace DL
                    where station.StationCode == code
                    orderby station.LineId
                    select station.LineId;
+        }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            List<User> list = new List<User>();
+            foreach (var item in DataSource.UserList)
+                list.Add(item);
+            return list.AsEnumerable();
+            
         }
     }
 }
