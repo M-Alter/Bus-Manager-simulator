@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BLAPI;
 
 namespace PlGui
 {
@@ -20,6 +21,7 @@ namespace PlGui
     /// </summary>
     public partial class MainWindow : Window
     {
+        BLAPI.IBL bl = BLAPI.BLFactory.GetIBL();
         public MainWindow()
         {
             InitializeComponent();
@@ -36,9 +38,11 @@ namespace PlGui
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Admin admin = new Admin();
-            admin.Show();
-            
+            if (bl.ValidateUser(usernameTxtBox.Text, passwordPswrdBox.Password))
+            {
+                Admin admin = new Admin();
+                admin.Show();
+            }
             Close();
         }
     }

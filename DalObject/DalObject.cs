@@ -171,11 +171,8 @@ namespace DL
 
         public IEnumerable<User> GetAllUsers()
         {
-            List<User> list = new List<User>();
-            foreach (var item in DataSource.UserList)
-                list.Add(item);
-            return list.AsEnumerable();
-            
+            return from item in DataSource.UserList
+                   select item.Clone();
         }
 
         bool IDL.AddBus(Bus bus)

@@ -19,6 +19,8 @@ namespace BLAPI
         Line GetLine(int id);
         IEnumerable<Line> GetAllLines();
         bool AddLine(Line line);
+        IEnumerable<string> GetAllUserNames();
+        bool ValidateUser(string userName, string password);
 
     }
 }

@@ -128,18 +128,27 @@ namespace BL
 
             double distance;
             double distanceTime;
-            for (int i = 0; i < stationArray.Length-1; i++)
+            for (int i = 0; i < stationArray.Length - 1; i++)
             {
-                distance = r.NextDouble() * 10;
-                distanceTime = distance * r.Next(20, 50) / 60 / 60;
-                if (dl.GetAdjacentStations(stationArray[i], stationArray[i+1]) == null)
+                if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == null)
                 {
-
-                    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = distance, Time = new TimeSpan((int)distanceTime%60%60,(int)distanceTime%60/60,(int)distanceTime/60/60) });
+                    distance = r.NextDouble() * 10;
+                    distanceTime = distance * r.Next(20, 50) / 60 / 60;
+                    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = distance, Time = new TimeSpan((int)distanceTime % 60 % 60, (int)distanceTime % 60 / 60, (int)distanceTime / 60 / 60) });
                 }
             }
-
             return true;
+        }
+
+        public IEnumerable<string> GetAllUserNames()
+        {
+            return from item in dl.GetAllUsers()
+                   select item.UserName;
+        }
+
+        public bool ValidateUser(string userName, string password)
+        {
+            return dl.GetAllUsers().Where(u => u.UserName.ToLower() == userName.ToLower() && u.Password == password && u.Admin == true).Select(u => u.Admin).FirstOrDefault();
         }
     }
 }
