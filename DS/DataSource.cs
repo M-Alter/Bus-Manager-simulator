@@ -14,6 +14,8 @@ namespace DS
         public static List<Station> StationList;
         public static List<Line> LineList;
         public static List<Trip> TripList;
+        public static List<LineStation> LineStationsList;
+        public static List<User> UserList;
 
         /// <summary>
         /// C'tor that runs before an instance is created
@@ -31,7 +33,7 @@ namespace DS
 
                 new Bus()
                 {
-                    FromDate = DateTime.Today, FuelRemain = 1200, LicenseNum = 12345678, Status = Enums.BusStatus.READY, TotalTrip = 0
+                    FromDate = DateTime.Today, FuelRemain = 1200, LicenseNum = 87654321, Status = Enums.BusStatus.READY, TotalTrip = 0
                 }
             };
             for (int i = 0; i < 10; i++)
@@ -47,10 +49,25 @@ namespace DS
             }
             StationList = new List<Station>
             {
-                new Station{Code = 38831, Lattitude = 32.183921, Longitude = 34.917806, Name = "Bar Lev" }
+                new Station{Code = 38831, Lattitude = 32.183921, Longitude = 34.917806, Name = "בי\"ס בר לב\\בן יהודה" },
+                new Station{Code = 38832, Lattitude = 31.870034, Longitude = 34.819541, Name = "הרצל\\צומת בילו" }
             };
+            LineList = new List<Line>
+            {
+                new Line    {    Area = Enums.Areas.CENTRAL, Code = 1, Id = 1, FirstStation = 38831, LastStation = 38832     }
+            };
+            LineStationsList = new List<LineStation>
+            {
+                new LineStation     {   StationCode = 38831, LineId = 1, LineStationIndex = 1, NextStation = 38832, PrevStation = 0     },
+                new LineStation     {   StationCode = 38832, LineId = 1, LineStationIndex = 1, NextStation = 0, PrevStation = 38831     }
+            };
+            UserList = new List<User>
+            {
+                new User    {   UserName = "Admin", Password = "Admin", Admin = true    },
+                new User    {   UserName = "Menachem", Password = "339832131", Admin = false    }
+            };
+
             TripList = new List<Trip>();
-            LineList = new List<Line>();
         }
     }
 }

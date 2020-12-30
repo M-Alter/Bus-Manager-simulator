@@ -10,7 +10,7 @@ namespace DO
     {
         #region Fields
         private int lineID;
-        private int station;
+        private int stationCode;
         private int lineStationIndex;
         private int prevStation;
         private int nextStation;
@@ -23,10 +23,10 @@ namespace DO
             set { lineID = value; }
         }
 
-        public int Station
+        public int StationCode
         {
-            get { return station; }
-            set { station = value; }
+            get { return stationCode; }
+            set { stationCode = value; }
         }
 
         public int LineStationIndex

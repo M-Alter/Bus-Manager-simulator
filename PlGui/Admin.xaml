@@ -7,13 +7,14 @@
         mc:Ignorable="d"
         Title="Admin Window" Height="450" Width="800">
     <Grid>
+        
         <TabControl>
             <TabItem Header="Buses" Width="100">
-                <ListView x:Name="buseslview" Margin="20,70,20,20" ItemsSource="{Binding}">
+                <ListView x:Name="buseslview" Margin="20,70,20,20" ItemsSource="{Binding}" MouseDoubleClick="buseslview_MouseDoubleClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel Visibility="Visible">
-                                <TextBlock Width="120" FontSize="20" Text="{Binding LicenseNum}"/>
+                                <TextBlock Width="120" FontSize="20" Text="{Binding LicenseString}"/>
                                 <TextBlock Width="Auto" FontSize="20" Text="{Binding FromDate}"/>
                             </WrapPanel>
                         </DataTemplate>
@@ -21,7 +22,7 @@
                 </ListView>
             </TabItem>
             <TabItem Header="Lines" Width="100">
-                <ListView x:Name="lineslview" ItemsSource="{Binding}" Margin="20,70,20,20">
+                <ListView x:Name="lineslview" ItemsSource="{Binding}" Margin="20,70,20,20" MouseDoubleClick="lineslview_MouseDoubleClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
@@ -33,7 +34,7 @@
                 </ListView>
             </TabItem>
             <TabItem Header="Stations" Width="100">
-                <ListView x:Name="stationslview" ItemsSource="{Binding}" Margin="20,70,20,20">
+                <ListView x:Name="stationslview" ItemsSource="{Binding}" Margin="20,70,20,20" MouseDoubleClick="stationslview_MouseDoubleClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
@@ -45,5 +46,6 @@
                 </ListView>
             </TabItem>
         </TabControl>
+        
     </Grid>
 </Window>

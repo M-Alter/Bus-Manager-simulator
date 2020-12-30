@@ -40,7 +40,7 @@ namespace BO
             set { lattitude = value; }
         }
 
-        //public IEnumerable<Line> LinesAtStation { get; set; }
+        public IEnumerable<int> LinesAtStation { get; set; }
 
         #endregion
     }

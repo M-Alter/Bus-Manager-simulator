@@ -46,6 +46,7 @@ namespace BO
             get { return lastStation; }
             set { lastStation = value; }
         }
+        public IEnumerable<LineStation> Stations { get; set; }
         #endregion
     }
 }

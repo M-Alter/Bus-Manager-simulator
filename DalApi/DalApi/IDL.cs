@@ -31,5 +31,12 @@ namespace DalApi
         IEnumerable<Line> GetAllLines();
         #endregion
 
+        #region LineStation
+
+        IEnumerable<int> GetLineStations(int lineId);
+
+        IEnumerable<int> GetStationLines(int code);
+
+        #endregion
     }
 }

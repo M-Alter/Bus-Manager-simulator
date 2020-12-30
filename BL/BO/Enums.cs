@@ -4,6 +4,6 @@
     {
         public enum BusStatus { READY, NOTREADY }
 
-        public enum Areas { }
+        public enum Areas { GENERAL, CENTRAL, JERUSALEM, NORTH, SOUTH }
     }
 }

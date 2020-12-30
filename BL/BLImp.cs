@@ -47,19 +47,31 @@ namespace BL
                    select station;
         }
 
-        public Station GetStation(int id)
+        public Station GetStation(int code)
         {
             Station station = new Station();
-            var tempStation = dl.GetStation(id);
+            var tempStation = dl.GetStation(code);
             tempStation.CopyPropertiesTo(station);
+            station.LinesAtStation = from lines in dl.GetStationLines(code)
+                                     orderby lines
+                                     select lines;
             return station;
         }
 
         public Line GetLine(int id)
         {
-            Line line = new     Line();
+            Line line = new Line();
             var tempLine = dl.GetLine(id);
             tempLine.CopyPropertiesTo(line);
+            var stationIDs = from numbers in dl.GetLineStations(id)
+                             select numbers;
+            int index = 1;
+            line.Stations = from numbers in stationIDs
+                            let name = dl.GetStation(numbers).Name
+                            select new LineStation() { Station = numbers, StationName = name, Index = index++};
+
+
+                            ;
             return line;
         }
     }
