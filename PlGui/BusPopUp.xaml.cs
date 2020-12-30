@@ -29,7 +29,7 @@ namespace PlGui
         public BusPopUp(Bus bus)
         {
             InitializeComponent();
-            Title = string.Format("License Number: " + bus.LicenseNum + " | info");
+            Title = string.Format("License Number: " + bus.LicenseString + " | info");
         }
     }
 }

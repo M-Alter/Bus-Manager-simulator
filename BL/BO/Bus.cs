@@ -21,8 +21,21 @@ namespace BO
         public int LicenseNum
         {
             get { return licenseNum; }
-            set { licenseNum = value; }
+            set 
+            { 
+                licenseNum = value;
+                if (value > 9999999)
+                {
+                    LicenseString = licenseNum.ToString("000-00-000");
+                }
+                else
+                {
+                    LicenseString = licenseNum.ToString("00-000-00");
+                }
+            }
         }
+
+        public string LicenseString { get; set; }
 
         public DateTime FromDate
         {

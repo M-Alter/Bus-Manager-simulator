@@ -7,9 +7,10 @@
         mc:Ignorable="d"
         Title="StationPopUp" Height="250" Width="500" ResizeMode="NoResize">
     <Grid>
-        
-        <Grid x:Name="stationGrid" Margin="15">
 
+        <Grid x:Name="stationGrid" Margin="15">
+            
+                           
         </Grid>
     </Grid>
 </Window>
