@@ -14,6 +14,7 @@ namespace BLAPI
         IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate);
         Station GetStation(int id);
         IEnumerable<Station> GetAllStations();
+        Line GetLine(int id);
         IEnumerable<Line> GetAllLines();
     }
 }
