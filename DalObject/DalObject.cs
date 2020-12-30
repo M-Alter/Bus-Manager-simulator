@@ -180,22 +180,26 @@ namespace DL
 
         bool IDL.AddBus(Bus bus)
         {
-            throw new NotImplementedException();
+            DataSource.BusList.Add(bus.Clone());
+            return true;
         }
 
         bool IDL.AddStation(Station station)
         {
-            throw new NotImplementedException();
+            DataSource.StationList.Add(station.Clone());
+            return true;
         }
 
         public bool AddLine(Line line)
         {
-            throw new NotImplementedException();
+            DataSource.LineList.Add(line.Clone());
+            return true;
         }
 
         public bool AddLineStation(LineStation lineStation)
         {
-            throw new NotImplementedException();
+            DataSource.LineStationsList.Add(lineStation.Clone());
+            return true;
         }
 
         public AdjacentStations GetAdjacentStations(int first, int second)
