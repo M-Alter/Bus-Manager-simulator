@@ -21,7 +21,7 @@ namespace PlGui
     /// </summary>
     public partial class MainWindow : Window
     {
-        BLAPI.IBL bl = BLAPI.BLFactory.GetIBL();
+        IBL bl = BLFactory.GetIBL();
         public MainWindow()
         {
             InitializeComponent();
@@ -38,7 +38,7 @@ namespace PlGui
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (bl.ValidateUser(usernameTxtBox.Text, passwordPswrdBox.Password))
+            //if (bl.ValidateUser(usernameTxtBox.Text, passwordPswrdBox.Password))
             {
                 Admin admin = new Admin();
                 admin.Show();
