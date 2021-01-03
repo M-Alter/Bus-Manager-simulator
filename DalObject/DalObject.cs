@@ -211,5 +211,10 @@ namespace DL
             DataSource.AdjacentStationsList.Add(adjacentStations.Clone());
             return true;
         }
+
+        public bool UpdateLineStationsIndex(int lineID, int stationID, bool positive)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

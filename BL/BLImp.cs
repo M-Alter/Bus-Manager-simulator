@@ -84,7 +84,6 @@ namespace BL
             {
                 throw new Exception("This bus number already exist");
             }
-
             if (!(bus.FromDate.Year >= 2018 && bus.LicenseNum >= MIN_EIGHT && bus.LicenseNum <= MAX_EIGHT)
                 || !(bus.FromDate.Year < 2018 && bus.LicenseNum <= MAX_SEVEN && bus.LicenseNum >= MIN_SEVEN))
                 throw new Exception("License num length doesn't match begin date!");
@@ -159,6 +158,11 @@ namespace BL
         public bool ValidateUser(string userName, string password)
         {
             return dl.GetAllUsers().Where(u => u.UserName.ToLower() == userName.ToLower() && u.Password == password && u.Admin == true).Select(u => u.Admin).FirstOrDefault();
+        }
+
+        public bool RemoveStationFromLine(Line line, int stationToRemove)
+        {
+            throw new NotImplementedException();
         }
     }
 }

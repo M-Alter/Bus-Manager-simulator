@@ -40,6 +40,7 @@ namespace DalApi
 
         bool AddLineStation(LineStation lineStation);
 
+        bool UpdateLineStationsIndex(int lineID, int stationID, bool positive);
         #endregion
 
         #region AdjacentStations
