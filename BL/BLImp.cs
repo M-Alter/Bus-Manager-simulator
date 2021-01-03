@@ -162,7 +162,33 @@ namespace BL
 
         public bool RemoveStationFromLine(Line line, int stationToRemove)
         {
-            throw new NotImplementedException();
+            foreach (var item in line.Stations)
+            {
+                dl.RemoveLineStation(item.Station);
+            }
+            //if station is first
+            //if station is last
+            int index = 0;
+            int[] stationArray = new int[line.Stations.Count()];
+            foreach (var item in line.Stations)
+            {
+                if(item.Station != stationToRemove)
+                    stationArray[index++] = item.Station;
+            };
+            foreach (var item in line.Stations)
+            {
+                stationArray[index++] = item.Station;
+            };
+            for (int i = 0; i < stationArray.Length; i++)
+            {
+                if (i == 0)
+                    dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = 1, StationCode = stationArray[0], NextStation = stationArray[1], PrevStation = 0 });
+                else if (i == stationArray.Length - 1)
+                    dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = 0, PrevStation = stationArray[i - 1] });
+                else
+                    dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
+            }
+            return true;
         }
     }
 }
