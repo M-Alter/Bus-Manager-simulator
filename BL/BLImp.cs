@@ -167,6 +167,7 @@ namespace BL
                 dl.RemoveLineStation(item.Station);
             }
             //if station is first
+
             //if station is last
             int index = 0;
             int[] stationArray = new int[line.Stations.Count()];
