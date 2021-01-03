@@ -188,6 +188,7 @@ namespace BL
                 else
                     dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
             }
+            line = GetLine(line.Id);
             return true;
         }
     }
