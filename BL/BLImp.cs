@@ -10,7 +10,7 @@ namespace BL
     internal class BLImp : IBL
     {
         IDL dl = DLFactory.GetDL();
-
+        static Random r = new Random(DateTime.Now.Millisecond);
         public IEnumerable<Bus> GetAllBuses()
         {
             return from item in dl.GetAllBuses()
@@ -124,10 +124,31 @@ namespace BL
                     dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = 0, PrevStation = stationArray[i - 1] });
                 else
                     dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
-
             }
 
+            double distance;
+            double distanceTime;
+            for (int i = 0; i < stationArray.Length - 1; i++)
+            {
+                if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == null)
+                {
+                    distance = r.NextDouble() * 10;
+                    distanceTime = distance * r.Next(20, 50) / 60 / 60;
+                    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = distance, Time = new TimeSpan((int)distanceTime % 60 % 60, (int)distanceTime % 60 / 60, (int)distanceTime / 60 / 60) });
+                }
+            }
             return true;
+        }
+
+        public IEnumerable<string> GetAllUserNames()
+        {
+            return from item in dl.GetAllUsers()
+                   select item.UserName;
+        }
+
+        public bool ValidateUser(string userName, string password)
+        {
+            return dl.GetAllUsers().Where(u => u.UserName.ToLower() == userName.ToLower() && u.Password == password && u.Admin == true).Select(u => u.Admin).FirstOrDefault();
         }
     }
 }

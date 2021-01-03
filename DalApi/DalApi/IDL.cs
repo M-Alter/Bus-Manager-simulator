@@ -47,5 +47,10 @@ namespace DalApi
         bool AddAdjacentStations(AdjacentStations adjacentStations);
 
         #endregion
+
+        #region Users
+        IEnumerable<User> GetAllUsers();
+
+        #endregion
     }
 }

@@ -10,7 +10,7 @@ namespace DL
     sealed class DalObject : IDL
     {
         #region singelton
-        static readonly DalObject instance = new DalObject();
+        private static readonly DalObject instance = new DalObject();
         static DalObject() { }// static ctor to ensure instance init is done just before first usage
         DalObject() { } // default => private
         public static DalObject Instance { get => instance; }// The public Instance property to use
@@ -169,24 +169,34 @@ namespace DL
                    select station.LineId;
         }
 
+        public IEnumerable<User> GetAllUsers()
+        {
+            return from item in DataSource.UserList
+                   select item.Clone();
+        }
+
         bool IDL.AddBus(Bus bus)
         {
-            throw new NotImplementedException();
+            DataSource.BusList.Add(bus.Clone());
+            return true;
         }
 
         bool IDL.AddStation(Station station)
         {
-            throw new NotImplementedException();
+            DataSource.StationList.Add(station.Clone());
+            return true;
         }
 
         public bool AddLine(Line line)
         {
-            throw new NotImplementedException();
+            DataSource.LineList.Add(line.Clone());
+            return true;
         }
 
         public bool AddLineStation(LineStation lineStation)
         {
-            throw new NotImplementedException();
+            DataSource.LineStationsList.Add(lineStation.Clone());
+            return true;
         }
 
         public AdjacentStations GetAdjacentStations(int first, int second)
