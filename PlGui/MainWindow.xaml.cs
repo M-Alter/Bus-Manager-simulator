@@ -38,7 +38,7 @@ namespace PlGui
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //if (bl.ValidateUser(usernameTxtBox.Text, passwordPswrdBox.Password))
+            if (bl.ValidateUser(usernameTxtBox.Text, passwordPswrdBox.Password))
             {
                 Admin admin = new Admin();
                 admin.Show();
