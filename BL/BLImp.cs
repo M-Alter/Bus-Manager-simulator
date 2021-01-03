@@ -75,11 +75,21 @@ namespace BL
 
         public bool AddBus(Bus bus)
         {
+            const int MIN_SEVEN = 1000000;
+            const int MAX_SEVEN = 9999999;
+            const int MIN_EIGHT = 10000000;
+            const int MAX_EIGHT = 99999999;
             var busBO = dl.GetBus(bus.LicenseNum);
             if (busBO != null)
             {
                 throw new Exception("This bus number already exist");
             }
+
+            if (!(bus.FromDate.Year >= 2018 && bus.LicenseNum >= MIN_EIGHT && bus.LicenseNum <= MAX_EIGHT)
+                || !(bus.FromDate.Year < 2018 && bus.LicenseNum <= MAX_SEVEN && bus.LicenseNum >= MIN_SEVEN))
+                throw new Exception("License num length doesn't match begin date!");
+            if(bus.FuelRemain < 0 || bus.FuelRemain > 1200)
+                throw new Exception("Gas should be between 0 to 1200!");            
             DO.Bus busDO = new DO.Bus();
             bus.CopyPropertiesTo(busDO);
             dl.AddBus(busDO);

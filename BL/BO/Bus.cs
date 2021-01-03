@@ -35,7 +35,7 @@ namespace BO
             }
         }
 
-        public string LicenseString { get; set; }
+        public string LicenseString { get; private set; }
 
         public DateTime FromDate
         {
