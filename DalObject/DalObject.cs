@@ -55,7 +55,7 @@ namespace DL
             Bus bus = DataSource.BusList.Find(b => b.LicenseNum == licenseNum);
 
             //if (bus != null)
-                return bus.Clone();
+            return bus.Clone();
             //else
             //    throw new Exception("exception");
 
@@ -109,18 +109,18 @@ namespace DL
         {
             Station result = DataSource.StationList.Find(s => s.Code == code);
 
-          //  if (result != null)
+            //  if (result != null)
             {
                 return result;
             }
-           // throw
+            // throw
         }
 
         public void DeleteStation(int code)
         {
             Station result = DataSource.StationList.Find(s => s.Code == code);
 
-              if (result != null)
+            if (result != null)
             {
                 DataSource.StationList.Remove(result);
             }
@@ -214,7 +214,10 @@ namespace DL
 
         public bool RemoveLineStation(int lineID)
         {
-            if (DataSource.LineStationsList.Remove(DataSource.LineStationsList.Find(item => item.LineId == lineID)))
+            if (DataSource.LineStationsList.Remove(
+                DataSource.LineStationsList.Find(item => item.LineId == lineID)
+                )
+                )
                 return true;
             return false;
 
