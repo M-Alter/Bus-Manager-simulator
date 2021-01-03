@@ -212,9 +212,12 @@ namespace DL
             return true;
         }
 
-        public bool UpdateLineStationsIndex(int lineID, int stationID, bool positive)
+        public bool RemoveLineStation(int lineID)
         {
-            throw new NotImplementedException();
+            if (DataSource.LineStationsList.Remove(DataSource.LineStationsList.Find(item => item.LineId == lineID)))
+                return true;
+            return false;
+
         }
     }
 }
