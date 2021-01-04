@@ -228,6 +228,12 @@ The password for your account is
             return true;
         }
 
-        
+        public IEnumerable<Station> GetAllStations(Predicate<Station> predicate)
+        {
+            return from item in dl.GetAllStations()
+                   let station = GetStation(item.Code)
+                   where predicate(station)
+                   select station;
+        }
     }
 }
