@@ -18,6 +18,7 @@ namespace BLAPI
         #endregion
         Station GetStation(int id);
         IEnumerable<Station> GetAllStations();
+        IEnumerable<Station> GetAllStations(Predicate<Station> predicate);
         bool AddStation(Station station);
         Line GetLine(int id);
         IEnumerable<Line> GetAllLines();
@@ -26,6 +27,7 @@ namespace BLAPI
         IEnumerable<string> GetAllUserNames(bool admin);
         bool ValidatePassword(string userName, string password);
         void ResendPassword(string userName, string emailAddress);
+
 
     }
 }

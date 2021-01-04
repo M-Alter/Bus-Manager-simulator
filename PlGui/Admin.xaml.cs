@@ -80,5 +80,11 @@ namespace PlGui
                 info.Show(); 
             }
         }
+
+        private void addLineBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddLine addLine = new AddLine();
+            addLine.ShowDialog();
+        }
     }
 }

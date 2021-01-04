@@ -10,6 +10,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -20,7 +21,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Label Content="Area" Grid.Column="0" Grid.Row="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ComboBox Name="areaCMBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Width="100"  IsEnabled="False" SelectionChanged="areaCMBox_SelectionChanged"/>
+        <ComboBox Name="areaCMBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Width="100"  IsEnabled="True" SelectionChanged="areaCMBox_SelectionChanged"/>
         <Label Content="Line number" Grid.Column="0" Grid.Row="1" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBox x:Name="lineTBox" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100"/>
         <Label Content="First stop" Grid.Column="0" Grid.Row="2" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -28,8 +29,17 @@
         <Label Content="Last stop" Grid.Column="0" Grid.Row="3" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <ComboBox Name="lastStopCMBox" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Width="100"  IsEnabled="False" SelectionChanged="lastStopCMBox_SelectionChanged"/>
         <Label Content="Add stops" Grid.Column="0" Grid.Row="4" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ComboBox Name="addStopCMBox" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" Width="100"  IsEnabled="False"/>
-        <Button x:Name="saveBtn" Grid.Column="0" Grid.Row="5" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100"/>
-        <Button x:Name="cancelBtn" Grid.Column="1" Grid.Row="5" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100"/>
+        <ComboBox Name="addStopCMBox" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" Width="100"  IsEnabled="False">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox x:Name="selectStastionCB" Checked="allCheckedBox" Unchecked="allCheckedBox" IsChecked="{Binding Checked}" Content="{Binding Name}">
+                        
+                    </CheckBox>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ListBox x:Name="stationsLBox" Grid.Column="2" Grid.Row="2" Grid.RowSpan="3"/>
+        <Button x:Name="saveBtn" Grid.Column="0" Grid.Row="5" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Click="saveBtn_Click"/>
+        <Button x:Name="cancelBtn" Grid.Column="1" Grid.Row="5" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Click="cancelBtn_Click"/>
     </Grid>
 </Window>

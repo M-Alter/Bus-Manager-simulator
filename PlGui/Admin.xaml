@@ -22,7 +22,9 @@
                 </ListView>
             </TabItem>
             <TabItem Header="Lines" Width="100">
-                <ListView x:Name="lineslview" ItemsSource="{Binding}" Margin="20,70,20,20" MouseDoubleClick="lineslview_MouseDoubleClick">
+                <WrapPanel>
+                    <Button x:Name="addLineBtn" Content="Add Line"  Margin="5" Height="30" Width="100" Click="addLineBtn_Click"/>
+                    <ListView x:Name="lineslview" ItemsSource="{Binding}" Margin="20,70,20,20" MouseDoubleClick="lineslview_MouseDoubleClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
@@ -32,6 +34,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                </WrapPanel>
             </TabItem>
             <TabItem Header="Stations" Width="100">
                 <ListView x:Name="stationslview" ItemsSource="{Binding}" Margin="20,70,20,20" MouseDoubleClick="stationslview_MouseDoubleClick">
