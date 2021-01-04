@@ -85,6 +85,13 @@ namespace PlGui
         {
             AddLine addLine = new AddLine();
             addLine.ShowDialog();
+
+            lines.Clear();
+            foreach (var item in bl.GetAllLines())
+            {
+                lines.Add(item);
+            }
+            lineslview.DataContext = lines;
         }
     }
 }

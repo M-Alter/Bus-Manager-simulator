@@ -1,12 +1,11 @@
 ﻿using BLAPI;
 using BO;
 using DalApi;
+using MailKit.Net.Smtp;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MailKit.Net.Smtp;
-using MailKit;
-using MimeKit;
 
 namespace BL
 {
@@ -90,8 +89,8 @@ namespace BL
             if (!(bus.FromDate.Year >= 2018 && bus.LicenseNum >= MIN_EIGHT && bus.LicenseNum <= MAX_EIGHT)
                 || !(bus.FromDate.Year < 2018 && bus.LicenseNum <= MAX_SEVEN && bus.LicenseNum >= MIN_SEVEN))
                 throw new Exception("License num length doesn't match begin date!");
-            if(bus.FuelRemain < 0 || bus.FuelRemain > 1200)
-                throw new Exception("Gas should be between 0 to 1200!");            
+            if (bus.FuelRemain < 0 || bus.FuelRemain > 1200)
+                throw new Exception("Gas should be between 0 to 1200!");
             DO.Bus busDO = new DO.Bus();
             bus.CopyPropertiesTo(busDO);
             dl.AddBus(busDO);
@@ -174,13 +173,15 @@ namespace BL
             message.Body = new TextPart("plain")
             {
                 Text = string.Format(@"Hey {0},
+***this is an automated email, please do not reply to this email***
+
 
 The password for your account is 
 ===============================
-{1}
+===           {1}           ===
 ===============================
--- Bus Manager",userName, dl.GetAllUsers().Where(u => u.UserName.ToLower() == userName.ToLower()).Select(u => u.Password).FirstOrDefault())
-             };
+-- Bus Manager", userName, dl.GetAllUsers().Where(u => u.UserName.ToLower() == userName.ToLower()).Select(u => u.Password).FirstOrDefault())
+            };
 
             //IDispose
             using (var client = new SmtpClient())
@@ -188,12 +189,20 @@ The password for your account is
                 client.Connect("smtp.gmail.com", 465, true);
 
                 // Note: only needed if the SMTP server requires authentication
-                client.Authenticate("busmanager.2131.1146@gmail.com", "21311146");
+                client.Authenticate("busmanager.2131.1146", "21311146");
 
-                client.Send(message);
-                client.Disconnect(true);
+                try
+                {
+                    client.Send(message);
+                    client.Disconnect(true);
+                    client.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Failed to send message", ex);
+                }
             }
-            }
+        }
 
         public bool RemoveStationFromLine(Line line, int stationToRemove)
         {
@@ -208,7 +217,7 @@ The password for your account is
             int[] stationArray = new int[line.Stations.Count()];
             foreach (var item in line.Stations)
             {
-                if(item.Station != stationToRemove)
+                if (item.Station != stationToRemove)
                     stationArray[index++] = item.Station;
             };
             foreach (var item in line.Stations)
