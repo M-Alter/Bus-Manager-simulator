@@ -13,14 +13,14 @@ namespace PlGui
     {
         private IBL bl = BLFactory.GetIBL();
         List<BO.Station> addStationsList = new List<BO.Station>();
-        List<StationStruct> stationStruct = new List<StationStruct>();
+        List<StationClass> stationStruct = new List<StationClass>();
         public AddLine()
         {
             InitializeComponent();
             areaCMBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Areas));
         }
 
-        struct StationStruct
+        class StationClass
         {
             public string Name { get; set; }
             public int Code { get; set; }
@@ -46,9 +46,9 @@ namespace PlGui
             BO.Station firstStation = (BO.Station)firstStopCMBox.SelectedItem as BO.Station;
             BO.Station lastStation = (BO.Station)lastStopCMBox.SelectedItem as BO.Station;
             addStopCMBox.IsEnabled = true;
-            foreach (var item in bl.GetAllStations(station => (station.Code != firstStation.Code) || (station.Code != lastStation.Code)))
+            foreach (var item in bl.GetAllStations(station => (station.Code != firstStation.Code) && (station.Code != lastStation.Code)))
             {
-                stationStruct.Add(new StationStruct { Name = item.Name, Code = item.Code, Checked = false });
+                stationStruct.Add(new StationClass { Name = item.Name, Code = item.Code,/* Checked = false */});
             }
             addStopCMBox.ItemsSource = stationStruct;
         }
@@ -81,7 +81,7 @@ namespace PlGui
             stationsLBox.Items.Add(string.Format($"{firstStation.Code} {firstStation.Name}"));
             foreach (var station in stationStruct)
             {
-                if(station.Checked)
+                if(station.Checked == true)
                     stationsLBox.Items.Add(string.Format($"{station.Code} {station.Name}"));
             }
             //foreach (var station in addStationsList)

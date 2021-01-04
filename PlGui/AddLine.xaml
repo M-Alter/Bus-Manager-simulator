@@ -25,14 +25,14 @@
         <Label Content="Line number" Grid.Column="0" Grid.Row="1" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBox x:Name="lineTBox" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100"/>
         <Label Content="First stop" Grid.Column="0" Grid.Row="2" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ComboBox Name="firstStopCMBox" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="100" IsEnabled="False" SelectionChanged="firstStopCMBox_SelectionChanged"/>
+        <ComboBox Name="firstStopCMBox" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="100" IsEnabled="False" SelectionChanged="firstStopCMBox_SelectionChanged" />
         <Label Content="Last stop" Grid.Column="0" Grid.Row="3" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <ComboBox Name="lastStopCMBox" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Width="100"  IsEnabled="False" SelectionChanged="lastStopCMBox_SelectionChanged"/>
         <Label Content="Add stops" Grid.Column="0" Grid.Row="4" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <ComboBox Name="addStopCMBox" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" Width="100"  IsEnabled="False">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox x:Name="selectStastionCB" Checked="allCheckedBox" Unchecked="allCheckedBox" IsChecked="{Binding Checked}" Content="{Binding Name}">
+                    <CheckBox x:Name="selectStastionCB" Checked="allCheckedBox" Unchecked="allCheckedBox" IsChecked="{Binding Checked}" Content="{Binding Name}" CommandParameter="{Binding Code}">
                         
                     </CheckBox>
                 </DataTemplate>

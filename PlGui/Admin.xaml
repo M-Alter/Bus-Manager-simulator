@@ -22,8 +22,10 @@
                 </ListView>
             </TabItem>
             <TabItem Header="Lines" Width="100">
-                <WrapPanel>
-                    <Button x:Name="addLineBtn" Content="Add Line"  Margin="5" Height="30" Width="100" Click="addLineBtn_Click"/>
+                <Grid>
+                <GroupBox Header="Tools" Margin="300,10,10,10" Height="50" VerticalAlignment="Top" >
+                    <Button x:Name="addLineBtn" Content="Add Line" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Click="addLineBtn_Click"/>
+                </GroupBox>
                     <ListView x:Name="lineslview" ItemsSource="{Binding}" Margin="20,70,20,20" MouseDoubleClick="lineslview_MouseDoubleClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -34,7 +36,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                </WrapPanel>
+                </Grid>
             </TabItem>
             <TabItem Header="Stations" Width="100">
                 <ListView x:Name="stationslview" ItemsSource="{Binding}" Margin="20,70,20,20" MouseDoubleClick="stationslview_MouseDoubleClick">

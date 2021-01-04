@@ -40,6 +40,10 @@ namespace BO
             set { lattitude = value; }
         }
 
+        public override string ToString()
+        {
+            return string.Format($"{Name} {Code}");
+        }
         public IEnumerable<int> LinesAtStation { get; set; }
 
         #endregion
