@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
         mc:Ignorable="d"
-        Title="MainWindow" Height="150" Width="300" ResizeMode="NoResize">
+        Title="MainWindow" Height="200" Width="300" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid x:Name="btnGrid" Grid.Row="0" >
             <Grid.ColumnDefinitions>
@@ -33,6 +34,15 @@
             <Label Content="Password:" Grid.Row="1" VerticalAlignment="Center"/>
             <PasswordBox x:Name="passwordPswrdBox" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
             <Button Height="18" Width="25" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Button_Click"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Label Content="email:"/>
+            <Button x:Name="resetbtn"  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Resend my password by email" Click="resetbtn_Click" />
+            <TextBox x:Name="emailTxtbox" Width="200"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Grid>
     </Grid>
 </Window>

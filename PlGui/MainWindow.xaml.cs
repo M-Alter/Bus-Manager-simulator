@@ -39,5 +39,10 @@ namespace PlGui
             }
 
         }
+
+        private void resetbtn_Click(object sender, RoutedEventArgs e)
+        {
+            bl.ResendPassword(usernameTxtBox.Text, emailTxtbox.Text);
+        }
     }
 }

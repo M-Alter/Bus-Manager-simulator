@@ -187,7 +187,7 @@ The password for you account is
                 client.Connect("smtp.gmail.com", 465, true);
 
                 // Note: only needed if the SMTP server requires authentication
-                client.Authenticate("busmanager.2131.1146", "21311146");
+                client.Authenticate("busmanager.2131.1146@gmail.com", "21311146");
 
                 client.Send(message);
                 client.Disconnect(true);
