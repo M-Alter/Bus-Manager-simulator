@@ -23,8 +23,8 @@ namespace BLAPI
         IEnumerable<Line> GetAllLines();
         bool AddLine(Line line);
         bool RemoveStationFromLine(Line line, int stationToRemove);
-        IEnumerable<string> GetAllUserNames();
-        bool ValidateUser(string userName, string password);
+        IEnumerable<string> GetAllUserNames(bool admin);
+        bool ValidatePassword(string userName, string password);
         void ResendPassword(string userName, string emailAddress);
 
     }
