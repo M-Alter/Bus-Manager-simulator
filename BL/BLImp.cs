@@ -152,15 +152,16 @@ namespace BL
             return true;
         }
 
-        public IEnumerable<string> GetAllUserNames()
+        public IEnumerable<string> GetAllUserNames(bool admin)
         {
             return from item in dl.GetAllUsers()
+                   where item.Admin == admin
                    select item.UserName;
         }
 
-        public bool ValidateUser(string userName, string password)
+        public bool ValidatePassword(string userName, string password)
         {
-            return dl.GetAllUsers().Where(u => u.UserName.ToLower() == userName.ToLower() && u.Password == password && u.Admin == true).Select(u => u.Admin).FirstOrDefault();
+            return dl.ValidatePassword(userName, password);
         }
 
         public void ResendPassword(string userName, string emailAddress)
@@ -174,7 +175,7 @@ namespace BL
             {
                 Text = string.Format(@"Hey {0},
 
-The password for you account is 
+The password for your account is 
 ===============================
 {1}
 ===============================

@@ -224,5 +224,10 @@ namespace DL
             }
             return true;
         }
+
+        public bool ValidatePassword(string userName, string password)
+        {
+            return DataSource.UserList.Exists(u => u.UserName.ToLower() == userName.ToLower() && u.Password == password);
+        }
     }
 }
