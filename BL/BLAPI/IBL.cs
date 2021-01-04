@@ -25,6 +25,7 @@ namespace BLAPI
         bool RemoveStationFromLine(Line line, int stationToRemove);
         IEnumerable<string> GetAllUserNames();
         bool ValidateUser(string userName, string password);
+        void ResendPassword(string userName, string emailAddress);
 
     }
 }

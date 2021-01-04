@@ -4,6 +4,9 @@ using DalApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MailKit.Net.Smtp;
+using MailKit;
+using MimeKit;
 
 namespace BL
 {
@@ -160,11 +163,42 @@ namespace BL
             return dl.GetAllUsers().Where(u => u.UserName.ToLower() == userName.ToLower() && u.Password == password && u.Admin == true).Select(u => u.Admin).FirstOrDefault();
         }
 
+        public void ResendPassword(string userName, string emailAddress)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Bus Manager", "busmanager.2131.1146@gmail.com"));
+            message.To.Add(new MailboxAddress(userName, emailAddress));
+            message.Subject = "Password reminder";
+
+            message.Body = new TextPart("plain")
+            {
+                Text = string.Format(@"Hey {0},
+
+The password for you account is 
+===============================
+{1}
+===============================
+-- Bus Manager",userName, dl.GetAllUsers().Where(u => u.UserName.ToLower() == userName.ToLower()).Select(u => u.Password).FirstOrDefault())
+             };
+
+            //IDispose
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 465, true);
+
+                // Note: only needed if the SMTP server requires authentication
+                client.Authenticate("busmanager.2131.1146", "21311146");
+
+                client.Send(message);
+                client.Disconnect(true);
+            }
+            }
+
         public bool RemoveStationFromLine(Line line, int stationToRemove)
         {
             foreach (var item in line.Stations)
             {
-                dl.RemoveLineStation(item.Station);
+                dl.RemoveAllLineStation(item.Station);
             }
             //if station is first
 
@@ -192,5 +226,7 @@ namespace BL
             line = GetLine(line.Id);
             return true;
         }
+
+        
     }
 }

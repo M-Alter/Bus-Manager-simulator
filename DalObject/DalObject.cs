@@ -212,15 +212,17 @@ namespace DL
             return true;
         }
 
-        public bool RemoveLineStation(int lineID)
+        public bool RemoveAllLineStation(int lineID)
         {
-            if (DataSource.LineStationsList.Remove(
-                DataSource.LineStationsList.Find(item => item.LineId == lineID)
-                )
-                )
-                return true;
-            return false;
-
+            IEnumerable<LineStation> lineStations = from item in DataSource.LineStationsList
+                                                    where item.LineId == lineID
+                                                    select item;
+            foreach (var item in lineStations)
+            {
+                if (!DataSource.LineStationsList.Remove(item))
+                    return false;
+            }
+            return true;
         }
     }
 }
