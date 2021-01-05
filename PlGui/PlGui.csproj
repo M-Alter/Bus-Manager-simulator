@@ -58,6 +58,9 @@
     <Compile Include="AddLine.xaml.cs">
       <DependentUpon>AddLine.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ResetPassword.xaml.cs">
+      <DependentUpon>ResetPassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StationPopUp.xaml.cs">
       <DependentUpon>StationPopUp.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="LinePopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResetPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

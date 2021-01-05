@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
         mc:Ignorable="d"
-        Title="MainWindow" Height="200" Width="300" ResizeMode="NoResize">
+        Title="MainWindow" Height="200" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -30,19 +30,20 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Content="Username:" VerticalAlignment="Center"/>
-            <ComboBox x:Name="usernameCmbBox" Grid.Column="1" VerticalAlignment="Center"/>
+            <ComboBox x:Name="usernameCmbBox" Grid.Column="1" VerticalAlignment="Center" SelectionChanged="usernameCmbBox_SelectionChanged"/>
             <Label Content="Password:" Grid.Row="1" VerticalAlignment="Center"/>
             <PasswordBox x:Name="passwordPswrdBox" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
             <Button Height="18" Width="25" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Button_Click"/>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
-                <RowDefinition/>
+                <!--<RowDefinition/>-->
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="email:"/>
-            <Button x:Name="resetbtn"  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Resend my password by email" Click="resetbtn_Click" />
-            <TextBox x:Name="emailTxtbox" Width="200"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <!--<Label Content="email:"/>
+            <TextBox x:Name="emailTxtbox" Width="200"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
+            <Button x:Name="resetbtn"  Grid.Row="1" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Forgot the password" Click="resetbtn_Click" IsEnabled="False" />
+            
         </Grid>
     </Grid>
 </Window>

@@ -45,7 +45,14 @@ namespace PlGui
 
         private void resetbtn_Click(object sender, RoutedEventArgs e)
         {
-            bl.ResendPassword(usernameCmbBox.Text, emailTxtbox.Text);
+            ResetPassword resetPassword = new ResetPassword(usernameCmbBox.Text);
+            resetPassword.ShowDialog();
+            //bl.ResendPassword(usernameCmbBox.Text, emailTxtbox.Text);
+        }
+
+        private void usernameCmbBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            resetbtn.IsEnabled = true;
         }
     }
 }

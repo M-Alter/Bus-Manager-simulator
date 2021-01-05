@@ -9,8 +9,11 @@
     <Grid>
 
         <Grid x:Name="stationGrid" Margin="15">
-            
-                           
+            <!--<ListBox x:Name="linesLbox" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Stretch" Width="100" DataContext="{Binding linesList}">
+                <TextBlock Text="{Binding}"/>
+            </ListBox>-->
+
+
         </Grid>
     </Grid>
 </Window>
