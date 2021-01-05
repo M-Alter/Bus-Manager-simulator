@@ -145,5 +145,10 @@ namespace PlGui
                 info.Show();
             }
         }
+
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+        {
+            SystemCommands.MinimizeWindow(this);
+        }
     }
 }

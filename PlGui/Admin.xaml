@@ -9,6 +9,7 @@
     <Grid>
         <Menu >
             <MenuItem Header="File">
+                <MenuItem Header="Minimize" Click="Minimize_Click"/>
                 <MenuItem Header="Exit" Click="Exit_Click" />
             </MenuItem>
             <MenuItem Header="View">
@@ -17,6 +18,14 @@
                 <MenuItem Header="Stations" Click="MenuStationsItem_Click"/>
             </MenuItem>
             <MenuItem Header="Tools">
+                <MenuItem Header="Add a Bus"/>
+                <MenuItem Header="Remove a Bus"/>
+                <Separator/>
+                <MenuItem Header="Add a Line" Click="addLineBtn_Click"/>
+                <MenuItem Header="Remove a Line"/>
+                <Separator/>
+                <MenuItem Header="Add a Station"/>
+                <MenuItem Header="Remove a Station"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About" Click="About_Click"/>
@@ -29,7 +38,7 @@
                         <ContextMenu>
                             <MenuItem Header="info" Click="BusesMenuInfoItem_Click"/>
                         </ContextMenu>
-                        
+
                     </ListView.ContextMenu>
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -43,22 +52,22 @@
             </TabItem>
             <TabItem Header="Lines" Width="100">
                 <Grid>
-                <GroupBox Header="Tools" Margin="300,10,10,10" Height="50" VerticalAlignment="Top" >
-                    <Button x:Name="addLineBtn" Content="Add Line" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Click="addLineBtn_Click"/>
-                </GroupBox>
+                    <GroupBox Header="Tools" Margin="300,10,10,10" Height="50" VerticalAlignment="Top" >
+                        <Button x:Name="addLineBtn" Content="Add Line" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Click="addLineBtn_Click"/>
+                    </GroupBox>
                     <ListView x:Name="lineslview" ItemsSource="{Binding}" Margin="20,70,20,20" MouseDoubleClick="lineslview_MouseDoubleClick">
                         <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <WrapPanel>
-                                <TextBlock Text="{Binding Code}" Width="50" FontSize="20"/>
-                                <TextBlock Text="{Binding FirstStation}" Width="Auto" FontSize="20" Padding="10,0"/>
-                                <TextBlock Text="{Binding FirstStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
-                                <TextBlock Text="{Binding LastStation}" Width="Auto" FontSize="20" Padding="10,0"/>
-                                <TextBlock Text="{Binding LastStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
-                             </WrapPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding Code}" Width="50" FontSize="20"/>
+                                    <TextBlock Text="{Binding FirstStation}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                    <TextBlock Text="{Binding FirstStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                    <TextBlock Text="{Binding LastStation}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                    <TextBlock Text="{Binding LastStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
             </TabItem>
             <TabItem Header="Stations" Width="100">
@@ -73,8 +82,21 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </TabItem>
+            <TabItem Header="Adjacent Stations">
+                <ListView x:Name="adjStationsLview" ItemsSource="{Binding}" Margin="20,70,20,20">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding Code}" Width="50" FontSize="20"/>
+                                <TextBlock Text="{Binding FirstStation}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <TextBlock Text="{Binding FirstStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <TextBlock Text="{Binding LastStation}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <TextBlock Text="{Binding LastStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </TabItem>
         </TabControl>
-        <Menu HorizontalAlignment="Left" Height="100" Margin="322,487,0,-164.5" VerticalAlignment="Top" Width="100"/>
-
     </Grid>
 </Window>
