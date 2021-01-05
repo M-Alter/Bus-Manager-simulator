@@ -120,5 +120,30 @@ namespace PlGui
         {
             tabs.SelectedIndex = 2;
         }
+
+        private void buseslview_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var currentBus = buseslview.SelectedItem as Bus;
+            if (currentBus is Bus)
+            {
+                ContextMenu contextMenu = new ContextMenu();
+                //contextMenu.
+                //BusPopUp info = new BusPopUp(currentBus);
+                //info.DataContext = currentBus;
+                //info.Show();
+            }
+        }
+
+        private void BusesMenuInfoItem_Click(object sender, RoutedEventArgs e)
+        {
+            var currentBus = buseslview.SelectedItem as Bus;
+            if (currentBus is Bus)
+            {
+
+                BusPopUp info = new BusPopUp(currentBus);
+                info.DataContext = currentBus;
+                info.Show();
+            }
+        }
     }
 }

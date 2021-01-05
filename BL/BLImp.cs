@@ -63,6 +63,8 @@ namespace BL
             Line line = new Line();
             var tempLine = dl.GetLine(id);
             tempLine.CopyPropertiesTo(line);
+            line.FirstStationName = dl.GetStation(line.FirstStation).Name;
+            line.LastStationName = dl.GetStation(line.LastStation).Name;
             var stationIDs = from numbers in dl.GetLineStations(id)
                              select numbers;
             int index = 1;

@@ -17,7 +17,6 @@
                 <MenuItem Header="Stations" Click="MenuStationsItem_Click"/>
             </MenuItem>
             <MenuItem Header="Tools">
-                
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About" Click="About_Click"/>
@@ -25,7 +24,13 @@
         </Menu>
         <TabControl x:Name="tabs" Margin="3,20,3,3">
             <TabItem Header="Buses" Width="100">
-                <ListView x:Name="buseslview" Margin="20,70,20,20" ItemsSource="{Binding}" MouseDoubleClick="buseslview_MouseDoubleClick">
+                <ListView x:Name="buseslview" Margin="20,70,20,20" ItemsSource="{Binding}" MouseDoubleClick="buseslview_MouseDoubleClick" MouseRightButtonUp="buseslview_MouseRightButtonUp">
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="info" Click="BusesMenuInfoItem_Click"/>
+                        </ContextMenu>
+                        
+                    </ListView.ContextMenu>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel Visibility="Visible">
@@ -42,12 +47,15 @@
                     <Button x:Name="addLineBtn" Content="Add Line" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Click="addLineBtn_Click"/>
                 </GroupBox>
                     <ListView x:Name="lineslview" ItemsSource="{Binding}" Margin="20,70,20,20" MouseDoubleClick="lineslview_MouseDoubleClick">
-                    <ListView.ItemTemplate>
+                        <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
-                                <TextBlock Text="{Binding Id}" Width="120" FontSize="20"/>
-                                <TextBlock Text="{Binding Code}" Width="Auto" FontSize="20"/>
-                            </WrapPanel>
+                                <TextBlock Text="{Binding Code}" Width="50" FontSize="20"/>
+                                <TextBlock Text="{Binding FirstStation}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <TextBlock Text="{Binding FirstStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <TextBlock Text="{Binding LastStation}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <TextBlock Text="{Binding LastStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
+                             </WrapPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

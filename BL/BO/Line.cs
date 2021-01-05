@@ -41,11 +41,15 @@ namespace BO
             set { firstStation = value; }
         }
 
+        public string FirstStationName { get; set; }
+
         public int LastStation
         {
             get { return lastStation; }
             set { lastStation = value; }
         }
+
+        public string LastStationName { get; set; }
         public IEnumerable<LineStation> Stations { get; set; }
         #endregion
     }
