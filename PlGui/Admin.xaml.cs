@@ -93,5 +93,17 @@ namespace PlGui
             }
             lineslview.DataContext = lines;
         }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(-1);
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(@"© All rights reserved
+Menachem Alter & Inon Bezalel
+","About",MessageBoxButton.OK,MessageBoxImage.Information);
+        }
     }
 }
