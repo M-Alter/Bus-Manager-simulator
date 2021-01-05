@@ -24,6 +24,9 @@ namespace BLAPI
         IEnumerable<Line> GetAllLines();
         bool AddLine(Line line);
         bool RemoveStationFromLine(Line line, int stationToRemove);
+        bool AddAdjacentStations(int first, int second);
+        AdjacentStations GetAdjacentStations(int first, int second);
+        IEnumerable<AdjacentStations> GetAllAdjacentStations();
         IEnumerable<string> GetAllUserNames(bool admin);
         bool ValidatePassword(string userName, string password);
         void ResendPassword(string userName, string emailAddress);

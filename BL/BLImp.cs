@@ -246,5 +246,23 @@ The password for your account is
                    where predicate(station)
                    select station;
         }
+
+        public bool AddAdjacentStations(int first, int second)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AdjacentStations GetAdjacentStations(int first, int second)
+        {
+            DO.AdjacentStations doAdjacentStations = dl.GetAdjacentStations(first, second);
+            return(AdjacentStations) doAdjacentStations.CopyPropertiesToNew(typeof(AdjacentStations));            
+        }
+
+        public IEnumerable<AdjacentStations> GetAllAdjacentStations()
+        {
+            return from item in dl.GetAllAdjacentStations()
+                   let current = (AdjacentStations)item.CopyPropertiesToNew(typeof(AdjacentStations))
+                   select current;
+        }
     }
 }

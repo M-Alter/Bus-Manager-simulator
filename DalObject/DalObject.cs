@@ -229,5 +229,11 @@ namespace DL
         {
             return DataSource.UserList.Exists(u => u.UserName.ToLower() == userName.ToLower() && u.Password == password);
         }
+
+        public IEnumerable<AdjacentStations> GetAllAdjacentStations()
+        {
+            return from item in DataSource.AdjacentStationsList
+                   select item;
+        }
     }
 }

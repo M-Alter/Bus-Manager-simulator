@@ -43,6 +43,7 @@ namespace DalApi
         #region AdjacentStations
         AdjacentStations GetAdjacentStations(int first, int second);
         bool AddAdjacentStations(AdjacentStations adjacentStations);
+        IEnumerable<AdjacentStations> GetAllAdjacentStations();
 
         #endregion
 

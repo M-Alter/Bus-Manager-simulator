@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="BLAPI\BLFactory.cs" />
     <Compile Include="BLImp.cs" />
+    <Compile Include="BO\AdjacentStations.cs" />
     <Compile Include="BO\Bus.cs" />
     <Compile Include="BO\Enums.cs" />
     <Compile Include="BLAPI\IBL.cs" />
