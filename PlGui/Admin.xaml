@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="Admin Window" Height="450" Width="800">
     <Grid>
-        <Menu>
+        <Menu >
             <MenuItem Header="File">
                 <MenuItem Header="Exit" Click="Exit_Click" />
             </MenuItem>
             <MenuItem Header="View">
-                <MenuItem Header="Buses"/>
-                <MenuItem Header="Lines/"/>
-                <MenuItem Header="Stations"/>
+                <MenuItem Header="Buses" Click="MenuBusesItem_Click"/>
+                <MenuItem Header="Lines" Click="MenuLinesItem_Click"/>
+                <MenuItem Header="Stations" Click="MenuStationsItem_Click"/>
             </MenuItem>
             <MenuItem Header="Tools">
                 
@@ -23,7 +23,7 @@
                 <MenuItem Header="About" Click="About_Click"/>
             </MenuItem>
         </Menu>
-        <TabControl Margin="3,20,3,3">
+        <TabControl x:Name="tabs" Margin="3,20,3,3">
             <TabItem Header="Buses" Width="100">
                 <ListView x:Name="buseslview" Margin="20,70,20,20" ItemsSource="{Binding}" MouseDoubleClick="buseslview_MouseDoubleClick">
                     <ListView.ItemTemplate>

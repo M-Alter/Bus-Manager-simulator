@@ -101,9 +101,24 @@ namespace PlGui
 
         private void About_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(@"© All rights reserved
-Menachem Alter & Inon Bezalel
+            MessageBox.Show(@"Version 1.0.0.0
+© 2021 Menachem Alter & Inon Bezalel
 ","About",MessageBoxButton.OK,MessageBoxImage.Information);
+        }
+
+        private void MenuBusesItem_Click(object sender, RoutedEventArgs e)
+        {
+            tabs.SelectedIndex = 0;
+        }
+
+        private void MenuLinesItem_Click(object sender, RoutedEventArgs e)
+        {
+            tabs.SelectedIndex = 1;
+        }
+
+        private void MenuStationsItem_Click(object sender, RoutedEventArgs e)
+        {
+            tabs.SelectedIndex = 2;
         }
     }
 }
