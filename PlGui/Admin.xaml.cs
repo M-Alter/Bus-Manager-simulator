@@ -25,6 +25,8 @@ namespace PlGui
         ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
         ObservableCollection<Station> stations = new ObservableCollection<Station>();
         ObservableCollection<BO.Line> lines = new ObservableCollection<BO.Line>();
+        ObservableCollection<AdjacentStations> adjacentStations = new ObservableCollection<AdjacentStations>();
+
         IBL bl = BLFactory.GetIBL(); 
         public Admin()
         {
@@ -45,15 +47,21 @@ namespace PlGui
                 lines.Add(item);
             }
             lineslview.DataContext = lines;
+
+            foreach (var item in bl.GetAllAdjacentStations())
+            {
+                adjacentStations.Add(item);
+            }
+            adjStationsLview.DataContext = adjacentStations;
         }
 
         private void lineslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var currrentLine = lineslview.SelectedItem as BO.Line;
-            if (currrentLine is BO.Line)
+            var currentLine = lineslview.SelectedItem as BO.Line;
+            if (currentLine is BO.Line)
             {
-                LinePopUp info = new LinePopUp(currrentLine);
-                info.DataContext = currrentLine;
+                LinePopUp info = new LinePopUp(currentLine);
+                info.DataContext = currentLine;
                 info.Show(); 
             }
         }

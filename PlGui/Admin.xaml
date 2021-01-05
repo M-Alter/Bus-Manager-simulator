@@ -87,11 +87,10 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
-                                <TextBlock Text="{Binding Code}" Width="50" FontSize="20"/>
-                                <TextBlock Text="{Binding FirstStation}" Width="Auto" FontSize="20" Padding="10,0"/>
-                                <TextBlock Text="{Binding FirstStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
-                                <TextBlock Text="{Binding LastStation}" Width="Auto" FontSize="20" Padding="10,0"/>
-                                <TextBlock Text="{Binding LastStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <TextBlock Text="{Binding Station1}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <TextBlock Text="{Binding Station2}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <TextBlock Text="{Binding Distance}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <TextBlock Text="{Binding Time}" Width="Auto" FontSize="20" Padding="10,0"/>
                             </WrapPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>

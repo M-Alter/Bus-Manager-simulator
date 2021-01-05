@@ -1,5 +1,6 @@
 ﻿using BLAPI;
 using System.Windows;
+using System.Windows.Input;
 
 namespace PlGui
 {
@@ -53,6 +54,14 @@ namespace PlGui
         private void usernameCmbBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             resetbtn.IsEnabled = true;
+        }
+
+        private void passwordPswrdBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter || e.Key == Key.Return)
+            {
+                this.Button_Click(sender, e);
+            }
         }
     }
 }
