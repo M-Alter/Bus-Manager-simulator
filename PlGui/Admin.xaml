@@ -88,7 +88,9 @@
                         <DataTemplate>
                             <WrapPanel>
                                 <TextBlock Text="{Binding Station1}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <TextBlock Text="{Binding Station1Name}" Width="200" FontSize="20" Padding="10,0"/>
                                 <TextBlock Text="{Binding Station2}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <TextBlock Text="{Binding Station2Name}" Width="200" FontSize="20" Padding="10,0"/>
                                 <TextBlock Text="{Binding Distance}" Width="Auto" FontSize="20" Padding="10,0"/>
                                 <TextBlock Text="{Binding Time}" Width="Auto" FontSize="20" Padding="10,0"/>
                             </WrapPanel>

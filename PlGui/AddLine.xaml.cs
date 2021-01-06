@@ -93,7 +93,7 @@ namespace PlGui
                 BO.AdjacentStations[] adjacentStations = new BO.AdjacentStations[ex.adjacentStationsArray.Length];
                 adjacentStations = ex.adjacentStationsArray;
                 AdjacentStationInfo adjacentStationInfo = new AdjacentStationInfo(adjacentStations);
-                adjacentStationInfo.Show();
+                adjacentStationInfo.ShowDialog();
             }
             Close();
         }
