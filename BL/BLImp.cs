@@ -149,7 +149,7 @@ namespace BL
             {
                 if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == null)
                 {
-                    adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1] });
+                    adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station1Name = dl.GetStation(stationArray[i]).Name, Station2 = stationArray[i + 1], Station2Name = dl.GetStation(stationArray[i+1]).Name});
                 }
                 //if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == null)
                 //{
@@ -272,14 +272,22 @@ The password for your account is
         public AdjacentStations GetAdjacentStations(int first, int second)
         {
             DO.AdjacentStations doAdjacentStations = dl.GetAdjacentStations(first, second);
-            return(AdjacentStations) doAdjacentStations.CopyPropertiesToNew(typeof(AdjacentStations));            
+            AdjacentStations adjacentStations = new AdjacentStations();
+            doAdjacentStations.CopyPropertiesTo(adjacentStations);
+            adjacentStations.Station1Name = GetStation(adjacentStations.Station1).Name;
+            adjacentStations.Station2Name = GetStation(adjacentStations.Station2).Name;
+            return adjacentStations;
+            //return(AdjacentStations) doAdjacentStations.CopyPropertiesToNew(typeof(AdjacentStations));            
         }
 
         public IEnumerable<AdjacentStations> GetAllAdjacentStations()
         {
             return from item in dl.GetAllAdjacentStations()
-                   let current = (AdjacentStations)item.CopyPropertiesToNew(typeof(AdjacentStations))
+                   let current = GetAdjacentStations(item.Station1, item.Station2)
                    select current;
+
+                   //let current = (AdjacentStations)item.CopyPropertiesToNew(typeof(AdjacentStations))
+                   //select current;
         }
     }
 }

@@ -25,16 +25,25 @@ namespace PlGui
             foreach (var item in adjacentStations)
             {
                 innerGrid.RowDefinitions.Add(new RowDefinition());
+                this.Height += 150;
             }
             for (int i = 0; i < adjacentStations.Length; i++)
             {
-                WrapPanel panel = new WrapPanel();
-                panel.Children.Add(new TextBlock { Text = adjacentStations[i].Station1.ToString() });
-                panel.Children.Add(new TextBlock { Text = adjacentStations[i].Station2.ToString() });
-                panel.Children.Add(new TextBox { Name = "distanceTbox" + i.ToString() });
-                panel.Children.Add(new TextBox { Name = "timeTbox" + i.ToString() });
-                Grid.SetRow(panel, i);
-                innerGrid.Children.Add(panel);
+                StackPanel sPanel = new StackPanel();
+                WrapPanel wPanelFrom = new WrapPanel();
+                WrapPanel wPanelTo = new WrapPanel();
+                WrapPanel wPanelInfo = new WrapPanel();
+                sPanel.Children.Add(wPanelFrom);
+                sPanel.Children.Add(wPanelTo);
+                sPanel.Children.Add(wPanelInfo);
+                wPanelFrom.Children.Add(new TextBlock { Text = string.Format("{0,-6} {1,-7}{2,-25}","From:", adjacentStations[i].Station1.ToString(), adjacentStations[i].Station1Name),  /*Padding = new Thickness(0, 0, 20, 0),*/ FontSize = 20});
+                wPanelTo.Children.Add(new TextBlock { Text = string.Format("{0,-8} {1,-7}{2,-25}", "To:", adjacentStations[i].Station2.ToString(), adjacentStations[i].Station2Name),  /*Padding = new Thickness(0, 0, 20, 0),*/ FontSize = 20 }); ;
+                wPanelInfo.Children.Add(new TextBlock { Text = "Distance", Padding = new Thickness(0, 0, 10, 0), FontSize = 20 });
+                wPanelInfo.Children.Add(new TextBox { Name = "distanceTbox" + i.ToString(), Width = 70, Padding = new Thickness(0, 0, 10, 0) });
+                wPanelInfo.Children.Add(new TextBlock { Text = "Time", Padding = new Thickness(10, 0, 10, 0), FontSize = 20 });
+                wPanelInfo.Children.Add(new TextBox { Name = "timeTbox" + i.ToString(), Width = 70, Padding = new Thickness(0, 0, 10, 0) });
+                Grid.SetRow(sPanel, i);
+                innerGrid.Children.Add(sPanel);
             }
         }
     }

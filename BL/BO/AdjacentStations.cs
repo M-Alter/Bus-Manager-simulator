@@ -22,6 +22,9 @@ namespace BO
             set { station1 = value; }
         }
 
+        public string Station1Name { get; set; }
+        public string Station2Name { get; set; }
+
         public int Station2
         {
             get { return station2; }

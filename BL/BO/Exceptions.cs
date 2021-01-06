@@ -5,14 +5,12 @@ namespace BO
 {
     public class AdjacentStationsExceptions : Exception
     {
-        public List<AdjacentStations> adjacentStations = new List<AdjacentStations>();
+        public AdjacentStations[] adjacentStationsArray;
         public AdjacentStationsExceptions(string message, params AdjacentStations[] adjacentStations)
             : base(message)
         {
-            foreach (var item in adjacentStations)
-            {
-                this.adjacentStations.Add(item);
-            }
+            adjacentStationsArray = new AdjacentStations[adjacentStations.Length];
+            adjacentStationsArray = adjacentStations;
         }
     }
 }

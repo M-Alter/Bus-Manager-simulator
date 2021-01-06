@@ -90,11 +90,10 @@ namespace PlGui
             }
             catch (BO.AdjacentStationsExceptions ex)
             {
-                foreach (var item in ex.adjacentStations)
-                {
-
-                }
-
+                BO.AdjacentStations[] adjacentStations = new BO.AdjacentStations[ex.adjacentStationsArray.Length];
+                adjacentStations = ex.adjacentStationsArray;
+                AdjacentStationInfo adjacentStationInfo = new AdjacentStationInfo(adjacentStations);
+                adjacentStationInfo.Show();
             }
             Close();
         }
