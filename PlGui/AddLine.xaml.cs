@@ -14,7 +14,7 @@ namespace PlGui
     {
         private IBL bl = BLFactory.GetIBL();
         List<BO.Station> addStationsList = new List<BO.Station>();
-        List<StationClass> stationForList = new List<StationClass>();
+        List<StationClass> stationForListView = new List<StationClass>();
         public AddLine()
         {
             InitializeComponent();
@@ -56,9 +56,9 @@ namespace PlGui
             stationsLBox.Items.Add(string.Format($"{lastStation.Code} {lastStation.Name}"));
             foreach (var item in bl.GetAllStations(station => (station.Code != firstStation.Code) && (station.Code != lastStation.Code)))
             {
-                stationForList.Add(new StationClass { Name = item.Name, Code = item.Code,/* Checked = false */});
+                stationForListView.Add(new StationClass { Name = item.Name, Code = item.Code,/* Checked = false */});
             }
-            addStopCMBox.ItemsSource = stationForList;
+            addStopCMBox.ItemsSource = stationForListView;
         }
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
@@ -70,18 +70,32 @@ namespace PlGui
             BO.Station lastStation = (BO.Station)lastStopCMBox.SelectedItem as BO.Station;
             List<BO.LineStation> stations = new List<BO.LineStation>();
             stations.Add(new BO.LineStation { Station = firstStation.Code, StationName = firstStation.Name, Index = index++ });
-            foreach (var item in stationForList)
-                stations.Add(new BO.LineStation {Station = item.Code, StationName = item.Name, Index = index++ });
+            foreach (var item in stationForListView)
+                if (item.Checked)
+                {
+                    stations.Add(new BO.LineStation { Station = item.Code, StationName = item.Name, Index = index++ });
+                }
             stations.Add(new BO.LineStation { Station = lastStation.Code, StationName = lastStation.Name, Index = index++ });
             BO.Line line = new BO.Line
             {
                 Area = area,
-                Code = lineNumber,
+                LineNumber = lineNumber,
                 FirstStation = firstStation.Code,
                 LastStation = lastStation.Code,
                 Stations = stations
             };
-            bl.AddLine(line);
+            try
+            {
+                bl.AddLine(line);
+            }
+            catch (BO.AdjacentStationsExceptions ex)
+            {
+                foreach (var item in ex.adjacentStations)
+                {
+
+                }
+
+            }
             Close();
         }
 
@@ -96,9 +110,9 @@ namespace PlGui
             BO.Station lastStation = (BO.Station)lastStopCMBox.SelectedItem as BO.Station;
             stationsLBox.Items.Clear();
             stationsLBox.Items.Add(string.Format($"{firstStation.Code} {firstStation.Name}"));
-            foreach (var station in stationForList)
+            foreach (var station in stationForListView)
             {
-                if(station.Checked == true)
+                if (station.Checked == true)
                     stationsLBox.Items.Add(string.Format($"{station.Code} {station.Name}"));
             }
             stationsLBox.Items.Add(string.Format($"{lastStation.Code} {lastStation.Name}"));
@@ -114,9 +128,9 @@ namespace PlGui
             {
                 if (text.Text.Length > 0)
                 {
-                    
-                    
-                        
+
+
+
                 }
                 e.Handled = true;
                 return;
@@ -139,14 +153,14 @@ namespace PlGui
                     (Keyboard.IsKeyDown(Key.LeftAlt)) || (Keyboard.IsKeyDown(Key.RightAlt))) return;
             }
             e.Handled = true;
-            MessageBox.Show("Only number are allowed","Line Number", MessageBoxButton.OKCancel);
+            MessageBox.Show("Only number are allowed", "Line Number", MessageBoxButton.OKCancel);
 
 
         }
 
         private void reset_Click(object sender, RoutedEventArgs e)
         {
-            
+
             //areaCMBox.SelectedItem = null;
             //lineTBox.Clear();
             //lastStopCMBox.SelectedItem = null;

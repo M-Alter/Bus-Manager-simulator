@@ -55,7 +55,8 @@ namespace PlGui
             adjStationsLview.DataContext = adjacentStations;
         }
 
-        private void lineslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void 
+            lineslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var currentLine = lineslview.SelectedItem as BO.Line;
             if (currentLine is BO.Line)

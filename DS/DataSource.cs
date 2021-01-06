@@ -67,18 +67,20 @@ namespace DS
                 new Station{Code = 38849, Lattitude = 31.963668, Longitude = 34.836363, Name = "מחנה צריפין\\מועדון"}
 
             };
+
             LineList = new List<Line>
             {
-                new Line    {    Area = Enums.Areas.CENTRAL, Code = 1, Id = 1, FirstStation = 38831, LastStation = 38836     }
+                new Line    {    Area = Enums.Areas.CENTRAL, LineNumber = 1, PersonalId = 9, FirstStation = 38831, LastStation = 38836     }
             };
+
             LineStationsList = new List<LineStation>
             {
-                new LineStation     {   StationCode = 38831, LineId = 1, LineStationIndex = 1, NextStation = 38832, PrevStation = 0     },
-                new LineStation     {   StationCode = 38832, LineId = 1, LineStationIndex = 2, NextStation = 38833, PrevStation = 38831     },
-                new LineStation     {   StationCode = 38833, LineId = 1, LineStationIndex = 3, NextStation = 38834, PrevStation = 38832     },
-                new LineStation     {   StationCode = 38834, LineId = 1, LineStationIndex = 4, NextStation = 38835, PrevStation = 38833     },
-                new LineStation     {   StationCode = 38835, LineId = 1, LineStationIndex = 5, NextStation = 38836, PrevStation = 38834     },
-                new LineStation     {   StationCode = 38836, LineId = 1, LineStationIndex = 6, NextStation = 0, PrevStation = 38835     }
+                new LineStation     {   StationCode = 38831, LineId = 9, LineStationIndex = 1, NextStation = 38832, PrevStation = 0     },
+                new LineStation     {   StationCode = 38832, LineId = 9, LineStationIndex = 2, NextStation = 38833, PrevStation = 38831     },
+                new LineStation     {   StationCode = 38833, LineId = 9, LineStationIndex = 3, NextStation = 38834, PrevStation = 38832     },
+                new LineStation     {   StationCode = 38834, LineId = 9, LineStationIndex = 4, NextStation = 38835, PrevStation = 38833     },
+                new LineStation     {   StationCode = 38835, LineId = 9, LineStationIndex = 5, NextStation = 38836, PrevStation = 38834     },
+                new LineStation     {   StationCode = 38836, LineId = 9, LineStationIndex = 6, NextStation = 0, PrevStation = 38835     }
             };
             UserList = new List<User>
             {

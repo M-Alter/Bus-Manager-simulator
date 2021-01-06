@@ -59,7 +59,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
-                                    <TextBlock Text="{Binding Code}" Width="50" FontSize="20"/>
+                                    <TextBlock Text="{Binding LineNumber}" Width="50" FontSize="20"/>
                                     <TextBlock Text="{Binding FirstStation}" Width="Auto" FontSize="20" Padding="10,0"/>
                                     <TextBlock Text="{Binding FirstStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
                                     <TextBlock Text="{Binding LastStation}" Width="Auto" FontSize="20" Padding="10,0"/>

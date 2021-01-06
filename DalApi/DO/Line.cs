@@ -9,23 +9,23 @@ namespace DO
     public class Line
     {
         #region Fields
-        private int id;
-        private int code;
+        private int personalId;
+        private int lineNumber;
         private Enums.Areas areas;
         private int firstStation;
         private int lastStation;
         #endregion
 
         #region Properties
-        public int Id
+        public int PersonalId
         {
-            get { return id; }
-            set { id = value; }
+            get { return personalId; }
+            set { personalId = value; }
         }
-        public int Code
+        public int LineNumber
         {
-            get { return code; }
-            set { code = value; }
+            get { return lineNumber; }
+            set { lineNumber = value; }
         }
 
         public Enums.Areas Area

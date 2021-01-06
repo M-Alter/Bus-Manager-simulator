@@ -132,7 +132,7 @@ namespace DL
 
         public Line GetLine(int id)
         {
-            Line result = DataSource.LineList.Find(s => s.Id == id);
+            Line result = DataSource.LineList.Find(s => s.PersonalId == id);
 
             //  if (result != null)
             {

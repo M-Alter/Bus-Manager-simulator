@@ -28,7 +28,7 @@ namespace PlGui
         public LinePopUp(BO.Line line)
         {
             InitializeComponent();
-            Title = string.Format("Line: " + line.Code  + " in " + line.Area.ToString().ToLower() + " area | info");
+            Title = string.Format("Line: " + line.LineNumber  + " in " + line.Area.ToString().ToLower() + " area | info");
             lineGrid.Visibility = Visibility.Visible;
         }
 

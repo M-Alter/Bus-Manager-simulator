@@ -20,8 +20,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Margin="3,0,0,0" Content="Line ID:" Grid.Row="0" />
-            <Label Content="{Binding Code}" Margin="100,0,0,0" Grid.Column="0" Grid.Row="0"/>
+            <Label Margin="3,0,0,0" Content="Line Number:" Grid.Row="0" />
+            <Label Content="{Binding LineNumber}" Margin="100,0,0,0" Grid.Column="0" Grid.Row="0"/>
             <Label Margin="3,0,0,0" Content="First Station:" Grid.Row="1"/>
             <Label Content="{Binding FirstStation}" Margin="100,0,0,0" Grid.Column="0" Grid.Row="1"/>
             <Label Margin="3,0,0,0" Content="Last Station:" Grid.Column="1" Grid.Row="1"/>

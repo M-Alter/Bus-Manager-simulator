@@ -11,6 +11,7 @@ namespace BL
 {
     internal class BLImp : IBL
     {
+        static int lineIdGenerator = 10;
         IDL dl = DLFactory.GetDL();
         static Random r = new Random(DateTime.Now.Millisecond);
         public IEnumerable<Bus> GetAllBuses()
@@ -36,7 +37,7 @@ namespace BL
         public IEnumerable<Line> GetAllLines()
         {
             return from item in dl.GetAllLines()
-                   let line = GetLine(item.Id)
+                   let line = GetLine(item.PersonalId)
                    select line;
         }
 
@@ -65,7 +66,7 @@ namespace BL
             tempLine.CopyPropertiesTo(line);
             line.FirstStationName = dl.GetStation(line.FirstStation).Name;
             line.LastStationName = dl.GetStation(line.LastStation).Name;
-            var stationIDs = from numbers in dl.GetLineStations(id)
+            var stationIDs = from numbers in dl.GetLineStations(line.PersonalId)
                              select numbers;
             int index = 1;
             line.Stations = from numbers in stationIDs
@@ -114,13 +115,15 @@ namespace BL
 
         public bool AddLine(Line line)
         {
-            var lineBO = dl.GetLine(line.Code);
+            //need to add method to get all line numbers
+            var lineBO = dl.GetLine(line.PersonalId);
             if (lineBO != null)
             {
                 throw new Exception("This line already exist");
             }
             DO.Line lineDO = new DO.Line();
             line.CopyPropertiesTo(lineDO);
+            lineDO.PersonalId = ++lineIdGenerator;
             dl.AddLine(lineDO);
             int index = 0;
             int[] stationArray = new int[line.Stations.Count()];
@@ -132,23 +135,37 @@ namespace BL
             for (int i = 0; i < stationArray.Length; i++)
             {
                 if (i == 0)
-                    dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = 1, StationCode = stationArray[0], NextStation = stationArray[1], PrevStation = 0 });
+                    dl.AddLineStation(new DO.LineStation { LineId = lineIdGenerator, LineStationIndex = 1, StationCode = stationArray[0], NextStation = stationArray[1], PrevStation = 0 });
                 else if (i == stationArray.Length - 1)
-                    dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = 0, PrevStation = stationArray[i - 1] });
+                    dl.AddLineStation(new DO.LineStation { LineId = lineIdGenerator, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = 0, PrevStation = stationArray[i - 1] });
                 else
-                    dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
+                    dl.AddLineStation(new DO.LineStation { LineId = lineIdGenerator, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
             }
 
-            double distance;
-            double distanceTime;
+            //double distance;
+            //double distanceTime;
+            List<AdjacentStations> adjacentStations = new List<AdjacentStations>();
             for (int i = 0; i < stationArray.Length - 1; i++)
             {
                 if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == null)
                 {
-                    distance = r.NextDouble() * 10;
-                    distanceTime = distance * r.Next(20, 50) / 60 / 60;
-                    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = distance, Time = new TimeSpan((int)distanceTime % 60 % 60, (int)distanceTime % 60 / 60, (int)distanceTime / 60 / 60) });
+                    adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1] });
                 }
+                //if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == null)
+                //{
+                //    distance = r.NextDouble() * 10;
+                //    distanceTime = distance * r.Next(20, 50) / 60 / 60;
+                //    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = distance, Time = new TimeSpan((int)distanceTime % 60 % 60, (int)distanceTime % 60 / 60, (int)distanceTime / 60 / 60) });
+                //}
+            }
+            if (adjacentStations.Count > 0)
+            {
+                AdjacentStations[] AdjacentStationsArray = new AdjacentStations[adjacentStations.Count];
+                for (int i = 0; i < adjacentStations.Count; i++)
+                {
+                    AdjacentStationsArray[i] = adjacentStations[i];
+                }
+                throw new AdjacentStationsExceptions("these adjacent stations are missing some info", AdjacentStationsArray);
             }
             return true;
         }
@@ -229,13 +246,13 @@ The password for your account is
             for (int i = 0; i < stationArray.Length; i++)
             {
                 if (i == 0)
-                    dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = 1, StationCode = stationArray[0], NextStation = stationArray[1], PrevStation = 0 });
+                    dl.AddLineStation(new DO.LineStation { LineId = line.PersonalId, LineStationIndex = 1, StationCode = stationArray[0], NextStation = stationArray[1], PrevStation = 0 });
                 else if (i == stationArray.Length - 1)
-                    dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = 0, PrevStation = stationArray[i - 1] });
+                    dl.AddLineStation(new DO.LineStation { LineId = line.PersonalId, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = 0, PrevStation = stationArray[i - 1] });
                 else
-                    dl.AddLineStation(new DO.LineStation { LineId = line.Id, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
+                    dl.AddLineStation(new DO.LineStation { LineId = line.PersonalId, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
             }
-            line = GetLine(line.Id);
+            line = GetLine(line.PersonalId);
             return true;
         }
 
