@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace PlGui
     /// </summary>
     public partial class LinePopUp : Window
     {
-        public LinePopUp()
+         public LinePopUp()
         {
             InitializeComponent();
         }
@@ -28,7 +29,7 @@ namespace PlGui
         public LinePopUp(BO.Line line)
         {
             InitializeComponent();
-            Title = string.Format("Line: " + line.LineNumber  + " in " + line.Area.ToString().ToLower() + " area | info");
+            Title = string.Format("Line: " + line.LineNumber + " in " + line.Area.ToString().ToLower() + " area | info");
             lineGrid.Visibility = Visibility.Visible;
         }
 

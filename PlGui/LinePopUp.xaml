@@ -26,13 +26,13 @@
             <Label Content="{Binding FirstStation}" Margin="100,0,0,0" Grid.Column="0" Grid.Row="1"/>
             <Label Margin="3,0,0,0" Content="Last Station:" Grid.Column="1" Grid.Row="1"/>
             <Label Content="{Binding LastStation}" Margin="100,0,0,0" Grid.Column="1" Grid.Row="1"/>
-            <DataGrid IsReadOnly="True" Grid.Row="2" Grid.ColumnSpan="2" Margin="3,0,100,0" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding Stations}">
+            <DataGrid x:Name="stationDgrid" Grid.Row="2" Grid.ColumnSpan="2" Margin="3,0,77,0" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding Stations}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Index" Binding="{Binding Index}"/>
-                    <DataGridTextColumn Header="Station number" Binding="{Binding Station}"/>
-                    <DataGridTextColumn Header="Station Name" Binding="{Binding StationName}"/>
-                    <DataGridTextColumn Header="Time" Binding="{Binding TimeToNext}"/>
-                    <DataGridTextColumn Header="Distance" Binding="{Binding Distance}"/>
+                    <DataGridTextColumn Header="Index" Binding="{Binding Index}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Station number" Binding="{Binding Station}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Station Name" Binding="{Binding StationName}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Time" Binding="{Binding TimeToNext}" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="Distance" Binding="{Binding Distance}" IsReadOnly="False"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
