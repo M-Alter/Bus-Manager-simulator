@@ -30,30 +30,30 @@ namespace PlGui
         {
             InitializeComponent();
             Title = string.Format("Station Number: " + station.Code + " | info");
-            ObservableCollection<int> linesList = new ObservableCollection<int>(station.LinesAtStation);
-            Grid grid = new Grid();
-            grid.ShowGridLines = true;
-            for (int i = 0; i < 3; i++)
-            {
-                grid.ColumnDefinitions.Add(new ColumnDefinition());
-            }
-            for (int i = 0; i <= linesList.Count()/3; i++)
-            {
-                grid.RowDefinitions.Add(new RowDefinition());
-            }
-            for (int i = 0; i < linesList.Count(); i++)
-            {
-                TextBlock txtBlock = new TextBlock();
-                txtBlock.Text = linesList.GetEnumerator().ToString();
-                txtBlock.FontSize = 14;
-                txtBlock.FontWeight = FontWeights.Bold;
-                txtBlock.Foreground = new SolidColorBrush(Colors.Green);
-                txtBlock.VerticalAlignment = VerticalAlignment.Top;
-                Grid.SetRow(txtBlock, i/3);
-                Grid.SetColumn(txtBlock, i%3);
-                this.Content = grid;
-            }
-            //linesLbox.DataContext = linesList;
+            //ObservableCollection<BO.StationLine> linesList = new ObservableCollection<int>(station.LinesAtStation);
+            //Grid grid = new Grid();
+            //grid.ShowGridLines = true;
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    grid.ColumnDefinitions.Add(new ColumnDefinition());
+            //}
+            //for (int i = 0; i <= linesList.Count()/3; i++)
+            //{
+            //    grid.RowDefinitions.Add(new RowDefinition());
+            //}
+            //for (int i = 0; i < linesList.Count(); i++)
+            //{
+            //    TextBlock txtBlock = new TextBlock();
+            //    txtBlock.Text = linesList.GetEnumerator().ToString();
+            //    txtBlock.FontSize = 14;
+            //    txtBlock.FontWeight = FontWeights.Bold;
+            //    txtBlock.Foreground = new SolidColorBrush(Colors.Green);
+            //    txtBlock.VerticalAlignment = VerticalAlignment.Top;
+            //    Grid.SetRow(txtBlock, i/3);
+            //    Grid.SetColumn(txtBlock, i%3);
+            //    this.Content = grid;
+            //}
+            ////linesLbox.DataContext = linesList;
         }
     }
 }

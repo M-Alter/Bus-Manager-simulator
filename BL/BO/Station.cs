@@ -44,7 +44,7 @@ namespace BO
         {
             return string.Format($"{Name} {Code}");
         }
-        public IEnumerable<int> LinesAtStation { get; set; }
+        public IEnumerable<StationLine> LinesAtStation { get; set; }
 
         #endregion
     }

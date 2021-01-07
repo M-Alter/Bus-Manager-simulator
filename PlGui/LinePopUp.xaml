@@ -10,7 +10,7 @@
         <Grid x:Name="busGrid" Margin="15">
             
         </Grid>
-        <Grid x:Name="lineGrid" Margin="15" Visibility="Hidden">
+        <Grid x:Name="lineGrid" Margin="15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
