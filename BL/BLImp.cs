@@ -71,10 +71,13 @@ namespace BL
             int index = 1;
             line.Stations = from numbers in stationIDs
                             let name = dl.GetStation(numbers).Name
-                            select new LineStation() { Station = numbers, StationName = name, Index = index++ };
+                            let next = dl.GetNextStation(id, numbers)
+                            let doAdjacentStations = dl.GetAdjacentStations(numbers, next)
+                            select new LineStation() { Station = numbers, StationName = name, Index = index++, TimeToNext =(doAdjacentStations == default(DO.AdjacentStations) ? new TimeSpan(0): doAdjacentStations.Time), Distance = (doAdjacentStations == default(DO.AdjacentStations) ? 0.0 : doAdjacentStations.Distance) };
+            
 
 
-            ;
+            
             return line;
         }
 

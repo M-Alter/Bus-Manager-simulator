@@ -31,6 +31,8 @@
                     <DataGridTextColumn Header="Index" Binding="{Binding Index}"/>
                     <DataGridTextColumn Header="Station number" Binding="{Binding Station}"/>
                     <DataGridTextColumn Header="Station Name" Binding="{Binding StationName}"/>
+                    <DataGridTextColumn Header="Time" Binding="{Binding TimeToNext}"/>
+                    <DataGridTextColumn Header="Distance" Binding="{Binding Distance}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

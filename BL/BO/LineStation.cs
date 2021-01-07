@@ -11,5 +11,7 @@ namespace BO
         public int Index { get; set; }
         public int Station { get; set; }
         public string StationName { get; set; }
+        public TimeSpan? TimeToNext { get; set; }
+        public double? Distance { get; set; }
     }
 }

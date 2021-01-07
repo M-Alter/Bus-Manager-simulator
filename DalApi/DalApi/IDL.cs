@@ -35,6 +35,7 @@ namespace DalApi
         #region LineStation
 
         IEnumerable<int> GetLineStations(int lineId);
+        int GetNextStation(int lineId, int stationCode);
         IEnumerable<int> GetStationLines(int code);
         bool AddLineStation(LineStation lineStation);
         bool RemoveAllLineStation(int lineID);
