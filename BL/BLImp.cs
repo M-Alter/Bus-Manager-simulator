@@ -264,10 +264,7 @@ The password for your account is
                    select station;
         }
 
-        public bool AddAdjacentStations(int first, int second)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public AdjacentStations GetAdjacentStations(int first, int second)
         {
@@ -288,6 +285,12 @@ The password for your account is
 
             //let current = (AdjacentStations)item.CopyPropertiesToNew(typeof(AdjacentStations))
             //select current;
+        }
+
+        public bool AddAdjacentStations(AdjacentStations adj)
+        {
+            dl.AddAdjacentStations((DO.AdjacentStations)adj.CopyPropertiesToNew(typeof(DO.AdjacentStations)));
+            return true;
         }
     }
 }
