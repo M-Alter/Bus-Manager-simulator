@@ -44,6 +44,7 @@ namespace PlGui
                 wPanelInfo.Children.Add(new TextBox { Name = "timeTbox" + i.ToString(), Width = 70, Padding = new Thickness(0, 0, 10, 0) });
                 Grid.SetRow(sPanel, i);
                 innerGrid.Children.Add(sPanel);
+                
             }
         }
     }

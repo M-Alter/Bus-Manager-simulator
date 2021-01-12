@@ -54,10 +54,10 @@ namespace DL
         {
             Bus bus = DataSource.BusList.Find(b => b.LicenseNum == licenseNum);
 
-            //if (bus != null)
-            return bus.Clone();
-            //else
-            //    throw new Exception("exception");
+            if (bus != null)
+                return bus.Clone();
+            else
+                return default(Bus);
 
         }
 
@@ -68,14 +68,19 @@ namespace DL
 
         public void DeleteBus(int licenseNum)
         {
-            Bus bus = DataSource.BusList.Find(b => b.LicenseNum == licenseNum);
-
+            //Bus bus = DataSource.BusList.Find(b => b.LicenseNum == licenseNum);
+            Bus bus = new Bus();
+            foreach (var item in DataSource.BusList)
+            {
+                if (item.LicenseNum == licenseNum)
+                    bus = item;
+            }
             if (bus != null)
             {
                 DataSource.BusList.Remove(bus);
             }
-            //else
-            //    throw
+            else
+                throw new Exception("This bus wasn't found");
         }
 
         #endregion

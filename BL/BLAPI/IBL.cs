@@ -14,6 +14,7 @@ namespace BLAPI
         IEnumerable<Bus> GetAllBuses();
         IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate);
         bool AddBus(Bus bus);
+        void DeleteBus(int licenseNum);
 
         #endregion
         Station GetStation(int id);
