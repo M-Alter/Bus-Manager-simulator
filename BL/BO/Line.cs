@@ -14,6 +14,8 @@ namespace BO
         private Enums.Areas areas;
         private int firstStation;
         private int lastStation;
+        private bool isActive = true;       
+
         #endregion
 
         #region Properties
@@ -51,6 +53,12 @@ namespace BO
 
         public string LastStationName { get; set; }
         public IEnumerable<LineStation> Stations { get; set; }
+
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; }
+        }
         #endregion
     }
 }

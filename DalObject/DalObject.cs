@@ -83,6 +83,24 @@ namespace DL
                 throw new Exception("This bus wasn't found");
         }
 
+
+        public void RemoveLine(int lineId, int lastStation)
+        {
+            Line line = new Line();
+            foreach (var item in DataSource.LineList)
+            {
+                if (item.LineNumber == lineId && item.LastStation == lastStation)
+                {
+                    line = item;
+                    break;
+                }  
+            }
+            if (line != null)
+                DataSource.LineList.Remove(line);
+            else
+                throw new Exception("This bus wasn't found");
+        }
+
         #endregion
 
         #region Station
@@ -263,5 +281,6 @@ namespace DL
         {
             return DataSource.LineList.Exists(line => line.PersonalId == lineId);
         }
+
     }
 }

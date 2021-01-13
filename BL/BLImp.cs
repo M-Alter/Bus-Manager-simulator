@@ -129,6 +129,10 @@ namespace BL
             //need to add method to get all line numbers
             if (dl.LineExists(line.PersonalId))
                 throw new Exception("This line already exist");
+            if (line.LineNumber > 999 || line.LineNumber < 1)
+            {
+                throw new Exception("Line number should be between 1 - 999");
+            }
             DO.Line lineDO = new DO.Line();
             line.CopyPropertiesTo(lineDO);
             lineDO.PersonalId = ++lineIdGenerator;
@@ -303,6 +307,9 @@ The password for your account is
             return true;
         }
 
-        
+        public void RemoveLine(int lineId, int lastStation)
+        {
+            dl.RemoveLine(lineId, lastStation);
+        }
     }
 }

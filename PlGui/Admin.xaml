@@ -42,7 +42,7 @@
                     <GroupBox Header="Tools" Margin="10,10,300,0" Height="50" VerticalAlignment="Top" Grid.ColumnSpan="3" >
                         <Button x:Name="addBusBtn" Content="Add Bus" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Click="addBusBtn_Click"/>
                     </GroupBox>
-                        <Button x:Name="removeBusBtn" Content="Remove Bus" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Click="removeBusBtn_Click" Grid.Column="2" Margin="69,25,0,314.333"/>
+                    <Button x:Name="removeBusBtn" Content="Remove Bus" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Click="removeBusBtn_Click" Grid.Column="2" Margin="67,25,0,314.333"/>
                     <ListView x:Name="buseslview" Margin="20,70,20,20" ItemsSource="{Binding}" MouseDoubleClick="buseslview_MouseDoubleClick" MouseRightButtonUp="buseslview_MouseRightButtonUp" Grid.ColumnSpan="3">
                         <ListView.ContextMenu>
                             <ContextMenu>
@@ -64,14 +64,17 @@
             <TabItem Header="Lines" Width="100">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="23*"/>
                         <ColumnDefinition Width="28*"/>
                         <ColumnDefinition Width="0*"/>
-                        <ColumnDefinition Width="363*"/>
+                        <ColumnDefinition Width="725*"/>
                     </Grid.ColumnDefinitions>
-                    <GroupBox Header="Tools" Margin="244,10,10,0" Height="50" VerticalAlignment="Top" Grid.Column="2" >
+                    <GroupBox Header="Tools" Margin="14.833,10,289.667,0" Height="50" VerticalAlignment="Top" Grid.ColumnSpan="4" Grid.Column="1" >
                         <Button x:Name="addLineBtn" Content="Add Line" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Click="addLineBtn_Click"/>
                     </GroupBox>
-                    <ListView x:Name="lineslview" ItemsSource="{Binding}" Margin="20,70,20,20" MouseDoubleClick="lineslview_MouseDoubleClick" Grid.ColumnSpan="3">
+                    <Button x:Name="removeLineBtn" Content="Remove Line" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Click="removeLineBtn_Click" Grid.Column="4" Margin="89,26,0,313.333"/>
+                    <ListView x:Name="lineslview" ItemsSource="{Binding}" Margin="14.833,70,19.667,20.333" MouseDoubleClick="lineslview_MouseDoubleClick" Grid.ColumnSpan="4" Grid.Column="1">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>

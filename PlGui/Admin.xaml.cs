@@ -191,5 +191,23 @@ namespace PlGui
         {
 
         }
+
+        private void removeLineBtn_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveLine removeLine = new RemoveLine();
+            removeLine.ShowDialog();
+            lines.Clear();
+            string str = removeLine.lineCBox.SelectedItem.ToString();
+            int lineNuber = int.Parse(str.Substring(0, 3)), lastStation = int.Parse(str.Substring(6, 5));
+            
+            foreach (var item in bl.GetAllLines())
+            {
+                if (item.LineNumber != lineNuber && item.LastStation != lastStation)
+                {
+                    lines.Add(item);
+                }
+            }
+            lineslview.DataContext = lines;
+        }
     }
 }

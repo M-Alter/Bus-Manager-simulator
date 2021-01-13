@@ -67,6 +67,9 @@
     <Compile Include="RemoveBus.xaml.cs">
       <DependentUpon>RemoveBus.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RemoveLine.xaml.cs">
+      <DependentUpon>RemoveLine.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ResetPassword.xaml.cs">
       <DependentUpon>ResetPassword.xaml</DependentUpon>
     </Compile>
@@ -116,6 +119,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RemoveBus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RemoveLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

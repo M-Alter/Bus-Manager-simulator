@@ -14,6 +14,8 @@ namespace DO
         private Enums.Areas areas;
         private int firstStation;
         private int lastStation;
+        private bool isActive = true;       
+
         #endregion
 
         #region Properties
@@ -44,6 +46,11 @@ namespace DO
         {
             get { return lastStation; }
             set { lastStation = value; }
+        }
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; }
         }
         #endregion
     }

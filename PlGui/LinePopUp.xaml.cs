@@ -43,5 +43,10 @@ namespace PlGui
             bl.RemoveStationFromLine(line.PersonalId , lineStation.Station);
             stationDgrid.Items.Refresh();
         }
+
+        private void stationDgrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

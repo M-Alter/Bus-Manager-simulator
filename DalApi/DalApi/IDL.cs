@@ -31,6 +31,7 @@ namespace DalApi
         IEnumerable<Line> GetAllLines();
         bool AddLine(Line line);
         bool LineExists(int lineId);
+        void RemoveLine(int lineId, int lastStation);
         #endregion
 
         #region LineStation
