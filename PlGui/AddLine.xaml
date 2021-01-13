@@ -29,7 +29,7 @@
         <Label Content="Last stop" Grid.Column="0" Grid.Row="3" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <ComboBox Name="lastStopCMBox" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" Width="100" Height="30" IsEnabled="False" SelectionChanged="lastStopCMBox_SelectionChanged"/>
         <Label Content="Add stops" Grid.Column="0" Grid.Row="4" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ComboBox Name="addStopCMBox" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" Width="100" Height="30" IsTextSearchEnabled="True" StaysOpenOnEdit="True" IsEnabled="False">
+        <ComboBox Name="addStopCMBox" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" Width="100" Height="30"   IsEnabled="False" >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <CheckBox x:Name="selectStastionCB" Checked="allCheckedBox" Unchecked="allCheckedBox" IsChecked="{Binding Checked}" Content="{Binding Name}" CommandParameter="{Binding Code}">

@@ -54,9 +54,9 @@ namespace BL
             var tempStation = dl.GetStation(code);
             tempStation.CopyPropertiesTo(station);
             station.LinesAtStation = from lines in dl.GetStationLines(code)
-                              let lastStation = dl.GetStation(dl.GetLine(lines).LastStation).Name
-                              orderby lines
-                              select new StationLine { LineNumber = lines, LastStation = lastStation};
+                                     let lastStation = dl.GetStation(dl.GetLine(lines).LastStation).Name
+                                     orderby lines
+                                     select new StationLine { LineNumber = lines, LastStation = lastStation };
             return station;
         }
 
@@ -74,6 +74,7 @@ namespace BL
                             let name = dl.GetStation(numbers).Name
                             let next = dl.GetNextStation(id, numbers)
                             let doAdjacentStations = dl.GetAdjacentStations(numbers, next)
+                            orderby index
                             select new LineStation() { Station = numbers, StationName = name, Index = index++, TimeToNext = (doAdjacentStations == default(DO.AdjacentStations) ? new TimeSpan(0) : doAdjacentStations.Time), Distance = (doAdjacentStations == default(DO.AdjacentStations) ? 0.0 : doAdjacentStations.Distance) };
             return line;
         }
@@ -116,11 +117,8 @@ namespace BL
         public bool AddLine(Line line)
         {
             //need to add method to get all line numbers
-            var lineBO = dl.GetLine(line.PersonalId);
-            if (lineBO != null)
-            {
+            if (dl.LineExists(line.PersonalId))
                 throw new Exception("This line already exist");
-            }
             DO.Line lineDO = new DO.Line();
             line.CopyPropertiesTo(lineDO);
             lineDO.PersonalId = ++lineIdGenerator;
@@ -223,26 +221,28 @@ The password for your account is
             }
         }
 
-        public bool RemoveStationFromLine(Line line, int stationToRemove)
+        public bool RemoveStationFromLine(int lineId, int stationToRemove)
         {
-            foreach (var item in line.Stations)
-            {
-                dl.RemoveAllLineStation(item.Station);
-            }
-            //if station is first
-
-            //if station is last
-            int index = 0;
+            Line line = GetLine(lineId);
             int[] stationArray = new int[line.Stations.Count()];
+            int index = 0;
             foreach (var item in line.Stations)
             {
                 if (item.Station != stationToRemove)
                     stationArray[index++] = item.Station;
             };
-            foreach (var item in line.Stations)
-            {
-                stationArray[index++] = item.Station;
-            };
+            //foreach (var item in line.Stations)
+            //{
+            //    stationArray[index++] = item.Station;
+            //};
+            line = null;
+            //foreach (var item in line.Stations)
+            //{
+                dl.RemoveAllLineStation(lineId);
+            //}
+            //if station is first
+
+            //if station is last
             for (int i = 0; i < stationArray.Length; i++)
             {
                 if (i == 0)
@@ -264,7 +264,7 @@ The password for your account is
                    select station;
         }
 
-       
+
 
         public AdjacentStations GetAdjacentStations(int first, int second)
         {

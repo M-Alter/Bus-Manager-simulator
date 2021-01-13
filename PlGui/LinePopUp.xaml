@@ -26,8 +26,15 @@
             <Label Content="{Binding FirstStation}" Margin="100,0,0,0" Grid.Column="0" Grid.Row="1"/>
             <Label Margin="3,0,0,0" Content="Last Station:" Grid.Column="1" Grid.Row="1"/>
             <Label Content="{Binding LastStation}" Margin="100,0,0,0" Grid.Column="1" Grid.Row="1"/>
-            <DataGrid x:Name="stationDgrid" Grid.Row="2" Grid.ColumnSpan="2" Margin="3,0,77,0" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding Stations}">
+            <DataGrid x:Name="stationDgrid" Grid.Row="2" Grid.ColumnSpan="2" Margin="3,0,50,0" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding Stations}">
                 <DataGrid.Columns>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btRemove" Content="Remove" Click="btRemove_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Index" Binding="{Binding Index}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Station number" Binding="{Binding Station}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Station Name" Binding="{Binding StationName}" IsReadOnly="True" />

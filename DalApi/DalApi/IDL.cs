@@ -30,6 +30,7 @@ namespace DalApi
         Line GetLine(int id);
         IEnumerable<Line> GetAllLines();
         bool AddLine(Line line);
+        bool LineExists(int lineId);
         #endregion
 
         #region LineStation

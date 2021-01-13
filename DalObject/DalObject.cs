@@ -214,14 +214,24 @@ namespace DL
 
         public bool RemoveAllLineStation(int lineID)
         {
-            IEnumerable<LineStation> lineStations = from item in DataSource.LineStationsList
-                                                    where item.LineId == lineID
-                                                    select item;
-            foreach (var item in lineStations)
+            foreach (var item in DataSource.LineStationsList)
             {
-                if (!DataSource.LineStationsList.Remove(item))
-                    return false;
+                if (item.LineId == lineID)
+                {
+                    DataSource.LineStationsList.Remove(item);
+                }
             }
+            //IEnumerable<LineStation> lineStations = ;
+            //var stam = from item in DataSource.LineStationsList
+            //where item.LineId == lineID
+            //let flag = DataSource.LineStationsList.Remove(item)
+            //select flag;
+
+            //foreach (var item in lineStations)
+            //{
+            //    if (!DataSource.LineStationsList.Remove(item))
+            //        return false;
+            //}
             return true;
         }
 
@@ -242,6 +252,11 @@ namespace DL
                          where item.LineId == lineId && item.StationCode == stationCode
                          select item.NextStation;
             return result.FirstOrDefault();
+        }
+
+        public bool LineExists(int lineId)
+        {
+            return DataSource.LineList.Exists(line => line.PersonalId == lineId);
         }
     }
 }

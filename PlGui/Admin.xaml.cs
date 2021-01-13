@@ -159,5 +159,10 @@ namespace PlGui
         {
             SystemCommands.MinimizeWindow(this);
         }
+
+        private void btnEditLine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
