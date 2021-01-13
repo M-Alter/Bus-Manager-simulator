@@ -12,8 +12,26 @@
             <!--<ListBox x:Name="linesLbox" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Stretch" Width="100" DataContext="{Binding linesList}">
                 <TextBlock Text="{Binding}"/>
             </ListBox>-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Station Code: " />
+            <Label Content="{Binding Code}" Margin="100,0,0,0" Grid.Column="0" Width="Auto"/>
+            <Label Content="Station Name: " Grid.Row="1"/>
+            <Label Content="{Binding Name}" Margin="100,0,0,0" Grid.Row="1" Grid.Column="0" Width="Auto"/>
 
-
+            <DataGrid x:Name="stationDgrid" Grid.Row="2" Grid.ColumnSpan="2" Margin="3,0,77,0" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding LinesAtStation}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Line" Binding="{Binding LineNumber}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Last Station" Binding="{Binding LastStation}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </Window>

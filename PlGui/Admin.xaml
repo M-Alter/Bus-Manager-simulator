@@ -109,6 +109,7 @@
                                 <TextBlock Text="{Binding Station2Name}" Width="200" FontSize="20" Padding="10,0"/>
                                 <TextBlock Text="{Binding Distance}" Width="Auto" FontSize="20" Padding="10,0"/>
                                 <TextBlock Text="{Binding Time}" Width="Auto" FontSize="20" Padding="10,0"/>
+                                <Button x:Name="editAdjBtn" Content="Edit" />
                             </WrapPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>

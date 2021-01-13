@@ -5,10 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
         mc:Ignorable="d"
-        Title="AdjacentStationInfo" Height="5" Width="400">
+        Title="Line PopUp" Height="250" Width="800" ResizeMode="NoResize">
     <Grid>
-        <Grid x:Name="innerGrid">
-            
-        </Grid>
+        <StackPanel>
+            <DataGrid x:Name="adjStationDgrid" Grid.Row="2" Grid.ColumnSpan="2" Margin="20,20,20,20" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding}" Height="130">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Station 1" Binding="{Binding Station1}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="First Station" Binding="{Binding Station1Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Station 2" Binding="{Binding Station2}" IsReadOnly="True" />
+                    <DataGridTextColumn Header="Second Station" Binding="{Binding Station2Name}" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="Time" Binding="{Binding Time}" IsReadOnly="False"/>
+                    <DataGridTextColumn Header="Distance" Binding="{Binding Distance}" IsReadOnly="False"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btSave" Content="Save" Click="btSave_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="saveBtn" Content="Save" Height="30" Width="70" HorizontalAlignment="Right" Margin="20,0,20,20" Click="saveBtn_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

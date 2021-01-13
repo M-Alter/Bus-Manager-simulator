@@ -54,8 +54,9 @@ namespace BL
             var tempStation = dl.GetStation(code);
             tempStation.CopyPropertiesTo(station);
             station.LinesAtStation = from lines in dl.GetStationLines(code)
-                                     orderby lines
-                                     select lines;
+                              let lastStation = dl.GetStation(dl.GetLine(lines).LastStation).Name
+                              orderby lines
+                              select new StationLine { LineNumber = lines, LastStation = lastStation};
             return station;
         }
 
@@ -71,10 +72,9 @@ namespace BL
             int index = 1;
             line.Stations = from numbers in stationIDs
                             let name = dl.GetStation(numbers).Name
-                            select new LineStation() { Station = numbers, StationName = name, Index = index++ };
-
-
-            ;
+                            let next = dl.GetNextStation(id, numbers)
+                            let doAdjacentStations = dl.GetAdjacentStations(numbers, next)
+                            select new LineStation() { Station = numbers, StationName = name, Index = index++, TimeToNext = (doAdjacentStations == default(DO.AdjacentStations) ? new TimeSpan(0) : doAdjacentStations.Time), Distance = (doAdjacentStations == default(DO.AdjacentStations) ? 0.0 : doAdjacentStations.Distance) };
             return line;
         }
 
@@ -159,7 +159,7 @@ namespace BL
             {
                 if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == null)
                 {
-                    adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station1Name = dl.GetStation(stationArray[i]).Name, Station2 = stationArray[i + 1], Station2Name = dl.GetStation(stationArray[i+1]).Name});
+                    adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station1Name = dl.GetStation(stationArray[i]).Name, Station2 = stationArray[i + 1], Station2Name = dl.GetStation(stationArray[i + 1]).Name });
                 }
                 //if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == null)
                 //{
@@ -274,10 +274,7 @@ The password for your account is
                    select station;
         }
 
-        public bool AddAdjacentStations(int first, int second)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public AdjacentStations GetAdjacentStations(int first, int second)
         {
@@ -296,8 +293,14 @@ The password for your account is
                    let current = GetAdjacentStations(item.Station1, item.Station2)
                    select current;
 
-                   //let current = (AdjacentStations)item.CopyPropertiesToNew(typeof(AdjacentStations))
-                   //select current;
+            //let current = (AdjacentStations)item.CopyPropertiesToNew(typeof(AdjacentStations))
+            //select current;
+        }
+
+        public bool AddAdjacentStations(AdjacentStations adj)
+        {
+            dl.AddAdjacentStations((DO.AdjacentStations)adj.CopyPropertiesToNew(typeof(DO.AdjacentStations)));
+            return true;
         }
 
         

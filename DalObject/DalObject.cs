@@ -240,5 +240,13 @@ namespace DL
             return from item in DataSource.AdjacentStationsList
                    select item;
         }
+
+        public int GetNextStation(int lineId, int stationCode)
+        {
+            var result = from item in DataSource.LineStationsList
+                         where item.LineId == lineId && item.StationCode == stationCode
+                         select item.NextStation;
+            return result.FirstOrDefault();
+        }
     }
 }
