@@ -84,6 +84,7 @@ namespace DS
             };
             UserList = new List<User>
             {
+                new User    {   UserName = "QA", Password = "", Admin = true    },
                 new User    {   UserName = "Admin", Password = "Admin", Admin = true    },
                 new User    {   UserName = "Menachem", Password = "339832131", Admin = false    }
             };

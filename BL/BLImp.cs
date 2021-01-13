@@ -90,15 +90,25 @@ namespace BL
             {
                 throw new Exception("This bus number already exist");
             }
-            if (!(bus.FromDate.Year >= 2018 && bus.LicenseNum >= MIN_EIGHT && bus.LicenseNum <= MAX_EIGHT)
-                || !(bus.FromDate.Year < 2018 && bus.LicenseNum <= MAX_SEVEN && bus.LicenseNum >= MIN_SEVEN))
+            if ((bus.FromDate.Year >= 2018 && bus.LicenseNum < MIN_EIGHT)||
+                (bus.FromDate.Year >= 2018 && bus.LicenseNum > MAX_EIGHT)||
+                (bus.FromDate.Year < 2018 && bus.LicenseNum > MAX_SEVEN) ||
+                (bus.FromDate.Year < 2018 && bus.LicenseNum < MIN_SEVEN))
                 throw new Exception("License num length doesn't match begin date!");
             if (bus.FuelRemain < 0 || bus.FuelRemain > 1200)
                 throw new Exception("Gas should be between 0 to 1200!");
+            if (bus.TotalTrip < 0)
+                throw new Exception("Milege can't be negative");
             DO.Bus busDO = new DO.Bus();
             bus.CopyPropertiesTo(busDO);
             dl.AddBus(busDO);
             return true;
+        }
+
+        public void DeleteBus(int licenseNum)
+        {
+            dl.DeleteBus(licenseNum);
+            //throw new NotImplementedException();
         }
 
         public bool AddStation(Station station)
@@ -292,5 +302,7 @@ The password for your account is
             dl.AddAdjacentStations((DO.AdjacentStations)adj.CopyPropertiesToNew(typeof(DO.AdjacentStations)));
             return true;
         }
+
+        
     }
 }

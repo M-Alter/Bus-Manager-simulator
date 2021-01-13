@@ -90,7 +90,20 @@ namespace PlGui
             }
         }
 
-        private void addLineBtn_Click(object sender, RoutedEventArgs e)
+        private void addBusBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddBus addBus = new AddBus();
+            addBus.ShowDialog();
+
+            buses.Clear();
+            foreach (var item in bl.GetAllBuses())
+            {
+                buses.Add(item);
+            }
+            buseslview.DataContext = buses;
+        }
+
+            private void addLineBtn_Click(object sender, RoutedEventArgs e)
         {
             AddLine addLine = new AddLine();
             addLine.ShowDialog();
@@ -158,6 +171,20 @@ namespace PlGui
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
             SystemCommands.MinimizeWindow(this);
+        }
+
+        private void removeBusBtn_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveBus removeBus = new RemoveBus();
+            removeBus.ShowDialog();
+            int bus = removeBus.busCBox.SelectedIndex;
+            buses.Clear();
+            foreach (var item in bl.GetAllBuses())
+            {
+                if(item.LicenseNum != bus)
+                    buses.Add(item);
+            }
+            buseslview.DataContext = buses;
         }
 
         private void btnEditLine_Click(object sender, RoutedEventArgs e)

@@ -1,0 +1,33 @@
+﻿<Window x:Class="PlGui.AddBus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlGui"
+        mc:Ignorable="d"
+        Title="AddBus" Height="400" Width="450">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="License number" Grid.Column="0" Grid.Row="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="licenseTBox" FontSize="16" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="142" Height="30" Margin="44,20,36,12" BorderBrush="Black" Text="7 or 8 digits"  TextAlignment="Center" SpellCheck.IsEnabled="False" FontFamily="Arial" Foreground="LightGray" GotFocus="TextBox_GotFocus" PreviewKeyDown="licenseTBox_PreviewKeyDown"/>
+        <Label Content="Start date" Grid.Column="0" Grid.Row="1" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <DatePicker x:Name="startDateDPicker" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="36" Margin="44,12,36,14" Width="142"/>
+        <Label Content="Milege (optional)" Grid.Column="0" Grid.Row="2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="milegeTBox" FontSize="20" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="142" Height="30" Margin="44,13,36,19" BorderBrush="Black" Text="digits only" TextAlignment="Center" SpellCheck.IsEnabled="True" FontFamily="Arial" Foreground="LightGray" GotFocus="TextBox_GotFocus" PreviewKeyDown="licenseTBox_PreviewKeyDown"/>
+        <Label Content="Gas (optional)" Grid.Column="0" Grid.Row="3" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="gasTBox" FontSize="20" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="142" Height="30" Margin="44,13,36,19" BorderBrush="Black" Text="0 - 1200"  TextAlignment="Center" SpellCheck.IsEnabled="True" FontFamily="Arial" SelectionOpacity="0.4" FontStretch="Condensed" Foreground="LightGray" GotFocus="TextBox_GotFocus" PreviewKeyDown="licenseTBox_PreviewKeyDown"/>
+        <Button x:Name="saveBtn" Grid.Column="0" Grid.Row="6" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Click="saveBtn_Click"/>
+        <Button x:Name="cancelBtn" Grid.Column="1" Grid.Row="6" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Click="cancelBtn_Click"/>
+    </Grid>
+</Window>
