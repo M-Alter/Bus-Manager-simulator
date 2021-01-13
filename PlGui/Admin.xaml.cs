@@ -186,5 +186,10 @@ namespace PlGui
             }
             buseslview.DataContext = buses;
         }
+
+        private void btnEditLine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

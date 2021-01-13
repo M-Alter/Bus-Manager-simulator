@@ -15,6 +15,8 @@ namespace PlGui
         private IBL bl = BLFactory.GetIBL();
         List<BO.Station> addStationsList = new List<BO.Station>();
         List<StationClass> stationForListView = new List<StationClass>();
+
+
         public AddLine()
         {
             InitializeComponent();
@@ -166,5 +168,9 @@ namespace PlGui
             //addStopCMBox.SelectedItem = null;
 
         }
+
+        
+
+
     }
 }

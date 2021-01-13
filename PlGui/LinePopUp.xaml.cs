@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
+using BLAPI;
 
 namespace PlGui
 {
@@ -21,6 +22,8 @@ namespace PlGui
     /// </summary>
     public partial class LinePopUp : Window
     {
+        static IBL bl = BLFactory.GetIBL();
+        BO.Line line = new BO.Line();
          public LinePopUp()
         {
             InitializeComponent();
@@ -31,10 +34,14 @@ namespace PlGui
             InitializeComponent();
             Title = string.Format("Line: " + line.LineNumber + " in " + line.Area.ToString().ToLower() + " area | info");
             lineGrid.Visibility = Visibility.Visible;
+            this.line = line;
         }
 
-        
-
-        
+        private void btRemove_Click(object sender, RoutedEventArgs e)
+        {
+            BO.LineStation lineStation = ((sender as Button).DataContext as BO.LineStation);
+            bl.RemoveStationFromLine(line.PersonalId , lineStation.Station);
+            stationDgrid.Items.Refresh();
+        }
     }
 }
