@@ -89,6 +89,7 @@ namespace PlGui
             try
             {
                 bl.AddLine(line);
+                Close();
             }
             catch (BO.AdjacentStationsExceptions ex)
             {
@@ -97,7 +98,10 @@ namespace PlGui
                 AdjacentStationInfo adjacentStationInfo = new AdjacentStationInfo(adjacentStations);
                 adjacentStationInfo.ShowDialog();
             }
-            Close();
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
@@ -167,7 +171,7 @@ namespace PlGui
 
         }
 
-        
+
 
 
     }
