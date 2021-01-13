@@ -154,8 +154,6 @@ namespace PlGui
                     (Keyboard.IsKeyDown(Key.LeftAlt)) || (Keyboard.IsKeyDown(Key.RightAlt))) return;
             }
             e.Handled = true;
-            MessageBox.Show("Only number are allowed", "Line Number", MessageBoxButton.OKCancel);
-
 
         }
 
