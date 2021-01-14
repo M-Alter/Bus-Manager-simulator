@@ -214,5 +214,19 @@ namespace PlGui
             }
             lineslview.DataContext = lines;
         }
+
+        private void addStationBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddStation addStation = new AddStation();
+            addStation.ShowDialog();
+
+            stations.Clear();
+            foreach (var item in bl.GetAllStations())
+            {
+                stations.Add(item);
+            }
+            stationslview.DataContext = stations;
+
+        }
     }
 }

@@ -113,10 +113,25 @@ namespace BL
 
         public bool AddStation(Station station)
         {
+            double longitude = r.NextDouble() + r.Next(29, 34);
+            double lattitude = r.NextDouble() + r.Next(31, 36);
             var stationBO = dl.GetStation(station.Code);
+            //BO.Station boStation = new Station()
+            //{
+            //    Code = stationBO.Code,
+            //    Lattitude = lattitude,
+            //    Longitude = longitude,
+            //    Name = stationBO.Name
+            //};
+            station.Longitude = longitude;
+            station.Lattitude = lattitude;
             if (stationBO != null)
             {
                 throw new Exception("This station already exist");
+            }
+            if (station.Code < 10000 || station.Code > 99999)
+            {
+                throw new Exception("Station number must be 5 digits");
             }
             DO.Station stationDO = new DO.Station();
             station.CopyPropertiesTo(stationDO);

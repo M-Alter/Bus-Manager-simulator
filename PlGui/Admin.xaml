@@ -70,11 +70,11 @@
                         <ColumnDefinition Width="0*"/>
                         <ColumnDefinition Width="725*"/>
                     </Grid.ColumnDefinitions>
-                    <GroupBox Header="Tools" Margin="14.833,10,289.667,0" Height="50" VerticalAlignment="Top" Grid.ColumnSpan="4" Grid.Column="1" >
+                    <GroupBox Header="Tools" Margin="14.667,10,289.667,0" Height="50" VerticalAlignment="Top" Grid.ColumnSpan="4" Grid.Column="1" >
                         <Button x:Name="addLineBtn" Content="Add Line" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Click="addLineBtn_Click"/>
                     </GroupBox>
                     <Button x:Name="removeLineBtn" Content="Remove Line" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Click="removeLineBtn_Click" Grid.Column="4" Margin="89,26,0,313.333"/>
-                    <ListView x:Name="lineslview" ItemsSource="{Binding}" Margin="14.833,70,19.667,20.333" MouseDoubleClick="lineslview_MouseDoubleClick" Grid.ColumnSpan="4" Grid.Column="1">
+                    <ListView x:Name="lineslview" ItemsSource="{Binding}" Margin="14.667,70,19.667,20.333" MouseDoubleClick="lineslview_MouseDoubleClick" Grid.ColumnSpan="4" Grid.Column="1">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
@@ -91,6 +91,10 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Stations" Width="100">
+                <Grid>
+                <GroupBox Header="Tools" Margin="14.667,10,289.667,0" Height="50" VerticalAlignment="Top" Grid.ColumnSpan="4" Grid.Column="1" >
+                    <Button x:Name="addStationBtn" Content="Add Station" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Click="addStationBtn_Click"/>
+                </GroupBox>
                 <ListView x:Name="stationslview" ItemsSource="{Binding}" Margin="20,70,20,20" MouseDoubleClick="stationslview_MouseDoubleClick">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -101,6 +105,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                </Grid>
             </TabItem>
             <TabItem Header="Adjacent Stations">
                 <ListView x:Name="adjStationsLview" ItemsSource="{Binding}" Margin="20,70,20,20">

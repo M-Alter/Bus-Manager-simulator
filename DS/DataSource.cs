@@ -72,7 +72,7 @@ namespace DS
             {
                 new Line    {   Area = Enums.Areas.CENTRAL, LineNumber = 1, PersonalId = 9, FirstStation = 38831, LastStation = 38836     },
                 new Line    {   Area = Enums.Areas.CENTRAL, LineNumber = 51, PersonalId = 10, FirstStation = 38840, LastStation = 38845   },
-                new Line    {   Area = Enums.Areas.CENTRAL, LineNumber = 21, PersonalId = 11, FirstStation = 38835, LastStation = 38845   },
+                new Line    {   Area = Enums.Areas.CENTRAL, LineNumber = 23, PersonalId = 11, FirstStation = 38835, LastStation = 38845   },
                 new Line    {   Area = Enums.Areas.CENTRAL, LineNumber = 100, PersonalId = 12, FirstStation = 38844, LastStation = 38848   },
                 new Line    {   Area = Enums.Areas.CENTRAL, LineNumber = 770, PersonalId = 13, FirstStation = 38841, LastStation = 38849   }
             };
