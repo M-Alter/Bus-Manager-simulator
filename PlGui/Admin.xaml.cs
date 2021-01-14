@@ -197,12 +197,17 @@ namespace PlGui
             RemoveLine removeLine = new RemoveLine();
             removeLine.ShowDialog();
             lines.Clear();
-            string str = removeLine.lineCBox.SelectedItem.ToString();
-            int lineNuber = int.Parse(str.Substring(0, 3)), lastStation = int.Parse(str.Substring(6, 5));
-            
+            string str = "klum"; 
+            int lineNumber = -9999, lastStation = -9999;
+            if (removeLine.lineCBox.SelectedItem != null)
+            {
+                str = removeLine.lineCBox.SelectedItem.ToString();
+                lineNumber = int.Parse(str.Substring(0, 3));
+                lastStation = int.Parse(str.Substring(6, 5));
+            }
             foreach (var item in bl.GetAllLines())
             {
-                if (item.LineNumber != lineNuber && item.LastStation != lastStation)
+                if (item.LineNumber != lineNumber && item.LastStation != lastStation)
                 {
                     lines.Add(item);
                 }

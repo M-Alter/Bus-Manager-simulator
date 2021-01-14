@@ -52,6 +52,7 @@ namespace PlGui
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
+            lineCBox.SelectedItem = string.Empty;
             this.Close();
         }
 
