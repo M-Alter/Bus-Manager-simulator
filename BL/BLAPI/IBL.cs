@@ -29,6 +29,7 @@ namespace BLAPI
         bool AddAdjacentStations(AdjacentStations adj);
         AdjacentStations GetAdjacentStations(int first, int second);
         IEnumerable<AdjacentStations> GetAllAdjacentStations();
+        bool UpdateAdjacentStatoins(AdjacentStations adjacentStations);
         IEnumerable<string> GetAllUserNames(bool admin);
         bool ValidatePassword(string userName, string password);
         void ResendPassword(string userName, string emailAddress);

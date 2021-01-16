@@ -11,7 +11,6 @@ namespace BL
 {
     internal class BLImp : IBL
     {
-        static int lineIdGenerator = 10;
         IDL dl = DLFactory.GetDL();
         static Random r = new Random(DateTime.Now.Millisecond);
 
@@ -205,15 +204,15 @@ namespace BL
             //need to add method to get all line numbers
 
             //check if line exists already
-            if (dl.LineExists(line.PersonalId))
-                throw new LineException(line.PersonalId, "This line already exist");
+            //if (dl.LineExists(line.PersonalId))
+            //    throw new LineException(line.PersonalId, "This line already exist");
             if (line.LineNumber > 999 || line.LineNumber < 1)
                 throw new LineException(line.PersonalId, "Line number should be between 1 - 999");
             DO.Line lineDO = new DO.Line();
             //copy all the properties over
             line.CopyPropertiesTo(lineDO);
             //------------------------------------------------------------------------------------------------------------
-            lineDO.PersonalId = ++lineIdGenerator;  //needs to be updated to come from the dal layer
+            lineDO.PersonalId = dl.GenerateLinePersonalId();  //needs to be updated to come from the dal layer
             //------------------------------------------------------------------------------------------------------------
             int index = 0;
             int[] stationArray = new int[line.Stations.Count()];
@@ -221,35 +220,39 @@ namespace BL
             foreach (var item in line.Stations)
                 stationArray[index++] = item.Station;
 
-            //add the LineStations
-            for (int i = 0; i < stationArray.Length; i++)
-            {
-                //if this is the first station in the list than previos station = 0 
-                if (i == 0)
-                    dl.AddLineStation(new DO.LineStation { LineId = lineIdGenerator, LineStationIndex = 1, StationCode = stationArray[0], NextStation = stationArray[1], PrevStation = 0 });
-                //if this is the last station in the list then the NextStation = 0 
-                else if (i == stationArray.Length - 1)
-                    dl.AddLineStation(new DO.LineStation { LineId = lineIdGenerator, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = 0, PrevStation = stationArray[i - 1] });
-                else
-                    dl.AddLineStation(new DO.LineStation { LineId = lineIdGenerator, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
-            }
-
             // add a list to all the adjacent staions
             List<AdjacentStations> adjacentStations = new List<AdjacentStations>();
             for (int i = 0; i < stationArray.Length - 1; i++)
             {
                 if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == default(DO.AdjacentStations))
-                    adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station1Name = dl.GetStation(stationArray[i]).Name, Station2 = stationArray[i + 1], Station2Name = dl.GetStation(stationArray[i + 1]).Name, Distance = r.NextDouble() * (100) + 1, Time = new TimeSpan(r.Next(0, 23), r.Next(0, 59), r.Next(0, 59)) });
+                {
+                    adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station1Name = dl.GetStation(stationArray[i]).Name, Station2 = stationArray[i + 1], Station2Name = dl.GetStation(stationArray[i + 1]).Name, /*Distance = r.NextDouble() * (100) + 1, Time = new TimeSpan(r.Next(0, 23), r.Next(0, 59), r.Next(0, 59))*/ });
+                    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = r.NextDouble() * (50) + 1, Time = new TimeSpan(0, r.Next(0, 59), r.Next(0, 59)) });
+                }
             }
             if (adjacentStations.Count > 0)
             {
                 AdjacentStations[] AdjacentStationsArray = new AdjacentStations[adjacentStations.Count];
                 for (int i = 0; i < adjacentStations.Count; i++)
                 {
-                    AdjacentStationsArray[i] = adjacentStations[i];
+                    AdjacentStationsArray[i] = GetAdjacentStations(adjacentStations[i].Station1, adjacentStations[i].Station2);
                 }
                 throw new AdjacentStationsExceptions("these adjacent stations are missing some info", AdjacentStationsArray);
             }
+
+            //add the LineStations
+            for (int i = 0; i < stationArray.Length; i++)
+            {
+                //if this is the first station in the list than previos station = 0 
+                if (i == 0)
+                    dl.AddLineStation(new DO.LineStation { LineId = lineDO.PersonalId, LineStationIndex = 1, StationCode = stationArray[0], NextStation = stationArray[1], PrevStation = 0 });
+                //if this is the last station in the list then the NextStation = 0 
+                else if (i == stationArray.Length - 1)
+                    dl.AddLineStation(new DO.LineStation { LineId = lineDO.PersonalId, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = 0, PrevStation = stationArray[i - 1] });
+                else
+                    dl.AddLineStation(new DO.LineStation { LineId = lineDO.PersonalId, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
+            }
+
 
             return dl.AddLine(lineDO);
         }
@@ -401,7 +404,7 @@ The password for your account is
             //add the stations names to the instance
             adjacentStations.Station1Name = GetStation(adjacentStations.Station1).Name;
             adjacentStations.Station2Name = GetStation(adjacentStations.Station2).Name;
-            return adjacentStations;            
+            return adjacentStations;
         }
 
         /// <summary>
@@ -411,7 +414,7 @@ The password for your account is
         public IEnumerable<AdjacentStations> GetAllAdjacentStations()
         {
             return from item in dl.GetAllAdjacentStations()
-                   //get instance as BO
+                       //get instance as BO
                    let current = GetAdjacentStations(item.Station1, item.Station2)
                    select current;
         }
@@ -435,6 +438,19 @@ The password for your account is
         public bool RemoveLine(int lineId, int lastStation)
         {
             return dl.RemoveLine(lineId, lastStation);
+        }
+
+        /// <summary>
+        /// updates the adjacent stations details
+        /// </summary>
+        /// <param name="adjacentStations"></param>
+        /// <returns>true if updates successfully</returns>
+        public bool UpdateAdjacentStatoins(AdjacentStations adjacentStations)
+        {
+            var temp = dl.GetAdjacentStations(adjacentStations.Station1, adjacentStations.Station2);
+            temp.Time = adjacentStations.Time;
+            temp.Distance = adjacentStations.Distance;
+            return dl.UpdateAdjacentStations(temp);
         }
     }
 }

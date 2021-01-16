@@ -66,6 +66,11 @@ namespace BO
         }
         #endregion
 
+        public override string ToString()
+        {
+            return LicenseString;
+        }
+
         /// <summary>
         /// gets the name of the property automatically and updates the UI if changed
         /// </summary>

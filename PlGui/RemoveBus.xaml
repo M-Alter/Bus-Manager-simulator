@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PlGui"
         mc:Ignorable="d"
         Title="RemoveBus" Height="450" Width="300">
-    <Grid>
+    <Grid x:Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>

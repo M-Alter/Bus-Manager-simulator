@@ -276,5 +276,18 @@ namespace DL
             return DataSource.LineList.Exists(line => line.PersonalId == lineId);
         }
 
+        public bool UpdateAdjacentStations(AdjacentStations adjacentStations)
+        {
+            var temp = DataSource.AdjacentStationsList.Find(adj => adj.Station1 == adjacentStations.Station1 && adj.Station2 == adjacentStations.Station2);
+            //Time is a struct type so no need to clone
+            temp.Time = adjacentStations.Time;
+            temp.Distance = adjacentStations.Distance;
+            return true;
+        }
+
+        public int GenerateLinePersonalId()
+        {
+            return DataSource.linePersonalIdGenerator++;
+        }
     }
 }

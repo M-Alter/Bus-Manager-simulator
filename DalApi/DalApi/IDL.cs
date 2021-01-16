@@ -32,6 +32,7 @@ namespace DalApi
         bool AddLine(Line line);
         bool LineExists(int lineId);
         bool RemoveLine(int lineId, int lastStation);
+        int GenerateLinePersonalId();
         #endregion
 
         #region LineStation
@@ -46,6 +47,7 @@ namespace DalApi
         #region AdjacentStations
         AdjacentStations GetAdjacentStations(int first, int second);
         bool AddAdjacentStations(AdjacentStations adjacentStations);
+        bool UpdateAdjacentStations(AdjacentStations adjacentStations);
         IEnumerable<AdjacentStations> GetAllAdjacentStations();
 
         #endregion

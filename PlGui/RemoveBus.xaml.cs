@@ -12,16 +12,15 @@ namespace PlGui
     public partial class RemoveBus : Window
     {
         private IBL bl = BLFactory.GetIBL();
-        List<int> allBusesNum = new List<int>();
+        List<BO.Bus> allBuses = new List<BO.Bus>();
         public RemoveBus()
         {
             InitializeComponent();
             foreach (var item in bl.GetAllBuses())
-            {
-                allBusesNum.Add(item.LicenseNum);
-            }
+                allBuses.Add(item);
 
-            busCBox.ItemsSource = allBusesNum;
+            busCBox.ItemsSource = allBuses;
+
         }
 
         private void busCMBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -31,32 +30,21 @@ namespace PlGui
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            //BO.Bus bus = (BO.Bus)busCBox.SelectedItem as BO.Bus;
-            int busNumber = -1, i = 0;
-            foreach (var item in allBusesNum)
-            {
-                if (i == busCBox.SelectedIndex)
-                {
-                    busNumber = item;
-                    break;
-                }
-                i++;
-            }
+            BO.Bus bus = (BO.Bus)busCBox.SelectedItem as BO.Bus;
 
-            try
+            if (busCBox.SelectedItem != null)
             {
-                if (busCBox.SelectedItem != null)
+                try
                 {
-                    bl.DeleteBus(busNumber);
-
-                    MessageBox.Show("The bus has delete");
+                    bl.DeleteBus(bus.LicenseNum);
+                    MessageBox.Show("The bus has delete","",MessageBoxButton.OK);
                     this.Close();
                 }
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 

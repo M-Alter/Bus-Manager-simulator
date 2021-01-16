@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BLAPI;
+using BO;
+using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using BLAPI;
-using BO;
 
 namespace PlGui
 {
@@ -27,7 +18,7 @@ namespace PlGui
         ObservableCollection<BO.Line> lines = new ObservableCollection<BO.Line>();
         ObservableCollection<AdjacentStations> adjacentStations = new ObservableCollection<AdjacentStations>();
 
-        IBL bl = BLFactory.GetIBL(); 
+        IBL bl = BLFactory.GetIBL();
         public Admin()
         {
             InitializeComponent();
@@ -55,7 +46,7 @@ namespace PlGui
             adjStationsLview.DataContext = adjacentStations;
         }
 
-        private void 
+        private void
             lineslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var currentLine = lineslview.SelectedItem as BO.Line;
@@ -63,19 +54,19 @@ namespace PlGui
             {
                 LinePopUp info = new LinePopUp(currentLine);
                 info.DataContext = currentLine;
-                info.Show(); 
+                info.Show();
             }
         }
 
         private void buseslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var currentBus = buseslview.SelectedItem as Bus;
-            if (currentBus is Bus) 
+            if (currentBus is Bus)
             {
 
-            BusPopUp info = new BusPopUp(currentBus);
-            info.DataContext = currentBus;
-            info.Show();
+                BusPopUp info = new BusPopUp(currentBus);
+                info.DataContext = currentBus;
+                info.Show();
             }
         }
 
@@ -86,7 +77,7 @@ namespace PlGui
             {
                 StationPopUp info = new StationPopUp(currentStation);
                 info.DataContext = currentStation;
-                info.Show(); 
+                info.Show();
             }
         }
 
@@ -103,20 +94,20 @@ namespace PlGui
             buseslview.DataContext = buses;
         }
 
-            private void addLineBtn_Click(object sender, RoutedEventArgs e)
+        private void addLineBtn_Click(object sender, RoutedEventArgs e)
         {
             AddLine addLine = new AddLine();
             addLine.ShowDialog();
 
             lines.Clear();
-            
+
             foreach (var item in bl.GetAllLines())
             {
                 lines.Add(item);
             }
-            
+
             lineslview.DataContext = lines;
-            
+
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -128,7 +119,7 @@ namespace PlGui
         {
             MessageBox.Show(@"Version 1.0.0.0
 © 2021 Menachem Alter & Inon Bezalel
-","About",MessageBoxButton.OK,MessageBoxImage.Information);
+", "About", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void MenuBusesItem_Click(object sender, RoutedEventArgs e)
@@ -180,13 +171,9 @@ namespace PlGui
         {
             RemoveBus removeBus = new RemoveBus();
             removeBus.ShowDialog();
-            int bus = removeBus.busCBox.SelectedIndex;
             buses.Clear();
             foreach (var item in bl.GetAllBuses())
-            {
-                if(item.LicenseNum != bus)
-                    buses.Add(item);
-            }
+                buses.Add(item);
             buseslview.DataContext = buses;
         }
 
@@ -200,7 +187,7 @@ namespace PlGui
             RemoveLine removeLine = new RemoveLine();
             removeLine.ShowDialog();
             lines.Clear();
-            string str = "klum"; 
+            string str = "klum";
             int lineNumber = -9999, lastStation = -9999;
             if (removeLine.lineCBox.SelectedItem != null)
             {
