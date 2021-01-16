@@ -131,12 +131,7 @@ namespace DL
         public Station GetStation(int code)
         {
             Station result = DataSource.StationList.Find(s => s.Code == code);
-
-            //  if (result != null)
-            {
                 return result;
-            }
-            // throw
         }
 
         public void DeleteStation(int code)
@@ -156,12 +151,7 @@ namespace DL
         public Line GetLine(int id)
         {
             Line result = DataSource.LineList.Find(s => s.PersonalId == id);
-
-            //  if (result != null)
-            {
                 return result;
-            }
-            // throw
         }
 
         public IEnumerable<Line> GetAllLines()

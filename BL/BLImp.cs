@@ -14,13 +14,24 @@ namespace BL
         static int lineIdGenerator = 10;
         IDL dl = DLFactory.GetDL();
         static Random r = new Random(DateTime.Now.Millisecond);
+
+        /// <summary>
+        /// get all the buses
+        /// </summary>
+        /// <returns>a collection of all the buses</returns>
         public IEnumerable<Bus> GetAllBuses()
         {
             return from item in dl.GetAllBuses()
+                       //call the get bus functin with LisenceNum parameter
                    let bus = GetBus(item.LicenseNum)
                    select bus;
         }
 
+        /// <summary>
+        /// gets the requested bus
+        /// </summary>
+        /// <param name="license">license num of the bus</param>
+        /// <returns>the bus with license "license"</returns>
         public Bus GetBus(int license)
         {
             Bus bus = new Bus();
@@ -29,56 +40,101 @@ namespace BL
             return bus;
         }
 
+
         public IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// gets all the lines available
+        /// </summary>
+        /// <returns>a collection of all the lines</returns>
         public IEnumerable<Line> GetAllLines()
         {
             return from item in dl.GetAllLines()
+                       //call the GetLine function with the lines personal id
                    let line = GetLine(item.PersonalId)
                    select line;
         }
 
+        /// <summary>
+        /// get all the available stations
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Station> GetAllStations()
         {
             return from item in dl.GetAllStations()
+                       //call the GetStation with the station code
                    let station = GetStation(item.Code)
                    select station;
         }
 
+        /// <summary>
+        /// gets a single station
+        /// </summary>
+        /// <param name="code">code number of the station</param>
+        /// <returns>return the station that has the requested code</returns>
         public Station GetStation(int code)
         {
             Station station = new Station();
+            //create a temporary statoin
             var tempStation = dl.GetStation(code);
+            //copy all properties over
             tempStation.CopyPropertiesTo(station);
+            //get all the lines that pass through this station
             station.LinesAtStation = from lines in dl.GetStationLines(code)
+                                         //get the line number (previously lines was the lines personal id)
+                                     let lineNumber = dl.GetLine(lines).LineNumber
+                                     //get the lines last station name
                                      let lastStation = dl.GetStation(dl.GetLine(lines).LastStation).Name
-                                     orderby lines
-                                     select new StationLine { LineNumber = lines, LastStation = lastStation };
+                                     //sort by the line numbers
+                                     orderby lineNumber
+                                     //add a new StationLine instant with the requested info
+                                     select new StationLine { LineNumber = lineNumber, LastStation = lastStation };
             return station;
         }
 
+        /// <summary>
+        /// get a single line
+        /// </summary>
+        /// <param name="id">lines personal id</param>
+        /// <returns>a line with the personal id == id</returns>
         public Line GetLine(int id)
         {
             Line line = new Line();
+            //create a temporary line
             var tempLine = dl.GetLine(id);
+            //copy all properties over
             tempLine.CopyPropertiesTo(line);
+            //get the first stations name
             line.FirstStationName = dl.GetStation(line.FirstStation).Name;
+            //get the last stations name
             line.LastStationName = dl.GetStation(line.LastStation).Name;
+            //get all the station id's that this line passes through
             var stationIDs = from numbers in dl.GetLineStations(line.PersonalId)
                              select numbers;
             int index = 1;
+            //get the station of each station id
             line.Stations = from numbers in stationIDs
+                                //get the stations name
                             let name = dl.GetStation(numbers).Name
+                            //get the next stations station id
                             let next = dl.GetNextStation(id, numbers)
+                            //get the time and distance between the 2 stations
                             let doAdjacentStations = dl.GetAdjacentStations(numbers, next)
+                            //sort the station with the indexes
                             orderby index
+                            //if the statoin is the last station then give it a value of zero
                             select new LineStation() { Station = numbers, StationName = name, Index = index++, TimeToNext = (doAdjacentStations == default(DO.AdjacentStations) ? new TimeSpan(0) : doAdjacentStations.Time), Distance = (doAdjacentStations == default(DO.AdjacentStations) ? 0.0 : doAdjacentStations.Distance) };
             return line;
         }
 
+        /// <summary>
+        /// add a new bus 
+        /// </summary>
+        /// <param name="bus">bus to add</param>
+        /// <returns>true if the bus was added successfully</returns>
         public bool AddBus(Bus bus)
         {
             const int MIN_SEVEN = 1000000;
@@ -86,103 +142,105 @@ namespace BL
             const int MIN_EIGHT = 10000000;
             const int MAX_EIGHT = 99999999;
             var busBO = dl.GetBus(bus.LicenseNum);
-            if (busBO != null)
+            if (busBO != default(DO.Bus))
             {
-                throw new Exception("This bus number already exist");
+                throw new BusException(bus.LicenseNum, "This bus number already exist");
             }
-            if ((bus.FromDate.Year >= 2018 && bus.LicenseNum < MIN_EIGHT)||
-                (bus.FromDate.Year >= 2018 && bus.LicenseNum > MAX_EIGHT)||
+            if ((bus.FromDate.Year >= 2018 && bus.LicenseNum < MIN_EIGHT) ||
+                (bus.FromDate.Year >= 2018 && bus.LicenseNum > MAX_EIGHT) ||
                 (bus.FromDate.Year < 2018 && bus.LicenseNum > MAX_SEVEN) ||
                 (bus.FromDate.Year < 2018 && bus.LicenseNum < MIN_SEVEN))
-                throw new Exception("License num length doesn't match begin date!");
+                throw new BusException(bus.LicenseNum, "License num length doesn't match begin date!");
             if (bus.FuelRemain < 0 || bus.FuelRemain > 1200)
-                throw new Exception("Gas should be between 0 to 1200!");
+                throw new BusException(bus.LicenseNum, "Gas should be between 0 to 1200!");
             if (bus.TotalTrip < 0)
-                throw new Exception("Milege can't be negative");
+                throw new BusException(bus.LicenseNum, "Milege can't be negative");
             DO.Bus busDO = new DO.Bus();
             bus.CopyPropertiesTo(busDO);
-            dl.AddBus(busDO);
-            return true;
+            return dl.AddBus(busDO);
         }
 
+        /// <summary>
+        /// delete a bus
+        /// </summary>
+        /// <param name="licenseNum">lisence num of bus to remove</param>
         public void DeleteBus(int licenseNum)
         {
             dl.DeleteBus(licenseNum);
-            //throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// adds a new station
+        /// </summary>
+        /// <param name="station"></param>
+        /// <returns>true if added successfully</returns>
         public bool AddStation(Station station)
         {
             double longitude = r.NextDouble() + r.Next(29, 34);
             double lattitude = r.NextDouble() + r.Next(31, 36);
             var stationBO = dl.GetStation(station.Code);
-            //BO.Station boStation = new Station()
-            //{
-            //    Code = stationBO.Code,
-            //    Lattitude = lattitude,
-            //    Longitude = longitude,
-            //    Name = stationBO.Name
-            //};
             station.Longitude = longitude;
             station.Lattitude = lattitude;
-            if (stationBO != null)
+            //check if staiton exists already
+            if (stationBO != default(DO.Station))
             {
-                throw new Exception("This station already exist");
+                throw new StationException(station.Code, "This station already exist");
             }
             if (station.Code < 10000 || station.Code > 99999)
             {
-                throw new Exception("Station number must be 5 digits");
+                throw new StationException(station.Code, "Station number must be 5 digits");
             }
             DO.Station stationDO = new DO.Station();
             station.CopyPropertiesTo(stationDO);
-            dl.AddStation(stationDO);
-            return true;
+            return dl.AddStation(stationDO);
         }
 
+        //===============================================================================================
+        /// <summary>
+        /// adds a new line 
+        /// </summary>
+        /// <param name="line">line to add</param>
+        /// <returns>true if added successfully</returns>
         public bool AddLine(Line line)
         {
             //need to add method to get all line numbers
+
+            //check if line exists already
             if (dl.LineExists(line.PersonalId))
-                throw new Exception("This line already exist");
+                throw new LineException(line.PersonalId, "This line already exist");
             if (line.LineNumber > 999 || line.LineNumber < 1)
-                throw new Exception("Line number should be between 1 - 999");
-            
+                throw new LineException(line.PersonalId, "Line number should be between 1 - 999");
             DO.Line lineDO = new DO.Line();
+            //copy all the properties over
             line.CopyPropertiesTo(lineDO);
-            lineDO.PersonalId = ++lineIdGenerator;
-            dl.AddLine(lineDO);
+            //------------------------------------------------------------------------------------------------------------
+            lineDO.PersonalId = ++lineIdGenerator;  //needs to be updated to come from the dal layer
+            //------------------------------------------------------------------------------------------------------------
             int index = 0;
             int[] stationArray = new int[line.Stations.Count()];
-
+            //add all the LineStations to the array
             foreach (var item in line.Stations)
-            {
                 stationArray[index++] = item.Station;
-            };
+
+            //add the LineStations
             for (int i = 0; i < stationArray.Length; i++)
             {
+                //if this is the first station in the list than previos station = 0 
                 if (i == 0)
                     dl.AddLineStation(new DO.LineStation { LineId = lineIdGenerator, LineStationIndex = 1, StationCode = stationArray[0], NextStation = stationArray[1], PrevStation = 0 });
+                //if this is the last station in the list then the NextStation = 0 
                 else if (i == stationArray.Length - 1)
                     dl.AddLineStation(new DO.LineStation { LineId = lineIdGenerator, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = 0, PrevStation = stationArray[i - 1] });
                 else
                     dl.AddLineStation(new DO.LineStation { LineId = lineIdGenerator, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
             }
 
-            //double distance;
-            //double distanceTime;
+            // add a list to all the adjacent staions
             List<AdjacentStations> adjacentStations = new List<AdjacentStations>();
             for (int i = 0; i < stationArray.Length - 1; i++)
             {
-                if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == null)
-                {
-                    adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station1Name = dl.GetStation(stationArray[i]).Name, Station2 = stationArray[i + 1], Station2Name = dl.GetStation(stationArray[i + 1]).Name });
-                }
-                //if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == null)
-                //{
-                //    distance = r.NextDouble() * 10;
-                //    distanceTime = distance * r.Next(20, 50) / 60 / 60;
-                //    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = distance, Time = new TimeSpan((int)distanceTime % 60 % 60, (int)distanceTime % 60 / 60, (int)distanceTime / 60 / 60) });
-                //}
+                if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == default(DO.AdjacentStations))
+                    adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station1Name = dl.GetStation(stationArray[i]).Name, Station2 = stationArray[i + 1], Station2Name = dl.GetStation(stationArray[i + 1]).Name, Distance = r.NextDouble() * (100) + 1, Time = new TimeSpan(r.Next(0, 23), r.Next(0, 59), r.Next(0, 59)) });
             }
             if (adjacentStations.Count > 0)
             {
@@ -193,28 +251,53 @@ namespace BL
                 }
                 throw new AdjacentStationsExceptions("these adjacent stations are missing some info", AdjacentStationsArray);
             }
-            return true;
-        }
 
+            return dl.AddLine(lineDO);
+        }
+        //===============================================================================================
+
+        /// <summary>
+        /// gets user names that are or aren't admins 
+        /// </summary>
+        /// <param name="admin">true if you want admin usernames of false for non admin usernames</param>
+        /// <returns>a collection of usernames</returns>
         public IEnumerable<string> GetAllUserNames(bool admin)
         {
             return from item in dl.GetAllUsers()
+                       //where the previleges match the requsted
                    where item.Admin == admin
+                   //sort the usernames alphabetically
+                   orderby item.UserName
                    select item.UserName;
         }
 
+        /// <summary>
+        /// check if the username and password match 
+        /// </summary>
+        /// <param name="userName">username to check</param>
+        /// <param name="password">password to match</param>
+        /// <returns>true if match was succsessfull</returns>
         public bool ValidatePassword(string userName, string password)
         {
             return dl.ValidatePassword(userName, password);
         }
 
+        /// <summary>
+        /// sends an email to emailAddress with a reminder of the password of the username account
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="emailAddress">email address to send the password to</param>
         public void ResendPassword(string userName, string emailAddress)
         {
+            //create a new message
             var message = new MimeMessage();
+            //add the source of the message
             message.From.Add(new MailboxAddress("Bus Manager", "busmanager.2131.1146@gmail.com"));
+            //add the destination of the messeg
             message.To.Add(new MailboxAddress(userName, emailAddress));
+            //add a subject to the message
             message.Subject = "Password reminder";
-
+            //add a body to the message(plain text (not HTML))
             message.Body = new TextPart("plain")
             {
                 Text = string.Format(@"Hey {0},
@@ -223,17 +306,18 @@ namespace BL
 
 The password for your account is 
 ===============================
-===           {1}           ===
+                {1}           
 ===============================
 -- Bus Manager", userName, dl.GetAllUsers().Where(u => u.UserName.ToLower() == userName.ToLower()).Select(u => u.Password).FirstOrDefault())
             };
 
-            //IDispose
+            //use resources only as long as needed and dipose right away
             using (var client = new SmtpClient())
             {
+                //connect to email server
                 client.Connect("smtp.gmail.com", 465, true);
 
-                // Note: only needed if the SMTP server requires authentication
+                //authenticate 
                 client.Authenticate("busmanager.2131.1146", "21311146");
 
                 try
@@ -249,6 +333,7 @@ The password for your account is
             }
         }
 
+        
         public bool RemoveStationFromLine(int lineId, int stationToRemove)
         {
             Line line = GetLine(lineId);
@@ -266,7 +351,7 @@ The password for your account is
             line = null;
             //foreach (var item in line.Stations)
             //{
-                dl.RemoveAllLineStation(lineId);
+            dl.RemoveAllLineStation(lineId);
             //}
             //if station is first
 

@@ -97,6 +97,8 @@ namespace PlGui
                 adjacentStations = ex.adjacentStationsArray;
                 AdjacentStationInfo adjacentStationInfo = new AdjacentStationInfo(adjacentStations);
                 adjacentStationInfo.ShowDialog();
+                bl.AddLine(line);
+                Close();
             }
             catch (Exception exc)
             {
