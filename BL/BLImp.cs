@@ -40,7 +40,6 @@ namespace BL
             return bus;
         }
 
-
         public IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate)
         {
             throw new NotImplementedException();
