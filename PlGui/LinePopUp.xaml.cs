@@ -41,7 +41,10 @@ namespace PlGui
         {
             BO.LineStation lineStation = ((sender as Button).DataContext as BO.LineStation);
             bl.RemoveStationFromLine(line.PersonalId , lineStation.Station);
-            stationDgrid.Items.Refresh();
+            line.Stations = bl.GetLine(line.PersonalId).Stations;
+            this.DataContext = line;
+            Close();
+            //stationDgrid.Items.Refresh();
         }
 
         private void stationDgrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

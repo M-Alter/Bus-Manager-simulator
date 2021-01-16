@@ -84,7 +84,7 @@ namespace DL
         }
 
 
-        public void RemoveLine(int lineId, int lastStation)
+        public bool RemoveLine(int lineId, int lastStation)
         {
             Line line = new Line();
             foreach (var item in DataSource.LineList)
@@ -95,10 +95,11 @@ namespace DL
                     break;
                 }  
             }
-            if (line != null)
+            if (line != default(Line))
                 DataSource.LineList.Remove(line);
             else
                 throw new Exception("This bus wasn't found");
+            return true;
         }
 
         #endregion
@@ -227,12 +228,15 @@ namespace DL
 
         public bool RemoveAllLineStation(int lineID)
         {
+            List<LineStation> stations = new List<LineStation>();
+
             foreach (var item in DataSource.LineStationsList)
-            {
                 if (item.LineId == lineID)
-                {
-                    DataSource.LineStationsList.Remove(item);
-                }
+                    stations.Add(item);
+
+            foreach (var item in stations)
+            {
+                DataSource.LineStationsList.Remove(item);
             }
             //IEnumerable<LineStation> lineStations = ;
             //var stam = from item in DataSource.LineStationsList

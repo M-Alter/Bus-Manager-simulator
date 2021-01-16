@@ -333,29 +333,31 @@ The password for your account is
             }
         }
 
-        
+        /// <summary>
+        /// removes a station fron the line 
+        /// </summary>
+        /// <param name="lineId">line to be removed from</param>
+        /// <param name="stationToRemove">station to remove</param>
+        /// <returns>true if removed successfully</returns>
         public bool RemoveStationFromLine(int lineId, int stationToRemove)
         {
             Line line = GetLine(lineId);
-            int[] stationArray = new int[line.Stations.Count()];
+            int[] stationArray = new int[line.Stations.Count() - 1];
             int index = 0;
+
+            //add all the stations to the array but the station to be deleted
             foreach (var item in line.Stations)
             {
                 if (item.Station != stationToRemove)
                     stationArray[index++] = item.Station;
             };
-            //foreach (var item in line.Stations)
-            //{
-            //    stationArray[index++] = item.Station;
-            //};
-            line = null;
-            //foreach (var item in line.Stations)
-            //{
-            dl.RemoveAllLineStation(lineId);
-            //}
-            //if station is first
 
-            //if station is last
+            line.Stations = null;
+
+            //remove all the lines linestations
+            dl.RemoveAllLineStation(lineId);
+
+            //add all the linestations in the array
             for (int i = 0; i < stationArray.Length; i++)
             {
                 if (i == 0)
@@ -365,50 +367,75 @@ The password for your account is
                 else
                     dl.AddLineStation(new DO.LineStation { LineId = line.PersonalId, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
             }
+
             line = GetLine(line.PersonalId);
             return true;
         }
 
+        /// <summary>
+        /// gets all stations that conform the predicate function given
+        /// </summary>
+        /// <param name="predicate">condition to conform</param>
+        /// <returns>a collection of stations that conform to predicate</returns>
         public IEnumerable<Station> GetAllStations(Predicate<Station> predicate)
         {
             return from item in dl.GetAllStations()
+                       //get the station as BO
                    let station = GetStation(item.Code)
+                   // check if the station conforms predicate
                    where predicate(station)
                    select station;
         }
 
-
-
+        /// <summary>
+        /// get the details of the 2 adjacent stations
+        /// </summary>
+        /// <param name="first">first station</param>
+        /// <param name="second">second station</param>
+        /// <returns>all the details between these two stations</returns>
         public AdjacentStations GetAdjacentStations(int first, int second)
         {
             DO.AdjacentStations doAdjacentStations = dl.GetAdjacentStations(first, second);
             AdjacentStations adjacentStations = new AdjacentStations();
             doAdjacentStations.CopyPropertiesTo(adjacentStations);
+
+            //add the stations names to the instance
             adjacentStations.Station1Name = GetStation(adjacentStations.Station1).Name;
             adjacentStations.Station2Name = GetStation(adjacentStations.Station2).Name;
-            return adjacentStations;
-            //return(AdjacentStations) doAdjacentStations.CopyPropertiesToNew(typeof(AdjacentStations));            
+            return adjacentStations;            
         }
 
+        /// <summary>
+        /// gets all the adjacent stations
+        /// </summary>
+        /// <returns>all the adjacent stations</returns>
         public IEnumerable<AdjacentStations> GetAllAdjacentStations()
         {
             return from item in dl.GetAllAdjacentStations()
+                   //get instance as BO
                    let current = GetAdjacentStations(item.Station1, item.Station2)
                    select current;
-
-            //let current = (AdjacentStations)item.CopyPropertiesToNew(typeof(AdjacentStations))
-            //select current;
         }
 
+        /// <summary>
+        /// adds a new adjacent stations
+        /// </summary>
+        /// <param name="adj">instatnce to add</param>
+        /// <returns>true if added successfully</returns>
         public bool AddAdjacentStations(AdjacentStations adj)
         {
-            dl.AddAdjacentStations((DO.AdjacentStations)adj.CopyPropertiesToNew(typeof(DO.AdjacentStations)));
-            return true;
+            return dl.AddAdjacentStations((DO.AdjacentStations)adj.CopyPropertiesToNew(typeof(DO.AdjacentStations)));
         }
 
-        public void RemoveLine(int lineId, int lastStation)
+        /// <summary>
+        /// remove a line
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="lastStation"></param>
+        /// <returns>true if removed successfully</returns>
+        public bool RemoveLine(int lineId, int lastStation)
         {
-            dl.RemoveLine(lineId, lastStation);
+            return dl.RemoveLine(lineId, lastStation);
         }
     }
 }
