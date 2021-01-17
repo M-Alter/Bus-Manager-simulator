@@ -45,7 +45,7 @@ namespace DO
             return false;
         }
 
-        
+
         internal static Bus CreateBusInstatnce(XElement bus)
         {
             return new Bus()
@@ -100,7 +100,18 @@ namespace DO
             {
                 UserName = user.Element("UserName").Value,
                 Password = user.Element("Password").Value,
-                Admin   = bool.Parse(user.Element("Admin").Value)
+                Admin = bool.Parse(user.Element("Admin").Value)
+            };
+        }
+
+        internal static AdjacentStations CreateAdjInstatnce(XElement adj)
+        {
+            return new AdjacentStations()
+            {
+                Station1 = int.Parse(adj.Element("Station1").Value),
+                Station2 = int.Parse(adj.Element("Station2").Value),
+                Distance = double.Parse(adj.Element("Distance").Value),
+                Time = new TimeSpan(int.Parse(adj.Element("Time").Element("Hour").Value), int.Parse(adj.Element("Time").Element("Min").Value), int.Parse(adj.Element("Time").Element("Sec").Value))
             };
         }
     }

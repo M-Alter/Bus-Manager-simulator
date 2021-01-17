@@ -29,7 +29,19 @@ namespace Dal
         #endregion
         public bool AddAdjacentStations(AdjacentStations adjacentStations)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(AdjacentStationsFilePath);
+            XElement AdjacentStationsElem = new XElement("AdjacentStations",
+                new XElement("Station1", adjacentStations.Station1),     //check if needs to be parsed to string
+                new XElement("Station2", adjacentStations.Station2),
+                new XElement("Distance", adjacentStations.Distance),
+                new XElement("Time",
+                    new XElement("Hour", adjacentStations.Time.Hours),
+                    new XElement("Min", adjacentStations.Time.Minutes),
+                    new XElement("Sec", adjacentStations.Time.Seconds)
+                    )
+                );
+            rootElem.Add(AdjacentStationsElem);
+            return XmlTools.SaveFile(rootElem, AdjacentStationsFilePath);
         }
 
         public bool AddBus(Bus bus)
@@ -105,12 +117,19 @@ namespace Dal
 
         public AdjacentStations GetAdjacentStations(int first, int second)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(AdjacentStationsFilePath);
+
+            return (from adj in rootElem.Elements()
+                    where int.Parse(adj.Element("Station1").Value) == first && int.Parse(adj.Element("Station2").Value) == second
+                    select XmlTools.CreateAdjInstatnce(adj)).FirstOrDefault();
         }
 
         public IEnumerable<AdjacentStations> GetAllAdjacentStations()
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(AdjacentStationsFilePath);
+
+            return from adj in rootElem.Elements()
+                   select XmlTools.CreateAdjInstatnce(adj);
         }
 
         public IEnumerable<Bus> GetAllBuses()
@@ -199,7 +218,12 @@ namespace Dal
 
         public IEnumerable<int> GetStationLines(int code)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(LineStationsFilePath);
+
+            return from lineStation in rootElem.Elements()
+                   where int.Parse(lineStation.Element("StationCode").Value) == code
+                   orderby int.Parse(lineStation.Element("LineId").Value)
+                   select int.Parse(lineStation.Element("LineId").Value);
         }
 
         public bool LineExists(int lineId)
