@@ -14,7 +14,7 @@ namespace DalApi
         IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate);
         Bus GetBus(int licenseNum);
         bool AddBus(Bus bus);
-        void DeleteBus(int licenseNum);
+        void RemoveBus(int licenseNum);
         void UpdateBus();
         #endregion
 

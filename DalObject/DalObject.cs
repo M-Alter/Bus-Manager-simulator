@@ -39,13 +39,13 @@ namespace DL
 
         public void AddBus(Bus bus)
         {
-            foreach (var busItem in DataSource.BusList)
-            {
-                if (busItem.LicenseNum == bus.LicenseNum)
-                {
-                    //throw
-                }
-            }
+            //foreach (var busItem in DataSource.BusList)
+            //{
+            //    if (busItem.LicenseNum == bus.LicenseNum)
+            //    {
+            //        //throw
+            //    }
+            //}
 
             DataSource.BusList.Add(bus.Clone());
         }
@@ -66,7 +66,7 @@ namespace DL
             throw new NotImplementedException();
         }
 
-        public void DeleteBus(int licenseNum)
+        public void RemoveBus(int licenseNum)
         {
             //Bus bus = DataSource.BusList.Find(b => b.LicenseNum == licenseNum);
             Bus bus = new Bus();

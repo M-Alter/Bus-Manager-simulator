@@ -40,7 +40,6 @@ namespace DO
             set { lattitude = value; }
         }
 
-        public IEnumerable<int> LinesAtStop { get; set; }
         #endregion
 
     }

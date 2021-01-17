@@ -164,7 +164,7 @@ namespace BL
         /// <param name="licenseNum">lisence num of bus to remove</param>
         public void DeleteBus(int licenseNum)
         {
-            dl.DeleteBus(licenseNum);
+            dl.RemoveBus(licenseNum);
         }
 
         /// <summary>
