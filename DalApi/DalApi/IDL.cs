@@ -23,7 +23,7 @@ namespace DalApi
         IEnumerable<Station> GetAllStationsThat(Predicate<Station> predicate);
         bool AddStation(Station station);
         Station GetStation(int code);
-        void DeleteStation(int code);
+        void RemoveStation(int code);
         #endregion
 
         #region Lines

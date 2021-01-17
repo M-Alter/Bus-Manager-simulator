@@ -93,7 +93,7 @@ namespace Dal
             throw new NotImplementedException();
         }
 
-        public void DeleteStation(int code)
+        public void RemoveStation(int code)
         {
             throw new NotImplementedException();
         }
@@ -149,14 +149,8 @@ namespace Dal
 
             return (from bus in rootElem.Elements()
                     where int.Parse(bus.Element("LicenseNum").Value) == licenseNum
-                    select new Bus()
-                    {
-                        LicenseNum = int.Parse(bus.Element("LicenseNum").Value),
-                        FromDate = DateTime.Parse(bus.Element("FromDate").Value),
-                        FuelRemain = double.Parse(bus.Element("FuelRemain").Value),
-                        TotalTrip = int.Parse(bus.Element("TotalTrip").Value),
-                        Status = (Enums.BusStatus)Enum.Parse(typeof(Enums.BusStatus), bus.Element("Status").Value)
-                    }).FirstOrDefault();
+                    select XmlTools.CreateBusInstatnce(bus)).FirstOrDefault();
+                    
         }
 
         public Line GetLine(int id)
@@ -165,10 +159,7 @@ namespace Dal
 
             return (from line in rootElem.Elements()
                     where int.Parse(line.Element("PersonalId").Value) == id
-                    select new Line()
-                    {
-                        PersonalId = int.Parse(line.Element("PersonalId").Value),
-                    }).FirstOrDefault();
+                    select XmlTools.CreateLineInstatnce(line)).FirstOrDefault();
         }
 
         public IEnumerable<int> GetLineStations(int lineId)

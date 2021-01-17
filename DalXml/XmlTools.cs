@@ -28,6 +28,9 @@ namespace DO
             }
         }
 
+
+
+
         internal static bool SaveFile(XElement rootElem, string filePath)
         {
             try
@@ -41,5 +44,32 @@ namespace DO
             }
             return false;
         }
+
+        
+        internal static Bus CreateBusInstatnce(XElement bus)
+        {
+            return new Bus()
+            {
+                LicenseNum = int.Parse(bus.Element("LicenseNum").Value),
+                FromDate = DateTime.Parse(bus.Element("FromDate").Value),
+                FuelRemain = double.Parse(bus.Element("FuelRemain").Value),
+                TotalTrip = int.Parse(bus.Element("TotalTrip").Value),
+                Status = (Enums.BusStatus)Enum.Parse(typeof(Enums.BusStatus), bus.Element("Status").Value)
+            };
+        }
+
+        internal static Line CreateLineInstatnce(XElement line)
+        {
+            return new Line()
+            {
+                PersonalId = int.Parse(line.Element("PersonalId").Value),
+                LineNumber = int.Parse(line.Element("LineNumber").Value),
+                FirstStation = int.Parse(line.Element("FirstStation").Value),
+                LastStation = int.Parse(line.Element("LastStation").Value),
+                Area = (Enums.Areas)Enum.Parse(typeof(Enums.Areas), line.Element("Area").Value),
+                IsActive = bool.Parse(line.Element("IsActive").Value)
+            };
+        }
+
     }
 }

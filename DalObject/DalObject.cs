@@ -135,7 +135,7 @@ namespace DL
                 return result;
         }
 
-        public void DeleteStation(int code)
+        public void RemoveStation(int code)
         {
             Station result = DataSource.StationList.Find(s => s.Code == code);
 
