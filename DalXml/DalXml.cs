@@ -204,7 +204,11 @@ namespace Dal
 
         public int GetNextStation(int lineId, int stationCode)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(LineStationsFilePath);
+
+            return (from lineStation in rootElem.Elements()
+                   where int.Parse(lineStation.Element("LineId").Value) == lineId && int.Parse(lineStation.Element("StationCode").Value) == stationCode
+                   select int.Parse(lineStation.Element("NextStation").Value)).FirstOrDefault();
         }
 
         public Station GetStation(int code)
