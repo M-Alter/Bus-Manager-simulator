@@ -24,6 +24,7 @@ namespace Dal
         string LineStationsFilePath = @"xml\LineStations.xml";
         string UserFilePath = @"xml\Users.xml";
         string AdjacentStationsFilePath = @"xml\AdjacentStations.xml";
+        string SerialNumberGeneratorPath = @"xml\SerialNumberGenerator.xml";
 
 
         #endregion
@@ -112,7 +113,10 @@ namespace Dal
 
         public int GenerateLinePersonalId()
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(SerialNumberGeneratorPath);
+            int serialNum = int.Parse(rootElem.Element("LineNumberGenerator").Value);
+            rootElem.Element("LineNumberGenerator").SetValue(serialNum + 1);
+            return serialNum;
         }
 
         public AdjacentStations GetAdjacentStations(int first, int second)
@@ -207,8 +211,8 @@ namespace Dal
             XElement rootElem = XmlTools.LoadFile(LineStationsFilePath);
 
             return (from lineStation in rootElem.Elements()
-                   where int.Parse(lineStation.Element("LineId").Value) == lineId && int.Parse(lineStation.Element("StationCode").Value) == stationCode
-                   select int.Parse(lineStation.Element("NextStation").Value)).FirstOrDefault();
+                    where int.Parse(lineStation.Element("LineId").Value) == lineId && int.Parse(lineStation.Element("StationCode").Value) == stationCode
+                    select int.Parse(lineStation.Element("NextStation").Value)).FirstOrDefault();
         }
 
         public Station GetStation(int code)
@@ -232,7 +236,11 @@ namespace Dal
 
         public bool LineExists(int lineId)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(LinesFilePath);
+
+            return (from line in rootElem.Elements()
+                    where int.Parse(line.Element("PersonalId").Value) == lineId
+                    select true).FirstOrDefault();
         }
 
         public bool RemoveAllLineStation(int lineID)
@@ -247,7 +255,17 @@ namespace Dal
 
         public bool UpdateAdjacentStations(AdjacentStations adjacentStations)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(AdjacentStationsFilePath);
+
+            var findAdj = (from adj in rootElem.Elements()
+            where int.Parse(adj.Element("Station1").Value) == adjacentStations.Station1 && int.Parse(adj.Element("Station2").Value) == adjacentStations.Station2
+            select adj).FirstOrDefault();
+
+            findAdj.Element("Distance").SetValue(adjacentStations.Distance);
+            findAdj.Element("Time").SetElementValue("Hour", adjacentStations.Time.Hours);
+            findAdj.Element("Time").SetElementValue("Min", adjacentStations.Time.Minutes);
+            findAdj.Element("Time").SetElementValue("Sec", adjacentStations.Time.Seconds);
+            return true;
         }
 
         public void UpdateBus()
