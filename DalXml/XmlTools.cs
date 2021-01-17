@@ -71,5 +71,37 @@ namespace DO
             };
         }
 
+        internal static LineStation CreateLineStationInstatnce(XElement lineStation)
+        {
+            return new LineStation()
+            {
+                LineId = int.Parse(lineStation.Element("LineId").Value),
+                StationCode = int.Parse(lineStation.Element("StationCode").Value),
+                LineStationIndex = int.Parse(lineStation.Element("LineStationIndex").Value),
+                PrevStation = int.Parse(lineStation.Element("PrevStation").Value),
+                NextStation = int.Parse(lineStation.Element("NextStation").Value)
+            };
+        }
+
+        internal static Station CreateStationInstatnce(XElement station)
+        {
+            return new Station()
+            {
+                Code = int.Parse(station.Element("Code").Value),
+                Name = station.Element("Name").Value,
+                Lattitude = double.Parse(station.Element("Lattitude").Value),
+                Longitude = double.Parse(station.Element("Longitude").Value)
+            };
+        }
+
+        internal static User CreateUserInstatnce(XElement user)
+        {
+            return new User()
+            {
+                UserName = user.Element("UserName").Value,
+                Password = user.Element("Password").Value,
+                Admin   = bool.Parse(user.Element("Admin").Value)
+            };
+        }
     }
 }

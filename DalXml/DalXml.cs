@@ -17,13 +17,13 @@ namespace Dal
         #endregion
 
         #region Files
-        string LinesFilePath = @"xml\Lines.XML";
-        string BusFilePath = @"xml\Buses.XML";
-        string StationFilePath = @"xml\Stations.Xml";
-        string TripFilePath = @"xml\Trips.Xml";
-        string LineStationsFilePath = @"xml\LineStations.Xml";
-        string UserFilePath = @"xml\Users.Xml";
-        string AdjacentStationsFilePath = @"xml\AdjacentStations.Xml";
+        string LinesFilePath = @"xml\Lines.xml";
+        string BusFilePath = @"xml\Buses.xml";
+        string StationsFilePath = @"xml\Stations.xml";
+        string TripFilePath = @"xml\Trips.xml";
+        string LineStationsFilePath = @"xml\LineStations.xml";
+        string UserFilePath = @"xml\Users.xml";
+        string AdjacentStationsFilePath = @"xml\AdjacentStations.xml";
 
 
         #endregion
@@ -49,7 +49,7 @@ namespace Dal
         public bool AddLine(Line line)
         {
             XElement rootElem = XmlTools.LoadFile(LinesFilePath);
-            XElement busElem = new XElement("Line",
+            XElement lineElem = new XElement("Line",
                 new XElement("PersonalId", line.PersonalId),     //check if needs to be parsed to string
                 new XElement("LineNumber", line.LineNumber),     //check if needs to be parsed to string
                 new XElement("Area", line.Area.ToString()),
@@ -57,7 +57,7 @@ namespace Dal
                 new XElement("LastStation", line.LastStation),
                 new XElement("IsActive", line.IsActive.ToString())
                 );
-            rootElem.Add(busElem);
+            rootElem.Add(lineElem);
             return XmlTools.SaveFile(rootElem, LinesFilePath);
         }
 
@@ -77,7 +77,7 @@ namespace Dal
 
         public bool AddStation(Station station)
         {
-            XElement rootElem = XmlTools.LoadFile(StationFilePath);
+            XElement rootElem = XmlTools.LoadFile(StationsFilePath);
             XElement stationElem = new XElement("Station",
                 new XElement("Code", station.Code),     //check if needs to be parsed to string
                 new XElement("Name", station.Name),
@@ -85,7 +85,7 @@ namespace Dal
                 new XElement("Lattitude", station.Lattitude)
                 );
             rootElem.Add(stationElem);
-            return XmlTools.SaveFile(rootElem, StationFilePath);
+            return XmlTools.SaveFile(rootElem, StationsFilePath);
         }
 
         public void RemoveBus(int licenseNum)
@@ -115,7 +115,10 @@ namespace Dal
 
         public IEnumerable<Bus> GetAllBuses()
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(BusFilePath);
+
+            return from bus in rootElem.Elements()
+                   select XmlTools.CreateBusInstatnce(bus);
         }
 
         public IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate)
@@ -125,12 +128,18 @@ namespace Dal
 
         public IEnumerable<Line> GetAllLines()
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(LinesFilePath);
+
+            return from line in rootElem.Elements()
+                   select XmlTools.CreateLineInstatnce(line);
         }
 
         public IEnumerable<Station> GetAllStations()
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(StationsFilePath);
+
+            return from station in rootElem.Elements()
+                   select XmlTools.CreateStationInstatnce(station);
         }
 
         public IEnumerable<Station> GetAllStationsThat(Predicate<Station> predicate)
@@ -140,7 +149,10 @@ namespace Dal
 
         public IEnumerable<User> GetAllUsers()
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(UserFilePath);
+
+            return from user in rootElem.Elements()
+                   select XmlTools.CreateUserInstatnce(user);
         }
 
         public Bus GetBus(int licenseNum)
@@ -150,7 +162,6 @@ namespace Dal
             return (from bus in rootElem.Elements()
                     where int.Parse(bus.Element("LicenseNum").Value) == licenseNum
                     select XmlTools.CreateBusInstatnce(bus)).FirstOrDefault();
-                    
         }
 
         public Line GetLine(int id)
@@ -164,7 +175,12 @@ namespace Dal
 
         public IEnumerable<int> GetLineStations(int lineId)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(LineStationsFilePath);
+
+            return from lineStation in rootElem.Elements()
+                   where int.Parse(lineStation.Element("LineId").Value) == lineId
+                   orderby int.Parse(lineStation.Element("LineStationIndex").Value)
+                   select int.Parse(lineStation.Element("StationCode").Value);
         }
 
         public int GetNextStation(int lineId, int stationCode)
@@ -174,7 +190,11 @@ namespace Dal
 
         public Station GetStation(int code)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(StationsFilePath);
+
+            return (from station in rootElem.Elements()
+                    where int.Parse(station.Element("Code").Value) == code
+                    select XmlTools.CreateStationInstatnce(station)).FirstOrDefault();
         }
 
         public IEnumerable<int> GetStationLines(int code)
@@ -209,7 +229,12 @@ namespace Dal
 
         public bool ValidatePassword(string userName, string password)
         {
-            throw new NotImplementedException();
+
+            XElement rootElem = XmlTools.LoadFile(UserFilePath);
+
+            return (from user in rootElem.Elements()
+                    where user.Element("UserName").Value.ToLower() == userName.ToLower() && user.Element("Password").Value == password
+                    select true).FirstOrDefault();
         }
     }
 }
