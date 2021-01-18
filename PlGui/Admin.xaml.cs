@@ -28,6 +28,7 @@ namespace PlGui
                 buses.Add(item);
             }
             buseslview.DataContext = buses;
+            //buseslview.DataContext = bl.GetAllBuses();
 
             foreach (var item in bl.GetAllStations())
                 stations.Add(item);
@@ -100,6 +101,8 @@ namespace PlGui
             addLine.ShowDialog();
 
             lines.Clear();
+            lines = null;
+            lines = new ObservableCollection<Line>();
 
             foreach (var item in bl.GetAllLines())
             {
