@@ -21,6 +21,7 @@ namespace Dal
         string BusFilePath = @"xml\Buses.xml";
         string StationsFilePath = @"xml\Stations.xml";
         string TripFilePath = @"xml\Trips.xml";
+        string LineTripFilePath = @"xml\LineTrips.xml";
         string LineStationsFilePath = @"xml\LineStations.xml";
         string UserFilePath = @"xml\Users.xml";
         string AdjacentStationsFilePath = @"xml\AdjacentStations.xml";
@@ -457,6 +458,14 @@ namespace Dal
                     where user.Element("UserName").Value.ToLower() == userName.ToLower() && user.Element("Password").Value == password
                     //select the first true
                     select true).FirstOrDefault();
+        }
+
+        public IEnumerable<LineTrip> GetLineSchedules()
+        {
+            XElement rootElem = XmlTools.LoadFile(LineTripFilePath);
+
+            return from ls in rootElem.Elements()
+                   select XmlTools.CreateLineTripInstance(ls);            
         }
     }
 }

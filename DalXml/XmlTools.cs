@@ -24,7 +24,7 @@ namespace DO
             }
             catch (FileLoadException e)
             {
-                throw new FileLoadException(e.Message, path);
+                throw new FileLoadException(e.Message, e.FileName);
             }
             catch (Exception e)
             {
@@ -116,6 +116,19 @@ namespace DO
                 Station2 = int.Parse(adj.Element("Station2").Value),
                 Distance = double.Parse(adj.Element("Distance").Value),
                 Time = new TimeSpan(int.Parse(adj.Element("Time").Element("Hour").Value), int.Parse(adj.Element("Time").Element("Min").Value), int.Parse(adj.Element("Time").Element("Sec").Value))
+            };
+        }
+
+        internal static LineTrip CreateLineTripInstance(XElement adj)
+        {
+            return new LineTrip()
+            {
+                
+                FinishAt = new TimeSpan(int.Parse(adj.Element("Time").Element("Hour").Value), int.Parse(adj.Element("Time").Element("Min").Value), int.Parse(adj.Element("Time").Element("Sec").Value)),
+                Frequency = new TimeSpan(int.Parse(adj.Element("Time").Element("Hour").Value), int.Parse(adj.Element("Time").Element("Min").Value), int.Parse(adj.Element("Time").Element("Sec").Value)),
+                StartAt = new TimeSpan(int.Parse(adj.Element("Time").Element("Hour").Value), int.Parse(adj.Element("Time").Element("Min").Value), int.Parse(adj.Element("Time").Element("Sec").Value)),
+                LineId = int.Parse(adj.Element("LineId").Value),
+                Id = Int32.Parse(adj.Element("LineId").Value + adj.Element("Time").Element("Hour").Value+ adj.Element("Time").Element("Min").Value + adj.Element("Time").Element("Sec").Value)
             };
         }
     }

@@ -13,6 +13,7 @@ namespace DS
         public static List<LineStation> LineStationsList;
         public static List<User> UserList;
         public static List<AdjacentStations> AdjacentStationsList;
+        public static List<LineTrip> LineTripsList;
         public static int linePersonalIdGenerator = 15;
 
         /// <summary>
@@ -103,6 +104,7 @@ namespace DS
                 new AdjacentStations{Station1 = 38834, Station2 = 38835, Distance = 1.5, Time = new TimeSpan(0,3,0) },
                 new AdjacentStations{Station1 = 38835, Station2 = 38836, Distance = 1.5, Time = new TimeSpan(0,3,0) }
             };
+            LineTripsList = new List<LineTrip>();
         }
     }
 }

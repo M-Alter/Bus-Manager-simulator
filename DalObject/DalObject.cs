@@ -289,5 +289,11 @@ namespace DL
         {
             return DataSource.linePersonalIdGenerator++;
         }
+
+        public IEnumerable<LineTrip> GetLineSchedules()
+        {
+            return from ls in DataSource.LineTripsList
+                   select ls.Clone();
+        }
     }
 }
