@@ -28,76 +28,133 @@ namespace Dal
 
 
         #endregion
+
+        /// <summary>
+        /// add a set of adjacent stations
+        /// </summary>
+        /// <param name="adjacentStations">set of sttions to add</param>
+        /// <returns>true if added successfully</returns>
         public bool AddAdjacentStations(AdjacentStations adjacentStations)
         {
+            //get the file 
             XElement rootElem = XmlTools.LoadFile(AdjacentStationsFilePath);
+            //create a new element to add to the file
+            //add the main tag 
             XElement AdjacentStationsElem = new XElement("AdjacentStations",
-                new XElement("Station1", adjacentStations.Station1),     //check if needs to be parsed to string
+                //add the elements
+                new XElement("Station1", adjacentStations.Station1),
                 new XElement("Station2", adjacentStations.Station2),
                 new XElement("Distance", adjacentStations.Distance),
+                //split the time to three sets
                 new XElement("Time",
                     new XElement("Hour", adjacentStations.Time.Hours),
                     new XElement("Min", adjacentStations.Time.Minutes),
                     new XElement("Sec", adjacentStations.Time.Seconds)
                     )
                 );
+            //add the new element to the root element
             rootElem.Add(AdjacentStationsElem);
+            //save the file
             return XmlTools.SaveFile(rootElem, AdjacentStationsFilePath);
         }
 
+        /// <summary>
+        /// add a new bus
+        /// </summary>
+        /// <param name="bus">bus to add</param>
+        /// <returns>true if added successfully</returns>
         public bool AddBus(Bus bus)
         {
+            //get the file 
             XElement rootElem = XmlTools.LoadFile(BusFilePath);
+            //create a new element to add to the file
+            //add the main tag 
             XElement busElem = new XElement("Bus",
-                new XElement("LicenseNum", bus.LicenseNum),     //check if needs to be parsed to string
+                //add the elements
+                new XElement("LicenseNum", bus.LicenseNum),    
                 new XElement("FromDate", bus.FromDate),
                 new XElement("TotalTrip", bus.TotalTrip),
                 new XElement("FuelRemain", bus.FuelRemain),
                 new XElement("Status", bus.Status.ToString())
                 );
+            //add the new element to the root element
             rootElem.Add(busElem);
+            //save the file
             return XmlTools.SaveFile(rootElem, BusFilePath);
         }
 
+        /// <summary>
+        /// add a new line
+        /// </summary>
+        /// <param name="line">line to add</param>
+        /// <returns><true if added successfully/returns>
         public bool AddLine(Line line)
         {
+            //get the file 
             XElement rootElem = XmlTools.LoadFile(LinesFilePath);
+            //create a new element to add to the file
+            //add the main tag 
             XElement lineElem = new XElement("Line",
-                new XElement("PersonalId", line.PersonalId),     //check if needs to be parsed to string
-                new XElement("LineNumber", line.LineNumber),     //check if needs to be parsed to string
+                //add the elements
+                new XElement("PersonalId", line.PersonalId),
+                new XElement("LineNumber", line.LineNumber),
                 new XElement("Area", line.Area.ToString()),
                 new XElement("FirstStation", line.FirstStation),
                 new XElement("LastStation", line.LastStation),
                 new XElement("IsActive", line.IsActive.ToString())
                 );
+            //add the new element to the root element
             rootElem.Add(lineElem);
+            //save the file
             return XmlTools.SaveFile(rootElem, LinesFilePath);
         }
 
+        /// <summary>
+        /// add a new station to a line
+        /// </summary>
+        /// <param name="lineStation">LineStation to add</param>
+        /// <returns>true if added successfully</returns>
         public bool AddLineStation(LineStation lineStation)
         {
+            //get the file 
             XElement rootElem = XmlTools.LoadFile(LineStationsFilePath);
+            //create a new element to add to the file
+            //add the main tag 
             XElement lineStationElem = new XElement("LineStation",
-                new XElement("LineId", lineStation.LineId),     //check if needs to be parsed to string
+                //add the elements
+                new XElement("LineId", lineStation.LineId),     
                 new XElement("StationCode", lineStation.StationCode),
                 new XElement("LineStationIndex", lineStation.LineStationIndex),
                 new XElement("PrevStation", lineStation.PrevStation),
                 new XElement("NextStation", lineStation.NextStation)
                 );
+            //add the new element to the root element
             rootElem.Add(lineStationElem);
+            //save the file
             return XmlTools.SaveFile(rootElem, LineStationsFilePath);
         }
 
+        /// <summary>
+        /// add a station
+        /// </summary>
+        /// <param name="station">station to add</param>
+        /// <returns>true if added successfully</returns>
         public bool AddStation(Station station)
         {
+            //get the file 
             XElement rootElem = XmlTools.LoadFile(StationsFilePath);
+            //create a new element to add to the file
+            //add the main tag 
             XElement stationElem = new XElement("Station",
-                new XElement("Code", station.Code),     //check if needs to be parsed to string
+                //add the elements
+                new XElement("Code", station.Code),     
                 new XElement("Name", station.Name),
                 new XElement("Longitude", station.Longitude),
                 new XElement("Lattitude", station.Lattitude)
                 );
+            //add the new element to the root element
             rootElem.Add(stationElem);
+            //save the file
             return XmlTools.SaveFile(rootElem, StationsFilePath);
         }
 
@@ -111,6 +168,10 @@ namespace Dal
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// gets a new serial number that hasn't yet existed in the system
+        /// </summary>
+        /// <returns></returns>
         public int GenerateLinePersonalId()
         {
             XElement rootElem = XmlTools.LoadFile(SerialNumberGeneratorPath);

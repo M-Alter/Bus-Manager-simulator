@@ -34,6 +34,9 @@ namespace BLAPI
         bool ValidatePassword(string userName, string password);
         void ResendPassword(string userName, string emailAddress);
 
+        void StartSimulator(TimeSpan startTime, int Rate, Action<TimeSpan> updateTime);
+        void StopSimulator();
+
 
     }
 }
