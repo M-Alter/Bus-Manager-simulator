@@ -459,5 +459,15 @@ The password for your account is
             temp.Distance = adjacentStations.Distance;
             return dl.UpdateAdjacentStations(temp);
         }
+
+        public void StartSimulator(TimeSpan startTime, int Rate, Action<TimeSpan> updateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StopSimulator()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
