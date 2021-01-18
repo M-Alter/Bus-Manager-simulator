@@ -174,9 +174,14 @@ namespace Dal
         /// <returns></returns>
         public int GenerateLinePersonalId()
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(SerialNumberGeneratorPath);
+            //get the value
             int serialNum = int.Parse(rootElem.Element("LineNumberGenerator").Value);
+            //save the next value to the file
             rootElem.Element("LineNumberGenerator").SetValue(serialNum + 1);
+            //save the file
+            XmlTools.SaveFile(rootElem, SerialNumberGeneratorPath);
             return serialNum;
         }
 
