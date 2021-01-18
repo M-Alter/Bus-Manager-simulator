@@ -351,6 +351,8 @@ The password for your account is
         public bool RemoveStationFromLine(int lineId, int stationToRemove)
         {
             Line line = GetLine(lineId);
+            if (line.Stations.Count() < 3)
+                throw new LineStationException("A line can't have less than 2 stations", line.LineNumber);
             int[] stationArray = new int[line.Stations.Count() - 1];
             int index = 0;
 
@@ -369,6 +371,7 @@ The password for your account is
             //update the first and last station
             dl.UpdateLine(line.PersonalId, stationArray[0], stationArray[stationArray.Length-1]);
 
+
             //add all the linestations in the array
             for (int i = 0; i < stationArray.Length; i++)
             {
@@ -380,7 +383,29 @@ The password for your account is
                     dl.AddLineStation(new DO.LineStation { LineId = line.PersonalId, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
             }
 
-            line = GetLine(line.PersonalId);
+            //==========================================================================================================
+            // add a list to all the adjacent staions
+            List<AdjacentStations> adjacentStations = new List<AdjacentStations>();
+            for (int i = 0; i < stationArray.Length - 1; i++)
+            {
+                if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == default(DO.AdjacentStations))
+                {
+                    adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station1Name = dl.GetStation(stationArray[i]).Name, Station2 = stationArray[i + 1], Station2Name = dl.GetStation(stationArray[i + 1]).Name, /*Distance = r.NextDouble() * (100) + 1, Time = new TimeSpan(r.Next(0, 23), r.Next(0, 59), r.Next(0, 59))*/ });
+                    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = r.NextDouble() * (50) + 1, Time = new TimeSpan(0, r.Next(0, 59), r.Next(0, 59)) });
+                }
+            }
+            if (adjacentStations.Count > 0)
+            {
+                AdjacentStations[] AdjacentStationsArray = new AdjacentStations[adjacentStations.Count];
+                for (int i = 0; i < adjacentStations.Count; i++)
+                {
+                    AdjacentStationsArray[i] = GetAdjacentStations(adjacentStations[i].Station1, adjacentStations[i].Station2);
+                }
+                throw new AdjacentStationsExceptions("these adjacent stations are missing some info", AdjacentStationsArray);
+            }
+            //==========================================================================================================
+
+            //line = GetLine(line.PersonalId);
             return true;
         }
 

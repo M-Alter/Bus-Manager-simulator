@@ -63,4 +63,20 @@ namespace BO
             this.lineNumber = lineNumber;
         }
     }
+
+
+    public class LineStationException : Exception
+    {
+        public int line;
+
+        /// <summary>
+        /// exception for a problem regarding lineStation
+        /// </summary>
+        /// <param name="message">error message</param>
+        /// <param name="line">line number</param>
+        public LineStationException(string message, int line):base(message)
+        {
+            this.line = line;
+        }
+    }
 }

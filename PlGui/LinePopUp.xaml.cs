@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,10 +23,7 @@ namespace PlGui
     {
         static IBL bl = BLFactory.GetIBL();
         PO.Line line = new PO.Line();
-        //public LinePopUp()
-        //{
-        //    InitializeComponent();
-        //}
+        
 
         public LinePopUp(PO.Line line)
         {
@@ -45,16 +41,31 @@ namespace PlGui
         private void btRemove_Click(object sender, RoutedEventArgs e)
         {
             BO.LineStation lineStation = ((sender as Button).DataContext as BO.LineStation);
-            ((PO.Line)this.DataContext).Stations.Remove(lineStation);
-            line.Stations.Remove(lineStation);
-            bl.RemoveStationFromLine(line.PersonalId, lineStation.Station);
-            //line.Stations = new ObservableCollection<LineStation>(bl.GetLine(line.PersonalId).Stations);
+            try
+            {
+                bl.RemoveStationFromLine(line.PersonalId, lineStation.Station);
+            }
+            catch (BO.AdjacentStationsExceptions ex)
+            {
+                BO.AdjacentStations[] adjacentStations = new BO.AdjacentStations[ex.adjacentStationsArray.Length];
+                adjacentStations = ex.adjacentStationsArray;
+                AdjacentStationInfo adjacentStationInfo = new AdjacentStationInfo(adjacentStations);
+                adjacentStationInfo.ShowDialog();
+            }
+            //catch (BO.LineStationException ex)
+            //{
+            //    MessageBox.Show(ex.line.ToString() + ex.Message, "", MessageBoxButton.OK);
+            //}
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK);
+            }
+            line.Stations = bl.GetLine(line.PersonalId).Stations;
             line.FirstStation = bl.GetLine(line.PersonalId).FirstStation;
             line.FirstStationName = bl.GetLine(line.PersonalId).FirstStationName;
             line.LastStation = bl.GetLine(line.PersonalId).LastStation;
             line.LastStationName = bl.GetLine(line.PersonalId).LastStationName;
-            this.DataContext = line;
-            stationDgrid.Items.Refresh();
+            
         }
         //=================================================================================================================================
         private void stationDgrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
