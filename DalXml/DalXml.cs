@@ -199,7 +199,7 @@ namespace Dal
             return (from adj in rootElem.Elements()
                         //find the element
                     where int.Parse(adj.Element("Station1").Value) == first && int.Parse(adj.Element("Station2").Value) == second
-                    //create an instance using the CreateAdjInstatnce from the Xmltools class
+                    //create each instance using the CreateAdjInstatnce from the Xmltools class
                     select XmlTools.CreateAdjInstatnce(adj)).FirstOrDefault();
         }
 
@@ -227,28 +227,41 @@ namespace Dal
             XElement rootElem = XmlTools.LoadFile(BusFilePath);
 
             return from bus in rootElem.Elements()
-                       //create an instance using the CreateBusInstatnce from the Xmltools class
+                       //create each instance using the CreateBusInstatnce from the Xmltools class
                    select XmlTools.CreateBusInstatnce(bus);
         }
 
+        ///
         public IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// get all the lines
+        /// </summary>
+        /// <returns>a collection Enumerable of all the lines</returns>
         public IEnumerable<Line> GetAllLines()
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(LinesFilePath);
 
             return from line in rootElem.Elements()
+                       //create each instance using the CreateLineInstatnce from the Xmltools class
                    select XmlTools.CreateLineInstatnce(line);
         }
 
+        /// <summary>
+        /// get all the stations
+        /// </summary>
+        /// <returns>an Enumerable collection of all the stations</returns>
         public IEnumerable<Station> GetAllStations()
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(StationsFilePath);
 
             return from station in rootElem.Elements()
+                       //create each instance using the CreateLineInstatnce from the Xmltools class
                    select XmlTools.CreateStationInstatnce(station);
         }
 
