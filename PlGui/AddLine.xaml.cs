@@ -173,5 +173,9 @@ namespace PlGui
 
         }
 
+        private void firstStopCMBox_DropDownOpened(object sender, EventArgs e)
+        {
+            lineTBox.IsEnabled = false;
+        }
     }
 }
