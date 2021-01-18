@@ -24,10 +24,10 @@ namespace PlGui
     {
         static IBL bl = BLFactory.GetIBL();
         PO.Line line = new PO.Line();
-         public LinePopUp()
-        {
-            InitializeComponent();
-        }
+        //public LinePopUp()
+        //{
+        //    InitializeComponent();
+        //}
 
         public LinePopUp(PO.Line line)
         {
@@ -35,17 +35,26 @@ namespace PlGui
             Title = string.Format("Line: " + line.LineNumber + " in " + line.Area.ToString().ToLower() + " area | info");
             lineGrid.Visibility = Visibility.Visible;
             this.line = line;
+            this.DataContext = line;
         }
-
+        //===============================================================================================================================
+        // needs to update the first and last sation in this window and on the main window
+        // need to block possability to remove all stations
+        // need to update all adjacent stations after removal of a station
+        //===============================================================================================================================
         private void btRemove_Click(object sender, RoutedEventArgs e)
         {
             BO.LineStation lineStation = ((sender as Button).DataContext as BO.LineStation);
-            bl.RemoveStationFromLine(line.PersonalId , lineStation.Station);
+            bl.RemoveStationFromLine(line.PersonalId, lineStation.Station);
             line.Stations = bl.GetLine(line.PersonalId).Stations;
+            line.FirstStation = bl.GetLine(line.PersonalId).FirstStation;
+            line.FirstStationName = bl.GetLine(line.PersonalId).FirstStationName;
+            line.LastStation = bl.GetLine(line.PersonalId).LastStation;
+            line.LastStationName = bl.GetLine(line.PersonalId).LastStationName;
             this.DataContext = line;
             stationDgrid.Items.Refresh();
         }
-
+        //=================================================================================================================================
         private void stationDgrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

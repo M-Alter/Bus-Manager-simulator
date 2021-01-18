@@ -20,6 +20,7 @@ namespace PO
         private string firstStationName;
         private string lastStationName;
         private bool isActive = true;
+        private IEnumerable<LineStation> stations;
 
         #endregion
 
@@ -88,7 +89,17 @@ namespace PO
             } 
         }
 
-        public IEnumerable<LineStation> Stations { get; set; }
+        public IEnumerable<LineStation> Stations {
+            get
+            {
+                return stations;
+            }
+            set
+            {
+                stations = value;
+                NotifyPropertyChanged();
+            } 
+        }
 
         public bool IsActive
         {
