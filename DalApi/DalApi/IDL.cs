@@ -27,7 +27,7 @@ namespace DalApi
         #endregion
 
         #region Lines
-        Line GetLine(int id);
+        Line GetLine(int personalId);
         IEnumerable<Line> GetAllLines();
         bool AddLine(Line line);
         bool LineExists(int lineId);

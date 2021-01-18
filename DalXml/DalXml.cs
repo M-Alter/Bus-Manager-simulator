@@ -216,7 +216,7 @@ namespace Dal
                        //create an instance using the CreateAdjInstatnce from the Xmltools class
                    select XmlTools.CreateAdjInstatnce(adj);
         }
-        
+
         /// <summary>
         /// get all the busses
         /// </summary>
@@ -261,7 +261,7 @@ namespace Dal
             XElement rootElem = XmlTools.LoadFile(StationsFilePath);
 
             return from station in rootElem.Elements()
-                       //create each instance using the CreateLineInstatnce from the Xmltools class
+                       //create each instance using the CreateStationInstatnce from the Xmltools class
                    select XmlTools.CreateStationInstatnce(station);
         }
 
@@ -270,76 +270,134 @@ namespace Dal
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// get all the users
+        /// </summary>
+        /// <returns>an Emunerable collection of all the users</returns>
         public IEnumerable<User> GetAllUsers()
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(UserFilePath);
 
             return from user in rootElem.Elements()
+                       //create each instance using the CreateUserInstatnce from the Xmltools class
                    select XmlTools.CreateUserInstatnce(user);
         }
 
+        /// <summary>
+        /// get a bus with a specific license number
+        /// </summary>
+        /// <param name="licenseNum">license number to find</param>
+        /// <returns>a Bus with licenseNum instance if found or default(Bus) if not</returns>
         public Bus GetBus(int licenseNum)
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(BusFilePath);
 
             return (from bus in rootElem.Elements()
                     where int.Parse(bus.Element("LicenseNum").Value) == licenseNum
+                    //create each instance using the CreateBusInstatnce from the Xmltools class
                     select XmlTools.CreateBusInstatnce(bus)).FirstOrDefault();
         }
 
-        public Line GetLine(int id)
+        /// <summary>
+        /// get a line with personal id
+        /// </summary>
+        /// <param name="personalId">id of the line</param>
+        /// <returns>a Line with personalID instance if found or default(Line) if not</returns>
+        public Line GetLine(int personalId)
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(LinesFilePath);
 
             return (from line in rootElem.Elements()
-                    where int.Parse(line.Element("PersonalId").Value) == id
+                    where int.Parse(line.Element("PersonalId").Value) == personalId
+                    //create each instance using the CreateLineInstatnce from the Xmltools class
                     select XmlTools.CreateLineInstatnce(line)).FirstOrDefault();
         }
 
+        /// <summary>
+        /// get all the station IDs that a line passes through
+        /// </summary>
+        /// <param name="lineId">personal ID of the line</param>
+        /// <returns>an Enumerable collection of all the Station IDs</returns>
         public IEnumerable<int> GetLineStations(int lineId)
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(LineStationsFilePath);
 
             return from lineStation in rootElem.Elements()
+                       //check if this line passes at the station
                    where int.Parse(lineStation.Element("LineId").Value) == lineId
+                   //sort the collevtion according to the index in the trip
                    orderby int.Parse(lineStation.Element("LineStationIndex").Value)
+                   //and collect the station ID
                    select int.Parse(lineStation.Element("StationCode").Value);
         }
 
+        /// <summary>
+        /// get the next station of a line
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="stationCode"></param>
+        /// <returns>the station ID that line lineId will pass after station stationCode if there is a next station or null if there isn't</returns>
         public int GetNextStation(int lineId, int stationCode)
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(LineStationsFilePath);
 
             return (from lineStation in rootElem.Elements()
-                    where int.Parse(lineStation.Element("LineId").Value) == lineId && int.Parse(lineStation.Element("StationCode").Value) == stationCode
+                    //check also if the station isn't the last station
+                    where int.Parse(lineStation.Element("LineId").Value) == lineId && int.Parse(lineStation.Element("StationCode").Value) == stationCode && int.Parse(lineStation.Element("NextStation").Value) != 0
                     select int.Parse(lineStation.Element("NextStation").Value)).FirstOrDefault();
         }
 
+        /// <summary>
+        /// get a station with station ID Code
+        /// </summary>
+        /// <param name="code">Code (ID) of the Station</param>
+        /// <returns>a station which Code is code if found or default(Station) if not</returns>
         public Station GetStation(int code)
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(StationsFilePath);
 
             return (from station in rootElem.Elements()
                     where int.Parse(station.Element("Code").Value) == code
+                    //create each instance using the CreateStationInstatnce from the Xmltools class
                     select XmlTools.CreateStationInstatnce(station)).FirstOrDefault();
         }
 
+        /// <summary>
+        /// get all the lines that pass in this station
+        /// </summary>
+        /// <param name="code">code of the station</param>
+        /// <returns>an Enumerable collection of all the line IDs that pass at this station</returns>
         public IEnumerable<int> GetStationLines(int code)
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(LineStationsFilePath);
 
             return from lineStation in rootElem.Elements()
                    where int.Parse(lineStation.Element("StationCode").Value) == code
+                   //sort the lines from lowest to highest
                    orderby int.Parse(lineStation.Element("LineId").Value)
                    select int.Parse(lineStation.Element("LineId").Value);
         }
 
+        /// <summary>
+        /// check if a exists
+        /// </summary>
+        /// <param name="lineId">line to check</param>
+        /// <returns>true if the line exists</returns>
         public bool LineExists(int lineId)
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(LinesFilePath);
 
             return (from line in rootElem.Elements()
                     where int.Parse(line.Element("PersonalId").Value) == lineId
+                    //if found select the first true
                     select true).FirstOrDefault();
         }
 
@@ -353,18 +411,28 @@ namespace Dal
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// update Time or Distance between 2 adjacent Stations
+        /// </summary>
+        /// <param name="adjacentStations"></param>
+        /// <returns>true if updated successfully</returns>
         public bool UpdateAdjacentStations(AdjacentStations adjacentStations)
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(AdjacentStationsFilePath);
 
+            //find the instance with these 2 stations
             var findAdj = (from adj in rootElem.Elements()
                            where int.Parse(adj.Element("Station1").Value) == adjacentStations.Station1 && int.Parse(adj.Element("Station2").Value) == adjacentStations.Station2
                            select adj).FirstOrDefault();
-
+            //update the Distance value
             findAdj.Element("Distance").SetValue(adjacentStations.Distance);
+            //update the Hours Min Sec values respectively
             findAdj.Element("Time").SetElementValue("Hour", adjacentStations.Time.Hours);
             findAdj.Element("Time").SetElementValue("Min", adjacentStations.Time.Minutes);
             findAdj.Element("Time").SetElementValue("Sec", adjacentStations.Time.Seconds);
+            //save the file
+            XmlTools.SaveFile(rootElem, AdjacentStationsFilePath);
             return true;
         }
 
@@ -373,13 +441,21 @@ namespace Dal
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// validates a non-case-sensative username to a case-sensative password
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns>true if found a match</returns>
         public bool ValidatePassword(string userName, string password)
         {
-
+            //load the file
             XElement rootElem = XmlTools.LoadFile(UserFilePath);
 
             return (from user in rootElem.Elements()
+                        //try matching the non-case-sensative username to the case-sensative password
                     where user.Element("UserName").Value.ToLower() == userName.ToLower() && user.Element("Password").Value == password
+                    //select the first true
                     select true).FirstOrDefault();
         }
     }
