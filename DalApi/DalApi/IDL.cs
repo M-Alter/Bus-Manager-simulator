@@ -33,6 +33,7 @@ namespace DalApi
         bool LineExists(int lineId);
         bool RemoveLine(int lineId, int lastStation);
         int GenerateLinePersonalId();
+        bool UpdateLine(int lineId, int firstStation, int lastStation);
         #endregion
 
         #region LineStation

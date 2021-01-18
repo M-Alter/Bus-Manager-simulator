@@ -23,7 +23,7 @@
             <Label Margin="3,0,0,0" Content="Line Number:" Grid.Row="0" />
             <Label Content="{Binding LineNumber}" Margin="100,0,0,0" Grid.Column="0" Grid.Row="0"/>
             <Label Margin="3,0,0,0" Content="First Station:" Grid.Row="1"/>
-            <Label Content="{Binding FirstStation}" Margin="100,0,0,0" Grid.Column="0" Grid.Row="1"/>
+            <Label Content="{Binding FirstStation, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="100,0,0,0" Grid.Column="0" Grid.Row="1"/>
             <Label Margin="3,0,0,0" Content="Last Station:" Grid.Column="1" Grid.Row="1"/>
             <Label Content="{Binding LastStation}" Margin="100,0,0,0" Grid.Column="1" Grid.Row="1"/>
             <DataGrid x:Name="stationDgrid" Grid.Row="2" Grid.ColumnSpan="2" Margin="3,0,50,0" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding Stations}">

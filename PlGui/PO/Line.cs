@@ -1,6 +1,7 @@
 ﻿using BO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -20,7 +21,7 @@ namespace PO
         private string firstStationName;
         private string lastStationName;
         private bool isActive = true;
-        private IEnumerable<LineStation> stations;
+        private ObservableCollection<LineStation> stations;
 
         #endregion
 
@@ -89,7 +90,7 @@ namespace PO
             } 
         }
 
-        public IEnumerable<LineStation> Stations {
+        public ObservableCollection<LineStation> Stations {
             get
             {
                 return stations;

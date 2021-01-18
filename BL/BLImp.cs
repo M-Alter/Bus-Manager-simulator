@@ -366,6 +366,9 @@ The password for your account is
             //remove all the lines linestations
             dl.RemoveAllLineStation(lineId);
 
+            //update the first and last station
+            dl.UpdateLine(line.PersonalId, stationArray[0], stationArray[stationArray.Length-1]);
+
             //add all the linestations in the array
             for (int i = 0; i < stationArray.Length; i++)
             {

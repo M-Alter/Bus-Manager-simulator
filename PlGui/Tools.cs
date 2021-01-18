@@ -1,5 +1,6 @@
 ﻿using PO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PlGui
 {
@@ -40,7 +41,7 @@ namespace PlGui
                 LastStationName = boLine.LastStationName,
                 Area = boLine.Area,
                 IsActive = boLine.IsActive,
-                Stations = boLine.Stations
+                Stations = new System.Collections.ObjectModel.ObservableCollection<BO.LineStation>(boLine.Stations)
             };
             return line;
         }

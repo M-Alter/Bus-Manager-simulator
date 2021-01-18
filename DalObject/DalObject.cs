@@ -295,5 +295,13 @@ namespace DL
             return from ls in DataSource.LineTripsList
                    select ls.Clone();
         }
+
+        public bool UpdateLine(int lineId, int firstStation, int lastStation)
+        {
+            var cur = DataSource.LineList.Find(line => line.PersonalId == lineId);
+            cur.FirstStation = firstStation;
+            cur.LastStation = lastStation;
+            return true;
+        }
     }
 }

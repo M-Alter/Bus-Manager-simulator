@@ -467,5 +467,10 @@ namespace Dal
             return from ls in rootElem.Elements()
                    select XmlTools.CreateLineTripInstance(ls);            
         }
+
+        public bool UpdateLine(int lineId, int firstStation, int lastStation)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

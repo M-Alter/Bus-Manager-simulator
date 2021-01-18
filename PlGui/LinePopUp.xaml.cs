@@ -45,8 +45,10 @@ namespace PlGui
         private void btRemove_Click(object sender, RoutedEventArgs e)
         {
             BO.LineStation lineStation = ((sender as Button).DataContext as BO.LineStation);
+            ((PO.Line)this.DataContext).Stations.Remove(lineStation);
+            line.Stations.Remove(lineStation);
             bl.RemoveStationFromLine(line.PersonalId, lineStation.Station);
-            line.Stations = bl.GetLine(line.PersonalId).Stations;
+            //line.Stations = new ObservableCollection<LineStation>(bl.GetLine(line.PersonalId).Stations);
             line.FirstStation = bl.GetLine(line.PersonalId).FirstStation;
             line.FirstStationName = bl.GetLine(line.PersonalId).FirstStationName;
             line.LastStation = bl.GetLine(line.PersonalId).LastStation;
