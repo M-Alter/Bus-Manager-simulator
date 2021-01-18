@@ -11,10 +11,10 @@ namespace PO
     public class StationLine : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public int LineNumber 
-        { 
-            get; 
-            set; 
+        public int LineNumber
+        {
+            get;
+            set;
         }
         public string LastStation { get; set; }
 

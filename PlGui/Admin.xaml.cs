@@ -1,5 +1,6 @@
 ﻿using BLAPI;
 using BO;
+using PO;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -13,9 +14,9 @@ namespace PlGui
     /// </summary>
     public partial class Admin : Window
     {
-        ObservableCollection<Bus> buses = new ObservableCollection<Bus>();
-        ObservableCollection<Station> stations = new ObservableCollection<Station>();
-        ObservableCollection<BO.Line> lines = new ObservableCollection<BO.Line>();
+        ObservableCollection<PO.Bus> buses = new ObservableCollection<PO.Bus>();
+        ObservableCollection<PO.Station> stations = new ObservableCollection<PO.Station>();
+        ObservableCollection<PO.Line> lines = new ObservableCollection<PO.Line>();
         ObservableCollection<AdjacentStations> adjacentStations = new ObservableCollection<AdjacentStations>();
 
         IBL bl = BLFactory.GetIBL();
@@ -25,18 +26,18 @@ namespace PlGui
 
             foreach (var item in bl.GetAllBuses())
             {
-                buses.Add(item);
+                buses.Add(Tools.POBus(item));
             }
             buseslview.DataContext = buses;
             //buseslview.DataContext = bl.GetAllBuses();
 
             foreach (var item in bl.GetAllStations())
-                stations.Add(item);
+                stations.Add(Tools.POStation(item));
             stationslview.DataContext = stations;
 
             foreach (var item in bl.GetAllLines())
             {
-                lines.Add(item);
+                lines.Add(Tools.POLine(item));
             }
             lineslview.DataContext = lines;
 
@@ -50,8 +51,8 @@ namespace PlGui
         private void
             lineslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var currentLine = lineslview.SelectedItem as BO.Line;
-            if (currentLine is BO.Line)
+            var currentLine = lineslview.SelectedItem as PO.Line;
+            if (currentLine is PO.Line)
             {
                 LinePopUp info = new LinePopUp(currentLine);
                 info.DataContext = currentLine;
@@ -61,8 +62,8 @@ namespace PlGui
 
         private void buseslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var currentBus = buseslview.SelectedItem as Bus;
-            if (currentBus is Bus)
+            var currentBus = buseslview.SelectedItem as PO.Bus;
+            if (currentBus is PO.Bus)
             {
 
                 BusPopUp info = new BusPopUp(currentBus);
@@ -73,8 +74,8 @@ namespace PlGui
 
         private void stationslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var currentStation = stationslview.SelectedItem as Station;
-            if (currentStation is Station)
+            var currentStation = stationslview.SelectedItem as PO.Station;
+            if (currentStation is PO.Station)
             {
                 StationPopUp info = new StationPopUp(currentStation);
                 info.DataContext = currentStation;
@@ -88,9 +89,12 @@ namespace PlGui
             addBus.ShowDialog();
 
             buses.Clear();
+            buses = null;
+            buses = new ObservableCollection<PO.Bus>();
+
             foreach (var item in bl.GetAllBuses())
             {
-                buses.Add(item);
+                buses.Add(Tools.POBus(item));
             }
             buseslview.DataContext = buses;
         }
@@ -102,11 +106,11 @@ namespace PlGui
 
             lines.Clear();
             lines = null;
-            lines = new ObservableCollection<Line>();
+            lines = new ObservableCollection<PO.Line>();
 
             foreach (var item in bl.GetAllLines())
             {
-                lines.Add(item);
+                lines.Add(Tools.POLine(item));
             }
 
             lineslview.DataContext = lines;
@@ -142,8 +146,8 @@ namespace PlGui
 
         private void buseslview_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var currentBus = buseslview.SelectedItem as Bus;
-            if (currentBus is Bus)
+            var currentBus = buseslview.SelectedItem as PO.Bus;
+            if (currentBus is PO.Bus)
             {
                 ContextMenu contextMenu = new ContextMenu();
                 //contextMenu.
@@ -155,8 +159,8 @@ namespace PlGui
 
         private void BusesMenuInfoItem_Click(object sender, RoutedEventArgs e)
         {
-            var currentBus = buseslview.SelectedItem as Bus;
-            if (currentBus is Bus)
+            var currentBus = buseslview.SelectedItem as PO.Bus;
+            if (currentBus is PO.Bus)
             {
 
                 BusPopUp info = new BusPopUp(currentBus);
@@ -175,21 +179,30 @@ namespace PlGui
             RemoveBus removeBus = new RemoveBus();
             removeBus.ShowDialog();
             buses.Clear();
+            buses = null;
+            buses = new ObservableCollection<PO.Bus>();
+
             foreach (var item in bl.GetAllBuses())
-                buses.Add(item);
+                buses.Add(Tools.POBus(item));
             buseslview.DataContext = buses;
         }
 
+        //===================================================================================================
         private void btnEditLine_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        //===================================================================================================
 
+        //===================================================================================================
         private void removeLineBtn_Click(object sender, RoutedEventArgs e)
         {
             RemoveLine removeLine = new RemoveLine();
             removeLine.ShowDialog();
             lines.Clear();
+            lines = null;
+            lines = new ObservableCollection<PO.Line>();
+
             string str = "klum";
             int lineNumber = -9999, lastStation = -9999;
             if (removeLine.lineCBox.SelectedItem != null)
@@ -202,11 +215,12 @@ namespace PlGui
             {
                 if (item.LineNumber != lineNumber && item.LastStation != lastStation)
                 {
-                    lines.Add(item);
+                    lines.Add(Tools.POLine(item));
                 }
             }
             lineslview.DataContext = lines;
         }
+        //======================================================================================================
 
         private void addStationBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -214,9 +228,12 @@ namespace PlGui
             addStation.ShowDialog();
 
             stations.Clear();
+            stations = null;
+            stations = new ObservableCollection<PO.Station>();
+
             foreach (var item in bl.GetAllStations())
             {
-                stations.Add(item);
+                stations.Add(Tools.POStation(item));
             }
             stationslview.DataContext = stations;
 

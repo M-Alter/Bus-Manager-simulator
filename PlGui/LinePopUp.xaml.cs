@@ -23,13 +23,13 @@ namespace PlGui
     public partial class LinePopUp : Window
     {
         static IBL bl = BLFactory.GetIBL();
-        BO.Line line = new BO.Line();
+        PO.Line line = new PO.Line();
          public LinePopUp()
         {
             InitializeComponent();
         }
 
-        public LinePopUp(BO.Line line)
+        public LinePopUp(PO.Line line)
         {
             InitializeComponent();
             Title = string.Format("Line: " + line.LineNumber + " in " + line.Area.ToString().ToLower() + " area | info");

@@ -26,7 +26,7 @@ namespace PlGui
         }
 
 
-        public BusPopUp(Bus bus)
+        public BusPopUp(PO.Bus bus)
         {
             InitializeComponent();
             Title = string.Format("License Number: " + bus.LicenseString + " | info");

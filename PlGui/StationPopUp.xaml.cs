@@ -26,7 +26,7 @@ namespace PlGui
             InitializeComponent();
         }
 
-        public StationPopUp(Station station)
+        public StationPopUp(PO.Station station)
         {
             InitializeComponent();
             Title = string.Format("Station Number: " + station.Code + " | info");

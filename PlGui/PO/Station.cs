@@ -15,7 +15,7 @@ namespace PO
         private string name;
         private double longitude;
         private double lattitude;
-        private IEnumerable<StationLine> linesAtStation;
+        private List<PO.StationLine> linesAtStation;
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -64,7 +64,7 @@ namespace PO
         {
             return string.Format($"{Name} {Code}");
         }
-        public IEnumerable<StationLine> LinesAtStation {
+        public List<PO.StationLine> LinesAtStation {
             get
             {
                 return linesAtStation;
