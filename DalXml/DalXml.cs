@@ -71,7 +71,7 @@ namespace Dal
             //add the main tag 
             XElement busElem = new XElement("Bus",
                 //add the elements
-                new XElement("LicenseNum", bus.LicenseNum),    
+                new XElement("LicenseNum", bus.LicenseNum),
                 new XElement("FromDate", bus.FromDate),
                 new XElement("TotalTrip", bus.TotalTrip),
                 new XElement("FuelRemain", bus.FuelRemain),
@@ -122,7 +122,7 @@ namespace Dal
             //add the main tag 
             XElement lineStationElem = new XElement("LineStation",
                 //add the elements
-                new XElement("LineId", lineStation.LineId),     
+                new XElement("LineId", lineStation.LineId),
                 new XElement("StationCode", lineStation.StationCode),
                 new XElement("LineStationIndex", lineStation.LineStationIndex),
                 new XElement("PrevStation", lineStation.PrevStation),
@@ -147,7 +147,7 @@ namespace Dal
             //add the main tag 
             XElement stationElem = new XElement("Station",
                 //add the elements
-                new XElement("Code", station.Code),     
+                new XElement("Code", station.Code),
                 new XElement("Name", station.Name),
                 new XElement("Longitude", station.Longitude),
                 new XElement("Lattitude", station.Lattitude)
@@ -185,20 +185,35 @@ namespace Dal
             return serialNum;
         }
 
+        /// <summary>
+        /// get details of 2 adjacent stations
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns>AdjacentStations</returns>
         public AdjacentStations GetAdjacentStations(int first, int second)
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(AdjacentStationsFilePath);
 
             return (from adj in rootElem.Elements()
+                        //find the element
                     where int.Parse(adj.Element("Station1").Value) == first && int.Parse(adj.Element("Station2").Value) == second
+                    //create an instance using the CreateAdjInstatnce from the Xmltools class
                     select XmlTools.CreateAdjInstatnce(adj)).FirstOrDefault();
         }
 
+        /// <summary>
+        /// get all adjacent stations
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<AdjacentStations> GetAllAdjacentStations()
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(AdjacentStationsFilePath);
 
             return from adj in rootElem.Elements()
+                       //create an instance using the CreateAdjInstatnce from the Xmltools class
                    select XmlTools.CreateAdjInstatnce(adj);
         }
 
@@ -324,8 +339,8 @@ namespace Dal
             XElement rootElem = XmlTools.LoadFile(AdjacentStationsFilePath);
 
             var findAdj = (from adj in rootElem.Elements()
-            where int.Parse(adj.Element("Station1").Value) == adjacentStations.Station1 && int.Parse(adj.Element("Station2").Value) == adjacentStations.Station2
-            select adj).FirstOrDefault();
+                           where int.Parse(adj.Element("Station1").Value) == adjacentStations.Station1 && int.Parse(adj.Element("Station2").Value) == adjacentStations.Station2
+                           select adj).FirstOrDefault();
 
             findAdj.Element("Distance").SetValue(adjacentStations.Distance);
             findAdj.Element("Time").SetElementValue("Hour", adjacentStations.Time.Hours);
