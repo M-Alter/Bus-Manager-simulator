@@ -6,6 +6,7 @@ namespace DO
 {
     public class XmlTools
     {
+
         public static XElement LoadFile(string path)
         {
             try
@@ -21,10 +22,13 @@ namespace DO
                     return rootElement;
                 }
             }
-            catch (Exception)
+            catch (FileLoadException e)
             {
-
-                throw;
+                throw new FileLoadException(e.Message, path);
+            }
+            catch (Exception e)
+            {
+                throw new FileLoadException(e.Message, path);
             }
         }
 
