@@ -352,7 +352,7 @@ The password for your account is
         {
             Line line = GetLine(lineId);
             if (line.Stations.Count() < 3)
-                throw new LineStationException("A line can't have less than 2 stations", line.LineNumber);
+                throw new LineStationException("A line can't have less than 2 stations\nyou might want to Remove the line", line.LineNumber);
             int[] stationArray = new int[line.Stations.Count() - 1];
             int index = 0;
 
