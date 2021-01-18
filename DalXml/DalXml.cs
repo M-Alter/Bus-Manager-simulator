@@ -216,12 +216,18 @@ namespace Dal
                        //create an instance using the CreateAdjInstatnce from the Xmltools class
                    select XmlTools.CreateAdjInstatnce(adj);
         }
-
+        
+        /// <summary>
+        /// get all the busses
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Bus> GetAllBuses()
         {
+            //load the file
             XElement rootElem = XmlTools.LoadFile(BusFilePath);
 
             return from bus in rootElem.Elements()
+                       //create an instance using the CreateBusInstatnce from the Xmltools class
                    select XmlTools.CreateBusInstatnce(bus);
         }
 
