@@ -67,6 +67,7 @@
     <Compile Include="AdjacentStationInfo.xaml.cs">
       <DependentUpon>AdjacentStationInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PO\AdjacentStations.cs" />
     <Compile Include="PO\Bus.cs" />
     <Compile Include="PO\Line.cs" />
     <Compile Include="PO\Station.cs" />

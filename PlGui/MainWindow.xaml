@@ -20,7 +20,7 @@
             <Button x:Name="UserBtn" Content="User" Height="30" Width="90"/>
             <Button x:Name="AdminBtn" Content="Admin" Height="30" Width="90" Grid.Column="1" Click="AdminBtn_Click"/>
         </Grid>
-        <Grid x:Name="credentialsGrid" Grid.Row="1" Margin="5" Visibility="Hidden">
+        <Grid x:Name="credentialsGrid" Grid.Row="1" Margin="5,1" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -29,9 +29,9 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="Username:" VerticalAlignment="Center"/>
+            <Label Content="Username:" VerticalAlignment="Center" FontSize="12" />
             <ComboBox x:Name="usernameCmbBox" Grid.Column="1" VerticalAlignment="Center" SelectionChanged="usernameCmbBox_SelectionChanged"/>
-            <Label Content="Password:" Grid.Row="1" VerticalAlignment="Center"/>
+            <Label Content="Password:" Grid.Row="1" VerticalAlignment="Center" FontSize="12"/>
             <PasswordBox x:Name="passwordPswrdBox" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" PreviewKeyDown="passwordPswrdBox_PreviewKeyDown"/>
             <Button Height="18" Width="25" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Click="Button_Click"/>
         </Grid>
