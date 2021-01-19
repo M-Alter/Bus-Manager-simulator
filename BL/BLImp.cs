@@ -498,5 +498,11 @@ The password for your account is
         {
             ClockSimulator.Instance.Stop();
         }
+
+        public void SetStationPanel(int station, Action<LineTiming> updateBus)
+        {
+            TripSimulator.Instance.StationId = station;
+            TripSimulator.Instance.BusObserver += updateBus;
+        }
     }
 }

@@ -90,13 +90,13 @@
                     </GroupBox>
                     <WrapPanel Margin="300,20,20,310">
                         <Label Content="Time"/>
-                        <TextBox x:Name="hourTb" Text="00" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" IsEnabled="{Binding SimulatorInactive}" PreviewTextInput="validateTb_PreviewTextInput"/>
+                        <TextBox x:Name="hourTb" Text="00" GotFocus="TextBox_GotFocus" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" IsEnabled="{Binding SimulatorInactive}" PreviewTextInput="validateTb_PreviewTextInput"/>
                         <Label Content=":"/>
-                        <TextBox x:Name="minutesTb" Text="00" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" IsEnabled="{Binding SimulatorInactive}" PreviewTextInput="validateTb_PreviewTextInput"/>
+                        <TextBox x:Name="minutesTb" Text="00" GotFocus="TextBox_GotFocus" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" IsEnabled="{Binding SimulatorInactive}" PreviewTextInput="validateTb_PreviewTextInput"/>
                         <Label Content=":"/>
-                        <TextBox x:Name="secoundsTb" Text="00" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" IsEnabled="{Binding SimulatorInactive}" PreviewTextInput="validateTb_PreviewTextInput"/>
+                        <TextBox x:Name="secoundsTb" Text="00" GotFocus="TextBox_GotFocus" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" IsEnabled="{Binding SimulatorInactive}" PreviewTextInput="validateTb_PreviewTextInput"/>
                         <Label Content="Rate"/>
-                        <TextBox x:Name="rateTb" Text="60" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" IsEnabled="{Binding SimulatorInactive}" PreviewTextInput="validateTb_PreviewTextInput"/>
+                        <TextBox x:Name="rateTb" Text="60" GotFocus="TextBox_GotFocus" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" IsEnabled="{Binding SimulatorInactive}" PreviewTextInput="validateTb_PreviewTextInput"/>
                         <Button x:Name="simulatorBtn"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Margin="10,0,0,0" Click="simulatorBtn_Click" Background="LightGreen" Content="start" FontSize="20"/>
                     </WrapPanel>
                     <ListView x:Name="stationslview" ItemsSource="{Binding}" Margin="20,70,400,20" MouseDoubleClick="stationslview_MouseDoubleClick">
@@ -134,7 +134,7 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        <ListView Margin="0,0,0,0" Grid.Column="1" Background="DarkGray" Width="Auto" HorizontalAlignment="Right">
+                        <ListView x:Name="lineTimingListView" Margin="0,0,0,0" Grid.Column="1" Background="DarkGray" Width="Auto" HorizontalAlignment="Right">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Time" Width="50">
