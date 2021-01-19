@@ -99,7 +99,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
                     <Grid Margin="390,70,20,20" Width="373">
-                        <ListView x:Name="lvYellowPanel" Width="150" HorizontalAlignment="Left" Background="Yellow" ItemsSource="{Binding}">
+                        <ListView x:Name="lvYellowPanel" Width="150" HorizontalAlignment="Left" ItemsSource="{Binding}" Background="#FFFFC800">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Line" Width="50">
@@ -117,7 +117,7 @@
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
                                 </GridView>
-                            </ListView.View>  
+                            </ListView.View>
                         </ListView>
                         <ListView Margin="160,0,0,0" Background="DarkGray" Width="200" HorizontalAlignment="Right">
                             <ListView.View>
@@ -125,14 +125,14 @@
                                     <GridViewColumn Header="" Width="50">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                
+
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
                                     <GridViewColumn Header="" Width="50">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                
+
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
