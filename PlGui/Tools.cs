@@ -1,5 +1,6 @@
 ﻿using PO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PlGui
 {
@@ -67,18 +68,10 @@ namespace PlGui
             return line;
         }
 
-        public static List<PO.StationLine> POStationLine(IEnumerable<BO.StationLine> boStationLine)
+        public static IEnumerable<PO.StationLine> POStationLine(IEnumerable<BO.StationLine> boStationLine)
         {
-            List<StationLine> stationLine = new List<StationLine>();
-            foreach (var item in boStationLine)
-            {
-                stationLine.Add(new StationLine
-                {
-                    LineNumber = item.LineNumber,
-                    LastStation = item.LastStation
-                });
-            };
-            return stationLine;
+            return from sl in boStationLine
+                   select new StationLine { LineNumber = sl.LineNumber, LastStation = sl.LastStation };
         }
 
         /// <summary>

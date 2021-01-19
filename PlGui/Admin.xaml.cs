@@ -77,6 +77,7 @@ namespace PlGui
             var currentStation = stationslview.SelectedItem as PO.Station;
             if (currentStation is PO.Station)
             {
+                lvYellowPanel.DataContext = currentStation.LinesAtStation;
                 StationPopUp info = new StationPopUp(currentStation);
                 info.DataContext = currentStation;
                 info.Show();
