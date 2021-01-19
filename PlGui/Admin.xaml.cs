@@ -10,6 +10,7 @@ using System.Threading;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media;
+using System.Collections.Generic;
 
 namespace PlGui
 {
@@ -24,6 +25,7 @@ namespace PlGui
         ObservableCollection<PO.AdjacentStations> adjacentStations = new ObservableCollection<PO.AdjacentStations>();
 
         IBL bl = BLFactory.GetIBL();
+        BO.Station busStation;
         // ***********************************************************************************************88
         //public Admin()
         //{
@@ -76,7 +78,28 @@ namespace PlGui
 
             timerWorker.WorkerReportsProgress = true;
             timerWorker.WorkerSupportsCancellation = true;
+            //---------------------------------------------------------------------------------------
+            panelWorker = new BackgroundWorker();
+            panelWorker.DoWork += (s, e) =>
+            {
+                bl.SetStationPanel((int)e.Argument, stationObserver);
+                while (!panelWorker.CancellationPending) try { Thread.Sleep(1000); } catch (Exception ex) { }
 
+            };
+            panelWorker.ProgressChanged += panel_ProgressChanged;
+            panelWorker.WorkerReportsProgress = true;
+            panelWorker.WorkerSupportsCancellation = true;
+            panelWorker.RunWorkerCompleted += (s, e) =>
+            {
+                if (busStation != null)
+                {
+                    //busLineListView.ItemsSource = bl.GetBusLineNumbers(busStation.Code).OrderBy(n => n);
+                    panelLines = new List<LineTiming>();
+                    lineTimingListView.ItemsSource = null;
+                    panelWorker.RunWorkerAsync(busStation.Code);
+                }
+            };
+            //-------------------------------------------------------------------------------------------
 
             foreach (var item in bl.GetAllBuses())
             {
@@ -225,6 +248,13 @@ namespace PlGui
             }
         }
 
+        public void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= TextBox_GotFocus;
+        }
+
         private void Minimize_Click(object sender, RoutedEventArgs e)
         {
             SystemCommands.MinimizeWindow(this);
@@ -302,6 +332,8 @@ namespace PlGui
                 timerWorker.CancelAsync();
                 workerThread.Interrupt();
             }
+            if (panelWorker.IsBusy)
+                panelWorker.CancelAsync();
             Environment.Exit(-2);
         }
 
@@ -312,6 +344,9 @@ namespace PlGui
         BackgroundWorker timerWorker;
         Thread workerThread;
         int rate;
+
+        BackgroundWorker panelWorker; // bkg worker for updating arriving lines
+        List<LineTiming> panelLines = new List<LineTiming>(); // collection of arriving lines
 
         public static readonly DependencyProperty SimulatorInactiveProperty = DependencyProperty.Register("SimulatorInactive", typeof(Boolean), typeof(Admin));
         private bool SimulatorInactive
@@ -359,7 +394,32 @@ namespace PlGui
                 workerThread.Interrupt();
             }
         }
-                
+
+        private void panel_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            LineTiming lineTiming = (LineTiming)e.UserState;
+            int index = panelLines.IndexOf(lineTiming);
+            if (index == -1)
+            { // It's a new line bus coming soon here
+                if (lineTiming.Timing == TimeSpan.Zero) return;
+                panelLines.Add(lineTiming);
+                panelLines.Sort((lnTime1, lnTime2) => (int)(lnTime1.Timing - lnTime2.Timing).TotalMilliseconds);
+            }
+            else
+            {
+                if (lineTiming.Timing == TimeSpan.Zero)
+                    panelLines.Remove(lineTiming);
+                else
+                    panelLines.Sort((lt1, lt2) => (int)(lt1.Timing - lt2.Timing).TotalMilliseconds);
+            }
+            lineTimingListView.ItemsSource = null;
+            int count = (panelLines.Count < 5) ? panelLines.Count : 5;
+            lineTimingListView.ItemsSource = panelLines.GetRange(0, count);
+        }
+
+        private void stationObserver(LineTiming lineTiming)
+            => panelWorker.ReportProgress(0, lineTiming);
+
         #endregion
     }
 }
