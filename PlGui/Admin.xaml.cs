@@ -159,6 +159,15 @@ namespace PlGui
                 //StationPopUp info = new StationPopUp(currentStation);
                 //info.DataContext = currentStation;
                 //info.Show();
+                if (panelWorker.IsBusy)
+                    panelWorker.CancelAsync();
+                else
+                {
+                    //lvYellowPanel.ItemsSource = bl.GetBusLineNumbers(busStation.Code).OrderBy(n => n);
+                    panelLines = new List<LineTiming>();
+                    lineTimingListView.ItemsSource = null;
+                    panelWorker.RunWorkerAsync(currentStation.Code);
+                }
             }
         }
 
@@ -358,10 +367,9 @@ namespace PlGui
         private void timer_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             TimeSpan time = (TimeSpan)e.UserState;
-            //timerTextBox.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", time.Hours, time.Minutes, time.Seconds);
-            hourTb.Text = String.Format($"{time.Hours}");
-            minutesTb.Text = String.Format($"{time.Minutes}"); 
-            secoundsTb.Text = String.Format($"{time.Seconds}");
+            hourTb.Text = String.Format($"{time.Hours:D2}");
+            minutesTb.Text = String.Format($"{time.Minutes:D2}"); 
+            secoundsTb.Text = String.Format($"{time.Seconds:D2}");
         }
 
         private void validateTb_PreviewTextInput(object sender, TextCompositionEventArgs e) => e.Handled = e.Text == null || !e.Text.All(char.IsDigit);
