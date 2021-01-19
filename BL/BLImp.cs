@@ -488,14 +488,15 @@ The password for your account is
             return dl.UpdateAdjacentStations(temp);
         }
 
-        public void StartSimulator(TimeSpan startTime, int Rate, Action<TimeSpan> updateTime)
+        public void StartSimulator(TimeSpan startTime, int rate, Action<TimeSpan> updateTime)
         {
-            throw new NotImplementedException();
+            ClockSimulator.Instance.ClockObserver += updateTime;
+            ClockSimulator.Instance.Start(startTime, rate);
         }
 
         public void StopSimulator()
         {
-            throw new NotImplementedException();
+            ClockSimulator.Instance.Stop();
         }
     }
 }

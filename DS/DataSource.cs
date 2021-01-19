@@ -76,7 +76,8 @@ namespace DS
                 new Line    {   Area = Enums.Areas.CENTRAL, LineNumber = 51, PersonalId = 10, FirstStation = 38840, LastStation = 38845   },
                 new Line    {   Area = Enums.Areas.CENTRAL, LineNumber = 23, PersonalId = 11, FirstStation = 38835, LastStation = 38845   },
                 new Line    {   Area = Enums.Areas.CENTRAL, LineNumber = 100, PersonalId = 12, FirstStation = 38844, LastStation = 38848   },
-                new Line    {   Area = Enums.Areas.CENTRAL, LineNumber = 770, PersonalId = 13, FirstStation = 38841, LastStation = 38849   }
+                new Line    {   Area = Enums.Areas.CENTRAL, LineNumber = 770, PersonalId = 13, FirstStation = 38841, LastStation = 38849   },
+                new Line    {   Area = Enums.Areas.JERUSALEM, LineNumber = 999, PersonalId = 14, FirstStation = 38837, LastStation = 38846 }
             };
 
             LineStationsList = new List<LineStation>
@@ -88,6 +89,7 @@ namespace DS
                 new LineStation     {   StationCode = 38835, LineId = 9, LineStationIndex = 5, NextStation = 38836, PrevStation = 38834     },
                 new LineStation     {   StationCode = 38836, LineId = 9, LineStationIndex = 6, NextStation = 0, PrevStation = 38835     }
             };
+
             UserList = new List<User>
             {
                 new User    {   UserName = "QA", Password = "", Admin = true    },
@@ -104,7 +106,12 @@ namespace DS
                 new AdjacentStations{Station1 = 38834, Station2 = 38835, Distance = 1.5, Time = new TimeSpan(0,3,0) },
                 new AdjacentStations{Station1 = 38835, Station2 = 38836, Distance = 1.5, Time = new TimeSpan(0,3,0) }
             };
-            LineTripsList = new List<LineTrip>();
+
+            LineTripsList = new List<LineTrip>
+            {
+                new LineTrip{LineId = 9,StartAt = new TimeSpan(08,30,00),FinishAt = new TimeSpan(19,00,00), Frequency = new TimeSpan(00,15,00), Id=9083000 }
+
+            };
         }
     }
 }

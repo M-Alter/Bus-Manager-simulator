@@ -61,7 +61,7 @@ namespace BL
             {
                 LineId = sc.LineId,
                 LineCode = dl.GetLine(sc.LineId).LineNumber,
-                TripStart = sc.StartAt
+                TripStart = sc.StartAt                
             };
             Thread.CurrentThread.Name = $"{lineTiming.ID}:{lineTiming.LineId}/{lineTiming.LineCode}";
             var stationIDs = dl.GetLineStations(lineTiming.LineId).ToList();

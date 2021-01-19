@@ -6,6 +6,10 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Threading;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Media;
 
 namespace PlGui
 {
@@ -20,9 +24,59 @@ namespace PlGui
         ObservableCollection<PO.AdjacentStations> adjacentStations = new ObservableCollection<PO.AdjacentStations>();
 
         IBL bl = BLFactory.GetIBL();
+        // ***********************************************************************************************88
+        //public Admin()
+        //{
+        //    InitializeComponent();
+
+        //    foreach (var item in bl.GetAllBuses())
+        //    {
+        //        buses.Add(Tools.POBus(item));
+        //    }
+        //    buseslview.DataContext = buses;
+        //    //buseslview.DataContext = bl.GetAllBuses();
+
+        //    foreach (var item in bl.GetAllStations())
+        //        stations.Add(Tools.POStation(item));
+        //    stationslview.DataContext = stations;
+
+        //    foreach (var item in bl.GetAllLines())
+        //    {
+        //        lines.Add(Tools.POLine(item));
+        //    }
+        //    lineslview.DataContext = lines;
+
+        //    foreach (var item in bl.GetAllAdjacentStations())
+        //    {
+        //        adjacentStations.Add(Tools.POAdjacentStations(item));
+        //    }
+        //    adjStationsLview.DataContext = adjacentStations;
+        //}
+        // ***********************************************************************
+
         public Admin()
         {
+            SimulatorInactive = true;
+            timerWorker = new BackgroundWorker();
             InitializeComponent();
+            timerWorker.DoWork += (s, e) =>
+            {
+                workerThread = Thread.CurrentThread;
+                bl.StartSimulator(startTime, rate, (time) => timerWorker.ReportProgress(0, time));
+                while (!timerWorker.CancellationPending) try { Thread.Sleep(1000000); } catch (Exception ex) { }
+            };
+            timerWorker.ProgressChanged += timer_ProgressChanged;
+            timerWorker.RunWorkerCompleted += (s, e) =>
+            {
+                SimulatorInactive = true;
+                simulatorBtn.Content = "Start";
+                simulatorBtn.Background = Brushes.LightGreen;
+                bl.StopSimulator();
+            };
+
+            timerWorker.WorkerReportsProgress = true;
+            timerWorker.WorkerSupportsCancellation = true;
+
 
             foreach (var item in bl.GetAllBuses())
             {
@@ -47,6 +101,7 @@ namespace PlGui
             }
             adjStationsLview.DataContext = adjacentStations;
         }
+
 
         private void
             lineslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -78,9 +133,9 @@ namespace PlGui
             if (currentStation is PO.Station)
             {
                 lvYellowPanel.DataContext = currentStation.LinesAtStation;
-                StationPopUp info = new StationPopUp(currentStation);
-                info.DataContext = currentStation;
-                info.Show();
+                //StationPopUp info = new StationPopUp(currentStation);
+                //info.DataContext = currentStation;
+                //info.Show();
             }
         }
 
@@ -242,7 +297,69 @@ namespace PlGui
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (timerWorker.IsBusy)
+            {
+                timerWorker.CancelAsync();
+                workerThread.Interrupt();
+            }
             Environment.Exit(-2);
         }
+
+
+        #region Simulator
+
+        TimeSpan startTime;
+        BackgroundWorker timerWorker;
+        Thread workerThread;
+        int rate;
+
+        public static readonly DependencyProperty SimulatorInactiveProperty = DependencyProperty.Register("SimulatorInactive", typeof(Boolean), typeof(Admin));
+        private bool SimulatorInactive
+        {
+            get => (bool)GetValue(SimulatorInactiveProperty);
+            set => SetValue(SimulatorInactiveProperty, value);
+        }
+
+        private void timer_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            TimeSpan time = (TimeSpan)e.UserState;
+            //timerTextBox.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", time.Hours, time.Minutes, time.Seconds);
+            hourTb.Text = String.Format($"{time.Hours}");
+            minutesTb.Text = String.Format($"{time.Minutes}"); 
+            secoundsTb.Text = String.Format($"{time.Seconds}");
+        }
+
+        private void validateTb_PreviewTextInput(object sender, TextCompositionEventArgs e) => e.Handled = e.Text == null || !e.Text.All(char.IsDigit);
+
+        private void simulatorBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int hh, mm, ss;
+            if (SimulatorInactive)
+            {
+                if (!(int.TryParse(hourTb.Text, out hh) && int.TryParse(minutesTb.Text, out mm)
+                && int.TryParse(secoundsTb.Text, out ss) && int.TryParse(rateTb.Text, out rate)))
+                {
+                    MessageBox.Show("Wrong timer format");
+                    return;
+                }
+                if (hh > 23 || mm > 59 || ss > 59)
+                {
+                    MessageBox.Show("Invalid time value");
+                    return;
+                }
+                startTime = new TimeSpan(hh, mm, ss);
+                timerWorker.RunWorkerAsync();
+                SimulatorInactive = false;
+                simulatorBtn.Content = "Stop";                
+                simulatorBtn.Background = Brushes.Red;
+            }
+            else
+            {
+                timerWorker.CancelAsync();
+                workerThread.Interrupt();
+            }
+        }
+                
+        #endregion
     }
 }
