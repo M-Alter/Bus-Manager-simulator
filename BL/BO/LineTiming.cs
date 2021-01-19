@@ -13,7 +13,7 @@ namespace BO
         public LineTiming() => ID = ++counter;
         public TimeSpan TripStart { get; set; }        
         public int LineId { get; set; }        
-        public int LineCode { get; set; }        
+        public int LineNumber { get; set; }        
         public string LastStation { get; set; }        
         public TimeSpan Timing { get; set; }
     }

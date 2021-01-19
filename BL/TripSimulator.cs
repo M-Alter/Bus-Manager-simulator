@@ -60,10 +60,10 @@ namespace BL
             LineTiming lineTiming = new LineTiming
             {
                 LineId = sc.LineId,
-                LineCode = dl.GetLine(sc.LineId).LineNumber,
+                LineNumber = dl.GetLine(sc.LineId).LineNumber,
                 TripStart = sc.StartAt                
             };
-            Thread.CurrentThread.Name = $"{lineTiming.ID}:{lineTiming.LineId}/{lineTiming.LineCode}";
+            Thread.CurrentThread.Name = $"{lineTiming.ID}:{lineTiming.LineId}/{lineTiming.LineNumber}";
             var stationIDs = dl.GetLineStations(lineTiming.LineId).ToList();
             if (stationIDs.Count == 0) return;
             var route = (from st in stationIDs
@@ -84,7 +84,7 @@ namespace BL
                     {
                         ID = lineTiming.ID,
                         LineId = lineTiming.LineId,
-                        LineCode = lineTiming.LineCode,
+                        LineNumber = lineTiming.LineNumber,
                         LastStation = lineTiming.LastStation,
                         TripStart = lineTiming.TripStart
                     };
