@@ -90,11 +90,11 @@ namespace DS
                 new LineStation     {   StationCode = 38836, LineId = 9, LineStationIndex = 6, NextStation = 0, PrevStation = 38835     },
 
 
-                new LineStation     {   StationCode = 38833, LineId = 10, LineStationIndex = 1, NextStation = 38834, PrevStation = 0   },
-                new LineStation     {    StationCode =   38834   , LineId = 11   , LineStationIndex =    2   , NextStation = 38835   , PrevStation = 38833   },
-                new LineStation     {    StationCode =   38835   , LineId = 11   , LineStationIndex =    3   , NextStation = 38836   , PrevStation = 38834   },
-                new LineStation     {    StationCode =   38836   , LineId = 11   , LineStationIndex =    4   , NextStation = 38837   , PrevStation = 38835   },
-                new LineStation     {    StationCode =   38837   , LineId = 11   , LineStationIndex =    5   , NextStation = 0   , PrevStation = 38836   },
+                new LineStation     {StationCode = 38833, LineId = 10, LineStationIndex = 1, NextStation = 38834, PrevStation = 0   },
+                new LineStation     {StationCode = 38834 , LineId = 11   , LineStationIndex =    2   , NextStation = 38835   , PrevStation = 38833   },
+                new LineStation     {StationCode = 38835 , LineId = 11   , LineStationIndex =    3   , NextStation = 38836   , PrevStation = 38834   },
+                new LineStation     {StationCode = 38836 , LineId = 11   , LineStationIndex =    4   , NextStation = 38837   , PrevStation = 38835   },
+                new LineStation     {StationCode = 38837 , LineId = 11   , LineStationIndex =    5   , NextStation = 0   , PrevStation = 38836   },
 
                 new LineStation     {   StationCode = 38841, LineId = 13, LineStationIndex = 1, NextStation = 38842, PrevStation = 0     },
                 new LineStation     {   StationCode = 38842, LineId = 13, LineStationIndex = 2, NextStation = 38843, PrevStation = 38841     },
