@@ -1,16 +1,15 @@
 ﻿using BLAPI;
 using BO;
-using PO;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Threading;
-using System.ComponentModel;
-using System.Linq;
 using System.Windows.Media;
-using System.Collections.Generic;
 
 namespace PlGui
 {
@@ -126,8 +125,7 @@ namespace PlGui
         }
 
 
-        private void
-            lineslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void lineslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var currentLine = lineslview.SelectedItem as PO.Line;
             if (currentLine is PO.Line)
@@ -368,7 +366,7 @@ namespace PlGui
         {
             TimeSpan time = (TimeSpan)e.UserState;
             hourTb.Text = String.Format($"{time.Hours:D2}");
-            minutesTb.Text = String.Format($"{time.Minutes:D2}"); 
+            minutesTb.Text = String.Format($"{time.Minutes:D2}");
             secoundsTb.Text = String.Format($"{time.Seconds:D2}");
         }
 
@@ -393,7 +391,7 @@ namespace PlGui
                 startTime = new TimeSpan(hh, mm, ss);
                 timerWorker.RunWorkerAsync();
                 SimulatorInactive = false;
-                simulatorBtn.Content = "Stop";                
+                simulatorBtn.Content = "Stop";
                 simulatorBtn.Background = Brushes.Red;
             }
             else

@@ -90,11 +90,11 @@ namespace DS
                 new LineStation     {   StationCode = 38836, LineId = 9, LineStationIndex = 6, NextStation = 0, PrevStation = 38835     },
 
 
-                new LineStation     {   StationCode = 38833, LineId = 10, LineStationIndex = 1, NextStation = 38834, PrevStation = 0   },
-                new LineStation     {    StationCode =   38834   , LineId = 10   , LineStationIndex =    2   , NextStation = 38835   , PrevStation = 38833   },
-                new LineStation     {    StationCode =   38835   , LineId = 10   , LineStationIndex =    3   , NextStation = 38836   , PrevStation = 38834   },
-                new LineStation     {    StationCode =   38836   , LineId = 10   , LineStationIndex =    4   , NextStation = 38837   , PrevStation = 38835   },
-                new LineStation     {    StationCode =   38837   , LineId = 10   , LineStationIndex =    5   , NextStation = 0   , PrevStation = 38836   },
+                new LineStation     { StationCode = 38833, LineId = 10, LineStationIndex = 1, NextStation = 38834, PrevStation = 0  },
+                new LineStation     { StationCode = 38834, LineId = 10, LineStationIndex = 2, NextStation = 38835, PrevStation = 38833},
+                new LineStation     { StationCode = 38835, LineId = 10, LineStationIndex = 3, NextStation = 38836, PrevStation = 38834},
+                new LineStation     { StationCode = 38836, LineId = 10, LineStationIndex = 4, NextStation = 38837, PrevStation = 38835},
+                new LineStation     { StationCode = 38837, LineId = 10, LineStationIndex = 5, NextStation = 0, PrevStation = 38836  },
 
                 new LineStation     {   StationCode = 38841, LineId = 13, LineStationIndex = 1, NextStation = 38842, PrevStation = 0     },
                 new LineStation     {   StationCode = 38842, LineId = 13, LineStationIndex = 2, NextStation = 38843, PrevStation = 38841     },
@@ -129,13 +129,14 @@ namespace DS
                 new AdjacentStations{Station1 = 38832, Station2 = 38833, Distance = 1.5, Time = new TimeSpan(0,3,0) },
                 new AdjacentStations{Station1 = 38833, Station2 = 38834, Distance = 1.5, Time = new TimeSpan(0,3,0) },
                 new AdjacentStations{Station1 = 38834, Station2 = 38835, Distance = 1.5, Time = new TimeSpan(0,3,0) },
-                new AdjacentStations{Station1 = 38835, Station2 = 38836, Distance = 1.5, Time = new TimeSpan(0,3,0) }
+                new AdjacentStations{Station1 = 38835, Station2 = 38836, Distance = 1.5, Time = new TimeSpan(0,3,0) },
+                new AdjacentStations{Station1 = 38836, Station2 = 38837, Distance = 1.5, Time = new TimeSpan(0,3,0) }
             };
 
             LineTripsList = new List<LineTrip>
             {
-                new LineTrip{LineId = 9,StartAt = new TimeSpan(08,30,00),FinishAt = new TimeSpan(19,00,00), Frequency = new TimeSpan(00,15,00), Id=9083000 }
-
+                new LineTrip{LineId = 9,StartAt = new TimeSpan(08,30,00),FinishAt = new TimeSpan(19,00,00), Frequency = new TimeSpan(00,15,00), Id=9083000 },
+                new LineTrip{LineId = 10,StartAt = new TimeSpan(08,35,00),FinishAt = new TimeSpan(19,00,00), Frequency = new TimeSpan(00,15,00), Id=10083500 }
             };
         }
     }
