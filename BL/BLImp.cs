@@ -506,5 +506,10 @@ The password for your account is
             TripSimulator.Instance.StationId = station;
             TripSimulator.Instance.BusObserver += updateBus;
         }
+
+        public bool AddLineTrip(int lineId, TimeSpan time)
+        {
+            return dl.AddLineTrip(lineId, time);
+        }
     }
 }

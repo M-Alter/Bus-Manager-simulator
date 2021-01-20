@@ -80,7 +80,10 @@ namespace PlGui
 
         private void addTripBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            AddTrip addTrip = new AddTrip(sender);
+            addTrip.DataContext = line;
+            addTrip.ShowDialog();
+            line.Timing = bl.GetLine(line.PersonalId).Timing;
         }
     }
 }

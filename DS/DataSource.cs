@@ -14,7 +14,7 @@ namespace DS
         public static List<User> UserList;
         public static List<AdjacentStations> AdjacentStationsList;
         public static List<LineTrip> LineTripsList;
-        public static int linePersonalIdGenerator = 15;
+        public static int linePersonalIdGenerator = 20;
 
         /// <summary>
         /// C'tor that runs before an instance is created

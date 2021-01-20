@@ -34,6 +34,7 @@ namespace DalApi
         bool RemoveLine(int lineId, int lastStation);
         int GenerateLinePersonalId();
         bool UpdateLine(int lineId, int firstStation, int lastStation);
+        bool AddLineTrip(int lineId, TimeSpan startTime);
         #endregion
 
         #region LineStation

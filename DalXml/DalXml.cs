@@ -373,7 +373,7 @@ namespace DL
             XElement rootElem = XmlTools.LoadFile(LineStationsFilePath);
 
             return (from lineStation in rootElem.Elements()
-                    //check also if the station isn't the last station
+                        //check also if the station isn't the last station
                     where int.Parse(lineStation.Element("LineId").Value) == lineId && int.Parse(lineStation.Element("StationCode").Value) == stationCode && int.Parse(lineStation.Element("NextStation").Value) != 0
                     select int.Parse(lineStation.Element("NextStation").Value)).FirstOrDefault();
         }
@@ -443,7 +443,7 @@ namespace DL
         }
 
         public bool RemoveLine(int lineId, int lastStation)
-        {           
+        {
             XElement rootElem = XmlTools.LoadFile(LinesFilePath);
 
             var temp = from line in rootElem.Elements()
@@ -510,7 +510,7 @@ namespace DL
             XElement rootElem = XmlTools.LoadFile(LineTripFilePath);
 
             return from ls in rootElem.Elements()
-                   select XmlTools.CreateLineTripInstance(ls);            
+                   select XmlTools.CreateLineTripInstance(ls);
         }
 
         public bool UpdateLine(int lineId, int firstStation, int lastStation)
@@ -525,6 +525,22 @@ namespace DL
             return from ls in rootElem.Elements()
                    where int.Parse(ls.Element("LineId").Value) == lineId
                    select new TimeSpan(int.Parse(ls.Element("StartAt").Element("Hour").Value), int.Parse(ls.Element("StartAt").Element("Min").Value), int.Parse(ls.Element("StartAt").Element("Sec").Value));
+        }
+
+        public bool AddLineTrip(int lineId, TimeSpan startTime)
+        {
+            XElement rootElem = XmlTools.LoadFile(LineTripFilePath);
+
+            XElement ltElem = new XElement("LineTrip",
+                new XElement("LineId", lineId),
+                new XElement("StartAt", 
+                    new XElement("Hour", startTime.Hours),
+                    new XElement("Min", startTime.Minutes),
+                    new XElement("Sec", startTime.Seconds)
+                    ),
+                new XElement("Id", $"{lineId}{startTime.Hours}{startTime.Minutes}{startTime.Seconds}")
+                );
+            return XmlTools.SaveFile(rootElem, LineTripFilePath);
         }
     }
 }

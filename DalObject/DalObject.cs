@@ -310,5 +310,11 @@ namespace DL
             cur.LastStation = lastStation;
             return true;
         }
+
+        public bool AddLineTrip(int lineId, TimeSpan startTime)
+        {
+            DataSource.LineTripsList.Add(new LineTrip { LineId = lineId, StartAt = startTime, Id = int.Parse($"{lineId}{startTime.Hours}{startTime.Minutes}{startTime.Seconds}") });
+            return true;
+        }
     }
 }

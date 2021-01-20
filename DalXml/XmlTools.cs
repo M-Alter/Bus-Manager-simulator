@@ -128,7 +128,7 @@ namespace DO
                 //Frequency = new TimeSpan(int.Parse(adj.Element("Time").Element("Hour").Value), int.Parse(adj.Element("Time").Element("Min").Value), int.Parse(adj.Element("Time").Element("Sec").Value)),
                 StartAt = new TimeSpan(int.Parse(adj.Element("StartAt").Element("Hour").Value), int.Parse(adj.Element("StartAt").Element("Min").Value), int.Parse(adj.Element("StartAt").Element("Sec").Value)),
                 LineId = int.Parse(adj.Element("LineId").Value),
-                Id = Int32.Parse(adj.Element("LineId").Value + adj.Element("Time").Element("Hour").Value+ adj.Element("Time").Element("Min").Value + adj.Element("Time").Element("Sec").Value)
+                Id = Int32.Parse(adj.Element("Id").Value)
             };
         }
     }

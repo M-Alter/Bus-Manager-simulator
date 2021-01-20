@@ -12,17 +12,16 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="{Binding}" Grid.Row="0"/>
-        <Label Content="Time"/>
+        <Label Name="tripTitleLabel" Content="{Binding}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
         <WrapPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBox x:Name="hourTb" Text="00" GotFocus="TextBox_GotFocus" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" IsEnabled="{Binding SimulatorInactive}" PreviewTextInput="validateTb_PreviewTextInput"/>
+            <TextBox x:Name="hourTb" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" PreviewTextInput="validateTb_PreviewTextInput"/>
             <Label Content=":"/>
-            <TextBox x:Name="minutesTb" Text="00" GotFocus="TextBox_GotFocus" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" IsEnabled="{Binding SimulatorInactive}" PreviewTextInput="validateTb_PreviewTextInput"/>
+            <TextBox x:Name="minutesTb" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" PreviewTextInput="validateTb_PreviewTextInput"/>
             <Label Content=":"/>
-            <TextBox x:Name="secoundsTb" Text="00" GotFocus="TextBox_GotFocus" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" IsEnabled="{Binding SimulatorInactive}" PreviewTextInput="validateTb_PreviewTextInput"/>
+            <TextBox x:Name="secoundsTb" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" PreviewTextInput="validateTb_PreviewTextInput"/>
         </WrapPanel>
-        <Button x:Name="addBtn" Content="Add trip" Grid.Row="2" Margin="10,70.333,190,29.667"/>
-        <Button x:Name="cancelBtn" Content="Add trip" Grid.Row="2" Margin="190,70.333,10,29.667"/>
+        <Button x:Name="addBtn" Content="Add trip" Grid.Row="2" Margin="10,70.333,190,29.667" Click="addBtn_Click"/>
+        <Button x:Name="cancelBtn" Content="Cancel" Grid.Row="2" Margin="190,70.333,10,29.667" Click="cancelBtn_Click"/>
 
     </Grid>
 </Window>
