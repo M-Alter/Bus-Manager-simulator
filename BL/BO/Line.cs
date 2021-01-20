@@ -53,6 +53,7 @@ namespace BO
 
         public string LastStationName { get; set; }
         public IEnumerable<LineStation> Stations { get; set; }
+        public IEnumerable<TimeSpan> Timing { get; set; }
 
         public bool IsActive
         {

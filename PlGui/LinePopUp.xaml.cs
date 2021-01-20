@@ -72,5 +72,10 @@ namespace PlGui
         {
 
         }
+
+        private void btRemoveTiming_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

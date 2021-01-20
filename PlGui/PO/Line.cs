@@ -21,6 +21,7 @@ namespace PO
         private string lastStationName;
         private bool isActive = true;
         private IEnumerable<LineStation> stations;
+        private IEnumerable<TimeSpan> timing;
 
         #endregion
 
@@ -48,7 +49,7 @@ namespace PO
         public int FirstStation
         {
             get { return firstStation; }
-            set 
+            set
             {
                 firstStation = value;
                 NotifyPropertyChanged();
@@ -70,23 +71,23 @@ namespace PO
         public int LastStation
         {
             get { return lastStation; }
-            set 
+            set
             {
                 lastStation = value;
                 NotifyPropertyChanged();
             }
         }
 
-        public string LastStationName { 
-            get 
+        public string LastStationName {
+            get
             {
                 return lastStationName;
-            } 
-            set 
+            }
+            set
             {
                 lastStationName = value;
                 NotifyPropertyChanged();
-            } 
+            }
         }
 
         public IEnumerable<LineStation> Stations {
@@ -98,7 +99,19 @@ namespace PO
             {
                 stations = value;
                 NotifyPropertyChanged();
-            } 
+            }
+        }
+
+        public IEnumerable<TimeSpan> Timing{
+            get
+            {
+                return timing;
+            }
+            set
+            {
+                timing = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public bool IsActive

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
         mc:Ignorable="d"
-        Title="Line PopUp" Height="250" Width="500" ResizeMode="NoResize">
+        Title="Line PopUp" Height="500" Width="500" ResizeMode="NoResize">
     <Grid>
         <Grid x:Name="busGrid" Margin="15">
             
@@ -14,6 +14,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
                 <RowDefinition Height="5*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -40,6 +41,19 @@
                     <DataGridTextColumn Header="Station Name" Binding="{Binding StationName}" IsReadOnly="True" />
                     <DataGridTextColumn Header="Time" Binding="{Binding TimeToNext}" IsReadOnly="False"/>
                     <DataGridTextColumn Header="Distance" Binding="{Binding Distance}" IsReadOnly="False"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="timingGrid" Grid.Row="3" Grid.ColumnSpan="2" Margin="3,0,50,0" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding Timing}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btRemoveTiming" Content="Remove" Click="btRemoveTiming_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Living time" Binding="{Binding}" IsReadOnly="True"/>
+                    
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

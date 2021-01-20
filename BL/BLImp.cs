@@ -132,6 +132,8 @@ namespace BL
                             orderby index
                             //if the statoin is the last station then give it a value of zero
                             select new LineStation() { Station = numbers, StationName = name, Index = index++, TimeToNext = (doAdjacentStations == default(DO.AdjacentStations) ? new TimeSpan(0) : doAdjacentStations.Time), Distance = (doAdjacentStations == default(DO.AdjacentStations) ? 0.0 : doAdjacentStations.Distance) };
+            // get all times of the line
+            line.Timing = dl.GetLineSchedules(line.PersonalId);
             return line;
         }
 

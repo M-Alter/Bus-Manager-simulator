@@ -296,6 +296,13 @@ namespace DL
                    select ls.Clone();
         }
 
+        public IEnumerable<TimeSpan> GetLineSchedules(int lineId)
+        {
+            return from ls in DataSource.LineTripsList
+                   where ls.LineId == lineId
+                   select ls.Clone().StartAt;
+        }
+
         public bool UpdateLine(int lineId, int firstStation, int lastStation)
         {
             var cur = DataSource.LineList.Find(line => line.PersonalId == lineId);

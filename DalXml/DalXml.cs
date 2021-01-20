@@ -472,5 +472,10 @@ namespace Dal
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<TimeSpan> GetLineSchedules(int lineId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

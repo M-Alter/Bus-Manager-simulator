@@ -41,7 +41,8 @@ namespace PlGui
                 LastStationName = boLine.LastStationName,
                 Area = boLine.Area,
                 IsActive = boLine.IsActive,
-                Stations = boLine.Stations
+                Stations = boLine.Stations,
+                Timing= boLine.Timing
             };
             return line;
         }
