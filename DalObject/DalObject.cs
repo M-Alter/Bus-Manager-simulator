@@ -80,7 +80,7 @@ namespace DL
                 DataSource.BusList.Remove(bus);
             }
             else
-                throw new Exception("This bus wasn't found");
+                throw new BusException(licenseNum, " bus wasn't found ");
         }
 
 

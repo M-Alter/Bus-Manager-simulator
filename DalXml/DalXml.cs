@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Dal
+namespace DL
 {
     class DalXml : IDL
     {
@@ -161,12 +161,32 @@ namespace Dal
 
         public void RemoveBus(int licenseNum)
         {
-            throw new NotImplementedException();
+            //get the file 
+            XElement rootElem = XmlTools.LoadFile(BusFilePath);
+            var temp = from item in rootElem.Elements()
+                       where int.Parse(item.Element("LicenseNum").Value) == licenseNum
+                       select item;
+            if (temp != null)
+            {
+                temp.Remove();
+            }
+            else
+            {
+                throw new BusException(licenseNum, " bus wasn't found ");
+            }
+
         }
 
         public void RemoveStation(int code)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(StationsFilePath);
+            var temp = from item in rootElem.Elements()
+                       where int.Parse(item.Element("Code").Value) == code
+                       select item;
+            if (temp != null)
+            {
+                temp.Remove();
+            }
         }
 
         /// <summary>
@@ -235,7 +255,12 @@ namespace Dal
         ///
         public IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(BusFilePath);
+
+            return from bus in rootElem.Elements()
+                       //create each instance using the CreateBusInstatnce from the Xmltools class
+                   where predicate(XmlTools.CreateBusInstatnce(bus))
+                   select XmlTools.CreateBusInstatnce(bus);
         }
 
         /// <summary>
