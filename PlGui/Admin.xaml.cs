@@ -24,7 +24,7 @@ namespace PlGui
         ObservableCollection<PO.AdjacentStations> adjacentStations = new ObservableCollection<PO.AdjacentStations>();
 
         IBL bl = BLFactory.GetIBL();
-        BO.Station busStation;
+        PO.Station busStation;
         // ***********************************************************************************************88
         //public Admin()
         //{
@@ -151,6 +151,7 @@ namespace PlGui
         private void stationslview_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var currentStation = stationslview.SelectedItem as PO.Station;
+            busStation = currentStation;
             if (currentStation is PO.Station)
             {
                 lvYellowPanel.DataContext = currentStation.LinesAtStation;

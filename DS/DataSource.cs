@@ -136,7 +136,13 @@ namespace DS
             LineTripsList = new List<LineTrip>
             {
                 new LineTrip{LineId = 9,StartAt = new TimeSpan(08,30,00),FinishAt = new TimeSpan(19,00,00), Frequency = new TimeSpan(00,15,00), Id=9083000 },
+                new LineTrip{LineId = 9,StartAt = new TimeSpan(08,45,00),FinishAt = new TimeSpan(19,00,00), Frequency = new TimeSpan(00,15,00), Id=9083000 },
+                new LineTrip{LineId = 9,StartAt = new TimeSpan(09,00,00),FinishAt = new TimeSpan(19,00,00), Frequency = new TimeSpan(00,15,00), Id=9083000 },
+                new LineTrip{LineId = 9,StartAt = new TimeSpan(09,15,00),FinishAt = new TimeSpan(19,00,00), Frequency = new TimeSpan(00,15,00), Id=9083000 },
+                new LineTrip{LineId = 9,StartAt = new TimeSpan(09,30,00),FinishAt = new TimeSpan(19,00,00), Frequency = new TimeSpan(00,15,00), Id=9083000 },
+                new LineTrip{LineId = 9,StartAt = new TimeSpan(09,45,00),FinishAt = new TimeSpan(19,00,00), Frequency = new TimeSpan(00,15,00), Id=9083000 },
                 new LineTrip{LineId = 10,StartAt = new TimeSpan(08,35,00),FinishAt = new TimeSpan(19,00,00), Frequency = new TimeSpan(00,15,00), Id=10083500 }
+
             };
         }
     }
