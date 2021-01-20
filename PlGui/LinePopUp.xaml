@@ -43,7 +43,7 @@
                     <DataGridTextColumn Header="Distance" Binding="{Binding Distance}" IsReadOnly="False"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid x:Name="timingGrid" Grid.Row="3" Grid.ColumnSpan="2" Margin="3,0,50,0" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding Timing}">
+            <DataGrid x:Name="timingGrid" Grid.Row="3" Grid.ColumnSpan="1" Margin="3,0,50,0" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding Timing}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
@@ -56,6 +56,7 @@
                     
                 </DataGrid.Columns>
             </DataGrid>
+            <Button x:Name="addTripBtn" Grid.Column="1" Grid.Row="3" Content="Add trip" Margin="60,70" FontSize="20" Click="addTripBtn_Click"/>
         </Grid>
     </Grid>
 </Window>

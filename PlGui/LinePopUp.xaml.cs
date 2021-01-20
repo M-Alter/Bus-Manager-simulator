@@ -77,5 +77,10 @@ namespace PlGui
         {
 
         }
+
+        private void addTripBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

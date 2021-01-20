@@ -429,12 +429,32 @@ namespace DL
 
         public bool RemoveAllLineStation(int lineID)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(LineStationsFilePath);
+
+            var temp = from line in rootElem.Elements()
+                       where int.Parse(line.Element("LineId").Value) == lineID
+                       select line;
+            if (temp != null)
+            {
+                temp.Remove();
+                return true;
+            }
+            return false;
         }
 
         public bool RemoveLine(int lineId, int lastStation)
-        {
-            throw new NotImplementedException();
+        {           
+            XElement rootElem = XmlTools.LoadFile(LinesFilePath);
+
+            var temp = from line in rootElem.Elements()
+                       where int.Parse(line.Element("PersonalId").Value) == lineId
+                       select line;
+            if (temp != null)
+            {
+                temp.Remove();
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -500,7 +520,11 @@ namespace DL
 
         public IEnumerable<TimeSpan> GetLineSchedules(int lineId)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(LineTripFilePath);
+
+            return from ls in rootElem.Elements()
+                   where int.Parse(ls.Element("LineId").Value) == lineId
+                   select new TimeSpan(int.Parse(ls.Element("StartAt").Element("Hour").Value), int.Parse(ls.Element("StartAt").Element("Min").Value), int.Parse(ls.Element("StartAt").Element("Sec").Value));
         }
     }
 }

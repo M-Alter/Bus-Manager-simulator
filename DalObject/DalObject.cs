@@ -89,7 +89,7 @@ namespace DL
             Line line = new Line();
             foreach (var item in DataSource.LineList)
             {
-                if (item.LineNumber == lineId && item.LastStation == lastStation)
+                if (item.PersonalId == lineId && item.LastStation == lastStation)
                 {
                     line = item;
                     break;
