@@ -37,7 +37,7 @@ namespace BLAPI
 
         void StartSimulator(TimeSpan startTime, int Rate, Action<TimeSpan> updateTime);
         void StopSimulator();
-        bool AddLineTrip(int personalId, TimeSpan reuslt);
+        
         void SetStationPanel(int station, Action<LineTiming> updateBus);
         bool RemoveLineTrip(int personalId, TimeSpan time);
     }
