@@ -311,10 +311,27 @@ namespace DL
             return true;
         }
 
+        /// <summary>
+        /// add a linetrip to line at time time
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="startTime"></param>
+        /// <returns></returns>
         public bool AddLineTrip(int lineId, TimeSpan startTime)
         {
             DataSource.LineTripsList.Add(new LineTrip { LineId = lineId, StartAt = startTime, Id = int.Parse($"{lineId}{startTime.Hours}{startTime.Minutes}{startTime.Seconds}") });
             return true;
+        }
+
+        /// <summary>
+        /// remove a linetrip from line lineid
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public bool RemoveLineTrip(int lineId, TimeSpan time)
+        {
+            return DataSource.LineTripsList.Remove(DataSource.LineTripsList.Find(lt => lt.StartAt == time));
         }
     }
 }

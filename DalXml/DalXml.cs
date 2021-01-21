@@ -542,5 +542,10 @@ namespace DL
                 );
             return XmlTools.SaveFile(rootElem, LineTripFilePath);
         }
+
+        public bool RemoveLineTrip(int lineId, TimeSpan time)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

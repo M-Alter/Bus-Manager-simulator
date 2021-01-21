@@ -114,6 +114,7 @@ namespace PlGui
                 adjacentStations.Add(Tools.POAdjacentStations(item));
             }
             adjStationsLview.DataContext = adjacentStations;
+            //adjStationsLview.ItemsSource = bl.GetAllAdjacentStations();
         }
 
         //open an info window

@@ -75,7 +75,10 @@ namespace PlGui
 
         private void btRemoveTiming_Click(object sender, RoutedEventArgs e)
         {
-
+            var info = (sender as Button).DataContext;
+            TimeSpan time = TimeSpan.Parse(info.ToString());
+            bl.RemoveLineTrip(line.PersonalId, time);
+            line.Timing = bl.GetLine(line.PersonalId).Timing;
         }
 
         private void addTripBtn_Click(object sender, RoutedEventArgs e)

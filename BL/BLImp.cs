@@ -507,9 +507,26 @@ The password for your account is
             TripSimulator.Instance.BusObserver += updateBus;
         }
 
+        /// <summary>
+        /// add a new start time to a line
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
         public bool AddLineTrip(int lineId, TimeSpan time)
         {
             return dl.AddLineTrip(lineId, time);
+        }
+
+        /// <summary>
+        /// to remove a line trip from a line
+        /// </summary>
+        /// <param name="personalId"></param>
+        /// <param name="time"></param>
+        public bool RemoveLineTrip(int lineId, TimeSpan time)
+        {
+
+            return dl.RemoveLineTrip(lineId, time);
         }
     }
 }

@@ -59,6 +59,7 @@ namespace DalApi
         #region Users
         IEnumerable<User> GetAllUsers();
         bool ValidatePassword(string userName, string password);
+        bool RemoveLineTrip(int lineId, TimeSpan time);
 
         #endregion
     }
