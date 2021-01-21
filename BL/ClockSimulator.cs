@@ -8,6 +8,7 @@ using System.Diagnostics;
 
 namespace BL
 {
+    //with a lot of modifications 
     internal sealed class ClockSimulator
     {
         #region singelton
@@ -36,27 +37,49 @@ namespace BL
             add => clockObserver = value;
             remove => clockObserver = null;
         }
-        
+
         private TimeSpan simulatorStartTime;
-            
+
+        /// <summary>
+        /// start the simukator
+        /// </summary>
+        /// <param name="startTime">what the time should be at start</param>
+        /// <param name="rate">at ehat rate should the simulator</param>
         internal void Start(TimeSpan startTime, int rate)
         {
+            //start time 
             simulatorStartTime = startTime;
+            //cloack thats start in start time and updates according to the rate
             simulatorClock = new Clock(startTime);
+            //rate of the clock
             simulatorRate = rate;
+            //boolean when to stop
             Cancel = false;
+            //start the timer that progreeses the simulatorClock
             stopwatch.Restart();
+            //run the clock thread
             new Thread(clockThread).Start();
+            //run the simulation thread
             TripSimulator.Instance.Start();
         }
 
-        internal void Stop() => Cancel = true;
 
+        //stop the clock and simulation
+        internal void Stop()
+        {
+            Cancel = true;
+        }
+
+        /// <summary>
+        /// while the clock isn't paused update the time every 10ms 
+        /// </summary>
         void clockThread()
         {
             while (!Cancel)
             {
+                //update the internal clock for the simulator 
                 simulatorClock = new Clock(simulatorStartTime + new TimeSpan(stopwatch.ElapsedTicks * simulatorRate));
+                //update the GUI clock
                 clockObserver(new TimeSpan(simulatorClock.Time.Hours, simulatorClock.Time.Minutes, simulatorClock.Time.Seconds));
                 Thread.Sleep(100);
             }

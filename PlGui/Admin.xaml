@@ -76,7 +76,6 @@
                                     <TextBlock Text="{Binding FirstStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
                                     <TextBlock Text="{Binding LastStation}" Width="Auto" FontSize="20" Padding="10,0"/>
                                     <TextBlock Text="{Binding LastStationName}" Width="Auto" FontSize="20" Padding="10,0"/>
-                                    <Button x:Name="btnEditLine" Content="Edit" Click="btnEditLine_Click" />
                                 </WrapPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
