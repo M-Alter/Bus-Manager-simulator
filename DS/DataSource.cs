@@ -95,18 +95,18 @@ namespace DS
                 new Station{Code =  38875   , Lattitude =   31.802319   , Longitude =   34.786735   , Name = "בית ספר גוונים\\ארז	"},
                 new Station{Code =  38876   , Lattitude =   31.804595   , Longitude =   34.786623   , Name = "דרך האילנות\\אלון	"},
                 new Station{Code =  38877   , Lattitude =   31.805041   , Longitude =   34.785098   , Name = "דרך האילנות\\מנחם בגין	"},
-                new Station{Code =  38878   , Lattitude =   31.816751   , Longitude =   34.782252   , Name = "העצמאות\\וייצמן	"},
-                new Station{Code =  38879   , Lattitude =   31.816579   , Longitude =   34.779753   , Name = "וייצמן\\מרבד הקסמים	"},
-                new Station{Code =  38880   , Lattitude =   31.801182   , Longitude =   34.787199   , Name = "צאלה\\אלמוג	"},
-                new Station{Code =  38881   , Lattitude =   31.802279   , Longitude =   34.786055   , Name = "גן חצב\\צאלה	"},
-                new Station{Code =  38882   , Lattitude =   31.814676   , Longitude =   34.777574   , Name = "פינס\\לוינסון	"},
-                new Station{Code =  38883   , Lattitude =   31.813285   , Longitude =   34.775928   , Name = "פיינברג\\שכביץ	"},
-                new Station{Code =  38884   , Lattitude =   31.806959   , Longitude =   34.773504   , Name = "בן גוריון\\פוקס	"},
-                new Station{Code =  38885   , Lattitude =   31.884187   , Longitude =   34.805494   , Name = "לוי אשכול\\הרב דוד ישראל	"},
-                new Station{Code =  38886   , Lattitude =   31.910118   , Longitude =   34.805809   , Name = "שושן\\אופנהיימר	"},
-                new Station{Code =  38887   , Lattitude =   31.882474   , Longitude =   34.80506    , Name = "הרב דוד ישראל\\אריה דולצין	"},
-                new Station{Code =  38888   , Lattitude =   31.878667   , Longitude =   34.81138    , Name = "קרוננברג\\ארגמן	"},
-                new Station{Code =  38889   , Lattitude =   31.975479   , Longitude =   34.813355   , Name = "יעקב פריימן\\בנימין שמוטקין	"}
+                new Station{Code =  38878   , Lattitude =   31.816751   , Longitude =   34.782252   , Name = "העצמאות\\וייצמן"},
+                new Station{Code =  38879   , Lattitude =   31.816579   , Longitude =   34.779753   , Name = "וייצמן\\מרבד הקסמים"},
+                new Station{Code =  38880   , Lattitude =   31.801182   , Longitude =   34.787199   , Name = "צאלה\\אלמוג"},
+                new Station{Code =  38881   , Lattitude =   31.802279   , Longitude =   34.786055   , Name = "גן חצב\\צאלה"},
+                new Station{Code =  38882   , Lattitude =   31.814676   , Longitude =   34.777574   , Name = "פינס\\לוינסון"},
+                new Station{Code =  38883   , Lattitude =   31.813285   , Longitude =   34.775928   , Name = "פיינברג\\שכביץ"},
+                new Station{Code =  38884   , Lattitude =   31.806959   , Longitude =   34.773504   , Name = "בן גוריון\\פוקס"},
+                new Station{Code =  38885   , Lattitude =   31.884187   , Longitude =   34.805494   , Name = "לוי אשכול\\הרב דוד ישראל"},
+                new Station{Code =  38886   , Lattitude =   31.910118   , Longitude =   34.805809   , Name = "שושן\\אופנהיימר"},
+                new Station{Code =  38887   , Lattitude =   31.882474   , Longitude =   34.80506    , Name = "הרב דוד ישראל\\אריה דולצין"},
+                new Station{Code =  38888   , Lattitude =   31.878667   , Longitude =   34.81138    , Name = "קרוננברג\\ארגמן"},
+                new Station{Code =  38889   , Lattitude =   31.975479   , Longitude =   34.813355   , Name = "יעקב פריימן\\בנימין שמוטקין"}
             };
 
             LineList = new List<Line>

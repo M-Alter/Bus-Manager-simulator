@@ -82,7 +82,7 @@ namespace BL
             {
                 LineId = sc.LineId,
                 LineNumber = dl.GetLine(sc.LineId).LineNumber,
-                TripStart = sc.StartAt
+                Timing = sc.StartAt
             };
             //name the thread so we can track it
             Thread.CurrentThread.Name = $"{lineTiming.ID}:{lineTiming.LineId}/{lineTiming.LineNumber}";
@@ -117,7 +117,7 @@ namespace BL
                         LineId = lineTiming.LineId,
                         LineNumber = lineTiming.LineNumber,
                         LastStation = lineTiming.LastStation,
-                        TripStart = lineTiming.TripStart
+                        Timing = lineTiming.Timing
                     };
                     //set the station to the new station
                     station = stationId;
