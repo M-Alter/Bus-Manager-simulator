@@ -24,6 +24,7 @@ namespace BLAPI
         Line GetLine(int id);
         IEnumerable<Line> GetAllLines();
         bool AddLine(Line line);
+        bool AddLineTrip(int lineId, TimeSpan time);
         bool RemoveLine(int lineId, int lastStation);
         bool RemoveStationFromLine(int lineId, int stationToRemove);
         bool AddAdjacentStations(AdjacentStations adj);
