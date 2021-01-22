@@ -98,7 +98,7 @@
                         <TextBox x:Name="rateTb" Text="60" GotFocus="TextBox_GotFocus" Width="30" Height="30" VerticalAlignment="Center" FontSize="18" IsEnabled="{Binding SimulatorInactive}" PreviewTextInput="validateTb_PreviewTextInput"/>
                         <Button x:Name="simulatorBtn"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="100" Margin="10,0,0,0" Click="simulatorBtn_Click" Background="LightGreen" Content="start" FontSize="20"/>
                     </WrapPanel>
-                    <ListView x:Name="stationslview" ItemsSource="{Binding}" Margin="20,70,400,20" MouseDoubleClick="stationslview_MouseDoubleClick">
+                    <ListView x:Name="stationslview" ItemsSource="{Binding}" Margin="20,70,400,20" MouseDoubleClick="stationslview_MouseDoubleClick" SelectionChanged="stationslview_SelectionChanged">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>

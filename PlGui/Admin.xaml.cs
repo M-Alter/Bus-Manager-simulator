@@ -465,6 +465,29 @@ namespace PlGui
         private void stationObserver(LineTiming lineTiming)
             => panelWorker.ReportProgress(0, lineTiming);
 
+
         #endregion
+
+        private void stationslview_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var currentStation = stationslview.SelectedItem as PO.Station;
+            busStation = currentStation;
+            if (currentStation is PO.Station)
+            {
+                lvYellowPanel.DataContext = currentStation.LinesAtStation;
+                //StationPopUp info = new StationPopUp(currentStation);
+                //info.DataContext = currentStation;
+                //info.Show();
+                if (panelWorker.IsBusy)
+                    panelWorker.CancelAsync();
+                else
+                {
+                    //lvYellowPanel.ItemsSource = bl.GetBusLineNumbers(busStation.Code).OrderBy(n => n);
+                    panelLines = new List<LineTiming>();
+                    lineTimingListView.ItemsSource = null;
+                    panelWorker.RunWorkerAsync(currentStation.Code);
+                }
+            }
+        }
     }
 }

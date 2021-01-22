@@ -48,7 +48,11 @@ namespace BL
 
         public IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate)
         {
-            throw new NotImplementedException();
+            return from item in dl.GetAllBuses()
+                       //call the get bus functin with LisenceNum parameter
+                   let bus = GetBus(item.LicenseNum)
+                   where predicate(bus)
+                   select bus;
         }
 
         /// <summary>
