@@ -26,6 +26,11 @@ namespace BLAPI
         void DeleteBus(int licenseNum);
 
         #endregion
+        /// <summary>
+        /// gets a single station
+        /// </summary>
+        /// <param name="code">code number of the station</param>
+        /// <returns>return the station that has the requested code</returns>
         Station GetStation(int id);
 
         /// <summary>
@@ -44,17 +49,55 @@ namespace BLAPI
 
         bool AddStation(Station station);
 
+        /// <summary>
+        /// get a single line
+        /// </summary>
+        /// <param name="id">lines personal id</param>
+        /// <returns>a line with the personal id == id</returns>
         Line GetLine(int id);
+
         /// <summary>
         /// gets all the lines available
         /// </summary>
         /// <returns>a collection of all the lines</returns>
         IEnumerable<Line> GetAllLines();
 
+        /// <summary>
+        /// adds a new line 
+        /// </summary>
+        /// <param name="line">line to add</param>
+        /// <returns>true if added successfully</returns>
         bool AddLine(Line line);
+
+        /// <summary>
+        /// add a new start time to a line
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
         bool AddLineTrip(int lineId, TimeSpan time);
+
+        /// <summary>
+        /// remove a line
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="lastStation"></param>
+        /// <returns>true if removed successfully</returns>
         bool RemoveLine(int lineId, int lastStation);
+
+        /// <summary>
+        /// removes a station fron the line 
+        /// </summary>
+        /// <param name="lineId">line to be removed from</param>
+        /// <param name="stationToRemove">station to remove</param>
+        /// <returns>true if removed successfully</returns>
         bool RemoveStationFromLine(int lineId, int stationToRemove);
+
+        /// <summary>
+        /// adds a new adjacent stations
+        /// </summary>
+        /// <param name="adj">instatnce to add</param>
+        /// <returns>true if added successfully</returns>
         bool AddAdjacentStations(AdjacentStations adj);
 
         /// <summary>
@@ -64,7 +107,13 @@ namespace BLAPI
         /// <param name="second">second station</param>
         /// <returns>all the details between these two stations</returns>
         AdjacentStations GetAdjacentStations(int first, int second);
+
+        /// <summary>
+        /// gets all the adjacent stations
+        /// </summary>
+        /// <returns>all the adjacent stations</returns>
         IEnumerable<AdjacentStations> GetAllAdjacentStations();
+
         bool UpdateAdjacentStatoins(AdjacentStations adjacentStations);
         IEnumerable<string> GetAllUserNames(bool admin);
         bool ValidatePassword(string userName, string password);
