@@ -46,6 +46,11 @@ namespace BL
             return bus;
         }
 
+        /// <summary>
+        /// get all the buses that conform to the predicate function
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate)
         {
             return from item in dl.GetAllBuses()

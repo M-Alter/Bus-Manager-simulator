@@ -16,13 +16,31 @@ namespace BLAPI
         /// <param name="license">license of the bus</param>
         /// <returns>a bus instance</returns>
         Bus GetBus(int license);
+
         /// <summary>
         /// get all the buses
         /// </summary>
         /// <returns>a collection of busses</returns>
         IEnumerable<Bus> GetAllBuses();
+
+        /// <summary>
+        /// get all the buses that conform to the predicate function
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate);
+
+        /// <summary>
+        /// add a new bus 
+        /// </summary>
+        /// <param name="bus">bus to add</param>
+        /// <returns>true if the bus was added successfully</returns>
         bool AddBus(Bus bus);
+
+        /// <summary>
+        /// delete a bus
+        /// </summary>
+        /// <param name="licenseNum">lisence num of bus to remove</param>
         void DeleteBus(int licenseNum);
 
         #endregion
@@ -114,15 +132,46 @@ namespace BLAPI
         /// <returns>all the adjacent stations</returns>
         IEnumerable<AdjacentStations> GetAllAdjacentStations();
 
+        /// <summary>
+        /// updates the adjacent stations details
+        /// </summary>
+        /// <param name="adjacentStations"></param>
+        /// <returns>true if updates successfully</returns>
         bool UpdateAdjacentStatoins(AdjacentStations adjacentStations);
+
+        /// <summary>
+        /// gets user names that are or aren't admins 
+        /// </summary>
+        /// <param name="admin">true if you want admin usernames of false for non admin usernames</param>
+        /// <returns>a collection of usernames</returns>
         IEnumerable<string> GetAllUserNames(bool admin);
+
+        /// <summary>
+        /// check if the username and password match 
+        /// </summary>
+        /// <param name="userName">username to check</param>
+        /// <param name="password">password to match</param>
+        /// <returns>true if match was succsessfull</returns>
         bool ValidatePassword(string userName, string password);
+
+        /// <summary>
+        /// sends an email to emailAddress with a reminder of the password of the username account
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="emailAddress">email address to send the password to</param>
         void ResendPassword(string userName, string emailAddress);
+
 
         void StartSimulator(TimeSpan startTime, int Rate, Action<TimeSpan> updateTime);
         void StopSimulator();
         
         void SetStationPanel(int station, Action<LineTiming> updateBus);
+
+        /// <summary>
+        /// to remove a line trip from a line
+        /// </summary>
+        /// <param name="personalId"></param>
+        /// <param name="time"></param>
         bool RemoveLineTrip(int personalId, TimeSpan time);
     }
 }
