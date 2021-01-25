@@ -1,27 +1,91 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Lines.xml>
   <Line>
-    <Area>CENTRAL</Area>
-    <LineNumber>1</LineNumber>
     <PersonalId>9</PersonalId>
+    <LineNumber>1</LineNumber>
+    <Area>CENTRAL</Area>
     <FirstStation>38831</FirstStation>
     <LastStation>38836</LastStation>
-    <IsActive>true</IsActive>
+    <IsActive>True</IsActive>
   </Line>
   <Line>
     <PersonalId>10</PersonalId>
-    <LineNumber>123</LineNumber>
+    <LineNumber>51</LineNumber>
     <Area>CENTRAL</Area>
-    <FirstStation>38831</FirstStation>
-    <LastStation>38835</LastStation>
+    <FirstStation>38833</FirstStation>
+    <LastStation>38837</LastStation>
     <IsActive>True</IsActive>
   </Line>
   <Line>
     <PersonalId>11</PersonalId>
-    <LineNumber>112</LineNumber>
-    <Area>NORTH</Area>
-    <FirstStation>38831</FirstStation>
-    <LastStation>38834</LastStation>
+    <LineNumber>23</LineNumber>
+    <Area>CENTRAL</Area>
+    <FirstStation>38835</FirstStation>
+    <LastStation>38845</LastStation>
+    <IsActive>True</IsActive>
+  </Line>
+  <Line>
+    <PersonalId>12</PersonalId>
+    <LineNumber>100</LineNumber>
+    <Area>CENTRAL</Area>
+    <FirstStation>38844</FirstStation>
+    <LastStation>38848</LastStation>
+    <IsActive>True</IsActive>
+  </Line>
+  <Line>
+    <PersonalId>13</PersonalId>
+    <LineNumber>770</LineNumber>
+    <Area>CENTRAL</Area>
+    <FirstStation>38841</FirstStation>
+    <LastStation>38849</LastStation>
+    <IsActive>True</IsActive>
+  </Line>
+  <Line>
+    <PersonalId>14</PersonalId>
+    <LineNumber>999</LineNumber>
+    <Area>CENTRAL</Area>
+    <FirstStation>38837</FirstStation>
+    <LastStation>38846</LastStation>
+    <IsActive>True</IsActive>
+  </Line>
+  <Line>
+    <PersonalId>15</PersonalId>
+    <LineNumber>111</LineNumber>
+    <Area>CENTRAL</Area>
+    <FirstStation>38860</FirstStation>
+    <LastStation>38889</LastStation>
+    <IsActive>True</IsActive>
+  </Line>
+  <Line>
+    <PersonalId>16</PersonalId>
+    <LineNumber>200</LineNumber>
+    <Area>CENTRAL</Area>
+    <FirstStation>38870</FirstStation>
+    <LastStation>38880</LastStation>
+    <IsActive>True</IsActive>
+  </Line>
+  <Line>
+    <PersonalId>17</PersonalId>
+    <LineNumber>288</LineNumber>
+    <Area>CENTRAL</Area>
+    <FirstStation>38880</FirstStation>
+    <LastStation>38889</LastStation>
+    <IsActive>True</IsActive>
+  </Line>
+  <Line>
+    <PersonalId>18</PersonalId>
+    <LineNumber>101</LineNumber>
+    <Area>CENTRAL</Area>
+    <FirstStation>38865</FirstStation>
+    <LastStation>38885</LastStation>
+    <IsActive>True</IsActive>
+  </Line>
+  <Line>
+    <PersonalId>19</PersonalId>
+    <LineNumber>110</LineNumber>
+    <Area>CENTRAL</Area>
+    <FirstStation>38860</FirstStation>
+    <LastStation>38880</LastStation>
     <IsActive>True</IsActive>
   </Line>
 </Lines.xml>

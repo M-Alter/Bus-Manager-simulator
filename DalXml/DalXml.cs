@@ -10,13 +10,22 @@ namespace DL
     class DalXml : IDL
     {
         #region singelton
+
         static readonly DalXml instance = new DalXml();
         static DalXml() { }// static ctor to ensure instance init is done just before first usage
-        DalXml() { } // default => private
+        DalXml()
+        {
+            
+            //foreach (var item in LineTripsList)
+            //{
+            //    this.AddLineTrip(item.LineId, item.StartAt);
+            //}
+        } // default => private
         public static DalXml Instance { get => instance; }// The public Instance property to use
         #endregion
 
         #region Files
+        
         string LinesFilePath = @"xml\Lines.xml";
         string BusFilePath = @"xml\Buses.xml";
         string StationsFilePath = @"xml\Stations.xml";
@@ -26,6 +35,8 @@ namespace DL
         string UserFilePath = @"xml\Users.xml";
         string AdjacentStationsFilePath = @"xml\AdjacentStations.xml";
         string SerialNumberGeneratorPath = @"xml\SerialNumberGenerator.xml";
+        
+
 
 
         #endregion
@@ -533,13 +544,15 @@ namespace DL
 
             XElement ltElem = new XElement("LineTrip",
                 new XElement("LineId", lineId),
-                new XElement("StartAt", 
+                new XElement("StartAt",
                     new XElement("Hour", startTime.Hours),
                     new XElement("Min", startTime.Minutes),
                     new XElement("Sec", startTime.Seconds)
                     ),
                 new XElement("Id", $"{lineId}{startTime.Hours}{startTime.Minutes}{startTime.Seconds}")
                 );
+
+            rootElem.Add(ltElem);
             return XmlTools.SaveFile(rootElem, LineTripFilePath);
         }
 

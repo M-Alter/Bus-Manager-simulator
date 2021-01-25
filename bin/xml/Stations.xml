@@ -1,39 +1,711 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Stations.xml>
-	<Station>
-		<Code>38831</Code>
-		<Lattitude>32.183921</Lattitude>
-		<Longitude>34.917806</Longitude>
-		<Name>בי\"ס בר לב\בן יהודה</Name>
-	</Station>
-	<Station>
-		<Code>38832</Code>
-		<Lattitude>31.870034</Lattitude>
-		<Longitude>34.819541</Longitude>
-		<Name>הרצל\צומת בילו</Name>
-	</Station>
-	<Station>
-		<Code>38833</Code>
-		<Lattitude>32.183921</Lattitude>
-		<Longitude>34.917806</Longitude>
-		<Name>הנחשול\דייגים</Name>
-	</Station>
-	<Station>
-		<Code>38834</Code>
-		<Lattitude>31.870034</Lattitude>
-		<Longitude>34.819541</Longitude>
-		<Name>פריד\ששת הימים</Name>
-	</Station>
-	<Station>
-		<Code>38835</Code>
-		<Lattitude>32.183921</Lattitude>
-		<Longitude>34.917806</Longitude>
-		<Name>ת. מרכזית לוד\הורדה</Name>
-	</Station>
-	<Station>
-	<Code>38836</Code>
-		<Lattitude>31.870034</Lattitude>
-		<Longitude>34.819541</Longitude>
-		<Name>חנה אברך\\וולקני</Name>
-	</Station>
+  <Station>
+    <Code>38831</Code>
+    <Name>בי"ס בר לב\בן יהודה</Name>
+    <Longitude>34.917806</Longitude>
+    <Lattitude>32.183921</Lattitude>
+  </Station>
+  <Station>
+    <Code>38832</Code>
+    <Name>הרצל\צומת בילו</Name>
+    <Longitude>34.819541</Longitude>
+    <Lattitude>31.870034</Lattitude>
+  </Station>
+  <Station>
+    <Code>38833</Code>
+    <Name>הנחשול\דייגים</Name>
+    <Longitude>34.917806</Longitude>
+    <Lattitude>32.183921</Lattitude>
+  </Station>
+  <Station>
+    <Code>38834</Code>
+    <Name>פריד\ששת הימים</Name>
+    <Longitude>34.819541</Longitude>
+    <Lattitude>31.870034</Lattitude>
+  </Station>
+  <Station>
+    <Code>38835</Code>
+    <Name>ת. מרכזית לוד\הורדה</Name>
+    <Longitude>34.917806</Longitude>
+    <Lattitude>32.183921</Lattitude>
+  </Station>
+  <Station>
+    <Code>38836</Code>
+    <Name>חנה אברך\וולקני</Name>
+    <Longitude>34.819541</Longitude>
+    <Lattitude>31.870034</Lattitude>
+  </Station>
+  <Station>
+    <Code>38837</Code>
+    <Name>הרצל\משה שרת</Name>
+    <Longitude>34.824106</Longitude>
+    <Lattitude>31.857565</Lattitude>
+  </Station>
+  <Station>
+    <Code>38838</Code>
+    <Name>הבנים\אלי כהן</Name>
+    <Longitude>34.822237</Longitude>
+    <Lattitude>31.862305</Lattitude>
+  </Station>
+  <Station>
+    <Code>38839</Code>
+    <Name>ויצמן\הבנים</Name>
+    <Longitude>34.818957</Longitude>
+    <Lattitude>31.865085</Lattitude>
+  </Station>
+  <Station>
+    <Code>38840</Code>
+    <Name>האירוס\הכלנית</Name>
+    <Longitude>34.818392</Longitude>
+    <Lattitude>31.865222</Lattitude>
+  </Station>
+  <Station>
+    <Code>38841</Code>
+    <Name>הכלנית\הנרקיס</Name>
+    <Longitude>34.828702</Longitude>
+    <Lattitude>31.867597</Lattitude>
+  </Station>
+  <Station>
+    <Code>38842</Code>
+    <Name>אלי כהן\לוחמי הגטאות</Name>
+    <Longitude>34.763896</Longitude>
+    <Lattitude>31.862449</Lattitude>
+  </Station>
+  <Station>
+    <Code>38843</Code>
+    <Name>שבזי\שבת אחים</Name>
+    <Longitude>34.912602</Longitude>
+    <Lattitude>31.863501</Lattitude>
+  </Station>
+  <Station>
+    <Code>38844</Code>
+    <Name>שבזי\ויצמן</Name>
+    <Longitude>34.828702</Longitude>
+    <Lattitude>31.865348</Lattitude>
+  </Station>
+  <Station>
+    <Code>38845</Code>
+    <Name>חיים בר לב\שדרות יצחק רבין</Name>
+    <Longitude>34.763896</Longitude>
+    <Lattitude>31.977409</Lattitude>
+  </Station>
+  <Station>
+    <Code>38846</Code>
+    <Name>מרכז לבריאות הנפש לב השרון</Name>
+    <Longitude>34.912708</Longitude>
+    <Lattitude>32.300345</Lattitude>
+  </Station>
+  <Station>
+    <Code>38847</Code>
+    <Name>מרכז לבריאות הנפש </Name>
+    <Longitude>34.912708</Longitude>
+    <Lattitude>32.301347</Lattitude>
+  </Station>
+  <Station>
+    <Code>38848</Code>
+    <Name>הולצמן\המדע</Name>
+    <Longitude>34.807944</Longitude>
+    <Lattitude>31.914255</Lattitude>
+  </Station>
+  <Station>
+    <Code>38849</Code>
+    <Name>מחנה צריפין\מועדון</Name>
+    <Longitude>34.836363</Longitude>
+    <Lattitude>31.963668</Lattitude>
+  </Station>
+  <Station>
+    <Code>38850</Code>
+    <Name>הרצל\גולני	</Name>
+    <Longitude>34.825249</Longitude>
+    <Lattitude>31.856115</Lattitude>
+  </Station>
+  <Station>
+    <Code>38851</Code>
+    <Name>הרותם\הדגניות	</Name>
+    <Longitude>34.81249</Longitude>
+    <Lattitude>31.874963</Lattitude>
+  </Station>
+  <Station>
+    <Code>38852</Code>
+    <Name>הערבה	</Name>
+    <Longitude>34.910842</Longitude>
+    <Lattitude>32.300035</Lattitude>
+  </Station>
+  <Station>
+    <Code>38853</Code>
+    <Name>מבוא הגפן\מורד התאנה	</Name>
+    <Longitude>34.948647</Longitude>
+    <Lattitude>32.305234</Lattitude>
+  </Station>
+  <Station>
+    <Code>38854</Code>
+    <Name>מבוא הגפן\ההרחבה	</Name>
+    <Longitude>34.943393</Longitude>
+    <Lattitude>32.304022</Lattitude>
+  </Station>
+  <Station>
+    <Code>38855</Code>
+    <Name>ההרחבה א	</Name>
+    <Longitude>34.940529</Longitude>
+    <Lattitude>32.302957</Lattitude>
+  </Station>
+  <Station>
+    <Code>38856</Code>
+    <Name>ההרחבה ב	</Name>
+    <Longitude>34.939512</Longitude>
+    <Lattitude>32.300264</Lattitude>
+  </Station>
+  <Station>
+    <Code>38857</Code>
+    <Name>ההרחבה\הותיקים	</Name>
+    <Longitude>34.938705</Longitude>
+    <Lattitude>32.298171</Lattitude>
+  </Station>
+  <Station>
+    <Code>38858</Code>
+    <Name>רשות שדות התעופה\העליה	</Name>
+    <Longitude>34.8976</Longitude>
+    <Lattitude>31.990876</Lattitude>
+  </Station>
+  <Station>
+    <Code>38859</Code>
+    <Name>כנף\ברוש	</Name>
+    <Longitude>34.879725</Longitude>
+    <Lattitude>31.998767</Lattitude>
+  </Station>
+  <Station>
+    <Code>38860</Code>
+    <Name>החבורה\דב הוז	</Name>
+    <Longitude>34.818708</Longitude>
+    <Lattitude>31.883019</Lattitude>
+  </Station>
+  <Station>
+    <Code>38861</Code>
+    <Name>בית הלוי ה	</Name>
+    <Longitude>34.926837</Longitude>
+    <Lattitude>32.349776</Lattitude>
+  </Station>
+  <Station>
+    <Code>38862</Code>
+    <Name>הראשונים\כביש 5700	</Name>
+    <Longitude>34.899465</Longitude>
+    <Lattitude>32.352953</Lattitude>
+  </Station>
+  <Station>
+    <Code>38863</Code>
+    <Name>הגאון בן איש חי\צאלון	</Name>
+    <Longitude>34.775083</Longitude>
+    <Lattitude>31.897286</Lattitude>
+  </Station>
+  <Station>
+    <Code>38864</Code>
+    <Name>עוקשי\לוי אשכול	</Name>
+    <Longitude>34.807039</Longitude>
+    <Lattitude>31.883941</Lattitude>
+  </Station>
+  <Station>
+    <Code>38865</Code>
+    <Name>מנוחה ונחלה\יהודה גורודיסקי	</Name>
+    <Longitude>34.816752</Longitude>
+    <Lattitude>31.896762</Lattitude>
+  </Station>
+  <Station>
+    <Code>38866</Code>
+    <Name>גורודסקי\יחיאל פלדי	</Name>
+    <Longitude>34.823461</Longitude>
+    <Lattitude>31.898463</Lattitude>
+  </Station>
+  <Station>
+    <Code>38867</Code>
+    <Name>דרך מנחם בגין\יעקב חזן	</Name>
+    <Longitude>34.904907</Longitude>
+    <Lattitude>32.076535</Lattitude>
+  </Station>
+  <Station>
+    <Code>38868</Code>
+    <Name>דרך הפארק\הרב נריה	</Name>
+    <Longitude>34.878765</Longitude>
+    <Lattitude>32.299994</Lattitude>
+  </Station>
+  <Station>
+    <Code>38869</Code>
+    <Name>התאנה\הגפן	</Name>
+    <Longitude>34.859437</Longitude>
+    <Lattitude>31.865457</Lattitude>
+  </Station>
+  <Station>
+    <Code>38870</Code>
+    <Name>התאנה\האלון	</Name>
+    <Longitude>34.864555</Longitude>
+    <Lattitude>31.866772</Lattitude>
+  </Station>
+  <Station>
+    <Code>38871</Code>
+    <Name>דרך הפרחים\יסמין	</Name>
+    <Longitude>34.784347</Longitude>
+    <Lattitude>31.809325</Lattitude>
+  </Station>
+  <Station>
+    <Code>38872</Code>
+    <Name>יצחק רבין\פנחס ספיר	</Name>
+    <Longitude>34.778239</Longitude>
+    <Lattitude>31.80037</Lattitude>
+  </Station>
+  <Station>
+    <Code>38873</Code>
+    <Name>מנחם בגין\יצחק רבין	</Name>
+    <Longitude>34.782985</Longitude>
+    <Lattitude>31.799224</Lattitude>
+  </Station>
+  <Station>
+    <Code>38874</Code>
+    <Name>חיים הרצוג\דולב	</Name>
+    <Longitude>34.785069</Longitude>
+    <Lattitude>31.800334</Lattitude>
+  </Station>
+  <Station>
+    <Code>38875</Code>
+    <Name>בית ספר גוונים\ארז	</Name>
+    <Longitude>34.786735</Longitude>
+    <Lattitude>31.802319</Lattitude>
+  </Station>
+  <Station>
+    <Code>38876</Code>
+    <Name>דרך האילנות\אלון	</Name>
+    <Longitude>34.786623</Longitude>
+    <Lattitude>31.804595</Lattitude>
+  </Station>
+  <Station>
+    <Code>38877</Code>
+    <Name>דרך האילנות\מנחם בגין	</Name>
+    <Longitude>34.785098</Longitude>
+    <Lattitude>31.805041</Lattitude>
+  </Station>
+  <Station>
+    <Code>38878</Code>
+    <Name>העצמאות\וייצמן</Name>
+    <Longitude>34.782252</Longitude>
+    <Lattitude>31.816751</Lattitude>
+  </Station>
+  <Station>
+    <Code>38879</Code>
+    <Name>וייצמן\מרבד הקסמים</Name>
+    <Longitude>34.779753</Longitude>
+    <Lattitude>31.816579</Lattitude>
+  </Station>
+  <Station>
+    <Code>38880</Code>
+    <Name>צאלה\אלמוג</Name>
+    <Longitude>34.787199</Longitude>
+    <Lattitude>31.801182</Lattitude>
+  </Station>
+  <Station>
+    <Code>38881</Code>
+    <Name>גן חצב\צאלה</Name>
+    <Longitude>34.786055</Longitude>
+    <Lattitude>31.802279</Lattitude>
+  </Station>
+  <Station>
+    <Code>38882</Code>
+    <Name>פינס\לוינסון</Name>
+    <Longitude>34.777574</Longitude>
+    <Lattitude>31.814676</Lattitude>
+  </Station>
+  <Station>
+    <Code>38883</Code>
+    <Name>פיינברג\שכביץ</Name>
+    <Longitude>34.775928</Longitude>
+    <Lattitude>31.813285</Lattitude>
+  </Station>
+  <Station>
+    <Code>38884</Code>
+    <Name>בן גוריון\פוקס</Name>
+    <Longitude>34.773504</Longitude>
+    <Lattitude>31.806959</Lattitude>
+  </Station>
+  <Station>
+    <Code>38885</Code>
+    <Name>לוי אשכול\הרב דוד ישראל</Name>
+    <Longitude>34.805494</Longitude>
+    <Lattitude>31.884187</Lattitude>
+  </Station>
+  <Station>
+    <Code>38886</Code>
+    <Name>שושן\אופנהיימר</Name>
+    <Longitude>34.805809</Longitude>
+    <Lattitude>31.910118</Lattitude>
+  </Station>
+  <Station>
+    <Code>38887</Code>
+    <Name>הרב דוד ישראל\אריה דולצין</Name>
+    <Longitude>34.80506</Longitude>
+    <Lattitude>31.882474</Lattitude>
+  </Station>
+  <Station>
+    <Code>38888</Code>
+    <Name>קרוננברג\ארגמן</Name>
+    <Longitude>34.81138</Longitude>
+    <Lattitude>31.878667</Lattitude>
+  </Station>
+  <Station>
+    <Code>38889</Code>
+    <Name>יעקב פריימן\בנימין שמוטקין</Name>
+    <Longitude>34.813355</Longitude>
+    <Lattitude>31.975479</Lattitude>
+  </Station>
+  <Station>
+    <Code>38831</Code>
+    <Name>בי"ס בר לב\בן יהודה</Name>
+    <Longitude>34.917806</Longitude>
+    <Lattitude>32.183921</Lattitude>
+  </Station>
+  <Station>
+    <Code>38832</Code>
+    <Name>הרצל\צומת בילו</Name>
+    <Longitude>34.819541</Longitude>
+    <Lattitude>31.870034</Lattitude>
+  </Station>
+  <Station>
+    <Code>38833</Code>
+    <Name>הנחשול\דייגים</Name>
+    <Longitude>34.917806</Longitude>
+    <Lattitude>32.183921</Lattitude>
+  </Station>
+  <Station>
+    <Code>38834</Code>
+    <Name>פריד\ששת הימים</Name>
+    <Longitude>34.819541</Longitude>
+    <Lattitude>31.870034</Lattitude>
+  </Station>
+  <Station>
+    <Code>38835</Code>
+    <Name>ת. מרכזית לוד\הורדה</Name>
+    <Longitude>34.917806</Longitude>
+    <Lattitude>32.183921</Lattitude>
+  </Station>
+  <Station>
+    <Code>38836</Code>
+    <Name>חנה אברך\וולקני</Name>
+    <Longitude>34.819541</Longitude>
+    <Lattitude>31.870034</Lattitude>
+  </Station>
+  <Station>
+    <Code>38837</Code>
+    <Name>הרצל\משה שרת</Name>
+    <Longitude>34.824106</Longitude>
+    <Lattitude>31.857565</Lattitude>
+  </Station>
+  <Station>
+    <Code>38838</Code>
+    <Name>הבנים\אלי כהן</Name>
+    <Longitude>34.822237</Longitude>
+    <Lattitude>31.862305</Lattitude>
+  </Station>
+  <Station>
+    <Code>38839</Code>
+    <Name>ויצמן\הבנים</Name>
+    <Longitude>34.818957</Longitude>
+    <Lattitude>31.865085</Lattitude>
+  </Station>
+  <Station>
+    <Code>38840</Code>
+    <Name>האירוס\הכלנית</Name>
+    <Longitude>34.818392</Longitude>
+    <Lattitude>31.865222</Lattitude>
+  </Station>
+  <Station>
+    <Code>38841</Code>
+    <Name>הכלנית\הנרקיס</Name>
+    <Longitude>34.828702</Longitude>
+    <Lattitude>31.867597</Lattitude>
+  </Station>
+  <Station>
+    <Code>38842</Code>
+    <Name>אלי כהן\לוחמי הגטאות</Name>
+    <Longitude>34.763896</Longitude>
+    <Lattitude>31.862449</Lattitude>
+  </Station>
+  <Station>
+    <Code>38843</Code>
+    <Name>שבזי\שבת אחים</Name>
+    <Longitude>34.912602</Longitude>
+    <Lattitude>31.863501</Lattitude>
+  </Station>
+  <Station>
+    <Code>38844</Code>
+    <Name>שבזי\ויצמן</Name>
+    <Longitude>34.828702</Longitude>
+    <Lattitude>31.865348</Lattitude>
+  </Station>
+  <Station>
+    <Code>38845</Code>
+    <Name>חיים בר לב\שדרות יצחק רבין</Name>
+    <Longitude>34.763896</Longitude>
+    <Lattitude>31.977409</Lattitude>
+  </Station>
+  <Station>
+    <Code>38846</Code>
+    <Name>מרכז לבריאות הנפש לב השרון</Name>
+    <Longitude>34.912708</Longitude>
+    <Lattitude>32.300345</Lattitude>
+  </Station>
+  <Station>
+    <Code>38847</Code>
+    <Name>מרכז לבריאות הנפש </Name>
+    <Longitude>34.912708</Longitude>
+    <Lattitude>32.301347</Lattitude>
+  </Station>
+  <Station>
+    <Code>38848</Code>
+    <Name>הולצמן\המדע</Name>
+    <Longitude>34.807944</Longitude>
+    <Lattitude>31.914255</Lattitude>
+  </Station>
+  <Station>
+    <Code>38849</Code>
+    <Name>מחנה צריפין\מועדון</Name>
+    <Longitude>34.836363</Longitude>
+    <Lattitude>31.963668</Lattitude>
+  </Station>
+  <Station>
+    <Code>38850</Code>
+    <Name>הרצל\גולני	</Name>
+    <Longitude>34.825249</Longitude>
+    <Lattitude>31.856115</Lattitude>
+  </Station>
+  <Station>
+    <Code>38851</Code>
+    <Name>הרותם\הדגניות	</Name>
+    <Longitude>34.81249</Longitude>
+    <Lattitude>31.874963</Lattitude>
+  </Station>
+  <Station>
+    <Code>38852</Code>
+    <Name>הערבה	</Name>
+    <Longitude>34.910842</Longitude>
+    <Lattitude>32.300035</Lattitude>
+  </Station>
+  <Station>
+    <Code>38853</Code>
+    <Name>מבוא הגפן\מורד התאנה	</Name>
+    <Longitude>34.948647</Longitude>
+    <Lattitude>32.305234</Lattitude>
+  </Station>
+  <Station>
+    <Code>38854</Code>
+    <Name>מבוא הגפן\ההרחבה	</Name>
+    <Longitude>34.943393</Longitude>
+    <Lattitude>32.304022</Lattitude>
+  </Station>
+  <Station>
+    <Code>38855</Code>
+    <Name>ההרחבה א	</Name>
+    <Longitude>34.940529</Longitude>
+    <Lattitude>32.302957</Lattitude>
+  </Station>
+  <Station>
+    <Code>38856</Code>
+    <Name>ההרחבה ב	</Name>
+    <Longitude>34.939512</Longitude>
+    <Lattitude>32.300264</Lattitude>
+  </Station>
+  <Station>
+    <Code>38857</Code>
+    <Name>ההרחבה\הותיקים	</Name>
+    <Longitude>34.938705</Longitude>
+    <Lattitude>32.298171</Lattitude>
+  </Station>
+  <Station>
+    <Code>38858</Code>
+    <Name>רשות שדות התעופה\העליה	</Name>
+    <Longitude>34.8976</Longitude>
+    <Lattitude>31.990876</Lattitude>
+  </Station>
+  <Station>
+    <Code>38859</Code>
+    <Name>כנף\ברוש	</Name>
+    <Longitude>34.879725</Longitude>
+    <Lattitude>31.998767</Lattitude>
+  </Station>
+  <Station>
+    <Code>38860</Code>
+    <Name>החבורה\דב הוז	</Name>
+    <Longitude>34.818708</Longitude>
+    <Lattitude>31.883019</Lattitude>
+  </Station>
+  <Station>
+    <Code>38861</Code>
+    <Name>בית הלוי ה	</Name>
+    <Longitude>34.926837</Longitude>
+    <Lattitude>32.349776</Lattitude>
+  </Station>
+  <Station>
+    <Code>38862</Code>
+    <Name>הראשונים\כביש 5700	</Name>
+    <Longitude>34.899465</Longitude>
+    <Lattitude>32.352953</Lattitude>
+  </Station>
+  <Station>
+    <Code>38863</Code>
+    <Name>הגאון בן איש חי\צאלון	</Name>
+    <Longitude>34.775083</Longitude>
+    <Lattitude>31.897286</Lattitude>
+  </Station>
+  <Station>
+    <Code>38864</Code>
+    <Name>עוקשי\לוי אשכול	</Name>
+    <Longitude>34.807039</Longitude>
+    <Lattitude>31.883941</Lattitude>
+  </Station>
+  <Station>
+    <Code>38865</Code>
+    <Name>מנוחה ונחלה\יהודה גורודיסקי	</Name>
+    <Longitude>34.816752</Longitude>
+    <Lattitude>31.896762</Lattitude>
+  </Station>
+  <Station>
+    <Code>38866</Code>
+    <Name>גורודסקי\יחיאל פלדי	</Name>
+    <Longitude>34.823461</Longitude>
+    <Lattitude>31.898463</Lattitude>
+  </Station>
+  <Station>
+    <Code>38867</Code>
+    <Name>דרך מנחם בגין\יעקב חזן	</Name>
+    <Longitude>34.904907</Longitude>
+    <Lattitude>32.076535</Lattitude>
+  </Station>
+  <Station>
+    <Code>38868</Code>
+    <Name>דרך הפארק\הרב נריה	</Name>
+    <Longitude>34.878765</Longitude>
+    <Lattitude>32.299994</Lattitude>
+  </Station>
+  <Station>
+    <Code>38869</Code>
+    <Name>התאנה\הגפן	</Name>
+    <Longitude>34.859437</Longitude>
+    <Lattitude>31.865457</Lattitude>
+  </Station>
+  <Station>
+    <Code>38870</Code>
+    <Name>התאנה\האלון	</Name>
+    <Longitude>34.864555</Longitude>
+    <Lattitude>31.866772</Lattitude>
+  </Station>
+  <Station>
+    <Code>38871</Code>
+    <Name>דרך הפרחים\יסמין	</Name>
+    <Longitude>34.784347</Longitude>
+    <Lattitude>31.809325</Lattitude>
+  </Station>
+  <Station>
+    <Code>38872</Code>
+    <Name>יצחק רבין\פנחס ספיר	</Name>
+    <Longitude>34.778239</Longitude>
+    <Lattitude>31.80037</Lattitude>
+  </Station>
+  <Station>
+    <Code>38873</Code>
+    <Name>מנחם בגין\יצחק רבין	</Name>
+    <Longitude>34.782985</Longitude>
+    <Lattitude>31.799224</Lattitude>
+  </Station>
+  <Station>
+    <Code>38874</Code>
+    <Name>חיים הרצוג\דולב	</Name>
+    <Longitude>34.785069</Longitude>
+    <Lattitude>31.800334</Lattitude>
+  </Station>
+  <Station>
+    <Code>38875</Code>
+    <Name>בית ספר גוונים\ארז	</Name>
+    <Longitude>34.786735</Longitude>
+    <Lattitude>31.802319</Lattitude>
+  </Station>
+  <Station>
+    <Code>38876</Code>
+    <Name>דרך האילנות\אלון	</Name>
+    <Longitude>34.786623</Longitude>
+    <Lattitude>31.804595</Lattitude>
+  </Station>
+  <Station>
+    <Code>38877</Code>
+    <Name>דרך האילנות\מנחם בגין	</Name>
+    <Longitude>34.785098</Longitude>
+    <Lattitude>31.805041</Lattitude>
+  </Station>
+  <Station>
+    <Code>38878</Code>
+    <Name>העצמאות\וייצמן</Name>
+    <Longitude>34.782252</Longitude>
+    <Lattitude>31.816751</Lattitude>
+  </Station>
+  <Station>
+    <Code>38879</Code>
+    <Name>וייצמן\מרבד הקסמים</Name>
+    <Longitude>34.779753</Longitude>
+    <Lattitude>31.816579</Lattitude>
+  </Station>
+  <Station>
+    <Code>38880</Code>
+    <Name>צאלה\אלמוג</Name>
+    <Longitude>34.787199</Longitude>
+    <Lattitude>31.801182</Lattitude>
+  </Station>
+  <Station>
+    <Code>38881</Code>
+    <Name>גן חצב\צאלה</Name>
+    <Longitude>34.786055</Longitude>
+    <Lattitude>31.802279</Lattitude>
+  </Station>
+  <Station>
+    <Code>38882</Code>
+    <Name>פינס\לוינסון</Name>
+    <Longitude>34.777574</Longitude>
+    <Lattitude>31.814676</Lattitude>
+  </Station>
+  <Station>
+    <Code>38883</Code>
+    <Name>פיינברג\שכביץ</Name>
+    <Longitude>34.775928</Longitude>
+    <Lattitude>31.813285</Lattitude>
+  </Station>
+  <Station>
+    <Code>38884</Code>
+    <Name>בן גוריון\פוקס</Name>
+    <Longitude>34.773504</Longitude>
+    <Lattitude>31.806959</Lattitude>
+  </Station>
+  <Station>
+    <Code>38885</Code>
+    <Name>לוי אשכול\הרב דוד ישראל</Name>
+    <Longitude>34.805494</Longitude>
+    <Lattitude>31.884187</Lattitude>
+  </Station>
+  <Station>
+    <Code>38886</Code>
+    <Name>שושן\אופנהיימר</Name>
+    <Longitude>34.805809</Longitude>
+    <Lattitude>31.910118</Lattitude>
+  </Station>
+  <Station>
+    <Code>38887</Code>
+    <Name>הרב דוד ישראל\אריה דולצין</Name>
+    <Longitude>34.80506</Longitude>
+    <Lattitude>31.882474</Lattitude>
+  </Station>
+  <Station>
+    <Code>38888</Code>
+    <Name>קרוננברג\ארגמן</Name>
+    <Longitude>34.81138</Longitude>
+    <Lattitude>31.878667</Lattitude>
+  </Station>
+  <Station>
+    <Code>38889</Code>
+    <Name>יעקב פריימן\בנימין שמוטקין</Name>
+    <Longitude>34.813355</Longitude>
+    <Lattitude>31.975479</Lattitude>
+  </Station>
 </Stations.xml>
