@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Stations.xml>
+	<Station>
+		<Code>38831</Code>
+		<Lattitude>32.183921</Lattitude>
+		<Longitude>34.917806</Longitude>
+		<Name>בי\"ס בר לב\בן יהודה</Name>
+	</Station>
+	<Station>
+		<Code>38832</Code>
+		<Lattitude>31.870034</Lattitude>
+		<Longitude>34.819541</Longitude>
+		<Name>הרצל\צומת בילו</Name>
+	</Station>
+	<Station>
+		<Code>38833</Code>
+		<Lattitude>32.183921</Lattitude>
+		<Longitude>34.917806</Longitude>
+		<Name>הנחשול\דייגים</Name>
+	</Station>
+	<Station>
+		<Code>38834</Code>
+		<Lattitude>31.870034</Lattitude>
+		<Longitude>34.819541</Longitude>
+		<Name>פריד\ששת הימים</Name>
+	</Station>
+	<Station>
+		<Code>38835</Code>
+		<Lattitude>32.183921</Lattitude>
+		<Longitude>34.917806</Longitude>
+		<Name>ת. מרכזית לוד\הורדה</Name>
+	</Station>
+	<Station>
+	<Code>38836</Code>
+		<Lattitude>31.870034</Lattitude>
+		<Longitude>34.819541</Longitude>
+		<Name>חנה אברך\\וולקני</Name>
+	</Station>
+</Stations.xml>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Lines.xml>
+  <Line>
+    <Area>CENTRAL</Area>
+    <LineNumber>1</LineNumber>
+    <PersonalId>9</PersonalId>
+    <FirstStation>38831</FirstStation>
+    <LastStation>38836</LastStation>
+    <IsActive>true</IsActive>
+  </Line>
+  <Line>
+    <PersonalId>10</PersonalId>
+    <LineNumber>123</LineNumber>
+    <Area>CENTRAL</Area>
+    <FirstStation>38831</FirstStation>
+    <LastStation>38835</LastStation>
+    <IsActive>True</IsActive>
+  </Line>
+  <Line>
+    <PersonalId>11</PersonalId>
+    <LineNumber>112</LineNumber>
+    <Area>NORTH</Area>
+    <FirstStation>38831</FirstStation>
+    <LastStation>38834</LastStation>
+    <IsActive>True</IsActive>
+  </Line>
+</Lines.xml>
