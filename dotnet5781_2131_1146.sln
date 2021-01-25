@@ -41,6 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{74F429A0-372
 		bin\xml\Buses.xml = bin\xml\Buses.xml
 		bin\xml\Lines.xml = bin\xml\Lines.xml
 		bin\xml\LineStations.xml = bin\xml\LineStations.xml
+		bin\xml\LineTrips.xml = bin\xml\LineTrips.xml
 		bin\xml\SerialNumberGenerator.xml = bin\xml\SerialNumberGenerator.xml
 		bin\xml\Stations.xml = bin\xml\Stations.xml
 		bin\xml\Trips.xml = bin\xml\Trips.xml
