@@ -37,14 +37,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bin", "bin", "{E39CCFB3-282
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{74F429A0-372B-49C0-BCD9-7E681E0EFFA0}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\AdjacentStations.xml = ..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\AdjacentStations.xml
-		..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\Buses.xml = ..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\Buses.xml
-		..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\Lines.xml = ..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\Lines.xml
-		..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\LineStations.xml = ..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\LineStations.xml
-		..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\SerialNumberGenerator.xml = ..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\SerialNumberGenerator.xml
-		..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\Stations.xml = ..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\Stations.xml
-		..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\Trips.xml = ..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\Trips.xml
-		..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\Users.xml = ..\..\..\Desktop\dotnet5781_2131_1146\bin\xml\Users.xml
+		bin\xml\AdjacentStations.xml = bin\xml\AdjacentStations.xml
+		bin\xml\Buses.xml = bin\xml\Buses.xml
+		bin\xml\Lines.xml = bin\xml\Lines.xml
+		bin\xml\LineStations.xml = bin\xml\LineStations.xml
+		bin\xml\SerialNumberGenerator.xml = bin\xml\SerialNumberGenerator.xml
+		bin\xml\Stations.xml = bin\xml\Stations.xml
+		bin\xml\Trips.xml = bin\xml\Trips.xml
+		bin\xml\Users.xml = bin\xml\Users.xml
 	EndProjectSection
 EndProject
 Global
