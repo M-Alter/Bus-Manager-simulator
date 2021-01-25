@@ -96,11 +96,11 @@
     <StationCode>38843</StationCode>
     <LineStationIndex>3</LineStationIndex>
     <PrevStation>38842</PrevStation>
-    <NextStation>38849</NextStation>
+    <NextStation>38844</NextStation>
   </LineStation>
   <LineStation>
     <LineId>13</LineId>
-    <StationCode>38849</StationCode>
+    <StationCode>38844</StationCode>
     <LineStationIndex>4</LineStationIndex>
     <PrevStation>38843</PrevStation>
     <NextStation>0</NextStation>
