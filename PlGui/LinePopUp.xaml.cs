@@ -105,6 +105,7 @@ namespace PlGui
                 bl.UpdateAdjacentStations(new AdjacentStations { Station1 = lineStation.Station, Station2 = station2, Distance = double.Parse(update.tboxDist.Text), Time = new TimeSpan(int.Parse(update.tboxHour.Text), int.Parse(update.tboxMin.Text), int.Parse(update.tboxSec.Text)) });
                 lineStation.Distance = double.Parse(update.tboxDist.Text);
                 lineStation.TimeToNext = new TimeSpan(int.Parse(update.tboxHour.Text), int.Parse(update.tboxMin.Text), int.Parse(update.tboxSec.Text));
+                stationDgrid.Items.Refresh();
             }
         }
     }
