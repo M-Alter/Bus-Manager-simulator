@@ -491,7 +491,7 @@ The password for your account is
         /// </summary>
         /// <param name="adjacentStations"></param>
         /// <returns>true if updates successfully</returns>
-        public bool UpdateAdjacentStatoins(AdjacentStations adjacentStations)
+        public bool UpdateAdjacentStations(AdjacentStations adjacentStations)
         {
             var temp = dl.GetAdjacentStations(adjacentStations.Station1, adjacentStations.Station2);
             temp.Time = adjacentStations.Time;

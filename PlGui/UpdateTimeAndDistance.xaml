@@ -1,0 +1,26 @@
+﻿<Window x:Class="PlGui.UpdateTimeAndDistance"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlGui"
+        mc:Ignorable="d"
+        Title="UpdateTimeAndDistance" Height="150" Width="200" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel Margin="20,15">
+            <WrapPanel HorizontalAlignment="Center">
+                <Label Content="Time"/>
+                <TextBox x:Name="tboxHour" Width="25"/>
+                <Label Content=":"/>
+                <TextBox x:Name="tboxMin" Width="25"/>
+                <Label Content=":"/>
+                <TextBox x:Name="tboxSec" Width="25"/>
+            </WrapPanel>
+            <WrapPanel Margin="0,10" HorizontalAlignment="Center">
+            <Label Content="Distance"/>
+                <TextBox x:Name="tboxDist" Width="80"/>
+            </WrapPanel>
+            <Button x:Name="btnSave" Content="Save" Click="btnSave_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

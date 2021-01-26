@@ -88,6 +88,9 @@
       <DependentUpon>StationPopUp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools.cs" />
+    <Compile Include="UpdateTimeAndDistance.xaml.cs">
+      <DependentUpon>UpdateTimeAndDistance.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddBus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StationPopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateTimeAndDistance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

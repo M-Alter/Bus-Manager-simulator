@@ -88,5 +88,24 @@ namespace PlGui
             addTrip.ShowDialog();
             line.Timing = bl.GetLine(line.PersonalId).Timing;
         }
+
+        private void btEdit_Click(object sender, RoutedEventArgs e)
+        {
+            BO.LineStation lineStation = ((sender as Button).DataContext as BO.LineStation);
+            int index = stationDgrid.SelectedIndex;
+            UpdateTimeAndDistance update = new UpdateTimeAndDistance();
+            update.ShowDialog();
+            int i = -1;
+            int station2 = (from s in line.Stations
+                           where ++i == index + 1
+                           select s.Station).FirstOrDefault();
+
+            if(update.DialogResult == true)
+            {
+                bl.UpdateAdjacentStations(new AdjacentStations { Station1 = lineStation.Station, Station2 = station2, Distance = double.Parse(update.tboxDist.Text), Time = new TimeSpan(int.Parse(update.tboxHour.Text), int.Parse(update.tboxMin.Text), int.Parse(update.tboxSec.Text)) });
+                lineStation.Distance = double.Parse(update.tboxDist.Text);
+                lineStation.TimeToNext = new TimeSpan(int.Parse(update.tboxHour.Text), int.Parse(update.tboxMin.Text), int.Parse(update.tboxSec.Text));
+            }
+        }
     }
 }

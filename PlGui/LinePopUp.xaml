@@ -36,6 +36,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btEdit" Content="Edit" Click="btEdit_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Index" Binding="{Binding Index}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Station number" Binding="{Binding Station}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Station Name" Binding="{Binding StationName}" IsReadOnly="True" />

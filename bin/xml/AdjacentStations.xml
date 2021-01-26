@@ -33,11 +33,11 @@
   <AdjacentStations>
     <Station1>38834</Station1>
     <Station2>38835</Station2>
-    <Distance>1.5</Distance>
+    <Distance>10.222</Distance>
     <Time>
       <Hour>0</Hour>
-      <Min>3</Min>
-      <Sec>0</Sec>
+      <Min>10</Min>
+      <Sec>10</Sec>
     </Time>
   </AdjacentStations>
   <AdjacentStations>
