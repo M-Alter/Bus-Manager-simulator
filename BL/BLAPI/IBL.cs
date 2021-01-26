@@ -161,10 +161,24 @@ namespace BLAPI
         /// <param name="emailAddress">email address to send the password to</param>
         void ResendPassword(string userName, string emailAddress);
 
-
+        /// <summary>
+        /// method to start the simulator
+        /// </summary>
+        /// <param name="startTime">time to start the simulator at</param>
+        /// <param name="Rate">speed rate of the similator</param>
+        /// <param name="updateTime">action to update the time in the GUI</param>
         void StartSimulator(TimeSpan startTime, int Rate, Action<TimeSpan> updateTime);
+        
+        /// <summary>
+        /// method to stop the simulator
+        /// </summary>
         void StopSimulator();
         
+        /// <summary>
+        /// a method to update the panel window
+        /// </summary>
+        /// <param name="station">what station the panel is reflecting</param>
+        /// <param name="updateBus">what bus to update</param>
         void SetStationPanel(int station, Action<LineTiming> updateBus);
 
         /// <summary>

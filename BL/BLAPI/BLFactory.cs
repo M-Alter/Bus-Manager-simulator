@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BLAPI
 {
+    /// <summary>
+    /// static factory class that returns an instance of IBL
+    /// </summary>
     public static class BLFactory
     {
         public static IBL GetIBL()
