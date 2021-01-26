@@ -137,7 +137,7 @@ namespace BLAPI
         /// </summary>
         /// <param name="adjacentStations"></param>
         /// <returns>true if updates successfully</returns>
-        bool UpdateAdjacentStatoins(AdjacentStations adjacentStations);
+        bool UpdateAdjacentStations(AdjacentStations adjacentStations);
 
         /// <summary>
         /// gets user names that are or aren't admins 
