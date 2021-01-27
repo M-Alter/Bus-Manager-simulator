@@ -551,7 +551,17 @@ namespace DL
 
         public bool RemoveLineTrip(int lineId, TimeSpan time)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(LineTripFilePath);
+            string id = $"{lineId}{time.Hours}{time.Minutes}{time.Seconds}";
+            var temp = from lineTrip in rootElem.Elements()
+                       where int.Parse(lineTrip.Element("Id").Value) == int.Parse(id)
+                       select lineTrip;
+            if (temp != null)
+            {
+                temp.Remove();
+                return true;
+            }
+            return false;
         }
     }
 }
