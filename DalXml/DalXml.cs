@@ -519,7 +519,20 @@ namespace DL
 
         public bool UpdateLine(int lineId, int firstStation, int lastStation)
         {
-            throw new NotImplementedException();
+            //load the file
+            XElement rootElem = XmlTools.LoadFile(LinesFilePath);
+
+
+            //find the instance with the personal id
+            var findLine = (from line in rootElem.Elements()
+                       where int.Parse(line.Element("PersonalId").Value) == lineId
+                       select line).FirstOrDefault();
+            //update the first and last stations value
+            findLine.Element("FirstStation").SetValue(firstStation);
+            findLine.Element("LastStation").SetValue(lastStation);          
+            //save the file
+            XmlTools.SaveFile(rootElem, LinesFilePath);
+            return true;
         }
 
         public IEnumerable<TimeSpan> GetLineSchedules(int lineId)
