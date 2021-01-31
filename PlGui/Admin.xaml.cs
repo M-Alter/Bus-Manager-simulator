@@ -44,7 +44,7 @@ namespace PlGui
                 //so we can continue using the same background worker with new threads
                 while (!timerWorker.CancellationPending) try { Thread.Sleep(1000000); } catch (Exception ex) { }
             };
-
+            
 
             timerWorker.ProgressChanged += timer_ProgressChanged;
             //when completed 

@@ -108,5 +108,12 @@ namespace PlGui
                 stationDgrid.Items.Refresh();
             }
         }
+
+        private void updateLineBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateLine updateLine = new UpdateLine(line);
+            updateLine.ShowDialog();
+
+        }
     }
 }

@@ -38,8 +38,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ListBox x:Name="stationsLBox" Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Margin="3"/>
-        <Button x:Name="reset" Content="Reset" Grid.Column="2" Grid.Row="0" Height="30" Width="100" Click="reset_Click"/>
+        <ListBox x:Name="stationsLBox" Grid.Column="2" Grid.Row="1" Grid.RowSpan="4" Margin="3" /> <!--SelectionChanged="stationsLBox_SelectionChanged"/>-->        
         <Button x:Name="saveBtn" Grid.Column="0" Grid.Row="6" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Click="saveBtn_Click"/>
         <Button x:Name="cancelBtn" Grid.Column="1" Grid.Row="6" Content="Cancel" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" Click="cancelBtn_Click"/>
     </Grid>

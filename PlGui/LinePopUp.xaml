@@ -8,7 +8,7 @@
         Title="Line PopUp" Height="500" Width="500" ResizeMode="NoResize">
     <Grid>
         <Grid x:Name="busGrid" Margin="15">
-            
+
         </Grid>
         <Grid x:Name="lineGrid" Margin="15">
             <Grid.RowDefinitions>
@@ -29,13 +29,13 @@
             <Label Content="{Binding LastStation}" Margin="100,0,0,0" Grid.Column="1" Grid.Row="1"/>
             <DataGrid x:Name="stationDgrid" Grid.Row="2" Grid.ColumnSpan="2" Margin="3,0,50,0" IsReadOnly="True" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding Stations}">
                 <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button x:Name="btRemove" Content="Remove" Click="btRemove_Click"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btRemove" Content="Remove" Click="btRemove_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -60,10 +60,11 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn Header="Living time" Binding="{Binding}" IsReadOnly="True"/>
-                    
+
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="addTripBtn" Grid.Column="1" Grid.Row="3" Content="Add trip" Margin="60,70" FontSize="20" Click="addTripBtn_Click"/>
+            <Button x:Name="addTripBtn" Content="Add trip" Grid.Column="1" Grid.Row="3" Margin="70.333,40.667,49.667,99" FontSize="20" Click="addTripBtn_Click"/>
+            <Button x:Name="updateLine" Content="Update line" Grid.Column="1" Grid.Row="3" Margin="70.333,107.667,49.667,32" FontSize="20" Click="updateLineBtn_Click"/>            
         </Grid>
     </Grid>
 </Window>

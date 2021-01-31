@@ -163,16 +163,6 @@ namespace PlGui
 
         }
 
-        private void reset_Click(object sender, RoutedEventArgs e)
-        {
-
-            //areaCMBox.SelectedItem = null;
-            //lineTBox.Clear();
-            //lastStopCMBox.SelectedItem = null;
-            //addStopCMBox.SelectedItem = null;
-
-        }
-
         private void firstStopCMBox_DropDownOpened(object sender, EventArgs e)
         {
             lineTBox.IsEnabled = false;
