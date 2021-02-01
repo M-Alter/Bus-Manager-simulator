@@ -24,13 +24,15 @@ namespace BL
         /// <summary>
         /// get all the buses
         /// </summary>
-        /// <returns>a collection of all the buses</returns>
-        public IEnumerable<Bus> GetAllBuses()
+        /// <returns>a collection of all the buses grouped by the years</returns>
+        public IEnumerable<IGrouping<int, Bus>> GetAllBuses()
         {
             return from item in dl.GetAllBuses()
                        //call the get bus functin with LisenceNum parameter
                    let bus = GetBus(item.LicenseNum)
-                   select bus;
+                   group bus by bus.FromDate.Year into fromYear
+                   orderby fromYear.Key
+                   select fromYear;
         }
 
         /// <summary>
@@ -245,7 +247,7 @@ namespace BL
                 if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == default(DO.AdjacentStations))
                 {
                     adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station1Name = dl.GetStation(stationArray[i]).Name, Station2 = stationArray[i + 1], Station2Name = dl.GetStation(stationArray[i + 1]).Name, /*Distance = r.NextDouble() * (100) + 1, Time = new TimeSpan(r.Next(0, 23), r.Next(0, 59), r.Next(0, 59))*/ });
-                    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = r.NextDouble() * (50) + 1, Time = new TimeSpan(0, r.Next(0, 59), r.Next(0, 59)) });
+                    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = r.NextDouble() * (10) + 1, Time = new TimeSpan(0, r.Next(0, 15), r.Next(0, 59)) });
                 }
             }
             if (adjacentStations.Count > 0)
@@ -402,7 +404,7 @@ The password for your account is
                 if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == default(DO.AdjacentStations))
                 {
                     adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station1Name = dl.GetStation(stationArray[i]).Name, Station2 = stationArray[i + 1], Station2Name = dl.GetStation(stationArray[i + 1]).Name, /*Distance = r.NextDouble() * (100) + 1, Time = new TimeSpan(r.Next(0, 23), r.Next(0, 59), r.Next(0, 59))*/ });
-                    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = r.NextDouble() * (50) + 1, Time = new TimeSpan(0, r.Next(0, 59), r.Next(0, 59)) });
+                    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = r.NextDouble() * (10) + 1, Time = new TimeSpan(0, r.Next(0, 15), r.Next(0, 59)) });
                 }
             }
             if (adjacentStations.Count > 0)
@@ -481,9 +483,10 @@ The password for your account is
         /// <param name="lineId"></param>
         /// <param name="lastStation"></param>
         /// <returns>true if removed successfully</returns>
-        public bool RemoveLine(int lineId, int lastStation)
+        public bool RemoveLine(int lineId)
         {
-            return dl.RemoveLine(lineId, lastStation);
+            dl.RemoveAllLineStation(lineId);
+            return dl.RemoveLine(lineId);
         }
 
         /// <summary>

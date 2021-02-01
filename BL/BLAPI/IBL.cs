@@ -18,10 +18,10 @@ namespace BLAPI
         Bus GetBus(int license);
 
         /// <summary>
-        /// get all the buses
+        /// get all the buses grouped by years
         /// </summary>
-        /// <returns>a collection of busses</returns>
-        IEnumerable<Bus> GetAllBuses();
+        /// <returns>a collection of buses</returns>
+        IEnumerable<IGrouping<int, Bus>> GetAllBuses();
 
         /// <summary>
         /// get all the buses that conform to the predicate function
@@ -101,7 +101,7 @@ namespace BLAPI
         /// <param name="lineId"></param>
         /// <param name="lastStation"></param>
         /// <returns>true if removed successfully</returns>
-        bool RemoveLine(int lineId, int lastStation);
+        bool RemoveLine(int lineId);
 
         /// <summary>
         /// removes a station fron the line 

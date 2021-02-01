@@ -17,7 +17,8 @@ namespace PlGui
         {
             InitializeComponent();
             foreach (var item in bl.GetAllBuses())
-                allBuses.Add(item);
+                foreach (var bus in item)
+                    allBuses.Add(bus);
 
             busCBox.ItemsSource = allBuses;
 
@@ -37,7 +38,7 @@ namespace PlGui
                 try
                 {
                     bl.DeleteBus(bus.LicenseNum);
-                    MessageBox.Show("The bus has delete","",MessageBoxButton.OK);
+                    MessageBox.Show("The bus has delete", "", MessageBoxButton.OK);
                     this.Close();
                 }
 

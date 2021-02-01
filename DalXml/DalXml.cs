@@ -10,15 +10,15 @@ namespace DL
     class DalXml : IDL
     {
         #region singelton
-        
+
         static readonly DalXml instance = new DalXml();
         static DalXml() { }// static ctor to ensure instance init is done just before first usage
-        DalXml() {        } // default => private
+        DalXml() { } // default => private
         public static DalXml Instance { get => instance; }// The public Instance property to use
         #endregion
 
         #region Files
-        
+
         string LinesFilePath = @"xml\Lines.xml";
         string BusFilePath = @"xml\Buses.xml";
         string StationsFilePath = @"xml\Stations.xml";
@@ -28,7 +28,7 @@ namespace DL
         string UserFilePath = @"xml\Users.xml";
         string AdjacentStationsFilePath = @"xml\AdjacentStations.xml";
         string SerialNumberGeneratorPath = @"xml\SerialNumberGenerator.xml";
-        
+
 
 
 
@@ -163,6 +163,10 @@ namespace DL
             return XmlTools.SaveFile(rootElem, StationsFilePath);
         }
 
+        /// <summary>
+        /// remove a bus 
+        /// </summary>
+        /// <param name="licenseNum"></param>
         public void RemoveBus(int licenseNum)
         {
             //get the file 
@@ -171,16 +175,16 @@ namespace DL
                        where int.Parse(item.Element("LicenseNum").Value) == licenseNum
                        select item;
             if (temp != null)
-            {
-                temp.Remove();
-            }
-            else
-            {
-                throw new BusException(licenseNum, " bus wasn't found ");
-            }
 
+                temp.Remove();
+            else
+                throw new BusException(licenseNum, " bus wasn't found ");
         }
 
+        /// <summary>
+        /// remove a station
+        /// </summary>
+        /// <param name="code"></param>
         public void RemoveStation(int code)
         {
             XElement rootElem = XmlTools.LoadFile(StationsFilePath);
@@ -188,9 +192,9 @@ namespace DL
                        where int.Parse(item.Element("Code").Value) == code
                        select item;
             if (temp != null)
-            {
                 temp.Remove();
-            }
+            else
+                throw new StationException(code, "this station was not found");
         }
 
         /// <summary>
@@ -256,15 +260,20 @@ namespace DL
                    select XmlTools.CreateBusInstatnce(bus);
         }
 
-        ///
+        /// <summary>
+        /// get all the buses that comply to the given condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate)
         {
             XElement rootElem = XmlTools.LoadFile(BusFilePath);
 
             return from bus in rootElem.Elements()
                        //create each instance using the CreateBusInstatnce from the Xmltools class
-                   where predicate(XmlTools.CreateBusInstatnce(bus))
-                   select XmlTools.CreateBusInstatnce(bus);
+                   let item = XmlTools.CreateBusInstatnce(bus)
+                   where predicate(item)
+                   select item;
         }
 
         /// <summary>
@@ -297,7 +306,13 @@ namespace DL
 
         public IEnumerable<Station> GetAllStationsThat(Predicate<Station> predicate)
         {
-            throw new NotImplementedException();
+            XElement rootElem = XmlTools.LoadFile(StationsFilePath);
+
+            return from station in rootElem.Elements()
+                       //create each instance using the CreateStationInstatnce from the Xmltools class
+                   let item = XmlTools.CreateStationInstatnce(station)
+                   where predicate(item)
+                   select item;
         }
 
         /// <summary>
@@ -431,6 +446,11 @@ namespace DL
                     select true).FirstOrDefault();
         }
 
+        /// <summary>
+        /// remove all stations of a line
+        /// </summary>
+        /// <param name="lineID"></param>
+        /// <returns></returns>
         public bool RemoveAllLineStation(int lineID)
         {
             XElement rootElem = XmlTools.LoadFile(LineStationsFilePath);
@@ -446,7 +466,12 @@ namespace DL
             return false;
         }
 
-        public bool RemoveLine(int lineId, int lastStation)
+        /// <summary>
+        /// remove a line
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <returns></returns>
+        public bool RemoveLine(int lineId)
         {
             XElement rootElem = XmlTools.LoadFile(LinesFilePath);
 
@@ -458,7 +483,8 @@ namespace DL
                 temp.Remove();
                 return true;
             }
-            return false;
+            else
+                throw new LineException(lineId, "this line was not found");
         }
 
         /// <summary>
@@ -486,6 +512,9 @@ namespace DL
             return true;
         }
 
+        /// <summary>
+        /// obsolete
+        /// </summary>
         public void UpdateBus()
         {
             throw new NotImplementedException();
@@ -509,6 +538,10 @@ namespace DL
                     select true).FirstOrDefault();
         }
 
+        /// <summary>
+        /// get all schedules of all the lines
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<LineTrip> GetLineSchedules()
         {
             XElement rootElem = XmlTools.LoadFile(LineTripFilePath);
@@ -517,6 +550,13 @@ namespace DL
                    select XmlTools.CreateLineTripInstance(ls);
         }
 
+        /// <summary>
+        /// update the first and last station of a line
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="firstStation"></param>
+        /// <param name="lastStation"></param>
+        /// <returns></returns>
         public bool UpdateLine(int lineId, int firstStation, int lastStation)
         {
             //load the file
@@ -525,16 +565,21 @@ namespace DL
 
             //find the instance with the personal id
             var findLine = (from line in rootElem.Elements()
-                       where int.Parse(line.Element("PersonalId").Value) == lineId
-                       select line).FirstOrDefault();
+                            where int.Parse(line.Element("PersonalId").Value) == lineId
+                            select line).FirstOrDefault();
             //update the first and last stations value
             findLine.Element("FirstStation").SetValue(firstStation);
-            findLine.Element("LastStation").SetValue(lastStation);          
+            findLine.Element("LastStation").SetValue(lastStation);
             //save the file
             XmlTools.SaveFile(rootElem, LinesFilePath);
             return true;
         }
 
+        /// <summary>
+        /// get all the start times of a line
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <returns></returns>
         public IEnumerable<TimeSpan> GetLineSchedules(int lineId)
         {
             XElement rootElem = XmlTools.LoadFile(LineTripFilePath);
@@ -544,6 +589,12 @@ namespace DL
                    select new TimeSpan(int.Parse(ls.Element("StartAt").Element("Hour").Value), int.Parse(ls.Element("StartAt").Element("Min").Value), int.Parse(ls.Element("StartAt").Element("Sec").Value));
         }
 
+        /// <summary>
+        /// add a new line trip
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="startTime"></param>
+        /// <returns></returns>
         public bool AddLineTrip(int lineId, TimeSpan startTime)
         {
             XElement rootElem = XmlTools.LoadFile(LineTripFilePath);
@@ -562,6 +613,12 @@ namespace DL
             return XmlTools.SaveFile(rootElem, LineTripFilePath);
         }
 
+        /// <summary>
+        /// remove a line trip
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
         public bool RemoveLineTrip(int lineId, TimeSpan time)
         {
             XElement rootElem = XmlTools.LoadFile(LineTripFilePath);

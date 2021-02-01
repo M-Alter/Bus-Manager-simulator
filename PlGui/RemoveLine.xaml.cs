@@ -45,10 +45,6 @@ namespace PlGui
             lineCBox.ItemsSource = linesList;
         }
 
-        private void lineCMBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -74,7 +70,7 @@ namespace PlGui
             {
                 if (lineCBox.SelectedItem != null)
                 {
-                    bl.RemoveLine(tempLine.PersonalId, tempLine.LastStation);
+                    bl.RemoveLine(tempLine.PersonalId);
 
                     MessageBox.Show($"The line {lineCBox.SelectedItem} has delete");
                     this.Close();

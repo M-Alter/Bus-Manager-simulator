@@ -50,12 +50,21 @@ namespace PlGui
             //}
         }
 
+        /// <summary>
+        /// if the save (bottom one) is pressed just continue as is
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-
             Close();
         }
-
+        
+        /// <summary>
+        /// if the inline save button was pressed, update the correpondent row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btSave_Click(object sender, RoutedEventArgs e)
         {
             BO.AdjacentStations adjacentStations = ((sender as Button).DataContext as BO.AdjacentStations);
