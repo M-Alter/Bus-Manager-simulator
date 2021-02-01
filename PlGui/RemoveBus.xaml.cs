@@ -24,11 +24,6 @@ namespace PlGui
 
         }
 
-        private void busCMBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
             BO.Bus bus = (BO.Bus)busCBox.SelectedItem as BO.Bus;
@@ -38,7 +33,7 @@ namespace PlGui
                 try
                 {
                     bl.DeleteBus(bus.LicenseNum);
-                    MessageBox.Show("The bus has delete", "", MessageBoxButton.OK);
+                    //MessageBox.Show("The bus has delete", "", MessageBoxButton.OK);
                     this.Close();
                 }
 
