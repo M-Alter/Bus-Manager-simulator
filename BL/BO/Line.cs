@@ -61,5 +61,10 @@ namespace BO
             set { isActive = value; }
         }
         #endregion
+
+        public override string ToString()
+        {
+            return string.Format($"{this.LineNumber}   {this.LastStation}  {this.LastStationName}");
+        }
     }
 }
