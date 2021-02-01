@@ -24,7 +24,7 @@ namespace BL
         /// <summary>
         /// get all the buses
         /// </summary>
-        /// <returns>a collection of all the buses</returns>
+        /// <returns>a collection of all the buses grouped by the years</returns>
         public IEnumerable<IGrouping<int, Bus>> GetAllBuses()
         {
             return from item in dl.GetAllBuses()

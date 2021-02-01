@@ -40,4 +40,19 @@ namespace DO
             return licenseNum + ": " + Message;
         }
     }
+
+
+    public class LineException : Exception
+    {
+        int lineId;
+        public LineException(int lineId, string message) : base(message)
+        {
+            this.lineId = lineId;
+        }
+
+        public override string ToString()
+        {
+            return lineId + ": " + Message;
+        }
+    }
 }

@@ -17,20 +17,23 @@ namespace DL
         #endregion
 
         #region Bus
-
+        /// <summary>
+        /// returns all the buses
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Bus> GetAllBuses()
         {
-            //return from bus in DataSource.BusList
-            //       group bus.Clone() by bus.FromDate.Year into fromYear
-            //       orderby fromYear
-            //       select fromYear;
-
             List<Bus> buses = new List<Bus>();
             foreach (var bus in DataSource.BusList)
                 buses.Add(bus.Clone());
             return buses.AsEnumerable();
         }
 
+        /// <summary>
+        /// get all the buses that comply to the pridicate condition
+        /// </summary>
+        /// <param name="predicate">condition</param>
+        /// <returns></returns>
         public IEnumerable<Bus> GetAllBusesThat(Predicate<Bus> predicate)
         {
             List<Bus> buses = new List<Bus>();
@@ -42,19 +45,20 @@ namespace DL
             return buses.AsEnumerable();
         }
 
+        /// <summary>
+        /// add a bus
+        /// </summary>
+        /// <param name="bus"></param>
         public void AddBus(Bus bus)
         {
-            //foreach (var busItem in DataSource.BusList)
-            //{
-            //    if (busItem.LicenseNum == bus.LicenseNum)
-            //    {
-            //        //throw
-            //    }
-            //}
-
             DataSource.BusList.Add(bus.Clone());
         }
 
+        /// <summary>
+        /// get the bus with the lincence number
+        /// </summary>
+        /// <param name="licenseNum"></param>
+        /// <returns></returns>
         public Bus GetBus(int licenseNum)
         {
             Bus bus = DataSource.BusList.Find(b => b.LicenseNum == licenseNum);
@@ -63,14 +67,20 @@ namespace DL
                 return bus.Clone();
             else
                 return default(Bus);
-
         }
 
+        /// <summary>
+        /// obsolete method
+        /// </summary>
         public void UpdateBus()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// remove a bus
+        /// </summary>
+        /// <param name="licenseNum"></param>
         public void RemoveBus(int licenseNum)
         {
             //Bus bus = DataSource.BusList.Find(b => b.LicenseNum == licenseNum);
@@ -88,13 +98,18 @@ namespace DL
                 throw new BusException(licenseNum, " bus wasn't found ");
         }
 
-
+        /// <summary>
+        /// remove a line
+        /// </summary>
+        /// <param name="lineId"></param>
+        /// <param name="lastStation"></param>
+        /// <returns></returns>
         public bool RemoveLine(int lineId, int lastStation)
         {
             Line line = new Line();
             foreach (var item in DataSource.LineList)
             {
-                if (item.PersonalId == lineId && item.LastStation == lastStation)
+                if (item.PersonalId == lineId /*&& item.LastStation == lastStation*/)
                 {
                     line = item;
                     break;
@@ -103,19 +118,28 @@ namespace DL
             if (line != default(Line))
                 DataSource.LineList.Remove(line);
             else
-                throw new Exception("This bus wasn't found");
+                throw new LineException(lineId, "This bus wasn't found");
             return true;
         }
 
         #endregion
 
         #region Station
+        /// <summary>
+        /// get all the stations
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Station> GetAllStations()
         {
             return from station in DataSource.StationList
                    select station.Clone();
         }
 
+        /// <summary>
+        /// get all station that comply to the predicate condition
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public IEnumerable<Station> GetAllStationsThat(Predicate<Station> predicate)
         {
             throw new NotImplementedException();

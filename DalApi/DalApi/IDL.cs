@@ -15,6 +15,8 @@ namespace DalApi
         Bus GetBus(int licenseNum);
         bool AddBus(Bus bus);
         void RemoveBus(int licenseNum);
+
+        [Obsolete("this method is not available", true)]
         void UpdateBus();
         #endregion
 
