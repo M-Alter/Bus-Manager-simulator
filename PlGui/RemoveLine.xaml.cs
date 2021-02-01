@@ -45,10 +45,6 @@ namespace PlGui
             lineCBox.ItemsSource = linesList;
         }
 
-        private void lineCMBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
