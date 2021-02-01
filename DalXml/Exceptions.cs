@@ -27,19 +27,19 @@ namespace DO
     }
 
 
-    public class BusException:Exception
-    {
-        int licenseNum;
-        public BusException(int licenseNum, string message): base (message)
-        {
-            this.licenseNum = licenseNum;
-        }
+    //public class BusException:Exception
+    //{
+    //    int licenseNum;
+    //    public BusException(int licenseNum, string message): base (message)
+    //    {
+    //        this.licenseNum = licenseNum;
+    //    }
 
-        public override string ToString()
-        {
-            return licenseNum + ": " + Message;
-        }
-    }
+    //    public override string ToString()
+    //    {
+    //        return licenseNum + ": " + Message;
+    //    }
+    //}
 
 
     

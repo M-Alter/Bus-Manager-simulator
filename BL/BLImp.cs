@@ -483,8 +483,9 @@ The password for your account is
         /// <param name="lineId"></param>
         /// <param name="lastStation"></param>
         /// <returns>true if removed successfully</returns>
-        public bool RemoveLine(int lineId, int lastStation)
+        public bool RemoveLine(int lineId)
         {
+            dl.RemoveAllLineStation(lineId);
             return dl.RemoveLine(lineId);
         }
 

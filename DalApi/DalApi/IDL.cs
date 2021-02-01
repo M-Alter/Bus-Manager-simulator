@@ -175,7 +175,7 @@ namespace DalApi
         bool AddLineStation(LineStation lineStation);
 
         /// <summary>
-        /// reomve all stations from a line
+        /// remove all stations from a line
         /// </summary>
         /// <param name="lineID"></param>
         /// <returns></returns>

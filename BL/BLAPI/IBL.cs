@@ -101,7 +101,7 @@ namespace BLAPI
         /// <param name="lineId"></param>
         /// <param name="lastStation"></param>
         /// <returns>true if removed successfully</returns>
-        bool RemoveLine(int lineId, int lastStation);
+        bool RemoveLine(int lineId);
 
         /// <summary>
         /// removes a station fron the line 

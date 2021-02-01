@@ -74,7 +74,7 @@ namespace PlGui
             {
                 if (lineCBox.SelectedItem != null)
                 {
-                    bl.RemoveLine(tempLine.PersonalId, tempLine.LastStation);
+                    bl.RemoveLine(tempLine.PersonalId);
 
                     MessageBox.Show($"The line {lineCBox.SelectedItem} has delete");
                     this.Close();
