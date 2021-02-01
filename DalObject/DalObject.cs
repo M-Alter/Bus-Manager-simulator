@@ -20,6 +20,11 @@ namespace DL
 
         public IEnumerable<Bus> GetAllBuses()
         {
+            //return from bus in DataSource.BusList
+            //       group bus.Clone() by bus.FromDate.Year into fromYear
+            //       orderby fromYear
+            //       select fromYear;
+
             List<Bus> buses = new List<Bus>();
             foreach (var bus in DataSource.BusList)
                 buses.Add(bus.Clone());

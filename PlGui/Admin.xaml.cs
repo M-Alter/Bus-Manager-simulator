@@ -19,7 +19,8 @@ namespace PlGui
     public partial class Admin : Window
     {
         //collections of all the objects
-        ObservableCollection<PO.Bus> buses = new ObservableCollection<PO.Bus>();
+        ObservableCollection<PO.Bus> newBuses = new ObservableCollection<PO.Bus>();
+        ObservableCollection<PO.Bus> oldBuses = new ObservableCollection<PO.Bus>();
         ObservableCollection<PO.Station> stations = new ObservableCollection<PO.Station>();
         ObservableCollection<PO.Line> lines = new ObservableCollection<PO.Line>();
         ObservableCollection<PO.AdjacentStations> adjacentStations = new ObservableCollection<PO.AdjacentStations>();
@@ -44,7 +45,7 @@ namespace PlGui
                 //so we can continue using the same background worker with new threads
                 while (!timerWorker.CancellationPending) try { Thread.Sleep(1000000); } catch (Exception ex) { }
             };
-            
+
 
             timerWorker.ProgressChanged += timer_ProgressChanged;
             //when completed 
@@ -92,9 +93,17 @@ namespace PlGui
             //get all the buses and add to the collection
             foreach (var item in bl.GetAllBuses())
             {
-                buses.Add(Tools.POBus(item));
+                if (item.Key > 2017)
+                {
+                    foreach (var bus in item)
+                        newBuses.Add(Tools.POBus(bus));
+                }
+                else
+                    foreach (var bus in item)
+                        oldBuses.Add(Tools.POBus(bus));
             }
-            buseslview.DataContext = buses;
+            buseslview.DataContext = newBuses;
+            oldbuseslview.DataContext = oldBuses;
 
             //get all the stations and add to the collection
             foreach (var item in bl.GetAllStations())
@@ -175,15 +184,28 @@ namespace PlGui
             AddBus addBus = new AddBus();
             addBus.ShowDialog();
 
-            buses.Clear();
-            buses = null;
-            buses = new ObservableCollection<PO.Bus>();
+            newBuses.Clear();
+            newBuses = null;
+            newBuses = new ObservableCollection<PO.Bus>();
 
+            oldBuses.Clear();
+            oldBuses = null;
+            oldBuses = new ObservableCollection<PO.Bus>();
+
+            //get all the buses and add to the collection
             foreach (var item in bl.GetAllBuses())
             {
-                buses.Add(Tools.POBus(item));
+                if (item.Key > 2017)
+                {
+                    foreach (var bus in item)
+                        newBuses.Add(Tools.POBus(bus));
+                }
+                else
+                    foreach (var bus in item)
+                        oldBuses.Add(Tools.POBus(bus));
             }
-            buseslview.DataContext = buses;
+            buseslview.DataContext = newBuses;
+            oldbuseslview.DataContext = oldBuses;
         }
 
         /// <summary>
@@ -284,13 +306,24 @@ namespace PlGui
         {
             RemoveBus removeBus = new RemoveBus();
             removeBus.ShowDialog();
-            buses.Clear();
-            buses = null;
-            buses = new ObservableCollection<PO.Bus>();
+            newBuses.Clear();
+            newBuses = null;
+            newBuses = new ObservableCollection<PO.Bus>();
 
+            //get all the buses and add to the collection
             foreach (var item in bl.GetAllBuses())
-                buses.Add(Tools.POBus(item));
-            buseslview.DataContext = buses;
+            {
+                if (item.Key > 2017)
+                {
+                    foreach (var bus in item)
+                        newBuses.Add(Tools.POBus(bus));
+                }
+                else
+                    foreach (var bus in item)
+                        oldBuses.Add(Tools.POBus(bus));
+            }
+            buseslview.DataContext = newBuses;
+            oldbuseslview.DataContext = oldBuses;
         }
 
         //===================================================================================================

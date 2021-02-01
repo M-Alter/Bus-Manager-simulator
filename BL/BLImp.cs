@@ -25,12 +25,14 @@ namespace BL
         /// get all the buses
         /// </summary>
         /// <returns>a collection of all the buses</returns>
-        public IEnumerable<Bus> GetAllBuses()
+        public IEnumerable<IGrouping<int, Bus>> GetAllBuses()
         {
             return from item in dl.GetAllBuses()
                        //call the get bus functin with LisenceNum parameter
                    let bus = GetBus(item.LicenseNum)
-                   select bus;
+                   group bus by bus.FromDate.Year into fromYear
+                   orderby fromYear.Key
+                   select fromYear;
         }
 
         /// <summary>
