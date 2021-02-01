@@ -55,4 +55,18 @@ namespace DO
             return lineId + ": " + Message;
         }
     }
+
+    public class StationException : Exception
+    {
+        int stationId;
+        public StationException(int stationId, string message) : base(message)
+        {
+            this.stationId = stationId;
+        }
+
+        public override string ToString()
+        {
+            return stationId + ": " + Message;
+        }
+    }
 }
