@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
         mc:Ignorable="d"
-        Title="Line PopUp" Height="250" Width="800" ResizeMode="NoResize">
+        Title="Line PopUp" Height="270" Width="800" ResizeMode="NoResize">
     <Grid>
         <StackPanel>
-            <DataGrid x:Name="adjStationDgrid" Grid.Row="2" Grid.ColumnSpan="2" Margin="20,20,20,20" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding}" Height="130">
+            <Label Content="To change the Time or Distance between 2 stations change the time or distance cells and press the save button in its line" HorizontalAlignment="Center"/>
+            <Label Content="You will always be able to change it if you go to the line and press edit" HorizontalAlignment="Center"/>
+            <DataGrid x:Name="adjStationDgrid" Grid.Row="2" Grid.ColumnSpan="2" Margin="20,2,20,20" IsReadOnly="False" AutoGenerateColumns="False" EnableRowVirtualization="False" ItemsSource="{Binding}" Height="130">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Station 1" Binding="{Binding Station1}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="First Station" Binding="{Binding Station1Name}" IsReadOnly="True"/>
