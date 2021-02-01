@@ -167,5 +167,6 @@ namespace PlGui
         {
             lineTBox.IsEnabled = false;
         }
+
     }
 }

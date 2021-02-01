@@ -23,7 +23,7 @@
         <Label Content="Area" Grid.Column="0" Grid.Row="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <ComboBox Name="areaCMBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Width="100" Height="30"  IsEnabled="True" SelectionChanged="areaCMBox_SelectionChanged"/>
         <Label Content="Line number" Grid.Column="0" Grid.Row="1" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBox x:Name="lineTBox" FontSize="20" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" PreviewKeyDown="lineTBox_PreviewKeyDown"/>
+        <TextBox x:Name="lineTBox" FontSize="20" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="30" PreviewKeyDown="lineTBox_PreviewKeyDown" /><!--TextChanged="lineTBox_TextChanged"--> 
         <Label Content="First stop" Grid.Column="0" Grid.Row="2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <ComboBox Name="firstStopCMBox" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="100" Height="30"  IsEnabled="False" SelectionChanged="firstStopCMBox_SelectionChanged" DropDownOpened="firstStopCMBox_DropDownOpened" />
         <Label Content="Last stop" Grid.Column="0" Grid.Row="3" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>

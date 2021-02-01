@@ -1,17 +1,9 @@
-﻿using System;
+﻿using BLAPI;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using BLAPI;
+
 namespace PlGui
 {
     /// <summary>
@@ -20,49 +12,46 @@ namespace PlGui
     public partial class UpdateLine : Window
     {
         static IBL bl = BLFactory.GetIBL();
-        PO.Line line = new PO.Line();
+        BO.Line line = new BO.Line();
+        public int StationNumber;
         List<BO.Station> addStationsList = new List<BO.Station>();
-        List<StationClass> stationForListView = new List<StationClass>();
-
-        public UpdateLine(PO.Line line)
+        ObservableCollection<StationClass> stationsExisted = new ObservableCollection<StationClass>();
+        ObservableCollection<StationClass> stationsToAdd = new ObservableCollection<StationClass>();
+        public UpdateLine(BO.Line line)
         {
             InitializeComponent();
+            //Title
             Title = string.Format("Line: " + line.LineNumber + " in " + line.Area.ToString().ToLower() + " area | info");
             //lineGrid.Visibility = Visibility.Visible;
             this.line = line;
             this.DataContext = line;
 
-            BO.Station firstStation = new BO.Station();
+            var existedStations = line.Stations.ToList();
+
             foreach (var item in bl.GetAllStations())
             {
-                if (item.Code == line.FirstStation)
+                // line.Stations.ToList().FirstOrDefault(st => st.Station == item.Code) == null
+                if (existedStations.FirstOrDefault(st => st.Station == item.Code) == null)
                 {
-                    firstStation = item as BO.Station;
+                    stationsToAdd.Add(new StationClass { Name = item.Name, Code = item.Code, Checked = false });
+                }
+                else
+                {
+                    stationsExisted.Add(new StationClass { Name = item.Name, Code = item.Code, Checked = true });
                 }
             }
-
-            BO.Station lastStation = new BO.Station();
-            foreach (var item in bl.GetAllStations())
+            
+            foreach (var station in stationsToAdd)
             {
-                if (item.Code == line.LastStation)
-                {
-                    lastStation = item as BO.Station;
-                }
+                stationsLBox.Items.Add(string.Format($"{station.Code} {station.Name}"));
             }
-            stationsLBox.Items.Add(string.Format($"{firstStation.Code} {firstStation.Name}"));
-            stationsLBox.Items.Add(string.Format($"{lastStation.Code} {lastStation.Name}"));
-            foreach (var item in bl.GetAllStations(station => (station.Code != firstStation.Code) && (station.Code != lastStation.Code)))
+            int index = 1;
+            foreach (var station in stationsExisted)
             {
-                stationForListView.Add(new StationClass { Name = item.Name, Code = item.Code,/* Checked = false */});
+                existStationsLBox.Items.Add(string.Format($"{index}: {station.Code} {station.Name}"));
+                index++;
             }
-            //foreach (var item in stationForListView)
-            //{
-            //    foreach (var stop in bl.)
-            //    {
-
-            //    }
-            //}
-            addStopCMBox.ItemsSource = stationForListView;
+            //StationNumber = 
         }
 
         class StationClass
@@ -74,37 +63,48 @@ namespace PlGui
 
         private void allCheckedBox(object sender, RoutedEventArgs e)
         {
-            BO.Station firstStation = new BO.Station();
-            foreach (var item in bl.GetAllStations())
-            {
-                if (item.Code == line.FirstStation)
-                {
-                    firstStation = item as BO.Station;
-                }
-            }
+            //BO.Station firstStation = new BO.Station();
+            //foreach (var item in bl.GetAllStations())
+            //{
+            //    if (item.Code == line.FirstStation)
+            //    {
+            //        firstStation = item as BO.Station;
+            //    }
+            //}
 
-            BO.Station lastStation = new BO.Station();
-            foreach (var item in bl.GetAllStations())
-            {
-                if (item.Code == line.LastStation)
-                {
-                    lastStation = item as BO.Station;
-                }
-            }
-            stationsLBox.Items.Clear();
-            stationsLBox.Items.Add(string.Format($"{firstStation.Code} {firstStation.Name}"));
-            foreach (var station in stationForListView)
+            //BO.Station lastStation = new BO.Station();
+            //foreach (var item in bl.GetAllStations())
+            //{
+            //    if (item.Code == line.LastStation)
+            //    {
+            //        lastStation = item as BO.Station;
+            //    }
+            //}
+            //stationsLBox.Items.Clear();
+            //stationsLBox.Items.Add(string.Format($"{firstStation.Code} {firstStation.Name}"));
+            foreach (var station in stationsExisted)
             {
                 if (station.Checked == true)
                     stationsLBox.Items.Add(string.Format($"{station.Code} {station.Name}"));
             }
-            stationsLBox.Items.Add(string.Format($"{lastStation.Code} {lastStation.Name}"));
+            //stationsLBox.Items.Add(string.Format($"{lastStation.Code} {lastStation.Name}"));
         }
 
+        //get only number
+        private void validateTb_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e) => e.Handled = e.Text == null || !e.Text.All(char.IsDigit);
 
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                bl.UpdateLine(line, int.Parse(lineNumberTB.Text),1);
+            }
+            catch (System.Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
 
         }
 

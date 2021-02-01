@@ -187,5 +187,14 @@ namespace BLAPI
         /// <param name="personalId"></param>
         /// <param name="time"></param>
         bool RemoveLineTrip(int personalId, TimeSpan time);
+
+        /// <summary>
+        /// to add a station to a line
+        /// </summary>
+        /// <param name="personalId"></param>
+        /// <param name="time"></param>
+        bool UpdateLine(Line line, int station, int index);
+
+
     }
 }

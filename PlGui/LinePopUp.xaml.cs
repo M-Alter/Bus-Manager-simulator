@@ -111,7 +111,20 @@ namespace PlGui
 
         private void updateLineBtn_Click(object sender, RoutedEventArgs e)
         {
-            UpdateLine updateLine = new UpdateLine(line);
+            BO.Line boLine = new BO.Line
+            {
+                Area = line.Area,
+                FirstStation = line.FirstStation,
+                FirstStationName = line.FirstStationName,
+                IsActive = line.IsActive,
+                LastStation = line.LastStation,
+                LastStationName = line.LastStationName,
+                LineNumber = line.LineNumber,
+                PersonalId = line.PersonalId,
+                Stations = line.Stations,
+                Timing = line.Timing
+            };
+            UpdateLine updateLine = new UpdateLine(boLine);
             updateLine.ShowDialog();
 
         }
