@@ -537,5 +537,29 @@ The password for your account is
 
             return dl.RemoveLineTrip(lineId, time);
         }
+
+        public bool UpdateLine(Line line, int station, int index)
+        {
+            if (station > 99999 || station < 10000)
+            {
+                throw new StationException(station, "Station must be 5 digits");
+            }
+            if (!(line.Stations.FirstOrDefault(st => st.Station == station) == null))
+            {
+                throw new StationException(station, $"Station {station} existed already");
+            }
+            var lookup = GetAllStations().ToDictionary(itemKeySelector => itemKeySelector.Code);
+            try
+            {
+                var result = lookup[station];
+            }
+            catch (Exception ex)
+            {
+
+                throw new StationException(station, $"Station {station} doesn't exist");
+            }
+            
+            return true;
+        }
     }
 }
