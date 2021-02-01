@@ -485,7 +485,7 @@ The password for your account is
         /// <returns>true if removed successfully</returns>
         public bool RemoveLine(int lineId, int lastStation)
         {
-            return dl.RemoveLine(lineId, lastStation);
+            return dl.RemoveLine(lineId);
         }
 
         /// <summary>

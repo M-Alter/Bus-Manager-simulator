@@ -446,7 +446,7 @@ namespace DL
             return false;
         }
 
-        public bool RemoveLine(int lineId, int lastStation)
+        public bool RemoveLine(int lineId)
         {
             XElement rootElem = XmlTools.LoadFile(LinesFilePath);
 

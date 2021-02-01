@@ -106,7 +106,7 @@ namespace DL
         /// <param name="lineId"></param>
         /// <param name="lastStation"></param>
         /// <returns></returns>
-        public bool RemoveLine(int lineId, int lastStation)
+        public bool RemoveLine(int lineId)
         {
             Line line = new Line();
             foreach (var item in DataSource.LineList)
