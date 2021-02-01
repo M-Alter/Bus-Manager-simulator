@@ -193,7 +193,7 @@ namespace BLAPI
         /// </summary>
         /// <param name="personalId"></param>
         /// <param name="time"></param>
-        bool UpdateLine(Line line, int station, int index);
+        bool UpdateLine(int lineId, int station, int index);
 
 
     }

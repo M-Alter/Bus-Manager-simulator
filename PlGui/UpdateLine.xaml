@@ -19,6 +19,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <ComboBox Name="cbStations" Grid.Column="1" Grid.Row="3" />
         <Label Margin="3,0,0,0" Content="Line Number:" Grid.Row="0" />
         <Label Content="{Binding LineNumber}" Margin="100,0,0,0" Grid.Column="0" Grid.Row="0"/>
         <Label Margin="3,0,0,0" Content="First Station:" Grid.Row="1"/>
@@ -28,9 +29,8 @@
         <Label Content="Existed stations:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
         <ListBox x:Name="existStationsLBox" Grid.Column="0" Grid.Row="3" Margin="3"/> <!--SelectionChanged="stationsLBox_SelectionChanged"/>-->
         <Label Content="Station to add:" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-        <ListBox x:Name="stationsLBox" Grid.Column="1" Grid.Row="3" Margin="3"/> <!--SelectionChanged="stationsLBox_SelectionChanged"/>-->
-        <Label Content="Enter number of station:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
-        <TextBox x:Name="lineNumberTB" Grid.Row="4" Grid.Column="1" Width="150" Height="30" PreviewTextInput="validateTb_PreviewTextInput"/>
+        <Label Content="Enter the index:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+        <TextBox x:Name="tbIndex" Grid.Row="4" Grid.Column="1" Width="150" Height="30" PreviewTextInput="validateTb_PreviewTextInput"/>
         <Button x:Name="saveBtn" Content="Save" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Width="100" Height="30" Click="saveBtn_Click"/>
         <Button x:Name="cancelBtn" Content="Cancel" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Width="100" Height="30" Click="cancelBtn_Click"/>
     </Grid>

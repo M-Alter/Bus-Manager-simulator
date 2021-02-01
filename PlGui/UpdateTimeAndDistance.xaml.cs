@@ -24,6 +24,11 @@ namespace PlGui
             InitializeComponent();
         }
 
+
+        //get only number
+        private void validateTb_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e) => e.Handled = e.Text == null || !e.Text.All(char.IsDigit);
+
+
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             if (!(int.TryParse(tboxHour.Text, out int hour) && int.TryParse(tboxMin.Text, out int min) && int.TryParse(tboxSec.Text, out int sec) && double.TryParse(tboxDist.Text, out double distance)))

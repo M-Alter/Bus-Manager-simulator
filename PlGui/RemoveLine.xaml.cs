@@ -32,6 +32,7 @@ namespace PlGui
 
         private void cancelBtn_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
             this.Close();
         }
 
@@ -43,6 +44,7 @@ namespace PlGui
                 try
                 {
                     bl.RemoveLine(selected.PersonalId);
+                    this.DialogResult = true;
                     this.Close();
                 }
                 catch (Exception ex)

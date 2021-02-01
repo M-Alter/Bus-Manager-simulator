@@ -10,15 +10,15 @@
         <StackPanel Margin="20,15">
             <WrapPanel HorizontalAlignment="Center">
                 <Label Content="Time"/>
-                <TextBox x:Name="tboxHour" Width="25"/>
+                <TextBox x:Name="tboxHour" Width="25" PreviewTextInput="validateTb_PreviewTextInput"/>
                 <Label Content=":"/>
-                <TextBox x:Name="tboxMin" Width="25"/>
+                <TextBox x:Name="tboxMin" Width="25" PreviewTextInput="validateTb_PreviewTextInput"/>
                 <Label Content=":"/>
-                <TextBox x:Name="tboxSec" Width="25"/>
+                <TextBox x:Name="tboxSec" Width="25" PreviewTextInput="validateTb_PreviewTextInput"/>
             </WrapPanel>
             <WrapPanel Margin="0,10" HorizontalAlignment="Center">
             <Label Content="Distance"/>
-                <TextBox x:Name="tboxDist" Width="80"/>
+                <TextBox x:Name="tboxDist" Width="80" PreviewTextInput="validateTb_PreviewTextInput"/>
             </WrapPanel>
             <Button x:Name="btnSave" Content="Save" Click="btnSave_Click"/>
         </StackPanel>

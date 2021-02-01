@@ -331,9 +331,9 @@ namespace PlGui
         {
 
         }
-        //===================================================================================================
+        
 
-        //===================================================================================================
+
         private void removeLineBtn_Click(object sender, RoutedEventArgs e)
         {
             RemoveLine removeLine = new RemoveLine();
@@ -341,25 +341,13 @@ namespace PlGui
             lines.Clear();
             lines = null;
             lines = new ObservableCollection<PO.Line>();
-
-            string str = "klum";
-            int lineNumber = -9999, lastStation = -9999;
-            if (removeLine.lineCBox.SelectedItem != null)
-            {
-                str = removeLine.lineCBox.SelectedItem.ToString();
-                lineNumber = int.Parse(str.Substring(0, 3));
-                lastStation = int.Parse(str.Substring(6, 5));
-            }
             foreach (var item in bl.GetAllLines())
             {
-                if (item.LineNumber != lineNumber && item.LastStation != lastStation)
-                {
-                    lines.Add(Tools.POLine(item));
-                }
+                lines.Add(Tools.POLine(item));
             }
             lineslview.DataContext = lines;
         }
-        //======================================================================================================
+
 
         private void addStationBtn_Click(object sender, RoutedEventArgs e)
         {

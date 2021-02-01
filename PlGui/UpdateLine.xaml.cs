@@ -1,4 +1,5 @@
 ﻿using BLAPI;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,83 +13,39 @@ namespace PlGui
     public partial class UpdateLine : Window
     {
         static IBL bl = BLFactory.GetIBL();
-        BO.Line line = new BO.Line();
+        PO.Line line = new PO.Line();
         public int StationNumber;
         List<BO.Station> addStationsList = new List<BO.Station>();
-        ObservableCollection<StationClass> stationsExisted = new ObservableCollection<StationClass>();
-        ObservableCollection<StationClass> stationsToAdd = new ObservableCollection<StationClass>();
-        public UpdateLine(BO.Line line)
+        List<BO.Station> cbStationList = new List<BO.Station>();
+        public UpdateLine(PO.Line line)
         {
             InitializeComponent();
-            //Title
+
             Title = string.Format("Line: " + line.LineNumber + " in " + line.Area.ToString().ToLower() + " area | info");
-            //lineGrid.Visibility = Visibility.Visible;
             this.line = line;
             this.DataContext = line;
 
-            var existedStations = line.Stations.ToList();
 
+            var existedStations = line.Stations.ToList();
             foreach (var item in bl.GetAllStations())
             {
-                // line.Stations.ToList().FirstOrDefault(st => st.Station == item.Code) == null
                 if (existedStations.FirstOrDefault(st => st.Station == item.Code) == null)
                 {
-                    stationsToAdd.Add(new StationClass { Name = item.Name, Code = item.Code, Checked = false });
-                }
-                else
-                {
-                    stationsExisted.Add(new StationClass { Name = item.Name, Code = item.Code, Checked = true });
+                    cbStationList.Add(item);
                 }
             }
-            
-            foreach (var station in stationsToAdd)
-            {
-                stationsLBox.Items.Add(string.Format($"{station.Code} {station.Name}"));
-            }
+            cbStations.ItemsSource = cbStationList;
+
             int index = 1;
-            foreach (var station in stationsExisted)
+            foreach (var station in line.Stations)
             {
-                existStationsLBox.Items.Add(string.Format($"{index}: {station.Code} {station.Name}"));
+                existStationsLBox.Items.Add(string.Format($"{index}: {station.Station} {station.StationName}"));
                 index++;
             }
-            //StationNumber = 
+            
         }
 
-        class StationClass
-        {
-            public string Name { get; set; }
-            public int Code { get; set; }
-            public bool Checked { get; set; }
-        }
-
-        private void allCheckedBox(object sender, RoutedEventArgs e)
-        {
-            //BO.Station firstStation = new BO.Station();
-            //foreach (var item in bl.GetAllStations())
-            //{
-            //    if (item.Code == line.FirstStation)
-            //    {
-            //        firstStation = item as BO.Station;
-            //    }
-            //}
-
-            //BO.Station lastStation = new BO.Station();
-            //foreach (var item in bl.GetAllStations())
-            //{
-            //    if (item.Code == line.LastStation)
-            //    {
-            //        lastStation = item as BO.Station;
-            //    }
-            //}
-            //stationsLBox.Items.Clear();
-            //stationsLBox.Items.Add(string.Format($"{firstStation.Code} {firstStation.Name}"));
-            foreach (var station in stationsExisted)
-            {
-                if (station.Checked == true)
-                    stationsLBox.Items.Add(string.Format($"{station.Code} {station.Name}"));
-            }
-            //stationsLBox.Items.Add(string.Format($"{lastStation.Code} {lastStation.Name}"));
-        }
+       
 
         //get only number
         private void validateTb_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e) => e.Handled = e.Text == null || !e.Text.All(char.IsDigit);
@@ -96,15 +53,28 @@ namespace PlGui
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
+            var selected = cbStations.SelectedItem as BO.Station;
             try
             {
-                bl.UpdateLine(line, int.Parse(lineNumberTB.Text),1);
+                bl.UpdateLine(line.PersonalId, selected.Code, int.Parse(tbIndex.Text));
+                Close();
             }
-            catch (System.Exception ex)
+            catch (BO.AdjacentStationsExceptions ex)
             {
-
-                MessageBox.Show(ex.Message);
+                BO.AdjacentStations[] adjacentStations = new BO.AdjacentStations[ex.adjacentStationsArray.Length];
+                adjacentStations = ex.adjacentStationsArray;
+                AdjacentStationInfo adjacentStationInfo = new AdjacentStationInfo(adjacentStations);
+                adjacentStationInfo.ShowDialog();
             }
+            //catch (BO.LineStationException ex)
+            //{
+            //    MessageBox.Show(ex.line.ToString() + ex.Message, "", MessageBoxButton.OK);
+            //}
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK);
+            }
+
 
         }
 
