@@ -10,6 +10,13 @@ namespace BL
 {
     public static class DeepCopyUtilities
     {
+        /// <summary>
+        /// convert a instance of one type to an instance with properties with the same names
+        /// </summary>
+        /// <typeparam name="T">output type</typeparam>
+        /// <typeparam name="S">input type</typeparam>
+        /// <param name="from">input parameter</param>
+        /// <param name="to">output parameter</param>
         public static void CopyPropertiesTo<T, S>(this S from, T to)
         {
             foreach (PropertyInfo propTo in to.GetType().GetProperties())
@@ -22,18 +29,20 @@ namespace BL
                     propTo.SetValue(to, value);
             }
         }
+
+        /// <summary>
+        /// creates a new instance of type type
+        /// </summary>
+        /// <typeparam name="S">input type</typeparam>
+        /// <param name="from">input param</param>
+        /// <param name="type">output param Type</param>
+        /// <returns></returns>
         public static object CopyPropertiesToNew<S>(this S from, Type type)
         {
             object to = Activator.CreateInstance(type); // new object of Type
             from.CopyPropertiesTo(to);
             return to;
         }
-        //public static BO.StudentCourse CopyToStudentCourse(this DO.Course course, DO.StudentInCourse sic)
-        //{
-        //    BO.StudentCourse result = (BO.StudentCourse)course.CopyPropertiesToNew(typeof(BO.StudentCourse));
-        //    // propertys' names changed? copy them here...
-        //    result.Grade = sic.Grade;
-        //    return result;
-        //}
+        
     }
 }
