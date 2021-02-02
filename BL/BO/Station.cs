@@ -14,26 +14,38 @@ namespace BO
         private double longitude;
         private double lattitude;
         #endregion
-        
+
         #region Properties
+        /// <summary>
+        /// code of the station
+        /// </summary>
         public int Code
         {
             get { return code; }
             set { code = value; }
         }
 
+        /// <summary>
+        /// name of the station
+        /// </summary>
         public string Name
         {
             get { return name; }
             set { name = value; }
         }
 
+        /// <summary>
+        /// longitude of the station
+        /// </summary>
         public double Longitude
         {
             get { return longitude; }
             set { longitude = value; }
         }
 
+        /// <summary>
+        /// lattitude of the station
+        /// </summary>
         public double Lattitude
         {
             get { return lattitude; }
