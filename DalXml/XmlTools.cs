@@ -6,19 +6,26 @@ namespace DO
 {
     public class XmlTools
     {
+        public static string dir = @"xml\";
+
+        static XmlTools()
+        {
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+        }
 
         public static XElement LoadFile(string path)
         {
             try
             {
-                if (File.Exists(path))
+                if (File.Exists(dir + path))
                 {
-                    return XElement.Load(path);
+                    return XElement.Load(dir + path);
                 }
                 else
                 {
                     XElement rootElement = new XElement(path);
-                    rootElement.Save(path);
+                    rootElement.Save(dir + path);
                     return rootElement;
                 }
             }
@@ -28,18 +35,18 @@ namespace DO
             }
             catch (Exception e)
             {
-                throw new FileLoadException(e.Message, path);
+                throw new FileLoadException(e.Message, dir + path);
             }
         }
 
 
 
 
-        internal static bool SaveFile(XElement rootElem, string filePath)
+        internal static bool SaveFile(XElement rootElem, string path)
         {
             try
             {
-                rootElem.Save(filePath);
+                rootElem.Save(dir + path);
                 return true;
             }
             catch (Exception ex)

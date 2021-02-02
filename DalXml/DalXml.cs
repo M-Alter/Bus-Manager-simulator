@@ -19,15 +19,15 @@ namespace DL
 
         #region Files
 
-        string LinesFilePath = @"xml\Lines.xml";
-        string BusFilePath = @"xml\Buses.xml";
-        string StationsFilePath = @"xml\Stations.xml";
-        string TripFilePath = @"xml\Trips.xml";
-        string LineTripFilePath = @"xml\LineTrips.xml";
-        string LineStationsFilePath = @"xml\LineStations.xml";
-        string UserFilePath = @"xml\Users.xml";
-        string AdjacentStationsFilePath = @"xml\AdjacentStations.xml";
-        string SerialNumberGeneratorPath = @"xml\SerialNumberGenerator.xml";
+        string LinesFilePath = @"Lines.xml";
+        string BusFilePath = @"Buses.xml";
+        string StationsFilePath = @"Stations.xml";
+        string TripFilePath = @"Trips.xml";
+        string LineTripFilePath = @"LineTrips.xml";
+        string LineStationsFilePath = @"LineStations.xml";
+        string UserFilePath = @"Users.xml";
+        string AdjacentStationsFilePath = @"AdjacentStations.xml";
+        string SerialNumberGeneratorPath = @"SerialNumberGenerator.xml";
 
 
 
