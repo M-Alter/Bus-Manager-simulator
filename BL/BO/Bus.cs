@@ -19,6 +19,9 @@ namespace BO
 
 
         #region Properties
+        /// <summary>
+        /// license number
+        /// </summary>
         public int LicenseNum
         {
             get { return licenseNum; }
@@ -36,26 +39,41 @@ namespace BO
             }
         }
 
+        /// <summary>
+        /// return a string instance of the license num
+        /// </summary>
         public string LicenseString { get; private set; }
 
+        /// <summary>
+        /// date the vehicle came on the street
+        /// </summary>
         public DateTime FromDate
         {
             get { return fromDate; }
             set { fromDate = value; }
         }
 
+        /// <summary>
+        /// total milege of the vehicle
+        /// </summary>
         public double TotalTrip
         {
             get { return totalTrip; }
             set { totalTrip = value; }
         }
-
+    
+        /// <summary>
+        /// fuel reamianing in the tank
+        /// </summary>
         public double FuelRemain
         {
             get { return fuelRemain; }
             set { fuelRemain = value; }
         }
 
+        /// <summary>
+        /// current bus status
+        /// </summary>
         public Enums.BusStatus Status
         {
             get { return status; }
