@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
         mc:Ignorable="d"
-        Title="UpdateTimeAndDistance" Height="150" Width="200" ResizeMode="NoResize">
+        Title="UpdateTimeAndDistance" Height="170" Width="200" ResizeMode="NoResize">
     <Grid>
         <StackPanel Margin="20,15">
             <WrapPanel HorizontalAlignment="Center">
