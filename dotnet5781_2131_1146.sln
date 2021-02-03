@@ -48,6 +48,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{74F429A0-372
 		bin\xml\Users.xml = bin\xml\Users.xml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nugets", "nugets", "{26DC3D90-8D73-430F-9872-81BC6690CD29}"
+	ProjectSection(SolutionItems) = preProject
+		bin\BouncyCastle.Crypto.dll = bin\BouncyCastle.Crypto.dll
+		bin\BouncyCastle.Crypto.xml = bin\BouncyCastle.Crypto.xml
+		bin\MailKit.dll = bin\MailKit.dll
+		bin\MailKit.pdb = bin\MailKit.pdb
+		bin\MailKit.xml = bin\MailKit.xml
+		bin\MimeKit.dll = bin\MimeKit.dll
+		bin\MimeKit.pdb = bin\MimeKit.pdb
+		bin\MimeKit.xml = bin\MimeKit.xml
+		bin\System.Buffers.dll = bin\System.Buffers.dll
+		bin\System.Buffers.xml = bin\System.Buffers.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -202,6 +216,7 @@ Global
 		{E18CF8C4-FAF2-4FA1-BBD5-BE9D81489EFD} = {5A4E9303-ADE5-408B-87AE-3C6174E062EA}
 		{E39CCFB3-2825-4BF8-88AB-8974C5182161} = {3342B27A-FA4E-4554-9EC7-4C0D708366C1}
 		{74F429A0-372B-49C0-BCD9-7E681E0EFFA0} = {E39CCFB3-2825-4BF8-88AB-8974C5182161}
+		{26DC3D90-8D73-430F-9872-81BC6690CD29} = {3342B27A-FA4E-4554-9EC7-4C0D708366C1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D50C3DE7-F945-443C-AABA-7F1794123242}
