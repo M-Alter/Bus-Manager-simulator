@@ -541,32 +541,66 @@ The password for your account is
             return dl.RemoveLineTrip(lineId, time);
         }
 
-        public bool UpdateLine(Line line, int station, int index)
-        {
-            if (station > 99999 || station < 10000)
-            {
-                throw new StationException(station, "Station must be 5 digits");
-            }
-            if (!(line.Stations.FirstOrDefault(st => st.Station == station) == null))
-            {
-                throw new StationException(station, $"Station {station} existed already");
-            }
-            var lookup = GetAllStations().ToDictionary(itemKeySelector => itemKeySelector.Code);
-            try
-            {
-                var result = lookup[station];
-            }
-            catch (Exception ex)
-            {
-                throw new StationException(station, $"Station {station} doesn't exist");
-            }
-            
-            return true;
-        }
-
         public bool UpdateLine(int lineId, int station, int index)
         {
-            throw new NotImplementedException();
+            Line line = GetLine(lineId);
+
+            int[] stationArray = new int[line.Stations.Count() + 1];
+            int j = 0;
+
+            //add all the stations to the array but the station to be deleted
+            foreach (var item in line.Stations)
+            {
+                if (j < index - 1 || j >= index)
+                    stationArray[j++] = item.Station;
+                else if (j == index - 1)
+                {
+                    stationArray[j++] = station;
+                    stationArray[j++] = item.Station;
+                }
+
+            };
+
+            line.Stations = null;
+
+            //remove all the lines linestations
+            dl.RemoveAllLineStation(lineId);
+
+            //update the first and last station
+            dl.UpdateLine(line.PersonalId, stationArray[0], stationArray[stationArray.Length - 1]);
+
+            //add all the linestations in the array
+            for (int i = 0; i < stationArray.Length; i++)
+            {
+                if (i == 0)
+                    dl.AddLineStation(new DO.LineStation { LineId = line.PersonalId, LineStationIndex = 1, StationCode = stationArray[0], NextStation = stationArray[1], PrevStation = 0 });
+                else if (i == stationArray.Length - 1)
+                    dl.AddLineStation(new DO.LineStation { LineId = line.PersonalId, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = 0, PrevStation = stationArray[i - 1] });
+                else
+                    dl.AddLineStation(new DO.LineStation { LineId = line.PersonalId, LineStationIndex = i + 1, StationCode = stationArray[i], NextStation = stationArray[i + 1], PrevStation = stationArray[i - 1] });
+            }
+
+            // add a list to all the adjacent staions
+            List<AdjacentStations> adjacentStations = new List<AdjacentStations>();
+            for (int i = 0; i < stationArray.Length - 1; i++)
+            {
+                if (dl.GetAdjacentStations(stationArray[i], stationArray[i + 1]) == default(DO.AdjacentStations))
+                {
+                    adjacentStations.Add(new AdjacentStations { Station1 = stationArray[i], Station1Name = dl.GetStation(stationArray[i]).Name, Station2 = stationArray[i + 1], Station2Name = dl.GetStation(stationArray[i + 1]).Name, /*Distance = r.NextDouble() * (100) + 1, Time = new TimeSpan(r.Next(0, 23), r.Next(0, 59), r.Next(0, 59))*/ });
+                    dl.AddAdjacentStations(new DO.AdjacentStations { Station1 = stationArray[i], Station2 = stationArray[i + 1], Distance = r.NextDouble() * (10) + 1, Time = new TimeSpan(0, r.Next(0, 15), r.Next(0, 59)) });
+                }
+            }
+            if (adjacentStations.Count > 0)
+            {
+                AdjacentStations[] AdjacentStationsArray = new AdjacentStations[adjacentStations.Count];
+                for (int i = 0; i < adjacentStations.Count; i++)
+                {
+                    AdjacentStationsArray[i] = GetAdjacentStations(adjacentStations[i].Station1, adjacentStations[i].Station2);
+                }
+                throw new AdjacentStationsExceptions("these adjacent stations are missing some info", AdjacentStationsArray);
+            }
+
+            return true;
         }
     }
 }
