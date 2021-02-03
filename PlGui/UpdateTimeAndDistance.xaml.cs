@@ -35,7 +35,10 @@ namespace PlGui
             {
                 MessageBox.Show("Enter numbers only", "",MessageBoxButton.OK);
             }
-            DialogResult = true;
+            else if (int.Parse(tboxHour.Text) > 23 || int.Parse(tboxMin.Text) > 59 || int.Parse(tboxSec.Text) > 59 || double.Parse(tboxDist.Text) >99)
+                MessageBox.Show("Invalid date or distance format", "", MessageBoxButton.OK);
+            else
+                DialogResult = true;
         }
     }
 }
