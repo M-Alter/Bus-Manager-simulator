@@ -68,6 +68,8 @@ namespace PlGui
         private void btSave_Click(object sender, RoutedEventArgs e)
         {
             BO.AdjacentStations adjacentStations = ((sender as Button).DataContext as BO.AdjacentStations);
+            var btn = sender as Button;
+            btn.IsEnabled = false;
             bL.UpdateAdjacentStations(new BO.AdjacentStations { Station1 = adjacentStations.Station1, Station2 = adjacentStations.Station2, Distance = adjacentStations.Distance, Time = adjacentStations.Time });
         }
     }
