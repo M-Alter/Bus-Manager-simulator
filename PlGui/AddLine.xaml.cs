@@ -21,6 +21,7 @@ namespace PlGui
         {
             InitializeComponent();
             areaCMBox.ItemsSource = Enum.GetValues(typeof(BO.Enums.Areas));
+            saveBtn.IsEnabled = false;
         }
 
         class StationClass
@@ -61,6 +62,7 @@ namespace PlGui
                 stationForListView.Add(new StationClass { Name = item.Name, Code = item.Code,/* Checked = false */});
             }
             addStopCMBox.ItemsSource = stationForListView;
+            saveBtn.IsEnabled = true;
         }
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
