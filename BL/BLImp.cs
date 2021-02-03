@@ -1,4 +1,4 @@
-﻿using BLAPI;
+﻿    using BLAPI;
 using BO;
 using DalApi;
 using MailKit.Net.Smtp;
@@ -554,7 +554,7 @@ The password for your account is
                 if (j < index - 1 || j >= index)
                     stationArray[j++] = item.Station;
                 else if (j == index - 1)
-                { 
+                {
                     stationArray[j++] = station;
                     stationArray[j++] = item.Station;
                 }

@@ -48,7 +48,7 @@ namespace PlGui
             {
                 fuel = int.Parse(gasTBox.Text);
             }
-            if (milegeTBox.Text != "digits only" && gasTBox.Text != "")
+            if (milegeTBox.Text != "digits only" && milegeTBox.Text != "")
             {
                 milege = int.Parse(gasTBox.Text);
             }

@@ -15,6 +15,7 @@ namespace PlGui
         static IBL bl = BLFactory.GetIBL();
         PO.Line line = new PO.Line();
         public int StationNumber;
+         
         List<BO.Station> addStationsList = new List<BO.Station>();
         List<BO.Station> cbStationList = new List<BO.Station>();
         public UpdateLine(PO.Line line)
@@ -42,6 +43,12 @@ namespace PlGui
                 existStationsLBox.Items.Add(string.Format($"{index}: {station.Station} {station.StationName}"));
                 index++;
             }
+            int[] Ind = new int[index];
+            for (int i = 1; i < index; i++)
+            {
+                //Ind[i] = i + 1;
+                cbIndex.Items.Add(i);
+            }
             
         }
 
@@ -53,11 +60,26 @@ namespace PlGui
 
         private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            var selected = cbStations.SelectedItem as BO.Station;
+            BO.Station selected = new BO.Station();
+            int selectedIndex = 0;
+            if (cbStations.SelectedItem != null)
+                selected = cbStations.SelectedItem as BO.Station;
+            else
+                MessageBox.Show("Choose station to add");
+            if (cbIndex.SelectedItem != null)
+            {
+                selectedIndex = int.Parse(cbIndex.SelectedItem.ToString());
+            }
+            else
+                MessageBox.Show("Choose index");
+            //MessageBox.Show($"{int.Parse(cbIndex.SelectedItem.ToString())}   :    {selectedIndex}");
             try
             {
-                bl.UpdateLine(line.PersonalId, selected.Code, int.Parse(tbIndex.Text));
-                Close();
+                if (selectedIndex != 0 && cbStations.SelectedItem != null)
+                {
+                    bl.UpdateLine(line.PersonalId, selected.Code, selectedIndex);
+                    Close();
+                }
             }
             catch (BO.AdjacentStationsExceptions ex)
             {
