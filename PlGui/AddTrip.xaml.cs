@@ -38,6 +38,11 @@ namespace PlGui
                 MessageBox.Show("Invalid time value");
                 return;
             }
+            else if (int.Parse(hourTb.Text) > 23 || int.Parse(minutesTb.Text) > 59 || int.Parse(secoundsTb.Text) > 59)
+            {
+                MessageBox.Show("Invalid time value");
+                return;
+            }
 
             PO.Line line = this.DataContext as PO.Line;
             bool flag;
@@ -53,7 +58,7 @@ namespace PlGui
                 flag = false;
             }
             if (flag)
-                MessageBox.Show("Trip on {0} add succefully for line", reuslt.ToString());
+                MessageBox.Show($"Trip on {reuslt.ToString()} added succefully for line");
                 this.Close();
         }
 
