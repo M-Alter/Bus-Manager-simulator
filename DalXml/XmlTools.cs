@@ -57,17 +57,17 @@ namespace DO
         }
 
 
-        internal static Bus CreateBusInstatnce(XElement bus)
-        {
-            return new Bus()
+            internal static Bus CreateBusInstatnce(XElement bus)
             {
-                LicenseNum = int.Parse(bus.Element("LicenseNum").Value),
-                FromDate = DateTime.Parse(bus.Element("FromDate").Value),
-                FuelRemain = double.Parse(bus.Element("FuelRemain").Value),
-                TotalTrip = int.Parse(bus.Element("TotalTrip").Value),
-                Status = (Enums.BusStatus)Enum.Parse(typeof(Enums.BusStatus), bus.Element("Status").Value)
-            };
-        }
+                return new Bus()
+                {
+                    LicenseNum = int.Parse(bus.Element("LicenseNum").Value),
+                    FromDate = DateTime.Parse(bus.Element("FromDate").Value),
+                    FuelRemain = double.Parse(bus.Element("FuelRemain").Value),
+                    TotalTrip = int.Parse(bus.Element("TotalTrip").Value),
+                    Status = (Enums.BusStatus)Enum.Parse(typeof(Enums.BusStatus), bus.Element("Status").Value)
+                };
+            }
 
         internal static Line CreateLineInstatnce(XElement line)
         {
