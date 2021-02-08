@@ -23,7 +23,7 @@ namespace PlGui
         ObservableCollection<PO.Bus> oldBuses = new ObservableCollection<PO.Bus>();
         ObservableCollection<PO.Station> stations = new ObservableCollection<PO.Station>();
         ObservableCollection<PO.Line> lines = new ObservableCollection<PO.Line>();
-        ObservableCollection<PO.AdjacentStations> adjacentStations = new ObservableCollection<PO.AdjacentStations>();
+        //ObservableCollection<PO.AdjacentStations> adjacentStations = new ObservableCollection<PO.AdjacentStations>();
 
         // get the bl instance
         IBL bl = BLFactory.GetIBL();
@@ -118,11 +118,11 @@ namespace PlGui
             lineslview.DataContext = lines;
 
             //get all the adjacent station and add to the collection
-            foreach (var item in bl.GetAllAdjacentStations())
-            {
-                adjacentStations.Add(Tools.POAdjacentStations(item));
-            }
-            adjStationsLview.DataContext = adjacentStations;
+            //foreach (var item in bl.GetAllAdjacentStations())
+            //{
+            //    adjacentStations.Add(Tools.POAdjacentStations(item));
+            //}
+            //adjStationsLview.DataContext = adjacentStations;
             //adjStationsLview.ItemsSource = bl.GetAllAdjacentStations();
         }
 

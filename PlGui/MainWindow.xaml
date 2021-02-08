@@ -43,7 +43,7 @@
             <!--<Label Content="email:"/>
             <TextBox x:Name="emailTxtbox" Width="200"  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" />-->
             <Button x:Name="resetbtn"  Grid.Row="1" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Forgot the password" Click="resetbtn_Click" IsEnabled="False" />
-            
+
         </Grid>
     </Grid>
 </Window>

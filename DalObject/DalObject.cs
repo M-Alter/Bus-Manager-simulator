@@ -144,7 +144,9 @@ namespace DL
         /// <returns></returns>
         public IEnumerable<Station> GetAllStationsThat(Predicate<Station> predicate)
         {
-            throw new NotImplementedException();
+            return from station in DataSource.StationList
+                   where predicate(station)
+                   select station.Clone();
         }
 
         /// <summary>
